@@ -1,0 +1,14 @@
+plugins:
+  phpcodesniffer:
+    enabled: true
+
+  phan:
+    enabled: true
+    config:
+      file_extensions: "php"
+
+  phpmd:
+    enabled: true
+
+  sonar-php:
+    enabled: true
