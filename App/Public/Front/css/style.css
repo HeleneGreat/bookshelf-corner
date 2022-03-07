@@ -1,0 +1,251 @@
+:root{
+    --category:#f0e1d5;
+    --rouge: #ec4e3d;
+    --button: #e2bd9f;
+    --header: rgb(185, 172, 156);
+    --footer: #bcaa9b;
+}
+
+*{
+    padding:0;
+    margin:0;
+    color:black;
+}
+
+p, a{
+    font-size: 20px;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+    color: var(--rouge);
+}
+
+ul{
+    list-style-type: none;
+}
+
+.center{
+    margin: 0 auto;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col{
+    flex-direction: column;
+}
+
+.justify-around{
+    justify-content: space-around;
+}
+
+.justify-between{
+    justify-content: space-between;
+}
+
+.justify-end{
+    justify-content: flex-end;
+}
+
+.align-items-center{
+    align-items: center;
+}
+
+.container{
+    width: 90%;
+    margin: 0 auto;
+}
+
+body{
+    background-color: gray;
+}
+
+
+/* *************************************** */
+/* ---------------- HEADER --------------- */
+/* *************************************** */
+#bandeau{
+    background-color: #ec4e3d;
+    padding: 10px 0;
+}
+
+#bandeau .logo{
+    width: 70px;
+    height: 70px;
+    padding: 7px;
+    background-color: white;
+    border-radius: 100%;
+}
+
+.title h4{
+    color: white;
+    font-size: 1.7rem;
+    letter-spacing: .1rem;
+}
+
+/* *****************/
+/* ----- NAV ----- */
+/* *****************/
+
+#open-menu,
+#close-menu{
+    cursor: pointer;
+    position: relative;
+    width: 75px;
+    height: 75px;
+}
+
+#open-menu,
+#close-menu{
+position: absolute;
+top: 15px;
+right: 25px;
+}
+
+#open-menu:hover,
+#close-menu:hover{
+    cursor: pointer;
+}
+
+.title{
+    margin-right: 25%;
+}
+
+
+
+#nav-menu{
+    position: fixed;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    width: 100%;
+    opacity: 0;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+#nav-menu ul{
+    justify-content: space-around;
+    height: 100%;
+    /* margin-top: -105px */
+}
+
+#nav-menu li,
+#nav-menu li a{
+    color: white;
+    font-size: 2rem;
+} 
+
+/* menu mobile qui s'affiche par-dessus l'écran */
+#nav-menu.overlay{
+    visibility: visible;
+    opacity: 1;
+    width: 100%;
+    height: 100vh;
+    background-color: #ec4e3d;
+}
+
+
+
+
+/* ***************************/
+/* - BIG SCREEN NO DISPLAY - */
+/* ***************************/
+
+.lg{
+    display: none;
+}
+
+
+
+
+/* ********************************************** */
+/* ---------------- MEDIA QUERIES --------------- */
+/* ********************************************** */
+
+
+/* *******************/
+/* ----- SMALL ----- */
+/* *******************/
+@media screen and (min-width:769px){
+}
+
+
+/* ********************/
+/* ----- MEDIUM ----- */
+/* ********************/
+/* N° 2*/
+@media screen and (min-width:993px){
+ 
+    .container{
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    #bandeau .logo{
+        width: 100px;
+        height: auto;
+        padding: 10px;
+    }
+
+    .title h4{
+        font-size: 2.3rem;
+    }
+    
+}
+
+
+
+/* *******************/
+/* ----- LARGE ----- */
+/* *******************/
+@media screen and (min-width:1201px){
+
+    .container{
+        width: 1200px;
+        margin: 0 auto;
+    }
+
+    .mobile{
+        display: none;
+    }
+
+    #open-menu:hover,
+    #close-menu:hover{
+        cursor:default;
+    }
+
+    .lg{
+        display: block;
+    }
+
+    .head-lg{
+        width: 85%;
+    }
+
+    .head-lg a{
+        color: white;
+        font-size: 1.3rem;
+    }
+
+    .head-lg h2{
+        color: white;
+        font-size: 3rem;
+        letter-spacing: .1rem;
+    }
+
+    .title-lg{
+        width: 85%;
+        align-self: flex-end;
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "name": "kercode/projet-final",
+    "authors": [
+        {
+            "name": "Hélène CARRIOU",
+            "email": "helenec56@laposte.net"
+        }
+    ],
+    "autoload": {
+        "psr-4" :{
+            "Projet\\" : "./App/"
+        }
+    },
+    "require": {}
+}
