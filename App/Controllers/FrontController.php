@@ -18,4 +18,18 @@ class FrontController{
     function about(){
         require 'App/Views/front/about.php';
     }
+
+    function allBooks(){
+        $books = \Projet\Models\BookModel::infoBooks();
+        require "App/Views/front/all-books.php";
+    }
+
+    function oneBook($id){
+        $books = \Projet\Models\BookModel::infoBooks();
+        require "App/Views/front/one-book.php";
+    }
+
+
+
+
 }

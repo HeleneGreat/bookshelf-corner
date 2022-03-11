@@ -1,3 +1,20 @@
+/*
+reset
+HEADER
+FOOTER
+ALL BOOKS
+MEDIA QUERIES
+- min-width: 993px
+- min-width: 1201px
+
+
+
+
+*/
+
+/* *******************/
+/* ----- RESET ----- */
+/* *******************/
 :root{
     --category:#f0e1d5;
     --rouge: #ec4e3d;
@@ -9,7 +26,7 @@
 *{
     padding:0;
     margin:0;
-    color:black;
+    color:rgb(44, 41, 41);
 }
 
 p, a{
@@ -77,6 +94,7 @@ body{
 #bandeau{
     background-color: #ec4e3d;
     padding: 10px 0;
+    margin-bottom: 50px;
 }
 
 #bandeau .logo{
@@ -121,8 +139,6 @@ right: 25px;
     margin-right: 25%;
 }
 
-
-
 #nav-menu{
     position: fixed;
     top: 0;
@@ -156,11 +172,39 @@ right: 25px;
 }
 
 
+/* *************************************** */
+/* ---------------- FOOTER --------------- */
+/* *************************************** */
+#foot{
+    background-color: var(--rouge);
+    min-height: 150px;
+    margin-top: 50px;
+}
 
+/* ****************************************** */
+/* ---------------- ALL BOOKS --------------- */
+/* ****************************************** */
+#all-books h1{
+    font-size: 2.5rem;
 
-/* ***************************/
-/* - BIG SCREEN NO DISPLAY - */
-/* ***************************/
+}
+
+#all-books #book-card{
+    background-color: rgba(255, 255, 255, 0.836);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 30px 0;
+}
+
+#all-books #book-card img{
+    width: 80%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* *******************************************/
+/* - BIG SCREEN NO DISPLAY IN SMALL DEVICES- */
+/* *******************************************/
 
 .lg{
     display: none;

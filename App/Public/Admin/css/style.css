@@ -1,0 +1,206 @@
+/*
+reset
+HEADER
+FOOTER
+DASHBOARD-SIDEBAR
+
+
+
+
+MEDIA QUERIES
+- min-width: 993px
+- min-width: 1201px
+
+
+
+
+*/
+
+/* *******************/
+/* ----- RESET ----- */
+/* *******************/
+:root{
+    --dashboard: #b2c9fe ;
+}
+
+*{
+    padding:0;
+    margin:0;
+    color:rgb(44, 41, 41);
+}
+
+p, a{
+    font-size: 20px;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+    color: var(--rouge);
+}
+
+ul{
+    list-style-type: none;
+}
+
+.center{
+    margin: 0 auto;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.flex{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col{
+    flex-direction: column;
+}
+
+.justify-around{
+    justify-content: space-around;
+}
+
+.justify-between{
+    justify-content: space-between;
+}
+
+.justify-end{
+    justify-content: flex-end;
+}
+
+.align-items-center{
+    align-items: center;
+}
+
+.container{
+    width: 90%;
+    margin: 0 auto;
+}
+
+body{
+    /* background-color: gray; */
+}
+
+
+/* *************************************** */
+/* ---------------- HEADER --------------- */
+/* *************************************** */
+#bandeau-admin{
+    background-color: var(--dashboard);
+    padding: 20px 30px;
+    margin-bottom: 50px;
+    min-height: 150px;
+}
+
+
+
+/* *****************/
+/* ----- NAV ----- */
+/* *****************/
+
+
+
+/* *************************************** */
+/* ---------------- FOOTER --------------- */
+/* *************************************** */
+#foot-admin{
+    background-color: var(--dashboard);
+    min-height: 150px;
+    margin-top: 50px;
+}
+
+/* ******************************************** */
+/* ---------- DASHBOARD - SIDEBAR-------------- */
+/* ******************************************** */
+#dashboard-sidebar{
+    background-color: var(--dashboard);
+    padding: 20px;
+    margin-top: -51px;
+    margin-bottom: -51px;
+}
+
+.btn {
+    background-color: white;
+    padding: 10px 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 150px;
+    text-align: center;
+}
+
+#dashboard-sidebar li:first-child{
+    margin-bottom: 60px;
+}
+
+
+
+
+
+/* *******************************************/
+/* - BIG SCREEN NO DISPLAY IN SMALL DEVICES- */
+/* *******************************************/
+
+.lg{
+    display: none;
+}
+
+
+
+
+/* ********************************************** */
+/* ---------------- MEDIA QUERIES --------------- */
+/* ********************************************** */
+
+
+/* *******************/
+/* ----- SMALL ----- */
+/* *******************/
+@media screen and (min-width:769px){
+}
+
+
+/* ********************/
+/* ----- MEDIUM ----- */
+/* ********************/
+/* N° 2*/
+@media screen and (min-width:993px){
+ 
+    .container{
+        max-width: 70%;
+        margin: 0 auto;
+    }
+
+    
+  
+    
+}
+
+
+
+/* *******************/
+/* ----- LARGE ----- */
+/* *******************/
+@media screen and (min-width:1201px){
+
+    .container{
+        width: 70%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .mobile{
+        display: none;
+    }
+
+    .lg{
+        display: block;
+    }
+
+    
+}

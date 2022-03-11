@@ -1,7 +1,10 @@
 <?php include_once('layouts/header.php'); ?>
 
-Accueil
+Contact
+
+<section class="container">
 
 
+</section>
 
 <?php include_once('layouts/footer.php'); ?>

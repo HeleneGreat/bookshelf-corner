@@ -1,7 +1,5 @@
 <?php include_once('layouts/header.php'); ?>
 
-Accueil
-
-
+About
 
 <?php include_once('layouts/footer.php'); ?>

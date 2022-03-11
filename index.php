@@ -17,6 +17,19 @@ try{
         if($_GET['action'] == 'contact'){
             $controllerFront->contact();
         }
+        
+        elseif($_GET['action'] == 'about'){
+            $controllerFront->about();
+        }
+        
+        elseif($_GET['action'] == 'livres'){
+            $controllerFront->allBooks();
+        }
+        
+        elseif($_GET['action'] == 'un-livre'){
+            $id = $_GET['id'];
+            $controllerFront->oneBook($id);
+        }
 
     }
     else{
