@@ -4,11 +4,6 @@ namespace Projet\Models;
 
 class AdminModel extends Manager{
 
-    // public int $id;    
-    // public string $pseudo;
-    // public string $mail;
-
-
     public static function infoAdmins(){
         $bdd = self::dbConnect();
         $req = $bdd->prepare('SELECT * FROM administrators');
@@ -19,14 +14,6 @@ class AdminModel extends Manager{
         }
         return $admins;
     }
-
-    // function __construct($data)
-    // {
-    //     $this->id = $data['ID'] ?? "";
-    //     $this->pseudo = $data['pseudo'] ?? "";
-    //     $this->mail = $data['mail'] ?? "";
-    //     $this->mdp = $data['mdp'] ?? "";
-    // }
 
     public static function createAdmin ($pseudo, $mail, $mdp){
         $bdd = self::dbConnect();

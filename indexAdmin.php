@@ -9,6 +9,10 @@ require_once __DIR__ . '/vendor/autoload.php';
 try{
 
     $adminController = new \Projet\Controllers\AdminController();
+    
+    $bookController = new \Projet\Controllers\BookController();
+
+
 
     if(isset($_GET['action'])){
 
@@ -67,22 +71,22 @@ try{
     /********************** PAGE LIVRES **********************/
     /*********************************************************/
         elseif($_GET['action'] == 'livres'){
-            $adminController->livres();
+            $bookController->livres();
         }
 
-        elseif ($_GET['action'] == "view"){
+        elseif ($_GET['action'] == "livresview"){
             $id = $_GET['id'];
-            $adminController->viewLivre($id);
+            $bookController->viewLivre($id);
         }
 
-        elseif ($_GET['action'] == "modify"){
+        elseif ($_GET['action'] == "livresmodify"){
             $id = $_GET['id'];
-            $adminController->modifyLivre($id);
+            $bookController->modifyLivre($id);
         }
 
-        elseif ($_GET['action'] == "delete"){
+        elseif ($_GET['action'] == "livresdelete"){
             $id = $_GET['id'];
-            $adminController->deleteLivre($id);
+            $bookController->deleteLivre($id);
         }
 
 

@@ -2,7 +2,7 @@
 
 <section>
 détail de ce livre
-    <h1><?= $books->title; ?></h1>
+    <h1><?= $book['title']; ?></h1>
 
 </section>
 
