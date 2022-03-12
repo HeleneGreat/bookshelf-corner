@@ -3,6 +3,7 @@ reset
 HEADER
 FOOTER
 DASHBOARD-SIDEBAR
+DASHBOARD-LIVRES
 
 
 
@@ -139,7 +140,18 @@ body{
 }
 
 
+/* ******************************************* */
+/* ---------- DASHBOARD - LIVRES-------------- */
+/* ******************************************* */
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
 
+table td, table th{
+    border: 1px solid var(--dashboard);
+    padding: 5px 10px;
+}
 
 
 /* *******************************************/

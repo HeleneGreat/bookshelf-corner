@@ -26,6 +26,14 @@ class BookModel extends Manager{
 
         return $books;
     }
+    
+    public static function infoBook($id){
+        $bdd = self::dbConnect();
+        $req = $bdd->prepare('SELECT * FROM books WHERE id = ?');
+        $req->execute(array($id));
+        return $req;
+    }
+
 
     function __construct($data)
     {
@@ -38,9 +46,6 @@ class BookModel extends Manager{
         $this->catchphrase = $data['catchphrase'];
         $this->content = $data['content'];
     }
-
-    
-
 
 
 

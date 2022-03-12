@@ -4,6 +4,10 @@ namespace Projet\Controllers;
 
 class AdminController{
 
+
+/********************************************************/
+/******************* CONNECTION ADMIN *******************/
+/********************************************************/
     function addAdmin(){
         require "App/Views/admin/createAdmin.php";
     }
@@ -49,17 +53,39 @@ class AdminController{
         }
     }
 
+/*********************************************************/
+/*********************** DASHBOARD ***********************/
+/*********************************************************/
+    function dashboard(){
+        $books = \Projet\Models\BookModel::infoBooks();
+        require "App/Views/admin/dashboard/dashboard.php";
+    }
+
+/*********************************************************/
+/********************** PAGE LIVRES **********************/
+/*********************************************************/
     function livres(){
         $books = \Projet\Models\BookModel::infoBooks();
         require "App/Views/admin/dashboard/books.php";
     }
 
-    function countLivres(){
-        $books = \Projet\Models\BookModel::infoBooks();
-        $count = count($books);
-        return $count;
+    // function countLivres(){
+    //     $books = \Projet\Models\BookModel::infoBooks();
+    //     $count = count($books);
+    //     return $count;
+    // }
+    
+    function viewLivre($id){
+        $books = \Projet\Models\BookModel::infoBook($id);
+        require "App/Views/admin/dashboard/view-one-livre.php";
     }
     
+    function modifyLivre(){
 
+    }
+    
+    function deleteLivre(){
+
+    }
 
 }

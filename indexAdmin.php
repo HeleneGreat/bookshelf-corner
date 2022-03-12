@@ -12,6 +12,9 @@ try{
 
     if(isset($_GET['action'])){
 
+    /********************************************************/
+    /******************* CONNECTION ADMIN *******************/
+    /********************************************************/
         // Lien vers le formulaire de création d'un nouvel admin
         if($_GET['action'] == 'createAccount'){
             $adminController->addAdmin();
@@ -50,11 +53,36 @@ try{
         // Se déconnecter
         elseif ($_GET['action'] == "disconnect"){
             session_destroy();
-            // $adminController->connexionAdmin();
+            $adminController->connexionAdmin();
         }
 
+    /*********************************************************/
+    /*********************** DASHBOARD ***********************/
+    /*********************************************************/
+        elseif($_GET['action'] == 'dashboard'){
+            $adminController->dashboard();
+        }
+
+    /*********************************************************/
+    /********************** PAGE LIVRES **********************/
+    /*********************************************************/
         elseif($_GET['action'] == 'livres'){
             $adminController->livres();
+        }
+
+        elseif ($_GET['action'] == "view"){
+            $id = $_GET['id'];
+            $adminController->viewLivre($id);
+        }
+
+        elseif ($_GET['action'] == "modify"){
+            $id = $_GET['id'];
+            $adminController->modifyLivre($id);
+        }
+
+        elseif ($_GET['action'] == "delete"){
+            $id = $_GET['id'];
+            $adminController->deleteLivre($id);
         }
 
 
