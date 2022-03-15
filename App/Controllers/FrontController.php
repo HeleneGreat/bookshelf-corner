@@ -19,17 +19,11 @@ class FrontController{
         require 'App/Views/front/about.php';
     }
 
-    function allBooks(){
-        $books = \Projet\Models\BookModel::infoBooks();
-        require "App/Views/front/all-books.php";
+    function lieux(){
+        require 'App/Views/front/lieux.php';
     }
 
-    function oneBook($id){
-        $books = \Projet\Models\BookModel::infoBooks();
-        require "App/Views/front/one-book.php";
-    }
-
-
+ 
 
 
 }

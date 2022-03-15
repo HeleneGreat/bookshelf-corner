@@ -3,7 +3,7 @@
 <footer id="foot">
 
     <section class="container">
-        FOOTER
+        
     </section>
 </footer>
 

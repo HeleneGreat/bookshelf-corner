@@ -3,7 +3,7 @@
 <section>
 <h1>Liste des livres</h1>
 
-<p><i class="fa-solid fa-circle-plus"></i> Ajouter un livre</p>
+<p class="ajout"><a href="indexAdmin.php?action=livresadd"><i class="fa-solid fa-circle-plus"></i> Ajouter un livre</a></p>
 
 <table>
     <!-- entêtes -->

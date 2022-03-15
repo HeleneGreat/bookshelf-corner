@@ -11,7 +11,16 @@
 <body>
 
 <header id="bandeau-admin">
-    <a class="btn" href="indexAdmin.php?action=disconnect">Se déconnecter</a>
+    <nav>
+        <ul class="flex justify-between">
+            <li><a class="btn" href="index.php">Voir mon site</a></li>
+            <li><a class="btn" href="indexAdmin.php?action=myAccount">Mon compte</a></li>
+            <li><a class="btn" href="indexAdmin.php?action=disconnect">Se déconnecter</a></li>
+        </ul>
+    </nav>
+    
+    
+   
 </header>
 
 <main class="flex">

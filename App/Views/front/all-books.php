@@ -6,11 +6,11 @@
 
     <div class="flex justify-between">
     <?php foreach($books as $book){ ?>
-        <a href="index.php?action=un-livre&<?= $book->id; ?>">
+        <a href="index.php?action=un-livre&id=<?= $book['id'] ?>">
             <article id="book-card">
-                <h2 class="text-center"><?= $book->title; ?></h2>
-                <h3 class="text-center"><?= $book->author; ?></h3>
-                <img src="<?= $book->picture; ?>" alt="La couverture du roman <?= $book->title; ?>">
+                <h2 class="text-center"><?= $book['title']; ?></h2>
+                <h3 class="text-center"><?= $book['author']; ?></h3>
+                <img src="./App/Public/Front/images/<?= $book['picture']; ?>" alt="La couverture du roman <?= $book['title']; ?>">
             </article>
         </a>
 

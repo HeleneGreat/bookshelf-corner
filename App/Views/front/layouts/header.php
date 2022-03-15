@@ -48,7 +48,7 @@
                 <h2>The Bookshelf Corner</h2>
                 <div>
                     <input type="search" placeholder="Rechercher">
-                    <button>Se connecter</button>
+                    <button><a href="indexAdmin.php">Se connecter</a></button>
                 </div>
             </div>
 

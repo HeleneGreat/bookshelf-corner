@@ -13,7 +13,6 @@
             <li><a class="btn" href="indexAdmin.php?action=slider">Slider</a></li>
             <li><a class="btn" href="indexAdmin.php?action=messages">Messages reçus</a></li>
             <li><a class="btn" href="indexAdmin.php?action=comments">Commentaires</a></li>
-            <li><a class="btn" href="indexAdmin.php?action=myAccount">Mon compte</a></li>
         </ul>
     </nav>
         

@@ -22,12 +22,13 @@ MEDIA QUERIES
 /* *******************/
 :root{
     --dashboard: #b2c9fe ;
+    --anthracite: rgb(44, 41, 41);
 }
 
 *{
     padding:0;
     margin:0;
-    color:rgb(44, 41, 41);
+    color:var(--anthracite);
 }
 
 p, a{
@@ -92,7 +93,6 @@ ul{
     background-color: var(--dashboard);
     padding: 20px 30px;
     margin-bottom: 50px;
-    min-height: 150px;
 }
 
 
@@ -113,7 +113,7 @@ ul{
 }
 
 /* ******************************************** */
-/* ---------- DASHBOARD - SIDEBAR-------------- */
+/* ---------- DASHBOARD & SIDEBAR-------------- */
 /* ******************************************** */
 #dashboard-sidebar{
     background-color: var(--dashboard);
@@ -143,6 +143,27 @@ ul{
     margin-bottom: 80px;
 }
 
+.retour,
+.ajout{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.retour a,
+.ajout a{
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+input[type='submit']{
+    margin-top: 20px;
+    color: var(--anthracite);
+    font-size: 1.3rem;
+    background-color: var(--dashboard);
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+}
 
 /* ******************************************* */
 /* ---------- DASHBOARD - LIVRES-------------- */
@@ -157,6 +178,21 @@ table td, table th{
     padding: 5px 10px;
 }
 
+.zones-text{
+    width: 100%;
+}
+
+textarea.catchphrase{
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100px;
+}
+
+textarea.content{
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 300px;
+}
 
 /* *******************************************/
 /* - BIG SCREEN NO DISPLAY IN SMALL DEVICES- */
@@ -216,6 +252,10 @@ table td, table th{
 
     .lg{
         display: block;
+    }
+
+    .zones-text{
+        width: 65%;
     }
 
     

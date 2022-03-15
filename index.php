@@ -10,6 +10,8 @@ try{
 
     $controllerFront = new \Projet\Controllers\FrontController();
 
+    $bookController = new \Projet\Controllers\BookController();
+
     // Les routes (actions). Isset détermine si la variable déclarée est différente de NULL
     if (isset($_GET['action'])){
 
@@ -22,13 +24,17 @@ try{
             $controllerFront->about();
         }
         
+        elseif($_GET['action'] == 'lieux'){
+            $controllerFront->lieux();
+        }
+        
         elseif($_GET['action'] == 'livres'){
-            $controllerFront->allBooks();
+            $bookController->allBooks();
         }
         
         elseif($_GET['action'] == 'un-livre'){
             $id = $_GET['id'];
-            $controllerFront->oneBook($id);
+            $bookController->oneBook($id);
         }
 
     }
