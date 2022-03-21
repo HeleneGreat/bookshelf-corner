@@ -1,16 +1,18 @@
+<?php $currentPageTitle = "Derniers livres lus"; ?>
 <?php include ('layouts/header.php')?>
 
 
-<section id="all-books" class="container">
-    <h1 class="text-center">Derniers articles</h1>
+<section id="all-books" class="container bg-all">
+    <h1>Les derniers livres que nous avons dévorés</h1>
 
-    <div class="flex justify-between">
+    <div class="flex-lg justify-between-lg">
     <?php foreach($books as $book){ ?>
         <a href="index.php?action=un-livre&id=<?= $book['id'] ?>">
-            <article id="book-card">
-                <h2 class="text-center"><?= $book['title']; ?></h2>
-                <h3 class="text-center"><?= $book['author']; ?></h3>
-                <img src="./App/Public/Front/images/<?= $book['picture']; ?>" alt="La couverture du roman <?= $book['title']; ?>">
+            <article id="book-card" class="center">
+                <h3 class="text-center"><?= $book['title']; ?></h3>
+                <h4 class="text-center"><?= $book['author']; ?></h4>
+                <p class="center text-center"><img src="./App/Public/Books/images/<?= $book['picture']; ?>" alt="La couverture du roman <?= $book['title']; ?>"></p>
+                <div class="text-center"><button>Lire l'article</button></div>
             </article>
         </a>
 

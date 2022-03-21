@@ -21,27 +21,19 @@ class BookModel extends Manager{
 
 
 
-    // A REVOIR DE FONCTIONNE PAS
-    public function modifySingleBook($data){
 
+    public function addSingleBook($data){
+        $bdd =$this->dbConnect();
+        $bdd->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        $req = $bdd->prepare('INSERT INTO books(title, author, notation, genre, catchphrase, content, edition, linkEdition, picture, location, year_publication) VALUES(:newTitle, :newAuthor, :newNotation, :newGenre,:newCatchphrase, :newContent, :newEdition, :newLinkEdition, :newPicture, :newLocation, :newYear_publication)');
+        $req->execute($data);
+        return $req;
+    }
+
+    public function modifySingleBook($data){
         $bdd =$this->dbConnect();
         $req = $bdd->prepare('UPDATE books SET title = :newTitle, author = :newAuthor, notation = :newNotation, genre = :newGenre, catchphrase = :newCatchphrase, content = :newContent, edition = :newEdition, linkEdition = :newLinkEdition, picture = :newPicture, location = :newLocation, year_publication = :newYear_publication WHERE id= :id');
-        $req->execute($data
-            // 'id',
-            // 'newTitle',
-            // 'newAuthor',
-            // 'newYear_publication',
-            // 'newGenre',
-            // 'newEdition',
-            // 'newLinkEdition',
-            // 'newLocation',
-            // 'newCatchphrase',
-            // 'newContent',
-            // 'newPicture',
-            // 'newNotation'
-            
-        );
-        
+        $req->execute($data);
         return $req;
     }
 

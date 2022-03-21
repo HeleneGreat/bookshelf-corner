@@ -78,6 +78,29 @@ try{
             $id = $_GET['id'];
             $bookController->viewLivre($id);
         }
+        
+        elseif ($_GET['action'] == "livresadd"){
+            $bookController->addLivre();
+        }
+
+        elseif ($_GET['action'] == "livresaddPost"){
+            $data = [
+                // ':id' => $_GET['id'],
+                'newTitle' => $_POST['newTitle'],
+                ':newAuthor' => $_POST['newAuthor'],
+                ':newYear_publication' => $_POST['newYear_publication'],
+                ':newGenre' => $_POST['newGenre'],
+                ':newEdition' => $_POST['newEdition'],
+                ':newLinkEdition' => $_POST['newLinkEdition'],
+                ':newLocation' => $_POST['newLocation'],
+                ':newCatchphrase' => $_POST['newCatchphrase'],
+                ':newContent' => $_POST['newContent'],
+                ':newPicture' => $_POST['newPicture'],
+                ':newNotation' => $_POST['newNotation']
+            ];
+            
+            $bookController->addLivrePost($data);
+        }
 
         elseif ($_GET['action'] == "livresmodify"){
             $id = $_GET['id'];
@@ -85,7 +108,6 @@ try{
         }
 
         elseif ($_GET['action'] == "livresmodifyPost"){
-            
             $data = [
                 ':id' => $_GET['id'],
                 ':newTitle' => $_POST['newTitle'],
@@ -101,13 +123,7 @@ try{
                 ':newNotation' => $_POST['newNotation']
             ];
             $bookController->modifyLivrePost($data);
-        }
-
-        
-
-        elseif ($_GET['action'] == "livresadd"){
-            $bookController->addLivre();
-        }
+        }  
 
         elseif ($_GET['action'] == "livresdelete"){
             $id = $_GET['id'];
@@ -126,5 +142,5 @@ try{
 
 catch (Exception $e){
     // require 'App/Views/admin/error.php';
-    echo "erreur catch de l'indexAdmin";
+    echo $e->getMessage();
 }

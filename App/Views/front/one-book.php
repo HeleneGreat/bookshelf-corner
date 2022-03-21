@@ -1,5 +1,6 @@
-<?php include ('layouts/header.php')?>
 
+<?php $currentPageTitle = $book['title'] . ", mon avis"; ?>
+<?php include ('layouts/header.php')?>
 <section>
 
 <h1><?= $book['title']; ?></h1>

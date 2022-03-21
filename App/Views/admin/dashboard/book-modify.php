@@ -2,7 +2,7 @@
 
 <section>
 
-    <a href="indexAdmin.php?action=livres"><i class="fas fa-arrow-circle-left"></i> Retour</a>
+<p class="retour"><a href="indexAdmin.php?action=livres"><i class="fas fa-arrow-circle-left"></i> Retour</a></p>
 
     <h1>Modifier le livre</h1>
  

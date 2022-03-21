@@ -30,6 +30,18 @@ function viewLivre($id){
     require "App/Views/admin/dashboard/book-view.php";
 }
 
+function addLivre(){
+    $books = new \Projet\Models\BookModel();
+    require "App/Views/admin/dashboard/book-add.php";
+}
+
+function addLivrePost($data){
+    $books = new \Projet\Models\BookModel();
+    $oneBook = $books->addSingleBook($data);
+    //$book = $oneBook->fetch();
+    header('Location: indexAdmin.php?action=livres');
+}
+
 function modifyLivre($id){
     $books = new \Projet\Models\BookModel();
     $oneBook = $books->singleBook($id);
@@ -40,13 +52,8 @@ function modifyLivre($id){
 function modifyLivrePost($data){
     $books = new \Projet\Models\BookModel();
     $oneBook = $books->modifySingleBook($data);
-    $book = $oneBook->fetch();
+    //$book = $oneBook->fetch();
     header('Location: indexAdmin.php?action=livres');
-}
-
-function addLivre(){
-    $books = new \Projet\Models\BookModel();
-    require "App/Views/admin/dashboard/book-add.php";
 }
 
 function deleteLivre($id){

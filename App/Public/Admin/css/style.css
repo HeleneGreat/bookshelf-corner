@@ -31,8 +31,14 @@ MEDIA QUERIES
     color:var(--anthracite);
 }
 
-p, a{
-    font-size: 20px;
+p, a, th, tr{
+    font-size: 22px;
+}
+
+h1{
+    margin-bottom: 40px;
+    font-size: 2rem;
+    color: var(--dashboard);
 }
 
 a{
@@ -85,6 +91,10 @@ ul{
     margin: 0 auto;
 }
 
+.display-none{
+    display: none;
+}
+
 
 /* *************************************** */
 /* ---------------- HEADER --------------- */
@@ -95,13 +105,60 @@ ul{
     margin-bottom: 50px;
 }
 
-
-
 /* *****************/
 /* ----- NAV ----- */
 /* *****************/
 
+#open-menu,
+#close-menu{
+position: absolute;
+top: 15px;
+right: 25px;
+font-size: 1.4rem;
+}
 
+#open-menu.hidden{
+    visibility: hidden;
+}
+
+#open-menu i,
+#close-menu i{
+    color: white;
+    text-shadow: 0px 0px 3px var(--anthracite);
+}
+
+#nav-xs{
+    position: fixed;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    width: 100%;
+    opacity: 0;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+#nav-xs ul{
+    justify-content: space-around;
+    height: 100%;
+}
+
+#nav-xs li,
+#nav-xs li a,
+#nav-lg li,
+#nav-lg li a{
+    color: white;
+    text-shadow: 0px 0px 3px var(--anthracite);
+} 
+
+/* menu mobile qui s'affiche par-dessus l'écran */
+#nav-xs.overlay{
+    visibility: visible;
+    opacity: 1;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--dashboard);
+}
 
 /* *************************************** */
 /* ---------------- FOOTER --------------- */
@@ -113,7 +170,7 @@ ul{
 }
 
 /* ******************************************** */
-/* ---------- DASHBOARD & SIDEBAR-------------- */
+/* ---------------- SIDEBAR-------------------- */
 /* ******************************************** */
 #dashboard-sidebar{
     background-color: var(--dashboard);
@@ -125,8 +182,6 @@ ul{
 .btn {
     background-color: white;
     padding: 10px 20px;
-    margin-top: 30px;
-    margin-bottom: 30px;
     width: 150px;
     text-align: center;
     display: block;
@@ -143,6 +198,10 @@ ul{
     margin-bottom: 80px;
 }
 
+
+/* ********************************************** */
+/* ---------------- DASHBOARD-------------------- */
+/* ********************************************** */
 .retour,
 .ajout{
     margin-top: 20px;
@@ -150,9 +209,31 @@ ul{
 }
 
 .retour a,
-.ajout a{
-    font-size: 1.3rem;
+.retour a i,
+.ajout a,
+.ajout i,
+.ajout a i{
+    font-size: 1.6rem;
     font-weight: bold;
+    color: var(--dashboard)
+}
+
+input, option, select{
+    padding: 8px 10px;
+    font-size: 18px;
+}
+
+input, select, textarea {
+    margin-top: 8px;
+    margin-bottom: 22px;
+    border: 1px solid var(--dashboard);
+    box-shadow: inset 0 0 0.25rem var(--dashboard);
+}
+
+input:focus, select:focus, textarea:focus{
+    outline: none;
+    border: 1px solid darken(#ddd, 15%);
+    box-shadow: inset 0 0 0.5rem darken(#ddd, 15%);
 }
 
 input[type='submit']{
@@ -164,6 +245,27 @@ input[type='submit']{
     cursor: pointer;
     border: none;
 }
+
+input[type='submit']:hover{
+    box-shadow: 0 0 6px rgb(92, 91, 91);
+    font-size: 1.3rem;
+}
+
+input[type='file']{
+    opacity: 0;
+    width: 0;
+}
+
+.custom-file-upload:hover{
+    cursor: pointer;
+}
+
+.ajout .add-picture{
+    font-size: 5rem;
+}
+
+
+
 
 /* ******************************************* */
 /* ---------- DASHBOARD - LIVRES-------------- */
@@ -191,7 +293,7 @@ textarea.catchphrase{
 textarea.content{
     min-width: 100%;
     max-width: 100%;
-    min-height: 300px;
+    min-height: 600px;
 }
 
 /* *******************************************/
@@ -252,6 +354,11 @@ textarea.content{
 
     .lg{
         display: block;
+    }
+
+    .btn{
+        margin-top: 30px;
+        margin-bottom: 30px;
     }
 
     .zones-text{

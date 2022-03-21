@@ -10,7 +10,8 @@
 </head>
 <body>
 
-<header id="bandeau-admin">
+<!-- HEADER BIG SCREEN -->
+<header id="bandeau-admin" class="lg">
     <nav>
         <ul class="flex justify-between">
             <li><a class="btn" href="index.php">Voir mon site</a></li>
@@ -18,9 +19,27 @@
             <li><a class="btn" href="indexAdmin.php?action=disconnect">Se déconnecter</a></li>
         </ul>
     </nav>
+</header>
+
+<!-- HEADER MOBILE -->
+<header id="bandeau-admin" class="mobile">
+<!-- AJOUTER CLASS ACTIVE MOBILE -->
+    <div id="open-menu" class="menu-toggle"><i class="fas fa-bars"></i></div>
+    <nav id="nav-xs" class="flex">
+        <ul class="flex col center">
+            <li><a href="index.php">Voir mon site</a></li>
+            <li><a href="indexAdmin.php?action=dashboard">Tableau de bord</a></li>
+            <li><a href="indexAdmin.php?action=livres">Livres</a></li>
+            <li><a href="indexAdmin.php?action=genres">Genres litéraires</a></li>
+            <li><a href="indexAdmin.php?action=slider">Slider</a></li>
+            <li><a href="indexAdmin.php?action=messages">Messages reçus</a></li>
+            <li><a href="indexAdmin.php?action=comments">Commentaires</a></li>
+            <li><a href="indexAdmin.php?action=myAccount">Mon compte</a></li>
+            <li><a href="indexAdmin.php?action=disconnect">Se déconnecter</a></li>
+        </ul>
+    </nav>
     
-    
-   
+    <div id="close-menu" class="menu-toggle display-none"><i class="fas fa-times"></i></div>
 </header>
 
 <main class="flex">

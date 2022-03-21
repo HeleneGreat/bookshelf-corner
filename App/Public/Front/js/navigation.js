@@ -2,7 +2,7 @@
 
 // let menuBurger = document.getElementById('menu-burger');
 
-// let overlay = document.getElementById('nav-menu');
+// let overlay = document.getElementById('nav-xs');
 
 
 
@@ -22,7 +22,7 @@ if(bigScreen.matches){
 
 let openMenu = document.getElementById('open-menu');
 
-let overlay = document.getElementById('nav-menu');
+let overlay = document.getElementById('nav-xs');
 
 let closeMenu = document.getElementById('close-menu');
 
@@ -45,7 +45,7 @@ closeMenu.addEventListener('click', function(){
 
 let openMenu = document.getElementById('open-menu');
 
-let overlay = document.getElementById('nav-menu');
+let overlay = document.getElementById('nav-xs');
 
 let closeMenu = document.getElementById('close-menu');
 
@@ -58,7 +58,7 @@ openMenu.addEventListener('click', function(){
 
 closeMenu.addEventListener('click', function(){
 
-    this.classList.toggle("close");
+    // this.classList.toggle("close");
     overlay.classList.toggle("overlay");
     
 });

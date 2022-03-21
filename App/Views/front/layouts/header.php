@@ -4,25 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><?= $currentPageTitle; ?> | The Bookshelf Corner</title>
     <link rel="stylesheet" href="./App/Public/front/css/style.css">
     
 </head>
 <body>
-
 <header id="bandeau">
 
 <!-- NAV SMALL MOBILE -->
 <div class="mobile container">
     <div class="title flex justify-between align-items-center">
         <p><img class="logo container" src="./App/Public/Front/images/bookshelf.png" alt=""></p>
-        <h4 class="text-center">The Bookshelf Corner</h4>
+        <h2 class="text-center">The Bookshelf Corner</h2>
     </div>
 
     <div>
         <img id="open-menu" class="menu-toggle" src="./App/Public/Front/images/70723_book_read_icon.png" alt="">
     </div>
-    <nav id="nav-menu" class="flex">
+    <nav id="nav-xs" class="flex">
         
         <ul class="flex col center">
             <li><a href="index.php">Accueil</a></li>
@@ -52,7 +51,7 @@
                 </div>
             </div>
 
-            <nav class="nav-lg">
+            <nav id="nav-lg">
                 <ul class="flex justify-between">
                     <li><a href="index.php">Accueil</a></li>
                     <li><a href="index.php?action=lieux">Lieux</a></li>
