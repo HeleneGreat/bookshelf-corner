@@ -25,10 +25,10 @@
         
         <ul class="flex col center">
             <li><a href="index.php">Accueil</a></li>
-            <li><a href="#">Lieux</a></li>
-            <li><a href="#">Livres</a></li>
-            <li><a href="#">A propos</a></li>
-            <li><a href="#">Me contacter</a></li>
+            <li><a href="index.php?action=lieux">Lieux</a></li>
+            <li><a href="index.php?action=livres">Livres</a></li>
+            <li><a href="index.php?action=about">A propos</a></li>
+            <li><a href="index.php?action=contact">Me contacter</a></li>
         </ul>
         <div class="flex justify-end">
             <img id="close-menu" class="menu-toggle" src="./App/Public/Front/images/70723_book_read_icon.png" alt="">

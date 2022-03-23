@@ -6,7 +6,7 @@ class BookModel extends Manager{
     
     public function allBooks(){
         $bdd =$this->dbConnect();
-        $req = $bdd->prepare('SELECT id, title, author, picture, created_at, location FROM books');
+        $req = $bdd->prepare('SELECT id, title, author, picture, created_at, location FROM books ORDER BY created_at DESC');
         $req->execute();
         return $req;
     }

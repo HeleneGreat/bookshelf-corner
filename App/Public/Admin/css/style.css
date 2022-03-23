@@ -17,6 +17,10 @@ MEDIA QUERIES
 
 */
 
+/* VARIABLES TEMPORAIRES */
+
+
+
 /* *******************/
 /* ----- RESET ----- */
 /* *******************/
@@ -101,9 +105,11 @@ ul{
 /* *************************************** */
 #bandeau-admin{
     background-color: var(--dashboard);
-    padding: 20px 30px;
+    padding: 30px 0;
     margin-bottom: 50px;
 }
+
+
 
 /* *****************/
 /* ----- NAV ----- */
@@ -296,6 +302,24 @@ textarea.content{
     min-height: 600px;
 }
 
+/* Fixed button to add a book */
+#add-btn{
+    background-color: red;
+    width: 60px;
+    height: 60px;
+    border-radius: 45px;
+    position: fixed;
+    right: 40px;
+    bottom: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#add-btn img{
+    width: 50%;
+    height: 50%;
+}
 /* *******************************************/
 /* - BIG SCREEN NO DISPLAY IN SMALL DEVICES- */
 /* *******************************************/
@@ -365,5 +389,12 @@ textarea.content{
         width: 65%;
     }
 
+    #bandeau-admin{
+        padding: 20px 30px;
+    }
+
+    #add-btn{
+        display: none;
+    }
     
 }

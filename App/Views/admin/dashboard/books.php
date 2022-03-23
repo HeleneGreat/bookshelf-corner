@@ -1,6 +1,33 @@
 <?php include_once('./App/Views/admin/layouts/header.php');?>
 
+
 <section>
+    <?php foreach($books as $book){ ?> 
+    <article>
+        <div><img src="<?= $book['picture']; ?>" alt="Couverture <?= $book['title']; ?>"></div>
+        <div>
+            <p class="title-list"><?= $book['title']; ?></p>
+            <p class="location-list"><?= $book['location']; ?></p>
+            <p class="date-list"><?= $book['created_at']; ?></p>
+        </div>
+
+
+    </article>
+    <?php } ?> 
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- VERSION 1 TABLEAU -->
+<section style="display:none;">
 <h1>Liste des livres</h1>
 
 <p class="ajout"><a href="indexAdmin.php?action=livresadd"><i class="fa-solid fa-circle-plus"></i> Ajouter un livre</a></p>
@@ -46,10 +73,6 @@
         <?php }; ?>
     </tbody>
 </table>
-
-
-
-
 </section>
 
     

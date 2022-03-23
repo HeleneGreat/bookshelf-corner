@@ -4,7 +4,7 @@
 
 
 <section class="container bg-contact">
-    <h1>Nous contacter</h1>
+    <h1>Nous contacter    <i class="fas fa-arrow-circle-right"></i></h1>
 
     <form action="" method="post" id="contact-form" class="text-center"> 
 
@@ -28,8 +28,14 @@
 
         </div>
 
-        <input type="reset" class="btn-small">
-        <input type="submit" class="btn">
+        
+
+        <input type="reset" class="btn-small lg">
+        <input type="submit" class="btn lg">
+
+        <!-- Mobile link to send the message-->
+        <button type="submit" id="send-btn"><img src="./App/Public/Front/images/send-button.png" alt="Envoyer le message"></button>
+        
     </form>
 
 </section>

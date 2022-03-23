@@ -44,5 +44,12 @@
 
 <main class="flex">
 
+<!-- Quick link to add a new book -->
+<a href="indexAdmin.php?action=livresadd">
+    <div id="add-btn">
+        <img src="./App/Public/Admin/images/book-light.png" alt="">
+    </div>
+</a>
+
 <?php include_once('./App/Views/admin/layouts/dashboard-sidebar.php'); ?>
     <div class="container">
