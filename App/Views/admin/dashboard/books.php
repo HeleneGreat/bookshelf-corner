@@ -1,24 +1,36 @@
 <?php include_once('./App/Views/admin/layouts/header.php');?>
 
 
-<section>
-    <?php foreach($books as $book){ ?> 
-    <article>
-        <div><img src="<?= $book['picture']; ?>" alt="Couverture <?= $book['title']; ?>"></div>
-        <div>
-            <p class="title-list"><?= $book['title']; ?></p>
-            <p class="location-list"><?= $book['location']; ?></p>
-            <p class="date-list"><?= $book['created_at']; ?></p>
-        </div>
+<section id="all-books">
 
+    <h1 class="text-center">Livres</h1>
 
-    </article>
+    <?php foreach($datas as $book){ ?> 
+    <a href="indexAdmin.php?action=livresview&id=<?= $book['id']; ?>">
+        <article class="flex">
+            <img src="./App/Public/Books/images/<?= $book['picture']; ?>" alt="Couverture <?= $book['title']; ?>">
+            <div>
+                <p class="list-title"><?= $book['title']; ?></p>
+                <p class="list-location"><?= $book['location']; ?></p>
+                <p class="list-date"><?= $book['created_at']; ?></p>
+            </div>
+        </article>
+    </a>
     <?php } ?> 
 
 
 </section>
 
 
+<!-- Quick link to add a new book -->
+<!-- <?php if((strpos($_SERVER['REQUEST_URI'], "action") == true)){
+    if(($_GET['action'] != "livresadd") ) { ?> -->
+<a href="indexAdmin.php?action=livresadd">
+    <div class="add-btn mobile-btn">
+        <img src="./App/Public/Admin/images/book-light.png" alt="">
+    </div>
+</a>
+<!-- <?php }} ?> -->
 
 
 
@@ -43,7 +55,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach($books as $book){ ?>   
+        <?php foreach($datas as $book){ ?>   
         <tr>
             <td><?= $book['title']; ?></td>
             <td><?= $book['location']; ?></td>

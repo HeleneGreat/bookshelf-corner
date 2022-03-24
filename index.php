@@ -48,5 +48,6 @@ try{
 }
 
 catch (Exception $e){
-    require 'App/Views/front/errorLoading.php';
+    
+    return $this->viewFront("errorLoading");
 }

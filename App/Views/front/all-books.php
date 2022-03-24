@@ -6,7 +6,7 @@
     <h1>Les derniers livres que nous avons dévorés</h1>
 
     <div class="flex-md justify-between-md">
-    <?php foreach($books as $book){ ?>
+    <?php foreach($datas as $book){ ?>
         <a href="index.php?action=un-livre&id=<?= $book['id'] ?>">
             <article id="book-card" class="center">
                 <h3 class="text-center"><?= $book['title']; ?></h3>

@@ -141,6 +141,7 @@ try{
 }
 
 catch (Exception $e){
-    // require 'App/Views/admin/error.php';
+    
+    // return $this->viewAdmin("error");
     echo $e->getMessage();
 }

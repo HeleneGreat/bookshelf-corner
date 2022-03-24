@@ -2,14 +2,14 @@
 
 namespace Projet\Controllers;
 
-class AdminController{
+class AdminController extends Controller{
 
 
 /********************************************************/
 /******************* CONNECTION ADMIN *******************/
 /********************************************************/
     function addAdmin(){
-        require "App/Views/admin/createAdmin.php";
+        return $this->viewAdmin("createAdmin");
     }
 
     // Formulaire de création d'un compte ADMIN :
@@ -18,7 +18,7 @@ class AdminController{
 
         if(filter_var($mail, FILTER_VALIDATE_EMAIL)){
             $email = $createAdmin->createAdmin($pseudo, $mail, $mdp);
-            require "App/Views/admin/confirmeCreation.php";
+            return $this->viewAdmin("confirmeCreation");
         }
         else{
             // header('Location: App/Views/admin/error.php');
@@ -27,7 +27,7 @@ class AdminController{
     }
 
     function connexionAdmin(){
-        require "App/Views/admin/connexionAdmin.php";
+        return $this->viewAdmin("connexionAdmin");
     }
 
     // Formulaire de connection admin
@@ -44,13 +44,14 @@ class AdminController{
         $_SESSION['mail'] = $result['mail'];
         $_SESSION['mdp'] = $result['mdp'];
         $_SESSION['pseudo'] = $result['pseudo'];
+        $_SESSION['picture'] = $result['picture'];
 
         $countBooks = new \Projet\Models\BookModel();
         $nbrBook = $countBooks->countBooks();
         $nbBooks = $nbrBook->fetch();
 
         if ($isPasswordCorrect){
-            require 'App/Views/admin/dashboard/dashboard.php';
+            return $this->viewAdmin("dashboard/dashboard", $nbBooks);
         }
         else{
             echo "Identifiants erronés !";
@@ -64,7 +65,17 @@ class AdminController{
         $countBooks = new \Projet\Models\BookModel();
         $nbrBook = $countBooks->countBooks();
         $nbBooks = $nbrBook->fetch();
-        require "App/Views/admin/dashboard/dashboard.php";
+        return $this->viewAdmin("dashboard/dashboard", $nbBooks);
+    }
+
+    function infoAdmin($mail){
+        $user = new \Projet\Models\AdminModel();
+        $admins = $user->infoAdmin($mail);
+        $admin = $admins->fetch();
+
+
+
+
     }
 
 

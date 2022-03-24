@@ -2,7 +2,7 @@
 
 namespace Projet\Controllers;
 
-class BookController{
+class BookController extends Controller{
 
 
 /*=======================================================*/
@@ -20,25 +20,24 @@ function livres(){
     $book = new \Projet\Models\BookModel();
     $allBooks = $book->allBooks();
     $books = $allBooks->fetchAll();
-    require "App/Views/admin/dashboard/books.php";
+    return $this->viewAdmin("dashboard/books", $books);
 }
 
 function viewLivre($id){
     $books = new \Projet\Models\BookModel();
     $oneBook = $books->singleBook($id);
     $book = $oneBook->fetch();
-    require "App/Views/admin/dashboard/book-view.php";
+    return $this->viewAdmin("dashboard/book-view", $book);
 }
 
 function addLivre(){
     $books = new \Projet\Models\BookModel();
-    require "App/Views/admin/dashboard/book-add.php";
+    return $this->viewAdmin("dashboard/book-add", $books);
 }
 
 function addLivrePost($data){
     $books = new \Projet\Models\BookModel();
     $oneBook = $books->addSingleBook($data);
-    //$book = $oneBook->fetch();
     header('Location: indexAdmin.php?action=livres');
 }
 
@@ -46,7 +45,7 @@ function modifyLivre($id){
     $books = new \Projet\Models\BookModel();
     $oneBook = $books->singleBook($id);
     $book = $oneBook->fetch();
-    require "App/Views/admin/dashboard/book-modify.php";
+    return $this->viewAdmin("dashboard/book-modify", $book);
 }
 
 function modifyLivrePost($data){
@@ -60,7 +59,7 @@ function deleteLivre($id){
     $books = new \Projet\Models\BookModel();
     $oneBook = $books->singleBook($id);
     $book = $oneBook->fetch();
-    require "App/Views/admin/dashboard/book-delete.php";
+    return $this->viewAdmin("dashboard/book-delete.php",$book);
 }
 
 
@@ -83,14 +82,15 @@ function allBooks(){
     $book = new \Projet\Models\BookModel();
     $allBooks = $book->allBooks();
     $books = $allBooks->fetchAll();
-    require "App/Views/front/all-books.php";
+    return $this->viewFront("all-books", $books);
 }
 
 function oneBook($id){
     $books = new \Projet\Models\BookModel();
     $oneBook = $books->singleBook($id);
     $book = $oneBook->fetch();
-    require "App/Views/front/one-book.php";
+   
+    return $this->viewFront("one-book", $book);
 }
 
 

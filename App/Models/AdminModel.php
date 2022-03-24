@@ -4,16 +4,16 @@ namespace Projet\Models;
 
 class AdminModel extends Manager{
 
-    public static function infoAdmins(){
-        $bdd = self::dbConnect();
-        $req = $bdd->prepare('SELECT * FROM administrators');
-        $req->execute();
-        $admins = [];
-        foreach( $req->fetchAll() as $admin){
-            array_push($admins, new self($admin));
-        }
-        return $admins;
-    }
+    // public static function infoAdmins(){
+    //     $bdd = self::dbConnect();
+    //     $req = $bdd->prepare('SELECT * FROM administrators');
+    //     $req->execute();
+    //     $admins = [];
+    //     foreach( $req->fetchAll() as $admin){
+    //         array_push($admins, new self($admin));
+    //     }
+    //     return $admins;
+    // }
 
     public static function createAdmin ($pseudo, $mail, $mdp){
         $bdd = self::dbConnect();
@@ -24,9 +24,16 @@ class AdminModel extends Manager{
 
     public function recupMdp($mail){
         $bdd = $this->dbConnect();
-        $infoAdmin = $bdd->prepare('SELECT pseudo, mail, mdp FROM administrators WHERE mail = ?');
+        $infoAdmin = $bdd->prepare('SELECT pseudo, mail, mdp, picture FROM administrators WHERE mail = ?');
         $infoAdmin->execute(array($mail));
         return $infoAdmin;
     }
+
+    // public function infoAdmin($mail){
+    //     $bdd = $this->dbConnect();
+    //     $infoAdmin = $bdd->prepare('SELECT pseudo, mail, mdp, picture FROM administrators WHERE mail = ?');
+    //     $infoAdmin->execute(array($mail));
+    //     return $infoAdmin;
+    // }
 
 }

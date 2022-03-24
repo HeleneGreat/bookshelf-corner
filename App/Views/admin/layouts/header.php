@@ -10,6 +10,9 @@
 </head>
 <body>
 
+<!-- Blur element when mobile nav is open -->
+<div id="blur" class="display-none"></div>
+
 <!-- HEADER BIG SCREEN -->
 <header id="bandeau-admin" class="lg">
     <nav>
@@ -23,33 +26,36 @@
 
 <!-- HEADER MOBILE -->
 <header id="bandeau-admin" class="mobile">
-<!-- AJOUTER CLASS ACTIVE MOBILE -->
+    <div class="container">
+        <h2>The Bookshelf Corner</h2>
+        <h3>Espace admin</h3>
+    </div>
     <div id="open-menu" class="menu-toggle"><i class="fas fa-bars"></i></div>
-    <nav id="nav-xs" class="flex">
-        <ul class="flex col center">
-            <li><a href="index.php">Voir mon site</a></li>
-            <li><a href="indexAdmin.php?action=dashboard">Tableau de bord</a></li>
-            <li><a href="indexAdmin.php?action=livres">Livres</a></li>
-            <li><a href="indexAdmin.php?action=genres">Genres litéraires</a></li>
-            <li><a href="indexAdmin.php?action=slider">Slider</a></li>
-            <li><a href="indexAdmin.php?action=messages">Messages reçus</a></li>
-            <li><a href="indexAdmin.php?action=comments">Commentaires</a></li>
-            <li><a href="indexAdmin.php?action=myAccount">Mon compte</a></li>
-            <li><a href="indexAdmin.php?action=disconnect">Se déconnecter</a></li>
+    <nav id="nav-xs">
+        <div id="nav-profile">
+            <img src="./App/Public/Admin/images/<?= $_SESSION['picture']; ?>" alt="">
+            <p><?= $_SESSION['pseudo'] ;?></p>
+        </div>
+        <ul>
+            <li><a href="index.php"><i class="fas fa-arrow-left"></i> Voir mon site</a></li>
+            <li><a href="indexAdmin.php?action=dashboard"><i class="fas fa-chart-line"></i> Tableau de bord</a></li>
+        </ul>
+        <ul><h3>Gestion du site</h3>
+            <li><a href="indexAdmin.php?action=livres"><i class="fas fa-book"></i> Livres</a></li>
+            <li><a href="indexAdmin.php?action=messages"><i class="fas fa-envelope"></i> Messages</a></li>
+            <li><a href="indexAdmin.php?action=comments"><i class="fas fa-comment"></i> Commentaires</a></li>
+        </ul>
+        <ul><h3>Profil</h3>
+            <li><a href="indexAdmin.php?action=myAccount"><i class="fas fa-user"></i> Mon compte</a></li>
+            <li><a class="disconnect" href="indexAdmin.php?action=disconnect"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a></li>
         </ul>
     </nav>
-    
-    <div id="close-menu" class="menu-toggle display-none"><i class="fas fa-times"></i></div>
+        
 </header>
 
-<main class="flex">
+<main >
 
-<!-- Quick link to add a new book -->
-<a href="indexAdmin.php?action=livresadd">
-    <div id="add-btn">
-        <img src="./App/Public/Admin/images/book-light.png" alt="">
-    </div>
-</a>
 
 <?php include_once('./App/Views/admin/layouts/dashboard-sidebar.php'); ?>
-    <div class="container">
+    
+
