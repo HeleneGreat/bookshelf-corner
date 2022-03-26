@@ -4,6 +4,7 @@ namespace Projet\Controllers;
 
 class BookController extends Controller{
 
+    // First admin methods, then front
 
 /*=======================================================*/
 /*=======================================================*/
@@ -51,7 +52,6 @@ function modifyLivre($id){
 function modifyLivrePost($data){
     $books = new \Projet\Models\BookModel();
     $oneBook = $books->modifySingleBook($data);
-    //$book = $oneBook->fetch();
     header('Location: indexAdmin.php?action=livres');
 }
 
@@ -61,6 +61,18 @@ function deleteLivre($id){
     $book = $oneBook->fetch();
     return $this->viewAdmin("dashboard/book-delete.php",$book);
 }
+
+function sliderSelection($data){
+    // First, all books in the DBB are set to slider = 0
+    $allBooks = new \Projet\Models\BookModel();
+    $sliderOff = $allBooks->sliderOff();
+    // Second, the books selected in the slider form are set to 1
+    $books = new \Projet\Models\BookModel();
+    $oneBook = $books->sliderOn($data);
+    header('Location: indexAdmin.php?action=livres');
+}
+
+
 
 
 

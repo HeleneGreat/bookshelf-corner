@@ -1,10 +1,17 @@
 <?php include_once('./App/Views/admin/layouts/header.php');?>
 
+<header>
+    <nav id="nav-books">
+        <ul class="flex justify-between text-center">
+            <li id="all-books-link" class="active"><i class="fa-solid fa-book-open"></i>Livres</li>
+            <li id="book-cat-link"><i class="fa-solid fa-list-ul"></i>Genres</li>
+            <li id="book-slider-link"><i class="fa-solid fa-sliders"></i>Slider</li>
+        </ul>
+    </nav>
+</header>
 
-<section id="all-books">
-
-    <h1 class="text-center">Livres</h1>
-
+<!-- Books Tab -->
+<section id="all-books" class="">
     <?php foreach($datas as $book){ ?> 
     <a href="indexAdmin.php?action=livresview&id=<?= $book['id']; ?>">
         <article class="flex">
@@ -17,24 +24,42 @@
         </article>
     </a>
     <?php } ?> 
+</section>
 
+<!-- Category Tab -->
+<section id="book-cat" class="display-none">
+<h2 class="text-center">Genres littéraires</h2>
 
 </section>
 
+<!-- Slider Tab -->
+<section id="book-slider" class="display-none">    
+    <form action="indexAdmin.php?action=book-slider" method="POST">
+        <?php foreach($datas as $book){ ?> 
+        <article class="flex justify-between align-items-center">
+            <div class="flex">
+                <img src="./App/Public/Books/images/<?= $book['picture']; ?>" alt="Couverture <?= $book['title']; ?>">
+                <p class="list-title"><?= $book['title']; ?></p>
+            </div>
+            <div class="switch">
+                <input type="checkbox" name="slider<?= $book['id']; ?>" value="<?= $book['id']; ?>" <?php if($book['slider'] == "1"){ echo "checked";} ?>>
+                <span class="slide"></span>
+            </div>
+        </article>
+        <?php } ?> 
+        <p class="text-center"><input type="submit" value="Enregistrer"></p>
+    </form>  
+</section>
 
 <!-- Quick link to add a new book -->
 <!-- <?php if((strpos($_SERVER['REQUEST_URI'], "action") == true)){
     if(($_GET['action'] != "livresadd") ) { ?> -->
 <a href="indexAdmin.php?action=livresadd">
     <div class="add-btn mobile-btn">
-        <img src="./App/Public/Admin/images/book-light.png" alt="">
+        <img src="./App/Public/Admin/images/book-white.png" alt="">
     </div>
 </a>
 <!-- <?php }} ?> -->
-
-
-
-
 
 
 

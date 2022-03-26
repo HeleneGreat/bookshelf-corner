@@ -86,7 +86,7 @@ try{
         elseif ($_GET['action'] == "livresaddPost"){
             $data = [
                 // ':id' => $_GET['id'],
-                'newTitle' => $_POST['newTitle'],
+                'newTitle' =>htmlspecialchars( $_POST['newTitle']),
                 ':newAuthor' => $_POST['newAuthor'],
                 ':newYear_publication' => $_POST['newYear_publication'],
                 ':newGenre' => $_POST['newGenre'],
@@ -124,14 +124,23 @@ try{
             ];
             $bookController->modifyLivrePost($data);
         }  
-
+// A COMPLETER revoir
         elseif ($_GET['action'] == "livresdelete"){
             $id = $_GET['id'];
             $bookController->deleteLivre($id);
         }
 
 
+    /*********************************************************/
+    /********************* LIVRES SLIDER *********************/
+    /*********************************************************/
+        elseif($_GET['action'] == "book-slider"){
+            $bookController->sliderSelection($_POST);
+        };
 
+
+        
+    
 
 
     }

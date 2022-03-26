@@ -3,10 +3,17 @@
 namespace Projet\Models;
 
 class BookModel extends Manager{
+
+    public function countBooks(){
+        $bdd =$this->dbConnect();
+        $req = $bdd->prepare('SELECT COUNT(id) FROM books WHERE id');
+        $req->execute();
+        return $req;
+    }
     
     public function allBooks(){
         $bdd =$this->dbConnect();
-        $req = $bdd->prepare('SELECT id, title, author, picture, created_at, location FROM books ORDER BY created_at DESC');
+        $req = $bdd->prepare('SELECT id, title, author, picture, created_at, location, slider FROM books ORDER BY created_at DESC');
         $req->execute();
         return $req;
     }
@@ -19,9 +26,7 @@ class BookModel extends Manager{
         return $req;
     }
 
-
-
-
+    // A REVOIR ICI
     public function addSingleBook($data){
         $bdd =$this->dbConnect();
         $bdd->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
@@ -37,13 +42,30 @@ class BookModel extends Manager{
         return $req;
     }
 
-    public function countBooks(){
+    public function slider($data){
         $bdd =$this->dbConnect();
-        $req = $bdd->prepare('SELECT COUNT(id) FROM books WHERE id');
+        $req = $bdd->prepare('UPDATE books SET slider = :addSlider WHERE id = :id');
+        $req->execute($data);
+        return $req;
+    }
+
+// All slider colomns are set to 0
+    public function sliderOff(){
+        $bdd =$this->dbConnect();
+        $req = $bdd->prepare('UPDATE books SET slider = "0"');
         $req->execute();
         return $req;
     }
 
+// The ones selected in the form are set to 1
+    public function sliderOn($data){
+        $bdd =$this->dbConnect();
+        foreach($data as $slider){
+            $req = $bdd->prepare('UPDATE books SET slider = "1" WHERE id = ?');
+            $req->execute(array($slider));  
+        }
+        return $req;
+    }
 
 }
 

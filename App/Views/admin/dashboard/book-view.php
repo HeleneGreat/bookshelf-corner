@@ -1,14 +1,12 @@
 <?php include_once('./App/Views/admin/layouts/header.php');?>
 
-<section id="one-book">
+<div class="retour container"><a href="indexAdmin.php?action=livres"><i class="fas fa-arrow-circle-left"></i></a></div>
 
+<section id="one-book">
     <div>
         <p><img src="./App/Public/Books/images/<?= $datas['picture']; ?>" alt="<?= $datas['title']; ?>"></p>
         <p>Mon avis : <?= $datas['notation']; ?> / 5</p>
     </div>
-
-
-<p class="retour container"><a href="indexAdmin.php?action=livres"><i class="fas fa-arrow-circle-left"></i> Retour</a></p>
 
     <h1 class="container"><?= $datas['title']; ?></h1>
     

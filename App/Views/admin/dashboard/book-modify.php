@@ -1,8 +1,8 @@
 <?php include_once('./App/Views/admin/layouts/header.php');?>
 
-<section>
+<section id="book-form">
 
-<p class="retour"><a href="indexAdmin.php?action=livres"><i class="fas fa-arrow-circle-left"></i> Retour</a></p>
+<div class="retour"><a href="indexAdmin.php?action=livres"><i class="fas fa-arrow-circle-left"></i></a></div>
 
     <h1 class="text-center">Modifier le livre</h1>
  
