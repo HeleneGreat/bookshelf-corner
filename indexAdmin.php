@@ -12,6 +12,8 @@ try{
     
     $bookController = new \Projet\Controllers\BookController();
 
+    $blogController = new \Projet\Controllers\BlogController();
+
 
 
     if(isset($_GET['action'])){
@@ -150,17 +152,19 @@ try{
             $adminController->account();
         }
 
-        elseif($_GET['action'] == "accountmodify"){
+        elseif($_GET['action'] == "accountModify"){
             $adminController->accountModify();
         }
 
         elseif($_GET['action'] == "accountModifyPost"){
             $purpose = "admin";
+            // check if there is a new picture uploaded
             if($_FILES['picture']['name'] !== ""){
                 $fileName = $adminController->verifyFiles($purpose);
             } else{
                 $fileName = $_SESSION['picture'] ;
             }
+            // update the $_SESSION information with this update
             $_SESSION['pseudo'] = $_POST['newPseudo'];
             $_SESSION['mail'] = $_POST['newMail'];
             $_SESSION['picture'] = $fileName;
@@ -176,28 +180,35 @@ try{
         /*********************************************************/
         /******************** BLOG PARAMETERS ********************/
         /*********************************************************/
-        elseif($_GET['action'] == "blog-info"){
+        elseif($_GET['action'] == "blogParameters"){
             $id = "1";
-            $adminController->infoBlog($id);
+            $blogController->blogParameters($id);
         }
 
-        elseif($_GET['action'] == "blog-modify"){
+        elseif($_GET['action'] == "blogModify"){
             $id = "1";
-            $adminController->blogModify($id);
+            $blogController->blogModify($id);
         }
 
         elseif($_GET['action'] == "blogModifyPost"){
             $purpose = "logo";
             $id = "1";
+            // check if there is a picture uploaded
             if($_FILES['picture']['name'] !== ""){
                 $fileName = $adminController->verifyFiles($purpose);
             } else{
-                $adminController->infoBlog($id);
-                $fileName = 
+                $fileName = $blogController->blogInfo($id)['logo'];
+            }
+            // check is there is a new blog name
+            if($_POST['newBlog'] !== ""){
+                $blogName = htmlspecialchars($_POST['newBlog']);
+            }
+            else{
+                $blogName = $blogController->blogInfo($id)['name'];
             }
             $data = [
                 ':picture' => $fileName,
-                ':newBlog' => htmlspecialchars($_POST['newBlog'])
+                ':newBlog' => $blogName
             ];
             $adminController->blogModifyPost($data);
         }

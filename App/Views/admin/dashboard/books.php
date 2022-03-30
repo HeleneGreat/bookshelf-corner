@@ -54,12 +54,14 @@
     </form>  
 </section>
 
-<!-- Quick link to add a new book -->
-<a href="indexAdmin.php?action=livresadd">
-    <div class="add-btn mobile-btn">
-        <img src="./App/Public/Admin/images/book-white.png" alt="">
-    </div>
-</a>
+<!-- Link to add a new book -->
+<div class="flex justify-end">
+    <a href="indexAdmin.php?action=livresadd" title="Ajouter un nouveau livre">
+        <div class="add-btn thumb-btn">
+            <img src="./App/Public/Admin/images/book-white.png" alt="Ajouter un nouveau livre">
+        </div>
+    </a>
+</div>
 
 
 

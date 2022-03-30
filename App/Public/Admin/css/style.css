@@ -1,24 +1,29 @@
 /*
+
 reset
+SET-UP
 HEADER
-FOOTER
-DASHBOARD-SIDEBAR
-DASHBOARD-LIVRES
-
-
-
+    * nav - animation
+    * nav - content
+DASHBOARD
+    * btn icon top
+    * forms
+DASHBOARD - LIVRES
+    * livres - nav
+    * livres - view
+    * livres - forms
+    * livres - all + slider
+    * livres - slider
+DASHBOARD - ACCOUNT
+DASHBOARD - PARAMETERS
 
 MEDIA QUERIES
-- min-width: 993px
-- min-width: 1201px
-
-
-
+    * SMALL : min-width: 769px
+    * MEDIUM : min-width: 993px
+    * LARGE : min-width: 1201px
+    * EXTRA-LARGE : min-width: 1440px
 
 */
-
-/* VARIABLES TEMPORAIRES */
-
 
 
 /* *******************/
@@ -40,7 +45,7 @@ main{
     width: 100%;
 }
 
-p, a, th, tr{
+p, a{
     font-size: 22px;
 }
 
@@ -54,6 +59,9 @@ p, a, th, tr{
     font-style: normal;
 }
 
+/* ********************/
+/* ----- SET-UP ----- */
+/* ********************/
 h1{
     text-align: center;
     margin-bottom: 40px;
@@ -157,6 +165,14 @@ ul{
     font-family:'uppereastsideregular', 'Times New Roman', Times, serif;
 }
 
+/* ICI */
+.btn {
+    background-color: white;
+    padding: 10px 20px;
+    width: 150px;
+    text-align: center;
+    display: block;
+}
 
 /* ****************************/
 /* ----- NAV - ANIMATION----- */
@@ -179,7 +195,7 @@ z-index: 9999999;
     text-shadow: 0px 0px 3px var(--anthracite);
 }
 
-#nav-xs{
+#nav-admin{
     position: fixed;
     top: 0;
     left: -100%;
@@ -191,9 +207,20 @@ z-index: 9999999;
 }
 
 /* menu mobile qui s'affiche par-dessus l'écran */
-#nav-xs.overlay{
+#nav-admin.overlay{
     left: 0;
     transition: left 0.5s;
+}
+
+#blur{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    width: 100%;
+    height: 100vh;
+    backdrop-filter: blur(2px);
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 /* ***************************/
@@ -220,7 +247,7 @@ z-index: 9999999;
     line-height: 78px;
 }
 
-#nav-xs h3{
+#nav-admin h3{
     color: var(--dashboard);
     font-weight: bold;
     font-size: 1.5rem;
@@ -228,75 +255,31 @@ z-index: 9999999;
     margin-left: 0;
 }
 
-#nav-xs ul{
+#nav-admin ul{
     padding-left: 30px;
 }
 
-#nav-xs li{
+#nav-admin li{
     margin-top: 10px;
 }
 
-#nav-xs i.fa-arrow-left{
+#nav-admin i.fa-arrow-left{
     transform: rotate(45deg);
 }
 
-#nav-xs i{
+#nav-admin i{
     margin-right: 10px;
 }
 
-#nav-xs .disconnect,
-#nav-xs .disconnect i{
+#nav-admin .disconnect,
+#nav-admin .disconnect i{
     color: red;
     font-weight: bold;
 }
 
-#blur{
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 99999;
-    width: 100%;
-    height: 100vh;
-    backdrop-filter: blur(2px);
-    background-color: rgba(0, 0, 0, 0.3);
-}
-
-/* *************************************** */
-/* ---------------- FOOTER --------------- */
-/* *************************************** */
-#foot-admin{
-    /* background-color: var(--dashboard); */
-    min-height: 150px;
-    margin-top: 50px;
-}
-
-/* ******************************************** */
-/* ---------------- SIDEBAR-------------------- */
-/* ******************************************** */
-#dashboard-sidebar{
-    background-color: var(--dashboard);
-    padding: 20px;
-    margin-top: -51px;
-    margin-bottom: -51px;
-}
-
-.btn {
-    background-color: white;
-    padding: 10px 20px;
-    width: 150px;
-    text-align: center;
-    display: block;
-}
-
-#dashboard-sidebar .active{
-    background-color: white;
+#nav-admin a:hover,
+#nav-admin .active{
     font-weight: bold;
-    box-shadow: 0 0 12px rgb(92, 91, 91);
-    font-size: 1.3rem;
-}
-
-#dashboard-sidebar li:first-child{
-    margin-bottom: 80px;
 }
 
 /* ********************************************** */
@@ -305,7 +288,7 @@ z-index: 9999999;
 
 
 /* ******************* */
-/* --- BTN ICON TOP--- */
+/* --- BTN ICON TOP --- */
 /* ******************* */
 .retour,
 .delete{
@@ -316,7 +299,7 @@ z-index: 9999999;
 }
 
 .retour{
-    left: 20px;
+    margin-left: 15px;
 }
 
 .retour i{
@@ -338,6 +321,7 @@ z-index: 9999999;
     position: absolute;
     right: 16px;
 }
+
 .delete .fa-circle{
     font-size: 1.5em;
     color: red;
@@ -390,7 +374,6 @@ a.btn:hover{
     font-size: 1.3rem;
 }
 
-
 #book-form input[type='file']{
     opacity: 0;
     width: 0;
@@ -404,46 +387,25 @@ a.btn:hover{
     font-size: 5rem;
 }
 
-/* ******************************************* */
-/* ---------- DASHBOARD - LIVRES-------------- */
-/* ******************************************* */
-table{
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table td, table th{
-    border: 3px solid var(--dashboard);
-    padding: 5px 10px;
-}
-
-.zones-text{
-    width: 100%;
-}
-
-textarea.catchphrase{
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 100px;
-}
-
-textarea.content{
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 600px;
-}
-
+/* ******************************************** */
+/* ---------- DASHBOARD - LIVRES -------------- */
+/* ******************************************** */
 /* Fixed button to add / modify a book */
-.mobile-btn{
+.thumb-btn{
     width: 60px;
     height: 60px;
     border-radius: 45px;
     position: fixed;
-    right: 40px;
-    bottom: 70px;
+    right: 20px;
+    bottom: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.thumb-btn img{
+    width: 50%;
+    height: 50%;
 }
 
 .add-btn{
@@ -454,18 +416,9 @@ textarea.content{
     background-color: orange;
 }
 
-.mobile-btn img{
-    width: 50%;
-    height: 50%;
-}
-
-/* ********************************************* */
-/* ---------- DASHBOARD - LIVRES 2-------------- */
-/* ********************************************* */
-
-/* *************************** */
-/* ------- LIVRE - NAV ------- */
-/* *************************** */
+/* **************************** */
+/* ------- LIVRES - NAV ------- */
+/* **************************** */
 #nav-books li{
     width: 33.33%;
     font-size: 1.3rem;
@@ -486,37 +439,9 @@ textarea.content{
     display: block;
 }
 
-/* *************************** */
-/* ------- LIVRE - ALL ------- */
-/* *************************** */
-#all-books article{
-    border-bottom: 1px solid rgba(204, 203, 203, 0.856);
-    position: relative;
-}
-
-#all-books article p:first-of-type{
-    color: var(--dashboard);
-}
-
-#all-books img{
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin-right: 20px;
-}
-
-#all-books .list-title{
-    font-weight: bold;
-}
-
-#all-books .list-location,
-#all-books .list-date{
-    font-size: 1.2rem;
-}
-
-/* **************************** */
-/* ------- LIVRE - VIEW ------- */
-/* **************************** */
+/* ***************************** */
+/* ------- LIVRES - VIEW ------- */
+/* ***************************** */
 #one-book{
     margin-top: 30px;
 }
@@ -531,35 +456,70 @@ textarea.content{
     margin: 20px 0;
 }
 
-#one-book img{
+#one-book #book-cover{
     width: 100%;
     height: 300px;
     object-fit: cover;
 }
 
-/* ****************************** */
-/* ------- LIVRE - SLIDER ------- */
-/* ****************************** */
-#book-slider article{
+/* **************************** */
+/* ------ LIVRES - FORMS ------ */
+/* **************************** */
+.zones-text{
+    width: 100%;
+}
+
+textarea.catchphrase{
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100px;
+}
+
+textarea.content{
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 600px;
+}
+
+/* ******************************* */
+/* ---- LIVRES - ALL + SLIDER ---- */
+/* ******************************* */
+#book-slider article,
+#all-books article{
     border-bottom: 1px solid rgba(204, 203, 203, 0.856);
+    position: relative;
 }
 
-#book-slider article:first-of-type{
-    border-top: 1px solid rgba(204, 203, 203, 0.856);
+#book-slider article p:first-of-type
+#all-books article p:first-of-type{
+    color: var(--dashboard);
 }
 
-#book-slider img{
+#book-slider img,
+#all-books img{
     width: 100px;
     height: 100px;
     object-fit: cover;
     margin-right: 20px;
 }
 
-#book-slider .list-title{
+#book-slider .list-title,
+#all-books .list-title{
     font-weight: bold;
+}
+
+#book-slider .list-title{
     line-height: 100px;
 }
 
+#all-books .list-location,
+#all-books .list-date{
+    font-size: 1.2rem;
+}
+
+/* ******************************* */
+/* ------- LIVRES - SLIDER ------- */
+/* ******************************* */
 /* switch = box around the button slide */
 .switch{
     margin-right: 15px;
@@ -601,8 +561,7 @@ textarea.content{
     background-color: var(--dashboard);
     left: 30px;
     transition: left 0.4s;
-} 
-
+}
 
 /* ******************************************** */
 /* ---------- DASHBOARD - ACCOUNT-------------- */
@@ -648,9 +607,6 @@ textarea.content{
 }
 
 
-
-
-
 /* ********************************************** */
 /* ---------------- MEDIA QUERIES --------------- */
 /* ********************************************** */
@@ -666,7 +622,6 @@ textarea.content{
 /* ********************/
 /* ----- MEDIUM ----- */
 /* ********************/
-/* N° 2*/
 @media screen and (min-width:993px){
     .container{
         max-width: 80%;
@@ -681,7 +636,15 @@ textarea.content{
     .delete{
     margin-bottom: -40px;
     }
+    
+    .thumb-btn{
+        right: 110px;
+        bottom: 70px;
+    }
 
+    /* *********************/
+    /* ----- ACCOUNT ----- */
+    /* *********************/
     #account img{
         width: 300px;
         margin: 0 0;
@@ -702,25 +665,20 @@ textarea.content{
         margin-top: 40px;
     }
     
+    /* **********************/
+    /* ---- PARAMETERS ---- */
+    /* **********************/
     #parameters .btn:first-of-type{
         margin-right: 150px;
     }
 
-
-
-
 }
   
-    
-
-
-
 
 /* *******************/
 /* ----- LARGE ----- */
 /* *******************/
 @media screen and (min-width:1201px){
-
     .container{
         min-width: 1200px;
         max-width: 1200px;
@@ -748,43 +706,33 @@ textarea.content{
         width: 65%;
     }
 
-   
-    #add-btn{
-        display: none;
-    }
-
-
     /* *******************/
     /* ----- ADMIN ----- */
     /* *******************/
+    main{
+        width: 900px;
+    }
+ 
     #bandeau-admin{
         position: sticky;
         width: 100%;
-        /* padding: 20px 30px; */
     }
 
-    #nav-xs{
+    #nav-admin{
         position: sticky;
         left:0;
         width: 300px;
         height: 100%;
     }
     
-    main{
-        width: 900px;
-    }
- 
-    section.container{
-        width: 100%;
-        margin-left: 50px;
-    }
-
     .stretched-link{
         position: relative;
         opacity: 1;
     }
 
     #dashboard,
+    #one-book,
+    #book-form,
     #message,
     #comment,
     #account,
@@ -792,7 +740,6 @@ textarea.content{
         margin-left: 20px;
         margin-top: 20px;
     }
-
 
     /* ***********************/
     /* ----- ALL BOOKS ----- */
@@ -814,8 +761,29 @@ textarea.content{
         margin-right: 60px;
     }
 
-    /* ***********************/
-    /* ------ ACCOUNT ------ */
-    /* ***********************/
-    
+    #one-book{
+        position: relative;
+        margin-top: 30px;
+    }
+
+    .thumb-btn{
+        right: 20px;
+        bottom: 70px;
+    }
+
+
+}
+
+
+/* *************************/
+/* ----- EXTRA-LARGE ----- */
+/* *************************/
+@media screen and (min-width:1440px){
+    .thumb-btn{
+        right: auto;
+        left: auto;
+        bottom: 100px;
+        margin-left: 30px;
+    }
+
 }

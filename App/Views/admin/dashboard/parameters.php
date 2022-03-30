@@ -10,7 +10,7 @@
     <p class="flex justify-center"><img src="./App/Public/Admin/images/<?= $datas['logo'];?>" alt="Logo du site <?= $datas['name'];?>"></p>
 
     <div class="flex-md justify-center">
-        <a href="indexAdmin.php?action=blog-modify" class="btn center">Modifier les informations du blog</a>
+        <a href="indexAdmin.php?action=blogModify" class="btn center">Modifier les informations du blog</a>
         <a href="" class="btn center">Ajouter un compte administrateur</a>
     </div>
 </section>

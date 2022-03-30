@@ -1,6 +1,6 @@
 <?php include_once('./App/Views/admin/layouts/header.php');?>
 
-<section id="book-form" class="container">
+<section id="book-form">
 
     <div class="retour"><a href="indexAdmin.php?action=livres"><i class="fas fa-arrow-circle-left"></i></a></div>
 

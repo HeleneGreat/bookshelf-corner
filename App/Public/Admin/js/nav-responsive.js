@@ -1,7 +1,7 @@
 
 let openMenu = document.getElementById('open-menu');
 
-let overlay = document.getElementById('nav-xs');
+let overlay = document.getElementById('nav-admin');
 
 let blur = document.getElementById('blur');
 
@@ -24,7 +24,6 @@ blur.addEventListener('click', function(){
 
 
 // Sidebar nav for big screens >= 1201px
-// if (window.screen.width >= 1201) {
 
 function removeContainer() 
 {
@@ -32,5 +31,3 @@ function removeContainer()
 
     section.classList.remove("container");
 }
-
-// }

@@ -97,24 +97,13 @@ class AdminController extends Controller{
     /*********************************************************/
     /******************** BLOG PARAMETERS ********************/
     /*********************************************************/
-    function infoBlog($id){
-        $user = new \Projet\Models\AdminModel();
-        $blogs = $user->infoBlog($id);
-        $blog = $blogs->fetch();
-        return $this->viewAdmin("dashboard/parameters", $blog);
-    }
+    
 
-    function blogModify($id){
-        $user = new \Projet\Models\AdminModel();
-        $blogs = $user->infoBlog($id);
-        $blog = $blogs->fetch();
-        return $this->viewAdmin("dashboard/parameters-modify", $blog);
-    }
 
     function blogModifyPost($data){
         $user = new \Projet\Models\AdminModel();
         $blogs = $user->blogModifyPost($data);
-        return $this->viewAdmin("dashboad/dashboard");
+        header('Location: indexAdmin.php?action=blogParameters');
     }
 
 

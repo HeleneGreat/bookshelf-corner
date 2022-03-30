@@ -3,7 +3,7 @@
 <!-- This page is only displayed on the Supra admin account -->
 
 <section id="parameters">
-    <div class="retour"><a href="indexAdmin.php?action=blog-info"><i class="fas fa-arrow-circle-left"></i></a></div>
+    <div class="retour"><a href="indexAdmin.php?action=blogParameters"><i class="fas fa-arrow-circle-left"></i></a></div>
 
     <h1>Paramètres du site</h1> 
 

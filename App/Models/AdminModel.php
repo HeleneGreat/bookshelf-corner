@@ -16,6 +16,11 @@ class AdminModel extends Manager{
     //     return $admins;
     // }
 
+    
+    /********************************************************/
+    /******************* ADMIN CONNECTION *******************/
+    /********************************************************/
+
     public static function createAdmin ($pseudo, $mail, $mdp, $fileName){
         $bdd = self::dbConnect();
         $req = $bdd->prepare('INSERT INTO administrators(pseudo, mail, mdp, picture) VALUE(?, ?, ?, ?)');
@@ -30,6 +35,9 @@ class AdminModel extends Manager{
         return $infoAdmin;
     }
 
+    /*********************************************************/
+    /********************* ADMIN ACCOUNT *********************/
+    /*********************************************************/
     public function modifyAccountPost($data){
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('UPDATE administrators SET pseudo = :newPseudo, mail = :newMail, picture = :picture WHERE id = :id');
@@ -37,13 +45,9 @@ class AdminModel extends Manager{
         return $req;
     }
 
-    public function infoBlog($id){
-        $bdd = $this->dbConnect();
-        $req = $bdd->prepare('SELECT logo, name FROM website WHERE id = ?');
-        $req->execute(array($id));
-        return $req;
-    }
-
+    /*********************************************************/
+    /******************** BLOG PARAMETERS ********************/
+    /*********************************************************/
     public function blogModifyPost($data){
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('UPDATE website SET logo = :picture, name = :newBlog WHERE id = 1');

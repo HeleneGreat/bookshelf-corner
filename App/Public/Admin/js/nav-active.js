@@ -1,5 +1,5 @@
 
-let menuItem = document.getElementById('admin-nav').getElementsByTagName('a');
+let menuItem = document.getElementById('nav-admin').getElementsByTagName('a');
 
 
 for (let i=0; i<menuItem.length; i++){

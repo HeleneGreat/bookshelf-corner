@@ -13,7 +13,7 @@
         </div>
     </div>
 
-        <a href="indexAdmin.php?action=accountmodify" class="btn center">Modifer mes informations</a>
+        <a href="indexAdmin.php?action=accountModify" class="btn center">Modifer mes informations</a>
 
 </section>
 
