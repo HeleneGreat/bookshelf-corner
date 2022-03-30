@@ -68,6 +68,31 @@ class AdminController extends Controller{
         return $this->viewAdmin("dashboard/dashboard", $nbBooks);
     }    
 
+    /**********************************************************/
+    /********************* ADMIN COMMENTS *********************/
+    /**********************************************************/
+    function comments(){
+        // $comment = new \Projet\Models\AdminModel();
+        // $allComments = $comment->allComments();
+        // $comments = $allComments->fetchAll();
+        return $this->viewAdmin("dashboard/comments");
+    }
+
+
+
+    /**********************************************************/
+    /********************* ADMIN MESSAGES *********************/
+    /**********************************************************/
+    function messages(){
+        // $message = new \Projet\Models\AdminModel();
+        // $allMessages = $message->allMessages();
+        // $message = $allMessages->fetchAll();
+        return $this->viewAdmin("dashboard/messages");
+    }
+
+
+
+
     /*********************************************************/
     /********************* ADMIN ACCOUNT *********************/
     /*********************************************************/

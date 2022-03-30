@@ -6,7 +6,7 @@
 
     <h1 class="text-center">Modifier le livre</h1>
  
-    <form action="indexAdmin.php?action=livresmodifyPost&id=<?= $datas['ID'];?>" method="post">
+    <form action="indexAdmin.php?action=livresmodifyPost&id=<?= $datas['ID'];?>" method="post" enctype="multipart/form-data">
         <div class="flex justify-between">
             <div>
             <!-- Book information -->
@@ -47,13 +47,18 @@
                     <p><input type="text" name="newLocation" id="newLocation" value="<?= $datas['location']; ?>"></p>
                 </div>
                 <div>
-                    <p><label for="newPicture">Image de la couverture du livre</label></p>
-                    <p><input type="file" name="newPicture" id="newPicture" value="<?= $datas['picture']; ?>" accept=".jpg, .jpeg, .png, .gif, .webp"></p>
-                </div>
-                <div>
                     <p><label for="newNotation">Note du livre</label></p>
                     <p><input name="newNotation" id="newNotation" type="range" min="0" max="5" step="1" value="<?= $datas['notation']; ?>" oninput="this.nextElementSibling.value = this.value">
                     <output><?= $datas['notation']; ?></output> / 5</p>
+                </div>
+                <!-- input file -->
+                <div>
+                    <p id="displayImg">Couverture du livre</p>
+                    <label for="picture" class="custom-file-upload ajout">
+                        <img src="./App/Public/Admin/images/picture.png" alt="Ajouter une image">
+                        <input type="file" name="picture" id="inputImg" accept="image/*" class="">
+                    </label>
+                    <p class="flex justify-center"><img class="display-none" src="" id="preview" alt=""></p>
                 </div>
             </div>
 

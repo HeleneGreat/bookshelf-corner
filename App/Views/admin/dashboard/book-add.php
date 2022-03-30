@@ -6,7 +6,7 @@
 
     <h1 class="text-center">Ajouter un livre</h1>
 
-    <form action="indexAdmin.php?action=livresaddPost" method="post">
+    <form action="indexAdmin.php?action=livresaddPost" method="post" enctype="multipart/form-data">
         <div class="flex justify-between">
             <div>
             <!-- Book information -->
@@ -47,15 +47,19 @@
                     <p><input type="text" name="newLocation" id="newLocation"></p>
                 </div>
                 <div>
-                    <p><label>Image de la couverture du livre</label></p>
-                    <p><label class="custom-file-upload ajout" for="newPicture"><input type="file" name="newPicture" id="newPicture" accept=".jpg, .jpeg, .png, .gif, .webp"><i class="fas fa-plus-circle"></i> <i class="fas fa-image add-picture"></i></label></p>
-                    <p><img src="" alt=""></p>
-                </div>
-                <div>
                     <p><label for="newNotation">Note du livre</label></p>
                     <p><input name="newNotation" id="newNotation" type="range" min="0" max="5" step="1" value="0" oninput="this.nextElementSibling.value = this.value">
                     <output>0</output> / 5</p>
                 </div> 
+                <!-- input file -->
+                <div>
+                    <p id="displayImg">Couverture du livre</p>
+                    <label for="picture" class="custom-file-upload ajout">
+                        <img src="./App/Public/Admin/images/picture.png" alt="Ajouter une image">
+                        <input type="file" name="picture" id="inputImg" accept="image/*" class="">
+                    </label>
+                    <p class="flex justify-center"><img class="display-none" src="" id="preview" alt=""></p>
+                </div>
             </div>
 
             <!-- Text zones -->

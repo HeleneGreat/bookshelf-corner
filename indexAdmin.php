@@ -90,6 +90,13 @@ try{
         }
 
         elseif ($_GET['action'] == "livresaddPost"){
+            $purpose = "book";
+            $folder = "Books";
+            if($_FILES['picture']['name'] !== ""){
+                $fileName = $bookController->verifyFiles($purpose, $folder);
+            } else{
+                $fileName = $bookController->noCover();
+            }
             $data = [
                 'newTitle' => htmlspecialchars( $_POST['newTitle']),
                 ':newAuthor' => htmlspecialchars($_POST['newAuthor']),
@@ -100,10 +107,9 @@ try{
                 ':newLocation' => htmlspecialchars($_POST['newLocation']),
                 ':newCatchphrase' => htmlspecialchars($_POST['newCatchphrase']),
                 ':newContent' => htmlspecialchars($_POST['newContent']),
-                ':newPicture' => htmlspecialchars($_POST['newPicture']),
+                ':newPicture' => $fileName,
                 ':newNotation' => htmlspecialchars($_POST['newNotation'])
             ];
-            
             $bookController->addLivrePost($data);
         }
 
@@ -113,6 +119,14 @@ try{
         }
 
         elseif ($_GET['action'] == "livresmodifyPost"){
+            $purpose = "book";
+            $folder = "Books";
+            $id = $_GET['id'];
+            if(!empty($_FILES) && $_FILES['picture']['name'] !== ""){
+                $fileName = $bookController->verifyFiles($purpose, $folder);
+            } else{
+                $fileName = $bookController->infoLivre($id)['picture'];
+            }
             $data = [
                 ':id' => $_GET['id'],
                 ':newTitle' => htmlspecialchars($_POST['newTitle']),
@@ -124,7 +138,7 @@ try{
                 ':newLocation' => htmlspecialchars($_POST['newLocation']),
                 ':newCatchphrase' => htmlspecialchars($_POST['newCatchphrase']),
                 ':newContent' => htmlspecialchars($_POST['newContent']),
-                ':newPicture' => htmlspecialchars($_POST['newPicture']),
+                ':newPicture' => $fileName,
                 ':newNotation' => htmlspecialchars($_POST['newNotation'])
             ];
             $bookController->modifyLivrePost($data);
@@ -158,9 +172,10 @@ try{
 
         elseif($_GET['action'] == "accountModifyPost"){
             $purpose = "admin";
+            $folder = "Admin";
             // check if there is a new picture uploaded
             if($_FILES['picture']['name'] !== ""){
-                $fileName = $adminController->verifyFiles($purpose);
+                $fileName = $adminController->verifyFiles($purpose, $folder);
             } else{
                 $fileName = $_SESSION['picture'] ;
             }
@@ -192,10 +207,11 @@ try{
 
         elseif($_GET['action'] == "blogModifyPost"){
             $purpose = "logo";
+            $folder = "Admin";
             $id = "1";
             // check if there is a picture uploaded
             if($_FILES['picture']['name'] !== ""){
-                $fileName = $adminController->verifyFiles($purpose);
+                $fileName = $adminController->verifyFiles($purpose, $folder);
             } else{
                 $fileName = $blogController->blogInfo($id)['logo'];
             }
@@ -213,7 +229,13 @@ try{
             $adminController->blogModifyPost($data);
         }
 
+        elseif($_GET['action'] == "comments"){
+            $adminController->comments();
+        }
 
+        elseif($_GET['action'] == "messages"){
+            $adminController->messages();
+        }
 
 
     }

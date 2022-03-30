@@ -39,6 +39,7 @@ MEDIA QUERIES
     padding:0;
     margin:0;
     color:var(--anthracite);
+    font-family: 'Times New Roman', Times, serif;
 }
 
 main{
@@ -375,8 +376,25 @@ a.btn:hover{
 }
 
 #book-form input[type='file']{
+    width: 100px;
+    height: 100px;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
     opacity: 0;
-    width: 0;
+}
+
+.custom-file-upload{
+    /* height: 100px; */
+    position: relative;
+    display: block;
+}
+
+.custom-file-upload img{
+    height: 100px;
+    width: 100px;
 }
 
 .custom-file-upload:hover{
@@ -479,6 +497,12 @@ textarea.content{
     min-width: 100%;
     max-width: 100%;
     min-height: 600px;
+}
+
+#book-form #preview{
+    width: 250px;
+    height: auto;
+    object-fit: cover;
 }
 
 /* ******************************* */

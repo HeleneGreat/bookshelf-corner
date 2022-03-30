@@ -12,7 +12,7 @@ class Controller{
         include('./App/Views/admin/' . $viewName . '.php');
     }
 
-    function verifyFiles($purpose){
+    function verifyFiles($purpose, $folder){
         if(isset($_FILES['picture'])){
             $tmpName = $_FILES['picture']['tmp_name'];
             $name = $_FILES['picture']['name'];
@@ -25,7 +25,7 @@ class Controller{
         $extension = strtolower(end($tabExtension));
 
         // Extensions accepted
-        $extensions = ['jpg', 'png', 'jpeg', 'gif'];
+        $extensions = ['jpg', 'png', 'jpeg', 'gif', 'webp'];
 
         // Max size accepted in octet (8000000 octets = 8 Mo)
         $maxSize = 8000000;
@@ -35,7 +35,7 @@ class Controller{
             // Files are renamed like this example : "logo_2022-03-29_16-25-36.png"
             $fileName = $purpose . "_" . date("Y-m-d_H-i-s") . "." . $extension;
             // Files are saved in the App
-            move_uploaded_file($tmpName, "./App/Public/Admin/images/" . $fileName);
+            move_uploaded_file($tmpName, "./App/Public/$folder/images/" . $fileName);
             return $fileName;
         }
 
