@@ -6,6 +6,7 @@ let overlay = document.getElementById('nav-xs');
 let blur = document.getElementById('blur');
 
 
+// Burger nav for small and medium screens
 openMenu.addEventListener('click', function(){
     
     overlay.classList.toggle("overlay");
@@ -20,3 +21,16 @@ blur.addEventListener('click', function(){
 
 });
 
+
+
+// Sidebar nav for big screens >= 1201px
+// if (window.screen.width >= 1201) {
+
+function removeContainer() 
+{
+    let section = document.getElementsByTagName("section");
+
+    section.classList.remove("container");
+}
+
+// }

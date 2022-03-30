@@ -13,11 +13,11 @@ class AdminController extends Controller{
     }
 
     // Formulaire de création d'un compte ADMIN :
-    function createAdminPost ($pseudo, $mail, $mdp){
-        $createAdmin = new \Projet\Models\AdminModel($data=[]);
+    function createAdminPost ($pseudo, $mail, $mdp, $fileName){
+        $createAdmin = new \Projet\Models\AdminModel;#($data=[]);
 
         if(filter_var($mail, FILTER_VALIDATE_EMAIL)){
-            $email = $createAdmin->createAdmin($pseudo, $mail, $mdp);
+            $email = $createAdmin->createAdmin($pseudo, $mail, $mdp, $fileName);
             return $this->viewAdmin("confirmeCreation");
         }
         else{
@@ -66,17 +66,57 @@ class AdminController extends Controller{
         $nbrBook = $countBooks->countBooks();
         $nbBooks = $nbrBook->fetch();
         return $this->viewAdmin("dashboard/dashboard", $nbBooks);
-    }
+    }    
 
-    function infoAdmin($mail){
+    /*********************************************************/
+    /********************* ADMIN ACCOUNT *********************/
+    /*********************************************************/
+    function account(){
+        $mail = $_SESSION['mail'];
         $user = new \Projet\Models\AdminModel();
-        $admins = $user->infoAdmin($mail);
-        $admin = $admins->fetch();
-
-
-
-
+        $admin = $user->recupMdp($mail);
+        $infoAdmin = $admin->fetch();
+        return $this->viewAdmin("dashboard/account", $infoAdmin);
     }
+
+    function accountModify(){
+        $mail = $_SESSION['mail'];
+        $user = new \Projet\Models\AdminModel();
+        $admin = $user->recupMdp($mail);
+        $infoAdmin = $admin->fetch();
+        return $this->viewAdmin("dashboard/account-modify", $infoAdmin);
+    }
+
+    function accountModifyPost($data){
+        $admin = new \Projet\Models\AdminModel();
+        $infoAdmin = $admin->modifyAccountPost($data);
+        header('Location: indexAdmin.php?action=account');
+    }
+
+
+    /*********************************************************/
+    /******************** BLOG PARAMETERS ********************/
+    /*********************************************************/
+    function infoBlog($id){
+        $user = new \Projet\Models\AdminModel();
+        $blogs = $user->infoBlog($id);
+        $blog = $blogs->fetch();
+        return $this->viewAdmin("dashboard/parameters", $blog);
+    }
+
+    function blogModify($id){
+        $user = new \Projet\Models\AdminModel();
+        $blogs = $user->infoBlog($id);
+        $blog = $blogs->fetch();
+        return $this->viewAdmin("dashboard/parameters-modify", $blog);
+    }
+
+    function blogModifyPost($data){
+        $user = new \Projet\Models\AdminModel();
+        $blogs = $user->blogModifyPost($data);
+        return $this->viewAdmin("dashboad/dashboard");
+    }
+
 
 
 }

@@ -36,6 +36,10 @@ MEDIA QUERIES
     color:var(--anthracite);
 }
 
+main{
+    width: 100%;
+}
+
 p, a, th, tr{
     font-size: 22px;
 }
@@ -51,6 +55,7 @@ p, a, th, tr{
 }
 
 h1{
+    text-align: center;
     margin-bottom: 40px;
     font-size: 2rem;
     color: var(--dashboard);
@@ -76,6 +81,10 @@ ul{
     text-align: center;
 }
 
+.bold{
+    font-weight: bold;
+}
+
 .flex{
     display: flex;
     flex-wrap: wrap;
@@ -97,8 +106,21 @@ ul{
     justify-content: flex-end;
 }
 
+.justify-center{
+    justify-content: center;
+}
+
 .align-items-center{
     align-items: center;
+}
+
+.stretched-link{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
 }
 
 .container{
@@ -110,6 +132,9 @@ ul{
     display: none;
 }
 
+.lg{
+    display: none;
+}
 
 /* *************************************** */
 /* ---------------- HEADER --------------- */
@@ -240,7 +265,7 @@ z-index: 9999999;
 /* ---------------- FOOTER --------------- */
 /* *************************************** */
 #foot-admin{
-    background-color: var(--dashboard);
+    /* background-color: var(--dashboard); */
     min-height: 150px;
     margin-top: 50px;
 }
@@ -277,11 +302,21 @@ z-index: 9999999;
 /* ********************************************** */
 /* ---------------- DASHBOARD-------------------- */
 /* ********************************************** */
-.retour{
+
+
+/* ******************* */
+/* --- BTN ICON TOP--- */
+/* ******************* */
+.retour,
+.delete{
     position: sticky;
-    top: 30px;
+    top: 20px;
+    padding-top: 10px;
+    margin-bottom: -40px;
+}
+
+.retour{
     left: 20px;
-    margin-bottom: -30px;
 }
 
 .retour i{
@@ -289,10 +324,30 @@ z-index: 9999999;
     font-weight: bold;
     color: var(--dashboard);
     background-color: white;
-    /* border: 1px solid white; */
+    box-shadow: inset 0 0 0 2px var(--dashboard);
     border-radius: 20px;
 }
 
+.delete .fa-trash-can{
+    font-size: 0.8em;
+    color: white;
+}
+
+.delete .fa-stack{
+    line-height: 1.5em;
+    position: absolute;
+    right: 16px;
+}
+.delete .fa-circle{
+    font-size: 1.5em;
+    color: red;
+}
+
+/* ******************** */
+/* ------- FORMS------- */
+/* ******************** */
+#parameters input, 
+#account input, 
 #book-form input, 
 #book-form option, 
 #book-form select{
@@ -300,24 +355,26 @@ z-index: 9999999;
     font-size: 18px;
 }
 
+#parameters input, 
+#account input, 
 #book-form input, 
 #book-form select, 
 #book-form textarea {
     margin-top: 8px;
     margin-bottom: 22px;
     border: 1px solid var(--dashboard);
-    box-shadow: inset 0 0 0.25rem var(--dashboard);
 }
 
+#parameters input, 
+#account input:focus, 
 #book-form input:focus, 
 #book-form select:focus, 
 #book-form textarea:focus{
     outline: none;
-    border: 1px solid darken(#ddd, 15%);
-    box-shadow: inset 0 0 0.5rem darken(#ddd, 15%);
-}
+    box-shadow: inset 0 0 0.25rem var(--dashboard);}
 
-input[type='submit']{
+input[type='submit'], 
+a.btn{
     margin-top: 20px;
     color: white;
     font-size: 1.3rem;
@@ -327,10 +384,12 @@ input[type='submit']{
     border: none;
 }
 
-input[type='submit']:hover{
+input[type='submit']:hover,
+a.btn:hover{
     box-shadow: 0 0 6px rgb(92, 91, 91);
     font-size: 1.3rem;
 }
+
 
 #book-form input[type='file']{
     opacity: 0;
@@ -374,21 +433,21 @@ textarea.content{
     min-height: 600px;
 }
 
-/* Fixed button to add a book */
+/* Fixed button to add / modify a book */
 .mobile-btn{
     width: 60px;
     height: 60px;
     border-radius: 45px;
     position: fixed;
     right: 40px;
-    bottom: 40px;
+    bottom: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .add-btn{
-    background-color: red;
+    background-color: green;
 }
 
 .modify-btn{
@@ -412,6 +471,11 @@ textarea.content{
     font-size: 1.3rem;
     border-bottom: 3px solid rgba(204, 203, 203, 0.856);
     padding: 10px  0;
+    cursor: pointer;
+}
+
+#nav-books li:hover{
+    border-bottom: 3px solid rgba(139, 139, 139, 0.856);
 }
 
 #nav-books li.active{
@@ -427,10 +491,11 @@ textarea.content{
 /* *************************** */
 #all-books article{
     border-bottom: 1px solid rgba(204, 203, 203, 0.856);
+    position: relative;
 }
 
-#all-books article:first-of-type{
-    border-top: 1px solid rgba(204, 203, 203, 0.856);
+#all-books article p:first-of-type{
+    color: var(--dashboard);
 }
 
 #all-books img{
@@ -452,6 +517,10 @@ textarea.content{
 /* **************************** */
 /* ------- LIVRE - VIEW ------- */
 /* **************************** */
+#one-book{
+    margin-top: 30px;
+}
+
 #one-book h2{
     margin-top: 20px;
     margin-bottom: 20px;
@@ -514,11 +583,6 @@ textarea.content{
     z-index: 999;
 }
 
-/* hide checkbox's label */
-.switch label{
-    /* opacity: 0; */
-}
-
 /* the button */
 .switch .slide{
     position: absolute;
@@ -532,19 +596,57 @@ textarea.content{
     transition: left 0.4s;
 }
 
+/* the button when checked*/
 .switch input[type='checkbox']:checked + .slide{
     background-color: var(--dashboard);
     left: 30px;
     transition: left 0.4s;
 } 
 
-/* *******************************************/
-/* - BIG SCREEN NO DISPLAY IN SMALL DEVICES- */
-/* *******************************************/
 
-.lg{
-    display: none;
+/* ******************************************** */
+/* ---------- DASHBOARD - ACCOUNT-------------- */
+/* ******************************************** */
+#account img{
+    width: 200px;
+    height: auto;
 }
+
+#account img,
+#account p{
+    margin-bottom: 20px;
+}
+
+#account input[type="password"],
+#account input[type="text"],
+#parameters input[type="text"]{
+    margin-top: -15px;
+    font-weight: bold;
+}
+
+#account input[type="submit"]{
+    margin-top: 30px
+}
+
+/* ******************************************** */
+/* ---------- DASHBOARD - PARAMETERS ---------- */
+/* ******************************************** */
+#parameters p{
+    margin-bottom: 20px;
+}
+
+#parameters img{
+    width: 200px;
+    height: auto;
+    border: 5px solid var(--dashboard);
+    border-radius: 100px;
+    margin-bottom: 40px;
+}
+
+#parameters .btn{
+    width: 200px;
+}
+
 
 
 
@@ -566,16 +668,51 @@ textarea.content{
 /* ********************/
 /* N° 2*/
 @media screen and (min-width:993px){
- 
     .container{
-        max-width: 70%;
+        max-width: 80%;
         margin: 0 auto;
     }
-
     
+    .flex-md{
+        display: flex;
+    }
+
+    .retour,
+    .delete{
+    margin-bottom: -40px;
+    }
+
+    #account img{
+        width: 300px;
+        margin: 0 0;
+    }
+    
+    #account #admin-info{
+        align-self: center;
+        margin-left: 50px;
+    }
+    
+    #account input[type="text"]{
+        width: 300px;
+    }
+    
+    #account a.btn{
+        width: 240px;
+        display: block;
+        margin-top: 40px;
+    }
+    
+    #parameters .btn:first-of-type{
+        margin-right: 150px;
+    }
+
+
+
+
+}
   
     
-}
+
 
 
 
@@ -585,7 +722,7 @@ textarea.content{
 @media screen and (min-width:1201px){
 
     .container{
-        width: 70%;
+        min-width: 1200px;
         max-width: 1200px;
         margin: 0 auto;
     }
@@ -611,12 +748,74 @@ textarea.content{
         width: 65%;
     }
 
-    #bandeau-admin{
-        padding: 20px 30px;
-    }
-
+   
     #add-btn{
         display: none;
     }
+
+
+    /* *******************/
+    /* ----- ADMIN ----- */
+    /* *******************/
+    #bandeau-admin{
+        position: sticky;
+        width: 100%;
+        /* padding: 20px 30px; */
+    }
+
+    #nav-xs{
+        position: sticky;
+        left:0;
+        width: 300px;
+        height: 100%;
+    }
+    
+    main{
+        width: 900px;
+    }
+ 
+    section.container{
+        width: 100%;
+        margin-left: 50px;
+    }
+
+    .stretched-link{
+        position: relative;
+        opacity: 1;
+    }
+
+    #dashboard,
+    #message,
+    #comment,
+    #account,
+    #parameters{
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+
+
+    /* ***********************/
+    /* ----- ALL BOOKS ----- */
+    /* ***********************/
+    #all-books i{
+        color: var(--dashboard);
+        padding: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    #all-books a:hover{
+        text-shadow: 2px 2px 4px grey;
+    }
+
+    #all-books .book-link{
+        align-self: center;
+        margin-left: auto;
+        margin-right: 60px;
+    }
+
+    /* ***********************/
+    /* ------ ACCOUNT ------ */
+    /* ***********************/
     
 }

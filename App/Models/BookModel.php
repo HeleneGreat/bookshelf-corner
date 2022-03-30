@@ -67,5 +67,12 @@ class BookModel extends Manager{
         return $req;
     }
 
+    public function deleteBook($id){
+        $bdd =$this->dbConnect();
+        $req = $bdd->prepare('DELETE FROM books WHERE id = ?');
+        $req->execute(array($id));
+        return $req;
+    }
+
 }
 

@@ -55,13 +55,6 @@ function modifyLivrePost($data){
     header('Location: indexAdmin.php?action=livres');
 }
 
-function deleteLivre($id){
-    $books = new \Projet\Models\BookModel();
-    $oneBook = $books->singleBook($id);
-    $book = $oneBook->fetch();
-    return $this->viewAdmin("dashboard/book-delete.php",$book);
-}
-
 function sliderSelection($data){
     // First, all books in the DBB are set to slider = 0
     $allBooks = new \Projet\Models\BookModel();
@@ -72,8 +65,12 @@ function sliderSelection($data){
     header('Location: indexAdmin.php?action=livres');
 }
 
-
-
+function deleteLivre($id){
+    $books = new \Projet\Models\BookModel();
+    $oneBook = $books->deleteBook($id);
+    $book = $oneBook->fetch();
+    header('Location: indexAdmin.php?action=livres');
+}
 
 
 
