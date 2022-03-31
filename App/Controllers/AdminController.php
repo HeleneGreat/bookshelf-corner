@@ -96,6 +96,14 @@ class AdminController extends Controller{
     /*********************************************************/
     /********************* ADMIN ACCOUNT *********************/
     /*********************************************************/
+    function infoAdmin(){
+        $mail = $_SESSION['mail'];
+        $user = new \Projet\Models\AdminModel();
+        $admin = $user->recupMdp($mail);
+        $infoAdmin = $admin->fetch();
+        return $infoAdmin;
+    }
+
     function account(){
         $mail = $_SESSION['mail'];
         $user = new \Projet\Models\AdminModel();

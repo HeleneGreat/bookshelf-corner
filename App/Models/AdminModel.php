@@ -40,7 +40,7 @@ class AdminModel extends Manager{
     /*********************************************************/
     public function modifyAccountPost($data){
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('UPDATE administrators SET pseudo = :newPseudo, mail = :newMail, picture = :picture WHERE id = :id');
+        $req = $bdd->prepare('UPDATE administrators SET pseudo = :newPseudo, mail = :newMail, mdp = :newAdminPsw, picture = :picture WHERE id = :id');
         $req->execute($data);
         return $req;
     }

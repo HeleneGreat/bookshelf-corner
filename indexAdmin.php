@@ -174,36 +174,44 @@ try{
         elseif($_GET['action'] == "accountModifyPost"){
             $purpose = "admin";
             $folder = "Admin";
-            // check if there is a new picture uploaded
+
+            // Check if there is a new picture uploaded
             if($_FILES['picture']['name'] !== ""){
                 $fileName = $adminController->verifyFiles($purpose, $folder);
             } else{
                 $fileName = $_SESSION['picture'] ;
             }
 
-            $pass = htmlspecialchars($_POST['adminMdp']);
-            $mdp = password_hash($pass, PASSWORD_DEFAULT);
-
-
-            if(!empty($pseudo) && (!empty($mail) && (!empty($mdp) && (!empty($fileName))))){
-                // echo "les champs sont bien remplis";
-                $adminController->createAdminPost($pseudo, $mail, $mdp, $fileName);
+            // Psw update
+            if(!empty($_POST['newAdminPsw'])){
+                // Check if actual psw is correct
+                $actualAdminPsw = htmlspecialchars($_POST['actualAdminPsw']);
+                $getInfo = $adminController->infoAdmin();    
+                $isPasswordCorrect = password_verify($actualAdminPsw, $getInfo['mdp']);
+                if ($isPasswordCorrect){
+                    $newPsw = $_POST['newAdminPsw'];
+                    $newMdp = password_hash($newPsw, PASSWORD_DEFAULT);  
+                                      
+                }
+                else{
+                    echo "Mot de passe incorrect";
+                    $adminController->accountModify(); 
+                }
             }
 
-
-
-
-
-            // update the $_SESSION information with this update
+            // Update the $_SESSION information with this update
             $_SESSION['pseudo'] = $_POST['newPseudo'];
             $_SESSION['mail'] = $_POST['newMail'];
             $_SESSION['picture'] = $fileName;
+            // Update the DBB 
             $data = [
                 ':id' => $_GET['id'],
                 ':picture' => $fileName,
                 ':newPseudo' => htmlspecialchars($_POST['newPseudo']),
-                ':newMail' => htmlspecialchars($_POST['newMail'])
+                ':newMail' => htmlspecialchars($_POST['newMail']),
+                ':newAdminPsw' => $newMdp
             ];
+
             $adminController->accountModifyPost($data);
         }
         

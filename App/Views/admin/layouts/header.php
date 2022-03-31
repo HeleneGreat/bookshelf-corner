@@ -14,7 +14,7 @@
 <div id="blur" class="display-none"></div>
 
 
-<!-- HEADER MOBILE -->
+<!-- HEADER -->
 <header>
     <div id="bandeau-admin">
         <div class="container">
