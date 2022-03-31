@@ -25,10 +25,10 @@
                 <p><input type="text" name="newMail" id="newMail" value="<?= $datas['mail']; ?>"></p>
             </div>
             <div>
-                <p><label for="actualPsw">Mon mot de passe actuel :</label></p>
-                <p><input type="password" name="actualPsw"></p>
-                <p><label for="newPsw">Nouveau mot de passe :</label></p>
-                <p><input type="password" name="newPsw"></p>
+                <p><label for="actualAdminPsw">Mon mot de passe actuel :</label></p>
+                <p><input type="password" name="actualAdminPsw"></p>
+                <p><label for="newAdminPsw">Nouveau mot de passe :</label></p>
+                <p><input type="password" name="newAdminPsw"></p>
             </div>
         </div>
 

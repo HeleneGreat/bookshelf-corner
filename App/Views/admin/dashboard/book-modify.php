@@ -66,7 +66,8 @@
             <div class="zones-text">                
                 <div>
                     <p><label for="newCatchphrase">Accroche de l'article</label></p>
-                    <textarea class="catchphrase" name="newCatchphrase" id="newCatchphrase"> <?= $datas['catchphrase']; ?></textarea>
+                    <textarea class="catchphrase" name="newCatchphrase" id="newCatchphrase" maxlength="300" onKeyUp="count_it()"></textarea>
+                    <p id="count"><span id="counter"></span> / 300</p>
                 </div>
                 <div>
                     <p><label for="newContent">Contenu de l'article</label></p>

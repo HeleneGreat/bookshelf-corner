@@ -35,7 +35,8 @@ try{
 
             $picture = $_FILES['picture'];
             $purpose = "admin";
-            $fileName = $adminController->verifyFiles($purpose);
+            $folder = "Admin";
+            $fileName = $adminController->verifyFiles($purpose, $folder);
 
             if(!empty($pseudo) && (!empty($mail) && (!empty($mdp) && (!empty($fileName))))){
                 // echo "les champs sont bien remplis";
@@ -179,6 +180,20 @@ try{
             } else{
                 $fileName = $_SESSION['picture'] ;
             }
+
+            $pass = htmlspecialchars($_POST['adminMdp']);
+            $mdp = password_hash($pass, PASSWORD_DEFAULT);
+
+
+            if(!empty($pseudo) && (!empty($mail) && (!empty($mdp) && (!empty($fileName))))){
+                // echo "les champs sont bien remplis";
+                $adminController->createAdminPost($pseudo, $mail, $mdp, $fileName);
+            }
+
+
+
+
+
             // update the $_SESSION information with this update
             $_SESSION['pseudo'] = $_POST['newPseudo'];
             $_SESSION['mail'] = $_POST['newMail'];

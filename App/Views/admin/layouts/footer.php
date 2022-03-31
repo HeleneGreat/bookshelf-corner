@@ -6,6 +6,7 @@
 
 
 </footer>
+<script src="App/Public/Admin/js/character-count.js"></script>
 <script src="App/Public/Admin/js/input-img.js"></script>
 <script src="App/Public/Admin/js/nav-active.js"></script>
 <script src="App/Public/Admin/js/nav-responsive.js"></script>

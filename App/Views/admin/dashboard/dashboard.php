@@ -1,7 +1,7 @@
 <?php include_once('./App/Views/admin/layouts/header.php'); ?>
 
 
-<section id="dashboard" class="container">
+<section id="dashboard">
     <h1 class="text-center">Bienvenue sur votre tableau de bord,<br><?= $_SESSION['pseudo']; ?> !</h1>
 
 
