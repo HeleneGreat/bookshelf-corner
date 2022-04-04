@@ -2,7 +2,7 @@
 
 session_start();
 
-// autoload.php généré avec composer
+// autoload.php generated with composer
 require_once __DIR__ . '/vendor/autoload.php';
 
 
@@ -12,23 +12,10 @@ try{
 
     $bookController = new \Projet\Controllers\BookController();
 
-    // Les routes (actions). Isset détermine si la variable déclarée est différente de NULL
+    
     if (isset($_GET['action'])){
-
-        // PAGE FORMULAIRE DE CONTACT
-        if($_GET['action'] == 'contact'){
-            $controllerFront->contact();
-        }
         
-        elseif($_GET['action'] == 'about'){
-            $controllerFront->about();
-        }
-        
-        elseif($_GET['action'] == 'lieux'){
-            $controllerFront->lieux();
-        }
-        
-        elseif($_GET['action'] == 'livres'){
+        if($_GET['action'] == 'livres'){
             $bookController->allBooks();
         }
         
@@ -36,10 +23,23 @@ try{
             $id = $_GET['id'];
             $bookController->oneBook($id);
         }
+        
+        elseif($_GET['action'] == 'lieux'){
+            $controllerFront->lieux();
+        }
+
+        elseif($_GET['action'] == 'about'){
+            $controllerFront->about();
+        }
+        
+        elseif($_GET['action'] == 'contact'){
+            $controllerFront->contact();
+        }
 
     }
+
     else{
-        $controllerFront->home();
+        $bookController->home();
     }
 
 
@@ -50,4 +50,5 @@ try{
 catch (Exception $e){
     
     return $this->viewFront("errorLoading");
+    echo $e->getMessage();
 }

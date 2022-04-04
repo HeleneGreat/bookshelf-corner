@@ -3,7 +3,26 @@
 <section id="one-book">
     <div class="retour"><a href="indexAdmin.php?action=livres" title="Retour"><i class="fas fa-arrow-circle-left"></i></a></div>
 
-    <div class="delete"><a href="indexAdmin.php?action=livresdelete&id=<?= $datas['ID'];?>" title="Supprimer ce livre" class="fa-stack"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-trash-can fa-stack-1x"></i></a></div>
+    <div id="btn-delete" class="delete"><a title="Supprimer ce livre" class="fa-stack"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-trash-can fa-stack-1x"></i></a></div>
+
+
+    <!-- DELETE CONFIRMATION MODAL -->
+    <div id="myModal" class="modal display-none">
+        <div class="modal-content text-center">
+            <span class="close bold">X</span>
+            <p><i class="fa-solid fa-trash-can"></i></p>
+            <p class="bold">Demande de confirmation</p>
+            <p>Êtes-vous sûr de vouloir supprimer ce livre :</p>
+            <p><span class="italic"><?= $datas['title']; ?></span> ?</p>
+            <div class="flex justify-center">
+                <a class="btn center" title="Retour">Annuler</a>
+                <a href="indexAdmin.php?action=livresdelete&id=<?= $datas['ID'];?>" title="Supprimer ce livre" class="btn center">Supprimer</a>
+            </div>
+        </div>
+    </div>
+
+
+
 
     <div>
         <p><img id="book-cover" src="./App/Public/Books/images/<?= $datas['picture']; ?>" alt="<?= $datas['title']; ?>"></p>

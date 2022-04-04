@@ -99,7 +99,7 @@ try{
                 $fileName = $bookController->noCover();
             }
             $data = [
-                'newTitle' => htmlspecialchars( $_POST['newTitle']),
+                ':newTitle' => htmlspecialchars( $_POST['newTitle']),
                 ':newAuthor' => htmlspecialchars($_POST['newAuthor']),
                 ':newYear_publication' => htmlspecialchars($_POST['newYear_publication']),
                 ':newGenre' => htmlspecialchars($_POST['newGenre']),
@@ -108,7 +108,7 @@ try{
                 ':newLocation' => htmlspecialchars($_POST['newLocation']),
                 ':newCatchphrase' => htmlspecialchars($_POST['newCatchphrase']),
                 ':newContent' => htmlspecialchars($_POST['newContent']),
-                ':newPicture' => $fileName,
+                ':picture' => $fileName,
                 ':newNotation' => htmlspecialchars($_POST['newNotation'])
             ];
             $bookController->addLivrePost($data);
@@ -139,7 +139,7 @@ try{
                 ':newLocation' => htmlspecialchars($_POST['newLocation']),
                 ':newCatchphrase' => htmlspecialchars($_POST['newCatchphrase']),
                 ':newContent' => htmlspecialchars($_POST['newContent']),
-                ':newPicture' => $fileName,
+                ':picture' => $fileName,
                 ':newNotation' => htmlspecialchars($_POST['newNotation'])
             ];
             $bookController->modifyLivrePost($data);

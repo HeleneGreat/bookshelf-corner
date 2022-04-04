@@ -6,8 +6,9 @@ HEADER
     * nav - animation
     * nav - content
 DASHBOARD
-    * btn icon top
     * forms
+    * btn icon top
+    * modal box
 DASHBOARD - LIVRES
     * livres - nav
     * livres - view
@@ -92,6 +93,10 @@ ul{
 
 .bold{
     font-weight: bold;
+}
+
+.italic{
+    font-style: italic;
 }
 
 .flex{
@@ -296,46 +301,6 @@ z-index: 9999999;
 /* *********************************************** */
 
 
-/* ******************* */
-/* --- BTN ICON TOP --- */
-/* ******************* */
-.retour,
-.delete{
-    position: sticky;
-    top: 20px;
-    padding-top: 10px;
-    margin-bottom: -40px;
-}
-
-.retour{
-    margin-left: 15px;
-}
-
-.retour i{
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: var(--dashboard);
-    background-color: white;
-    box-shadow: inset 0 0 0 2px var(--dashboard);
-    border-radius: 20px;
-}
-
-.delete .fa-trash-can{
-    font-size: 0.8em;
-    color: white;
-}
-
-.delete .fa-stack{
-    line-height: 1.5em;
-    position: absolute;
-    right: 16px;
-}
-
-.delete .fa-circle{
-    font-size: 1.5em;
-    color: red;
-}
-
 /* ******************** */
 /* ------- FORMS------- */
 /* ******************** */
@@ -367,7 +332,8 @@ z-index: 9999999;
     box-shadow: inset 0 0 0.25rem var(--dashboard);}
 
 input[type='submit'], 
-a.btn{
+a.btn,
+button.btn{
     margin-top: 20px;
     color: white;
     font-size: 1.3rem;
@@ -411,6 +377,106 @@ a.btn:hover{
 
 .ajout .add-picture{
     font-size: 5rem;
+}
+
+
+/* ******************** */
+/* --- BTN ICON TOP --- */
+/* ******************** */
+.retour,
+.delete{
+    position: sticky;
+    top: 20px;
+    padding-top: 10px;
+    margin-bottom: -40px;
+}
+
+.retour{
+    margin-left: 15px;
+}
+
+.retour i{
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--dashboard);
+    background-color: white;
+    box-shadow: inset 0 0 0 2px var(--dashboard);
+    border-radius: 20px;
+}
+
+.delete .fa-trash-can{
+    font-size: 0.8em;
+    color: white;
+}
+
+.delete .fa-stack{
+    line-height: 1.5em;
+    position: absolute;
+    right: 16px;
+}
+
+.delete .fa-circle{
+    font-size: 1.5em;
+    color: red;
+}
+
+/* ********************* */
+/* ----- MODAL BOX ----- */
+/* ********************* */
+.modal{
+    /* display: none; */
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); 
+    z-index: 99999999;
+}
+
+.modal .modal-content{
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+}
+
+.modal .modal-content p{
+    line-height: 2rem;
+}
+
+.modal .modal-content p.bold{
+    margin-bottom: 20px;
+    color: red;
+    font-size: 1.8rem;
+}
+
+.modal .modal-content .close{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: right;
+}
+
+.modal .modal-content .close{
+    cursor: pointer;
+    float: right;
+}
+
+.modal .modal-content i{
+    color: red;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.modal .modal-content a{
+    width: 100px;
+}
+
+.modal .modal-content a[title="Retour"]{
+    background-color: rgba(151, 151, 151, 0.902);
 }
 
 /* ******************************************** */
@@ -675,6 +741,7 @@ textarea.content{
     .retour,
     .delete{
     margin-bottom: -40px;
+    cursor: pointer;
     }
     
     .thumb-btn{

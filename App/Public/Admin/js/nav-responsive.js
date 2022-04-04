@@ -20,14 +20,3 @@ blur.addEventListener('click', function(){
     blur.classList.toggle("display-none");  
 
 });
-
-
-
-// Sidebar nav for big screens >= 1201px
-
-function removeContainer() 
-{
-    let section = document.getElementsByTagName("section");
-
-    section.classList.remove("container");
-}

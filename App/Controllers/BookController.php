@@ -100,6 +100,14 @@ class BookController extends Controller{
 
 
 
+    function home(){
+        $book = new \Projet\Models\BookModel();
+        $allBooks = $book->allBooks();
+        $books = $allBooks->fetchAll();
+        return $this->viewFront("home", $books);
+    }
+
+
     function allBooks(){
         $book = new \Projet\Models\BookModel();
         $allBooks = $book->allBooks();
