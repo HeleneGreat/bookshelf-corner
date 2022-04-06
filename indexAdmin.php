@@ -77,6 +77,10 @@ try{
     /*********************************************************/
     /********************** PAGE LIVRES **********************/
     /*********************************************************/
+
+    /****************************/
+    /******** TAB LIVRES ********/
+    /****************************/
         elseif($_GET['action'] == 'livres'){
             $bookController->livres();
         }
@@ -144,16 +148,56 @@ try{
             ];
             $bookController->modifyLivrePost($data);
         }  
-
+        
         elseif ($_GET['action'] == "livresdelete"){
             $id = $_GET['id'];
             $bookController->deleteLivre($id);
         }
 
+        /****************************/
+        /******** TAB GENRES ********/
+        /****************************/
+        elseif ($_GET['action'] == "genreAddPost"){
+            $purpose = "genre";
+            $folder = "Books";
+            if($_FILES['picture']['name'] !== ""){
+                $fileName = $bookController->verifyFiles($purpose, $folder);
+            } else{
+                $fileName = $bookController->noIcon();
+            }
+            $data = [
+                ':newType' => htmlspecialchars( $_POST['newType']),
+                ':newIcon' => $fileName
+            ];
+            $bookController->genreAddPost($data);
+        }
 
-    /*********************************************************/
-    /********************* LIVRES SLIDER *********************/
-    /*********************************************************/
+        elseif ($_GET['action'] == "genreModifyPost"){
+            $purpose = "genre";
+            $folder = "Books";
+            $id = $_GET['id'];
+            if(!empty($_FILES) && $_FILES['picture']['name'] !== ""){
+                $fileName = $bookController->verifyFiles($purpose, $folder);
+            } else{
+                $fileName = $bookController->all($id)['icon'];
+            }
+            $data = [
+                ':id' => $id,
+                ':newType' => htmlspecialchars( $_POST['newType']),
+                ':newIcon' => $fileName
+            ];
+            $bookController->genreModifyPost($data);
+        }  
+
+        elseif ($_GET['action'] == "genreDelete"){
+            $id = $_GET['id'];
+            $bookController->deleteGenre($id);
+        }
+
+
+        /****************************/
+        /******** TAB SLIDER ********/
+        /****************************/
         elseif($_GET['action'] == "book-slider"){
             $bookController->sliderSelection($_POST);
         }

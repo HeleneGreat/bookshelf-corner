@@ -14,6 +14,7 @@ DASHBOARD - LIVRES
     * livres - view
     * livres - forms
     * livres - all + slider
+    * livres - genre
     * livres - slider
 DASHBOARD - ACCOUNT
 DASHBOARD - PARAMETERS
@@ -304,6 +305,7 @@ z-index: 9999999;
 /* ******************** */
 /* ------- FORMS------- */
 /* ******************** */
+.one-cat input, 
 #parameters input, 
 #account input, 
 #book-form input, 
@@ -313,6 +315,7 @@ z-index: 9999999;
     font-size: 18px;
 }
 
+.one-cat input, 
 #parameters input, 
 #account input, 
 #book-form input, 
@@ -323,6 +326,7 @@ z-index: 9999999;
     border: 1px solid var(--dashboard);
 }
 
+.one-cat input, 
 #parameters input, 
 #account input:focus, 
 #book-form input:focus, 
@@ -349,29 +353,46 @@ a.btn:hover{
     font-size: 1.3rem;
 }
 
+.one-cat input[type='file'],
 #book-form input[type='file']{
     width: 100px;
     height: 100px;
     margin: 0;
     padding: 0;
     position: absolute;
-    top: 0;
     left: 0;
     opacity: 0;
 }
 
+.custom-file-upload-cat,
 .custom-file-upload{
-    /* height: 100px; */
     position: relative;
+    height: 100px;
+    width: 100px;
+}
+.custom-file-upload-cat{
+    width: 220px;
+}
+
+.custom-file-upload-cat img:first-of-type{
+    margin-right: 15px;
+}
+
+.one-cat input[type='file']{
+    top: 0;
+}
+
+.custom-file-upload{
     display: block;
 }
 
+.custom-file-upload-cat img,
 .custom-file-upload img{
     height: 100px;
     width: 100px;
 }
 
-.custom-file-upload:hover{
+.custom-file-upload input:hover{
     cursor: pointer;
 }
 
@@ -573,10 +594,15 @@ textarea.content{
     min-height: 600px;
 }
 
-#book-form #preview{
+#preview{
     width: 250px;
     height: auto;
     object-fit: cover;
+}
+
+#preview{
+    width: 100px;  
+    margin-bottom: 20px;
 }
 
 #book-form #count{
@@ -590,15 +616,11 @@ textarea.content{
 /* ******************************* */
 /* ---- LIVRES - ALL + SLIDER ---- */
 /* ******************************* */
+#book-cat article,
 #book-slider article,
 #all-books article{
     border-bottom: 1px solid rgba(204, 203, 203, 0.856);
     position: relative;
-}
-
-#book-slider article p:first-of-type
-#all-books article p:first-of-type{
-    color: var(--dashboard);
 }
 
 #book-slider img,
@@ -609,11 +631,32 @@ textarea.content{
     margin-right: 20px;
 }
 
+#book-cat .cat-img{
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+    position: relative;
+}
+
+#book-cat .cat-img img{
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+
+#book-cat .list-title,
 #book-slider .list-title,
 #all-books .list-title{
     font-weight: bold;
 }
 
+#book-cat .list-title,
 #book-slider .list-title{
     line-height: 100px;
 }
@@ -623,6 +666,43 @@ textarea.content{
     font-size: 1.2rem;
 }
 
+/* ******************************* */
+/* ------- LIVRES - GENRES ------- */
+/* ******************************* */
+#book-cat i{
+    color: var(--dashboard);
+    padding: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#book-cat h2{
+    margin-bottom: 15px;
+}
+
+#book-cat a:hover{
+    text-shadow: 2px 2px 4px grey;
+}
+
+#book-cat .cat-link{
+    align-self: center;
+    margin-left: auto;
+    margin-right: 60px;
+}
+
+#book-cat .one-cat p{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#book-cat .one-cat input[type='text']{
+    margin-left: 17px;
+}
+
+#book-cat .one-cat .cat-submit{
+    margin-left: auto;
+    margin-right: 65px;
+}
 /* ******************************* */
 /* ------- LIVRES - SLIDER ------- */
 /* ******************************* */

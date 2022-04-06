@@ -7,6 +7,8 @@ This function display in the <img> the picture that was selected in the input[fi
 
 */
 
+let inputImg = document.getElementById('inputImg');
+let preview = document.getElementById('preview');
 
 inputImg.addEventListener('change', function(){
     const [file] = inputImg.files;
@@ -17,5 +19,30 @@ inputImg.addEventListener('change', function(){
         preview.src = URL.createObjectURL(file);
     }
 }) ; 
+
+
+
+
+let bookCat = document.getElementById('book-cat');
+let inputFiles = bookCat.querySelectorAll('input[type="file"]');
+
+for(let i = 0; i < inputFiles.length; i++){
+    inputFiles[i].addEventListener('change', function(event){
+        let prev = document.getElementById('toto');
+        if(prev){ prev.remove();}
+
+        
+        const [file] = event.target.files;
+
+        if (file) {
+            let preview = document.createElement('img');
+            preview.id = "toto";
+            preview.src = URL.createObjectURL(file);
+
+            let parentE = event.target.parentElement;
+            parentE.appendChild(preview);
+        } 
+    });
+}
 
 

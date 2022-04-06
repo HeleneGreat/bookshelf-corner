@@ -25,18 +25,21 @@ class BookController extends Controller{
     /*********************************************************/
     /********************** PAGE LIVRES **********************/
     /*********************************************************/
+
+    
+    /**************************/
+    /********* LIVRES *********/
+    /**************************/
     function livres(){
         $book = new \Projet\Models\BookModel();
         $allBooks = $book->allBooks();
         $books = $allBooks->fetchAll();
-        return $this->viewAdmin("dashboard/books", $books);
-    }
 
-    function viewLivre($id){
-        $books = new \Projet\Models\BookModel();
-        $oneBook = $books->singleBook($id);
-        $book = $oneBook->fetch();
-        return $this->viewAdmin("dashboard/book-view", $book);
+        $genre = new \Projet\Models\BookModel();
+        $allGenres = $genre->allGenres();
+        $genres = $allGenres->fetchAll();
+        $datas = array_merge($books, $genres);
+        return $this->viewAdmin("dashboard/books", $datas);
     }
 
     function addLivre(){
@@ -55,6 +58,13 @@ class BookController extends Controller{
         header('Location: indexAdmin.php?action=livres');
     }
 
+    function viewLivre($id){
+        $books = new \Projet\Models\BookModel();
+        $oneBook = $books->singleBook($id);
+        $book = $oneBook->fetch();
+        return $this->viewAdmin("dashboard/book-view", $book);
+    }
+  
     function modifyLivre($id){
         $books = new \Projet\Models\BookModel();
         $oneBook = $books->singleBook($id);
@@ -68,6 +78,16 @@ class BookController extends Controller{
         header('Location: indexAdmin.php?action=livres');
     }
 
+    function deleteLivre($id){
+        $books = new \Projet\Models\BookModel();
+        $oneBook = $books->deleteBook($id);
+        $book = $oneBook->fetch();
+        header('Location: indexAdmin.php?action=livres');
+    }
+    
+    /**************************/
+    /********* SLIDER *********/
+    /**************************/
     function sliderSelection($data){
         // First, all books in the DBB are set to slider = 0
         $allBooks = new \Projet\Models\BookModel();
@@ -78,17 +98,39 @@ class BookController extends Controller{
         header('Location: indexAdmin.php?action=livres');
     }
 
-    function deleteLivre($id){
-        $books = new \Projet\Models\BookModel();
-        $oneBook = $books->deleteBook($id);
-        $book = $oneBook->fetch();
+    /**************************/
+    /********* GENRES *********/
+    /**************************/
+    function noIcon(){
+        return "no-icon.png";
+    }
+
+    function allGenre(){
+        $genres = new \Projet\Models\BookModel();
+        $oneGenre = $genres->allGenre();
+        $genre = $oneGenre->fetchAll();
+        return $this->viewAdmin("dashboard/books", $datas);
+    }
+
+    function genreAddPost($data){
+        $genres = new \Projet\Models\BookModel();
+        $oneGenre = $genres->genreAddPost($data);
         header('Location: indexAdmin.php?action=livres');
     }
 
+    function genreModifyPost($data){
+        $genres = new \Projet\Models\BookModel();
+        $oneGenre = $genres->genreModifyPost($data);
+        header('Location: indexAdmin.php?action=livres');
+    }
 
-
-
-
+    function deleteGenre($id){
+        $genres = new \Projet\Models\BookModel();
+        $oneGenre = $genres->deleteGenre($id);
+        $genre = $oneGenre->fetch();
+        header('Location: indexAdmin.php?action=livres');
+    }
+    
 
 
     /*=======================================================*/

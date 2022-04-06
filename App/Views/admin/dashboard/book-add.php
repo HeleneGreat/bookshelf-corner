@@ -55,7 +55,7 @@
                 <div>
                     <p id="displayImg">Couverture du livre</p>
                     <label for="picture" class="custom-file-upload ajout">
-                        <img src="./App/Public/Admin/images/picture.png" alt="Ajouter une image">
+                        <img src="./App/Public/Admin/images/picture.png" alt="Ajouter une image" title="Ajouter une image">
                         <input type="file" name="picture" id="inputImg" accept="image/*" class="">
                     </label>
                     <p class="flex justify-center"><img class="display-none" src="" id="preview" alt=""></p>

@@ -4,6 +4,7 @@ namespace Projet\Models;
 
 class BookModel extends Manager{
 
+
     public function countBooks(){
         $bdd =$this->dbConnect();
         $req = $bdd->prepare('SELECT COUNT(id) FROM books WHERE id');
@@ -42,12 +43,24 @@ class BookModel extends Manager{
         return $req;
     }
 
-    public function slider($data){
+    public function deleteBook($id){
         $bdd =$this->dbConnect();
-        $req = $bdd->prepare('UPDATE books SET slider = :addSlider WHERE id = :id');
-        $req->execute($data);
+        $req = $bdd->prepare('DELETE FROM books WHERE id = ?');
+        $req->execute(array($id));
         return $req;
     }
+    
+
+    /**************************/
+    /********* SLIDER *********/
+    /**************************/
+
+    // public function slider($data){
+    //     $bdd =$this->dbConnect();
+    //     $req = $bdd->prepare('UPDATE books SET slider = :addSlider WHERE id = :id');
+    //     $req->execute($data);
+    //     return $req;
+    // }
 
 // All slider colomns are set to 0
     public function sliderOff(){
@@ -67,9 +80,34 @@ class BookModel extends Manager{
         return $req;
     }
 
-    public function deleteBook($id){
+    /**************************/
+    /********* GENRES *********/
+    /**************************/
+
+    public function allGenres(){
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare('SELECT id, type, icon FROM genres ORDER BY type ASC');
+        $req->execute();
+        return $req;
+    }
+    
+    public function genreAddPost($data){
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare('INSERT INTO genres(type, icon) VALUES (:newType, :newIcon)');
+        $req->execute($data);
+        return $req;
+    }
+
+    public function genreModifyPost($data){
         $bdd =$this->dbConnect();
-        $req = $bdd->prepare('DELETE FROM books WHERE id = ?');
+        $req = $bdd->prepare('UPDATE genres SET type = :newType, icon = :newIcon WHERE id= :id');
+        $req->execute($data);
+        return $req;
+    }
+
+    public function deleteGenre($id){
+        $bdd =$this->dbConnect();
+        $req = $bdd->prepare('DELETE FROM genres WHERE id = ?');
         $req->execute(array($id));
         return $req;
     }
