@@ -176,14 +176,31 @@ try{
             $purpose = "genre";
             $folder = "Books";
             $id = $_GET['id'];
+            // input file
             if(!empty($_FILES) && $_FILES['picture']['name'] !== ""){
                 $fileName = $bookController->verifyFiles($purpose, $folder);
             } else{
-                $fileName = $bookController->all($id)['icon'];
+                $fileName = $bookController->infoGenre($id)['icon'];
             }
+
+            // unique name
+            if(!empty($_POST['newType'])){
+                $newName = $bookController->checkForDuplicate("genres", htmlspecialchars( $_POST['newType']));
+                if($newName == false){
+                    $genreName = htmlspecialchars( $_POST['newType']);
+                }
+                else{ 
+                    // $bookController->livres();
+                    
+                 }
+            } else{
+                $genreName = $bookController->infoGenre($id)['type'];
+            }
+
+            // Données issues du formulaire
             $data = [
                 ':id' => $id,
-                ':newType' => htmlspecialchars( $_POST['newType']),
+                ':newType' => $genreName,
                 ':newIcon' => $fileName
             ];
             $bookController->genreModifyPost($data);

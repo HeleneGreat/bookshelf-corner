@@ -151,6 +151,10 @@ ul{
     display: none;
 }
 
+.required{
+    color: red;
+}
+
 /* *************************************** */
 /* ---------------- HEADER --------------- */
 /* *************************************** */
@@ -445,7 +449,6 @@ a.btn:hover{
 /* ----- MODAL BOX ----- */
 /* ********************* */
 .modal{
-    /* display: none; */
     position: fixed;
     height: 100%;
     width: 100%;
@@ -664,6 +667,12 @@ textarea.content{
 #all-books .list-location,
 #all-books .list-date{
     font-size: 1.2rem;
+}
+
+#book-cat button,
+#all-books button{
+    border: none;
+    background: none;
 }
 
 /* ******************************* */

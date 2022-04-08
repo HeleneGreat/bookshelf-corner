@@ -25,9 +25,26 @@
             <div class="flex book-link">
                 <a href="indexAdmin.php?action=livresview&id=<?= $book['id']; ?>" class="stretched-link"><i class="fa-solid fa-eye"></i></a>
                 <a href="indexAdmin.php?action=livresmodify&id=<?= $book['id']; ?>"><i class="fa-solid fa-pencil lg"></i></a>
-                <a href="indexAdmin.php?action=livresdelete&id=<?= $book['id']; ?>"><i class="fa-regular fa-trash-can lg"></i></a>
+                <button id="btn-delete-<?= $book['id']; ?>" onclick="modalDelete(<?= $book['id']; ?>)"><a title="Supprimer ce livre"><i class="fa-regular fa-trash-can lg"></i></a></button>
             </div>
         </article>
+
+
+          <!-- DELETE CONFIRMATION MODAL FOR BOOKS -->
+        <div id="myModal<?= $book['id']; ?>" class="modal display-none">
+            <div class="modal-content text-center">
+                <span class="close bold" onclick="modalClose(<?= $book['id']; ?>)">X</span>
+                <p><i class="fa-solid fa-trash-can"></i></p>
+                <p class="bold">Demande de confirmation</p>
+                <p>Êtes-vous sûr de vouloir supprimer ce livre :</p>
+                <p><span class="italic"><?= $book['title']; ?></span> ?</p>
+                <div class="flex justify-center">
+                    <a class="btn center" title="Retour" onclick="modalClose(<?= $book['id']; ?>)">Annuler</a>
+                    <a href="indexAdmin.php?action=livresdelete&id=<?= $book['id'];?>" title="Supprimer ce livre" class="btn center">Supprimer</a>
+                </div>
+            </div>
+        </div>
+
     <?php }} ?> 
 </section>
 
@@ -38,6 +55,7 @@
             if($book['type'] != "--"){
         ?> 
         <article class="one-cat">
+            <!-- GENRE -->
             <div class="flex">
                 <div class="flex">
                     <div class="cat-img text-center">
@@ -47,28 +65,46 @@
                 </div>
                 <div class="flex cat-link">
                     <a onclick="genreModify(<?= $book['id']; ?>)"><i class="fa-solid fa-pencil"></i></a>
-                    <a href="indexAdmin.php?action=genreDelete&id=<?= $book['id']; ?>"><i class="fa-regular fa-trash-can"></i></a>
+                    <button id="btn-delete-<?= $book['id']; ?>" onclick="modalDelete(<?= $book['id']; ?>)"><a title="Supprimer ce genre"><i class="fa-regular fa-trash-can"></i></a></button>
+                    <!-- <a href="indexAdmin.php?action=genreDelete&id=<?= $book['id']; ?>"><i class="fa-regular fa-trash-can"></i></a> -->
                 </div>
             </div>
+            <!-- FORM MODIFY GENRE -->
             <form id="modify<?= $book['id']; ?>" action="indexAdmin.php?action=genreModifyPost&id=<?= $book['id']; ?>" method="post" enctype="multipart/form-data" class="flex display-none">
                 <label for="picture" class="custom-file-upload-cat ajout">
                     <img src="./App/Public/Admin/images/picture.png" alt="Ajouter une icône" title="Ajouter une icône">
                     <input type="file" name="picture" id="inputImg<?= $book['id']; ?>" accept="image/*" class="">
                 </label>
-                <p><input type="text" name="newType" id="newType" required placeholder="Nouveau titre de genre"></p>
+                <p><input type="text" name="newType" id="newType" placeholder="Nouveau titre de genre"></p>
                 <div class="cat-submit">
                     <p><input type="submit" value="Modifier"></p>
                 </div>
             </form>
         </article>
+
+          <!-- DELETE CONFIRMATION MODAL FOR GENRES -->
+          <div id="myModal<?= $book['id']; ?>" class="modal display-none">
+            <div class="modal-content text-center">
+                <span class="close bold" onclick="modalClose(<?= $book['id']; ?>)">X</span>
+                <p><i class="fa-solid fa-trash-can"></i></p>
+                <p class="bold">Demande de confirmation</p>
+                <p>Êtes-vous sûr de vouloir supprimer ce genre littéraire :</p>
+                <p><span class="italic"><?= $book['type']; ?></span> ?</p>
+                <div class="flex justify-center">
+                    <a class="btn center" title="Retour" onclick="modalClose(<?= $book['id']; ?>)">Annuler</a>
+                    <a href="indexAdmin.php?action=genreDelete&id=<?= $book['id'];?>" title="Supprimer ce genre" class="btn center">Supprimer</a>
+                </div>
+            </div>
+        </div>
+
     <?php }}} ?> 
 
     <article id="book-form" class="text-center">
         <h2>Ajouter une nouvelle catégorie</h2>
         <form action="indexAdmin.php?action=genreAddPost" method="post" enctype="multipart/form-data">
             <div>
-                <p><label for="newType">Genre littéraire :</label></p>
-                <p><input type="text" name="newType" id="newType" ></p>
+                <p><label for="newType">Genre littéraire : <span class="required">*</span></label></p>
+                <p><input type="text" name="newType" id="newType" required></p>
             </div>
             <div>
                 <p id="displayImg">Icône :</p>

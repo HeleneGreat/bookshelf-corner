@@ -15,13 +15,11 @@
             <p>Êtes-vous sûr de vouloir supprimer ce livre :</p>
             <p><span class="italic"><?= $datas['title']; ?></span> ?</p>
             <div class="flex justify-center">
-                <a class="btn center" title="Retour">Annuler</a>
+                <a id="cancel" class="btn center" title="Retour">Annuler</a>
                 <a href="indexAdmin.php?action=livresdelete&id=<?= $datas['ID'];?>" title="Supprimer ce livre" class="btn center">Supprimer</a>
             </div>
         </div>
     </div>
-
-
 
 
     <div>

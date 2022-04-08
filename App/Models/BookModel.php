@@ -4,7 +4,6 @@ namespace Projet\Models;
 
 class BookModel extends Manager{
 
-
     public function countBooks(){
         $bdd =$this->dbConnect();
         $req = $bdd->prepare('SELECT COUNT(id) FROM books WHERE id');
@@ -91,6 +90,13 @@ class BookModel extends Manager{
         return $req;
     }
     
+    public function infoGenre($id){
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare('SELECT id, type, icon FROM genres WHERE id = ?');
+        $req->execute(array($id));
+        return $req;
+    }
+
     public function genreAddPost($data){
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('INSERT INTO genres(type, icon) VALUES (:newType, :newIcon)');

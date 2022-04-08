@@ -2,7 +2,6 @@
 This function display in the <img> the picture that was selected in the input[file]
 
 1. input type="file" id="inputImg"
-
 2. img id="preview"
 
 */
@@ -22,7 +21,7 @@ inputImg.addEventListener('change', function(){
 
 
 
-
+// WHEN THE INPUT FILE IS WITHIN A PHP LOOP
 let bookCat = document.getElementById('book-cat');
 let inputFiles = bookCat.querySelectorAll('input[type="file"]');
 

@@ -41,26 +41,54 @@ class Controller{
 
         else if($error == 1) { 
             echo "La taille du fichier est trop grande"; }
-
         else if($error == 2) { 
             echo "La taille du fichier est trop grande"; }
-
         else if($error == 3) { 
             echo "Téléchargement du fichier incomplet"; }
-
         else if($error == 4) { 
             echo "Aucun fichier téléchargé"; }
-
         else if($error == 6) { 
             echo "Il manque un fichier temporaire"; }
-
         else if($error == 7) { 
             echo "Impossible d'enregistrer le fichier"; }
-
         else if($error == 8) { 
             echo "Une extension PHP a empêché le téléchargement du fichier"; }
-    
+    }
 
+    function checkForDuplicate($table, $newName){
+        if($table == "admins"){
+            $admin = new \Projet\Models\AdminModel();
+            $admins = $admin->allAdmins();
+            $check = $admins->fetchAll();
+            if (in_array($newName, $check)){
+                return false;
+            } else{
+                return true;
+            } 
+        }
+        elseif($table == "books"){
+            $book = new \Projet\Models\BookModel();
+            $books = $book->allBooks();
+            $check = $books->fetchAll();
+            if (in_array($newName, $check)){
+                return false;
+            } else{
+                return true;
+            }
+        }
+        elseif($table == "genres"){
+            $genre = new \Projet\Models\BookModel();
+            $genres = $genre->allGenres();
+            $check = $genres->fetchAll();
+            if (in_array($newName, $check)){
+                return false;
+            } else{
+                return true;
+            }
+        }
+        else{
+            echo "Un des arguments a été mal enregistré";
+        }
     }
 
 }

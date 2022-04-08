@@ -13,6 +13,13 @@ class BookController extends Controller{
         return $book;
     }
 
+    function infoGenre($id){
+        $genres = new \Projet\Models\BookModel();
+        $oneGenre = $genres->infoGenre($id);
+        $genre = $oneGenre->fetch();
+        return $genre;
+    }
+
 
     /*=======================================================*/
     /*=======================================================*/
@@ -107,9 +114,9 @@ class BookController extends Controller{
 
     function allGenre(){
         $genres = new \Projet\Models\BookModel();
-        $oneGenre = $genres->allGenre();
+        $oneGenre = $genres->allGenres();
         $genre = $oneGenre->fetchAll();
-        return $this->viewAdmin("dashboard/books", $datas);
+        return $this->viewAdmin("dashboard/books", $genre);
     }
 
     function genreAddPost($data){
@@ -119,8 +126,9 @@ class BookController extends Controller{
     }
 
     function genreModifyPost($data){
-        $genres = new \Projet\Models\BookModel();
+        $genres = new \Projet\Models\BookModel(); 
         $oneGenre = $genres->genreModifyPost($data);
+       
         header('Location: indexAdmin.php?action=livres');
     }
 
