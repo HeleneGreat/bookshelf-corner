@@ -25,13 +25,10 @@
                 <div>
                     <p><label for="newGenre">Genre</label></p>
                     <select id="newGenre" name="newGenre">
-                        <option value="none">--</option>
-                        <option value="Aventure">Aventure</option>
-                        <option value="Classique">Classique</option>
-                        <option value="Fantasy">Fantasy</option>
-                        <option value="Historique">Historique</option>
-                        <option value="Policier">Policier</option>
-                        <option value="Romance">Romance</option>
+                        <option value="" class="placeholder" selected disabled hidden></option>
+                        <?php foreach($datas as $data){?>
+                            <option value="<?= $data['category']; ?>"><?= $data['category']; ?></option>
+                        <?php }?>
                     </select>
                 </div>
                 <div>

@@ -14,13 +14,15 @@ try{
 
     $blogController = new \Projet\Controllers\BlogController();
 
+    $messageController = new \Projet\Controllers\MsgController();
+
 
 
     if(isset($_GET['action'])){
 
-    /********************************************************/
-    /******************* CONNECTION ADMIN *******************/
-    /********************************************************/
+        /********************************************************/
+        /******************* CONNECTION ADMIN *******************/
+        /********************************************************/
         // Lien vers le formulaire de création d'un nouvel admin
         if($_GET['action'] == 'createAccount'){
             $adminController->addAdmin();
@@ -67,20 +69,20 @@ try{
             $adminController->connexionAdmin();
         }
 
-    /*********************************************************/
-    /*********************** DASHBOARD ***********************/
-    /*********************************************************/
+        /*********************************************************/
+        /*********************** DASHBOARD ***********************/
+        /*********************************************************/
         elseif($_GET['action'] == 'dashboard'){
             $adminController->dashboard();
         }
 
-    /*********************************************************/
-    /********************** PAGE LIVRES **********************/
-    /*********************************************************/
+        /*********************************************************/
+        /********************** PAGE LIVRES **********************/
+        /*********************************************************/
 
-    /****************************/
-    /******** TAB LIVRES ********/
-    /****************************/
+        /****************************/
+        /******** TAB LIVRES ********/
+        /****************************/
         elseif($_GET['action'] == 'livres'){
             $bookController->livres();
         }
@@ -182,7 +184,6 @@ try{
             } else{
                 $fileName = $bookController->infoGenre($id)['icon'];
             }
-
             // unique name
             if(!empty($_POST['newType'])){
                 $newName = $bookController->checkForDuplicate("genres", htmlspecialchars( $_POST['newType']));
@@ -191,12 +192,10 @@ try{
                 }
                 else{ 
                     // $bookController->livres();
-                    
-                 }
+                   }
             } else{
-                $genreName = $bookController->infoGenre($id)['type'];
+                $genreName = $bookController->infoGenre($id)['category'];
             }
-
             // Données issues du formulaire
             $data = [
                 ':id' => $id,
@@ -211,19 +210,16 @@ try{
             $bookController->deleteGenre($id);
         }
 
-
         /****************************/
         /******** TAB SLIDER ********/
         /****************************/
         elseif($_GET['action'] == "book-slider"){
             $bookController->sliderSelection($_POST);
         }
-
-
         
-    /*********************************************************/
-    /********************* ADMIN ACCOUNT *********************/
-    /*********************************************************/
+        /*********************************************************/
+        /********************* ADMIN ACCOUNT *********************/
+        /*********************************************************/
         elseif($_GET['action'] == "account"){
             $adminController->account();
         }
@@ -235,14 +231,12 @@ try{
         elseif($_GET['action'] == "accountModifyPost"){
             $purpose = "admin";
             $folder = "Admin";
-
             // Check if there is a new picture uploaded
             if($_FILES['picture']['name'] !== ""){
                 $fileName = $adminController->verifyFiles($purpose, $folder);
             } else{
                 $fileName = $_SESSION['picture'] ;
             }
-
             // Psw update
             if(!empty($_POST['newAdminPsw'])){
                 // Check if actual psw is correct
@@ -251,15 +245,13 @@ try{
                 $isPasswordCorrect = password_verify($actualAdminPsw, $getInfo['mdp']);
                 if ($isPasswordCorrect){
                     $newPsw = $_POST['newAdminPsw'];
-                    $newMdp = password_hash($newPsw, PASSWORD_DEFAULT);  
-                                      
+                    $newMdp = password_hash($newPsw, PASSWORD_DEFAULT);                    
                 }
                 else{
                     echo "Mot de passe incorrect";
                     $adminController->accountModify(); 
                 }
             }
-
             // Update the $_SESSION information with this update
             $_SESSION['pseudo'] = $_POST['newPseudo'];
             $_SESSION['mail'] = $_POST['newMail'];
@@ -272,7 +264,6 @@ try{
                 ':newMail' => htmlspecialchars($_POST['newMail']),
                 ':newAdminPsw' => $newMdp
             ];
-
             $adminController->accountModifyPost($data);
         }
         
@@ -312,17 +303,36 @@ try{
             ];
             $adminController->blogModifyPost($data);
         }
+   
 
+        /********************************************************/
+        /*********************** COMMENTS ***********************/
+        /********************************************************/
         elseif($_GET['action'] == "comments"){
             $adminController->comments();
-        }
+        }   
+
+
+        /********************************************************/
+        /*********************** MESSAGES ***********************/
+        /********************************************************/
 
         elseif($_GET['action'] == "messages"){
-            $adminController->messages();
+            $messageController->allMessages();
         }
 
+        elseif($_GET['action'] == "messageview"){
+            $id = $_GET['id'];
+            $messageController->viewMessage($id);
+        }   
 
-    }
+        elseif ($_GET['action'] == "messageDelete"){
+            $id = $_GET['id'];
+            $messageController->deleteMessage($id);
+        }
+
+    }   
+    
     else{
         $adminController->connexionAdmin();
     }

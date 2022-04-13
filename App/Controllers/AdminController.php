@@ -30,9 +30,7 @@ class AdminController extends Controller{
         return $this->viewAdmin("connexionAdmin");
     }
 
-    // Formulaire de connection admin
     function connexionAdminPost($mail, $mdp){
-
         // récupérer le mdp
         $user = new \Projet\Models\AdminModel();
         $connexAdmin = $user->recupMdp($mail, $mdp);
@@ -65,7 +63,12 @@ class AdminController extends Controller{
         $countBooks = new \Projet\Models\BookModel();
         $nbrBook = $countBooks->countBooks();
         $nbBooks = $nbrBook->fetch();
-        return $this->viewAdmin("dashboard/dashboard", $nbBooks);
+        
+        $countMails = new \Projet\Models\MsgModel();
+        $nbrMail = $countMails->countMessages();
+        $nbMails = $nbrMail->fetch();
+        $stats = array_merge($nbBooks, $nbMails);
+        return $this->viewAdmin("dashboard/dashboard", $stats);
     }    
 
     /**********************************************************/
@@ -80,16 +83,7 @@ class AdminController extends Controller{
 
 
 
-    /**********************************************************/
-    /********************* ADMIN MESSAGES *********************/
-    /**********************************************************/
-    function messages(){
-        // $message = new \Projet\Models\AdminModel();
-        // $allMessages = $message->allMessages();
-        // $message = $allMessages->fetchAll();
-        return $this->viewAdmin("dashboard/messages");
-    }
-
+   
 
 
 

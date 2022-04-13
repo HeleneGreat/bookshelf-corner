@@ -14,9 +14,6 @@ MEDIA QUERIES
 */
 
 /************** VARIABLES TEMPORAIRES ************/
-.bg-contact{
-    background-color: #dde1e7;
-}
 
 
 .bg-all{
@@ -48,6 +45,8 @@ button:active {
     box-shadow: inset 3px 3px 3px #0041c2,
                 inset -3px -3px 3px rgb(88, 155, 231);
    }
+
+
 
 
 
@@ -156,7 +155,8 @@ ul{
     border: none;
     color: white;
     padding: 10px 30px;
-    margin: 40px 0;
+    margin-top: 40px;
+    margin-bottom: 40px;
     cursor: pointer;
 }
 
@@ -175,11 +175,42 @@ ul{
     box-shadow: inset 0 0 8px rgb(92, 91, 91);
 }
 
+.lg{
+    display: none;
+}
+
+.success{
+    background-color: rgb(9, 184, 85);
+}
+
+.error{
+    background-color: var(--rouge);
+}
+
+.success, 
+.error{
+    border-radius: 10px;
+}
+
+.success p, 
+.error p{
+    color: white;
+    padding: 15px 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.success i, 
+.error i{
+    color: white;
+    margin-right: 15px;
+}
+
 /* *************************************** */
 /* ---------------- HEADER --------------- */
 /* *************************************** */
 #bandeau{
-    background-color: #ec4e3d;
+    background-color: var(--rouge);
     padding: 10px 0;
     margin-bottom: 50px;
 }
@@ -336,8 +367,12 @@ right: 25px;
 /* **************************************** */
 /* ---------------- CONTACT --------------- */
 /* **************************************** */
+#contact-left,
+#contact-right{
+    width: 100%;
+}
 
-/* input text & textarea */
+#contact-form select, 
 #contact-form textarea, 
 #contact-form input[type='text'], 
 #contact-form input[type='email']{
@@ -345,27 +380,46 @@ right: 25px;
     background-color: #dde1e7;
     border: none;
     outline: none;
-    box-shadow: -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3);
+    width: 90%;
+
+}
+
+select, option{
+    border: none;
+}
+
+select,
+textarea::placeholder,
+input::placeholder{
+    color: #8d8d8d;
 }
 
 #contact-form textarea:focus, 
 #contact-form input[type='text']:focus, 
 #contact-form input[type='email']:focus{
     border: none;
-    box-shadow: inset -5px -5px 9px rgba(255,255,255,0.45), inset 5px 5px 9px rgba(94,104,121,0.3);
 }
 
+#contact-form textarea,
 #contact-form p{
     margin-top: 30px;
 }
 
 #contact-form textarea{
-    min-width: 600px;
-    max-width: 600px;
+    min-width: 90%;
+    max-width: 90%;
     min-height: 300px; 
 }
 
+#contact-form .rgpd{
+    text-align: justify;
+}
+#contact-form .rgpd label{
+    clear: left;
+}
+
 /* radio button */
+input[type="checkbox"],
 input[type="radio"]{
     appearance: none;
     background-color: white;
@@ -379,12 +433,19 @@ input[type="radio"]{
     place-content: center;
 }
 
+input[type="checkbox"]{
+    margin-right: 60px;
+    border-radius: 5px;
+    /* float: left; */
+    display: inline-grid;
+}
 input[type="radio"]{
     border-radius: 50%; 
     margin-right: 60px;
 }
 
 /* before = quand le bouton est coché */
+input[type="checkbox"]::before,
 input[type="radio"]::before{
 content: "";
 width: 0.65em;
@@ -397,14 +458,13 @@ input[type="radio"]::before{
 border-radius: 50%;
 }
 
-
-input[type="radio"]:checked::before {
-transform: scale(1);
+input[type="checkbox"]::before{
+    border-radius: 2px;
 }
 
-/* reset / submit */
-#contact-form input[type="reset"]{
-    margin-right: 50px;
+input[type="checkbox"]:checked::before ,
+input[type="radio"]:checked::before {
+transform: scale(1);
 }
 
 #send-btn{
@@ -424,15 +484,6 @@ transform: scale(1);
     height: 50%;
 }
 
-/* *******************************************/
-/* - BIG SCREEN NO DISPLAY IN SMALL DEVICES- */
-/* *******************************************/
-
-.lg{
-    display: none;
-}
-
-
 
 
 /* ********************************************** */
@@ -440,22 +491,19 @@ transform: scale(1);
 /* ********************************************** */
 
 
-/* *******************/
-/* ----- SMALL ----- */
-/* *******************/
-@media screen and (min-width:769px){
-}
-
-
 /* ********************/
 /* ----- MEDIUM ----- */
 /* ********************/
-/* N° 2*/
 @media screen and (min-width:993px){
  
     .container{
         width: 80%;
         margin: 0 auto;
+    }
+
+    .success, 
+    .error{
+        width: fit-content;
     }
 
     #bandeau .logo{
@@ -473,14 +521,27 @@ transform: scale(1);
         justify-content: space-between;
     }
         
-/* ****************************************** */
-/* ---------------- ALL BOOKS --------------- */
-/* ****************************************** */
-#all-books #book-card{
-    width: 250px;
-}
+    /* ****************************************** */
+    /* ---------------- ALL BOOKS --------------- */
+    /* ****************************************** */
+    #all-books #book-card{
+        width: 250px;
+    }
 
 
+    #contact-form textarea{
+        min-width: 96%;
+        max-width: 96%;
+        min-height: 440px; 
+    }
+
+    #contact-form #contact-left{
+        width: 35%;
+    }
+
+    #contact-form #contact-right{
+        width: 60%;
+    }
 }
 
 
@@ -512,6 +573,11 @@ transform: scale(1);
         margin: 0 auto;
     }
 
+    .success, 
+    .error{
+        width: fit-content;
+    }
+    
     .mobile{
         display: none;
     }

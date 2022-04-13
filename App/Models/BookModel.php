@@ -13,31 +13,41 @@ class BookModel extends Manager{
     
     public function allBooks(){
         $bdd =$this->dbConnect();
-        $req = $bdd->prepare('SELECT id, title, author, picture, created_at, location, slider FROM books ORDER BY created_at DESC');
+        $req = $bdd->prepare(
+            'SELECT id, title, author, picture, created_at, location, slider 
+            FROM books 
+            ORDER BY created_at DESC');
         $req->execute();
         return $req;
     }
 
     public function singleBook($id){
         $bdd =$this->dbConnect();
-        // $req = $bdd->prepare('SELECT id, title, created_at, author, notation, genre, catchphrase, content, edition, linkEdition, picture, location, year_publication FROM books WHERE id = ?');
-        $req = $bdd->prepare('SELECT * FROM books WHERE id=?');
+        $req = $bdd->prepare(
+            'SELECT books.id, title, created_at, author, notation, catchphrase, content, edition, linkEdition, picture, location, year_publication, category 
+            FROM books 
+            INNER JOIN genres 
+            ON books.id_genre = genres.id 
+            WHERE books.id = ?');
         $req->execute(array($id));
         return $req;
     }
 
-    // A REVOIR ICI
     public function addSingleBook($data){
         $bdd =$this->dbConnect();
-        $bdd->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-        $req = $bdd->prepare('INSERT INTO books(title, author, notation, genre, catchphrase, content, edition, linkEdition, picture, location, year_publication) VALUES(:newTitle, :newAuthor, :newNotation, :newGenre, :newCatchphrase, :newContent, :newEdition, :newLinkEdition, :picture, :newLocation, :newYear_publication)');
+        $req = $bdd->prepare(
+            'INSERT INTO books(title, author, notation, catchphrase, id_genre, content, edition, linkEdition, picture, location, year_publication) 
+            VALUES(:newTitle, :newAuthor, :newNotation, :newCatchphrase, (SELECT id FROM genres WHERE category = :newGenre), :newContent, :newEdition, :newLinkEdition, :picture, :newLocation, :newYear_publication)');
         $req->execute($data);
         return $req;
     }
 
     public function modifySingleBook($data){
         $bdd =$this->dbConnect();
-        $req = $bdd->prepare('UPDATE books SET title = :newTitle, author = :newAuthor, notation = :newNotation, genre = :newGenre, catchphrase = :newCatchphrase, content = :newContent, edition = :newEdition, linkEdition = :newLinkEdition, picture = :picture, location = :newLocation, year_publication = :newYear_publication WHERE id= :id');
+        $req = $bdd->prepare(
+            'UPDATE books 
+            SET title = :newTitle, author = :newAuthor, notation = :newNotation, id_genre = (SELECT id FROM genres WHERE category = :newGenre), catchphrase = :newCatchphrase, content = :newContent, edition = :newEdition, linkEdition = :newLinkEdition, picture = :picture, location = :newLocation, year_publication = :newYear_publication 
+            WHERE id = :id');
         $req->execute($data);
         return $req;
     }
@@ -53,14 +63,7 @@ class BookModel extends Manager{
     /**************************/
     /********* SLIDER *********/
     /**************************/
-
-    // public function slider($data){
-    //     $bdd =$this->dbConnect();
-    //     $req = $bdd->prepare('UPDATE books SET slider = :addSlider WHERE id = :id');
-    //     $req->execute($data);
-    //     return $req;
-    // }
-
+    
 // All slider colomns are set to 0
     public function sliderOff(){
         $bdd =$this->dbConnect();
@@ -85,28 +88,38 @@ class BookModel extends Manager{
 
     public function allGenres(){
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('SELECT id, type, icon FROM genres ORDER BY type ASC');
+        $req = $bdd->prepare('SELECT id, category, icon FROM genres ORDER BY category ASC');
+        $req->execute();
+        return $req;
+    }
+    
+    public function categoriesList(){
+        $bdd =$this->dbConnect();
+        $req = $bdd->prepare(
+            'SELECT id, category
+            FROM genres 
+            ORDER BY category ASC');
         $req->execute();
         return $req;
     }
     
     public function infoGenre($id){
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('SELECT id, type, icon FROM genres WHERE id = ?');
+        $req = $bdd->prepare('SELECT id, category, icon FROM genres WHERE id = ?');
         $req->execute(array($id));
         return $req;
     }
 
     public function genreAddPost($data){
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('INSERT INTO genres(type, icon) VALUES (:newType, :newIcon)');
+        $req = $bdd->prepare('INSERT INTO genres(category, icon) VALUES (:newType, :newIcon)');
         $req->execute($data);
         return $req;
     }
 
     public function genreModifyPost($data){
         $bdd =$this->dbConnect();
-        $req = $bdd->prepare('UPDATE genres SET type = :newType, icon = :newIcon WHERE id= :id');
+        $req = $bdd->prepare('UPDATE genres SET category = :newType, icon = :newIcon WHERE id= :id');
         $req->execute($data);
         return $req;
     }

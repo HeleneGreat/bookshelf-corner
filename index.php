@@ -5,12 +5,16 @@ session_start();
 // autoload.php generated with composer
 require_once __DIR__ . '/vendor/autoload.php';
 
+require_once('./App/class/UserMessage.php');
+
 
 try{
 
     $controllerFront = new \Projet\Controllers\FrontController();
 
     $bookController = new \Projet\Controllers\BookController();
+
+    $messageController = new \Projet\Controllers\MsgController();
 
     
     if (isset($_GET['action'])){
@@ -35,6 +39,18 @@ try{
         elseif($_GET['action'] == 'contact'){
             $controllerFront->contact();
         }
+        
+        elseif($_GET['action'] == 'contactPost'){
+            $data = [
+                ':gender' => htmlspecialchars($_POST['gender']),
+                ':familyname' => htmlspecialchars($_POST['familyname']),
+                ':firstname' => htmlspecialchars($_POST['firstname']),
+                ':email' => htmlspecialchars($_POST['email']),
+                ':object' => htmlspecialchars($_POST['object']),
+                ':message' => htmlspecialchars($_POST['message'])
+            ];
+            $messageController->contactPost($data);
+        }
 
     }
 
@@ -49,6 +65,6 @@ try{
 
 catch (Exception $e){
     
-    return $this->viewFront("errorLoading");
+    // return $this->viewFront("errorLoading");
     echo $e->getMessage();
 }

@@ -33,7 +33,7 @@
         <div>
             <p>Auteur : <span class="bold"><?= $datas['author']; ?></span></p>
             <p>Année de publication : <span class="bold"><?= $datas['year_publication']; ?></span></p>
-            <p>Genre : <span class="bold"><?= $datas['genre']; ?></span></p>
+            <p>Genre : <span class="bold"><?= $datas['category']; ?></span></p>
         </div>
         <div>
             <p>Edition : <a href="<?= $datas['linkEdition']; ?>" target="blank"><span class="bold"><?= $datas['edition']; ?></span></a></p>
@@ -48,7 +48,7 @@
 
 <!-- Link to modify this book -->
 <div class="flex justify-end">
-    <a href="indexAdmin.php?action=livresmodify&id=<?= $datas['ID']; ?>" title="Modifier ce livre">
+    <a href="indexAdmin.php?action=livresmodify&id=<?= $datas['id']; ?>" title="Modifier ce livre">
         <div class="modify-btn thumb-btn">
             <img src="./App/Public/Admin/images/pen-white.png" alt="Modifier ce livre">
         </div>

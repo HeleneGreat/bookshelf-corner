@@ -155,6 +155,32 @@ ul{
     color: red;
 }
 
+.success{
+    background-color: rgb(9, 184, 85);
+}
+
+.error{
+    background-color: var(--rouge);
+}
+
+.success, 
+.error{
+    border-radius: 10px;
+}
+
+.success p, 
+.error p{
+    color: white;
+    padding: 15px 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.success i, 
+.error i{
+    color: white;
+    margin-right: 15px;
+}
 /* *************************************** */
 /* ---------------- HEADER --------------- */
 /* *************************************** */
@@ -555,13 +581,15 @@ a.btn:hover{
     display: block;
 }
 
-/* ***************************** */
-/* ------- LIVRES - VIEW ------- */
-/* ***************************** */
+/* ************************************** */
+/* ------- LIVRE + MESSAGE - VIEW ------- */
+/* ************************************** */
+#one-message,
 #one-book{
     margin-top: 30px;
 }
 
+#one-message h2,
 #one-book h2{
     margin-top: 20px;
     margin-bottom: 20px;
@@ -576,6 +604,14 @@ a.btn:hover{
     width: 100%;
     height: 300px;
     object-fit: cover;
+}
+
+#one-message p{
+    margin-bottom: 15px;
+}
+
+#one-message .msg-content{
+    margin-top: 30px;
 }
 
 /* **************************** */
@@ -597,6 +633,10 @@ textarea.content{
     min-height: 600px;
 }
 
+img.old-picture{
+    width: 200px;
+}
+
 #preview{
     width: 250px;
     height: auto;
@@ -616,11 +656,12 @@ textarea.content{
     padding-right: 10px;
 }
 
-/* ******************************* */
-/* ---- LIVRES - ALL + SLIDER ---- */
-/* ******************************* */
+/* ********************************************* */
+/* ---- LIVRES - ALL + SLIDER + ALL MESSAGE ---- */
+/* ********************************************* */
 #book-cat article,
 #book-slider article,
+#all-messages article,
 #all-books article{
     border-bottom: 1px solid rgba(204, 203, 203, 0.856);
     position: relative;
@@ -669,10 +710,26 @@ textarea.content{
     font-size: 1.2rem;
 }
 
+#all-messages button,
 #book-cat button,
 #all-books button{
     border: none;
     background: none;
+    cursor: pointer;
+}
+
+#one-message h1,
+#all-messages h1{
+    margin-top: 20px;
+}
+
+#all-messages .message-info{
+    width: 80%;
+    height: 50px;
+}
+
+#all-messages .message-info .object{
+    width: 190px;
 }
 
 /* ******************************* */
@@ -927,6 +984,7 @@ textarea.content{
     }
 
     #dashboard,
+    #one-message,
     #one-book,
     #book-form,
     #message,
@@ -937,9 +995,10 @@ textarea.content{
         margin-top: 20px;
     }
 
-    /* ***********************/
-    /* ----- ALL BOOKS ----- */
-    /* ***********************/
+    /* **************************************/
+    /* ----- ALL BOOKS + ALL MESSAGES ----- */
+    /* **************************************/
+    #all-messages i,
     #all-books i{
         color: var(--dashboard);
         padding: 10px;
@@ -947,16 +1006,24 @@ textarea.content{
         margin-right: 10px;
     }
 
+    #all-messages a:hover,
     #all-books a:hover{
         text-shadow: 2px 2px 4px grey;
     }
 
+    #all-messages .message-link{
+        align-self: center;
+        margin-left: auto;
+        margin-right: 15px;
+    }
+    
     #all-books .book-link{
         align-self: center;
         margin-left: auto;
         margin-right: 60px;
     }
 
+    #one-message,
     #one-book{
         position: relative;
         margin-top: 30px;

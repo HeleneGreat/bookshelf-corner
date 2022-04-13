@@ -25,8 +25,7 @@ window.onclick = function(event){
 
 // SAME BUT WHEN THE DELETE BTN IS WITHIN A PHP LOOP
 function modalDelete(id){
-    let allBooks = document.getElementById('all-books');
-    let deleteBtn = allBooks.querySelectorAll('#btn-delete-' + id);
+    let deleteBtn = document.querySelectorAll('#btn-delete-' + id);
     let modal = document.getElementById('myModal' + id);
   
     modal.classList.remove('display-none');
@@ -39,6 +38,5 @@ function modalDelete(id){
 
 function modalClose(id){
     let modal = document.getElementById('myModal' + id);
-
     modal.classList.add('display-none');
 }

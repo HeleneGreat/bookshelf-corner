@@ -51,7 +51,9 @@ class BookController extends Controller{
 
     function addLivre(){
         $books = new \Projet\Models\BookModel();
-        return $this->viewAdmin("dashboard/book-add", $books);
+        $addCats = $books->categoriesList();
+        $cats = $addCats->fetchAll();
+        return $this->viewAdmin("dashboard/book-add", $cats);
     }
 
     function noCover(){
@@ -76,7 +78,15 @@ class BookController extends Controller{
         $books = new \Projet\Models\BookModel();
         $oneBook = $books->singleBook($id);
         $book = $oneBook->fetch();
-        return $this->viewAdmin("dashboard/book-modify", $book);
+
+        $genre = new \Projet\Models\BookModel();
+        $allGenres = $genre->categoriesList();
+        $genres = $allGenres->fetchAll();
+        $datas = [
+            "book" => $book,
+            "genres" => $genres
+        ] ;
+        return $this->viewAdmin("dashboard/book-modify", $datas);
     }
 
     function modifyLivrePost($data){

@@ -51,17 +51,17 @@
 <!-- Category Tab -->
 <section id="book-cat" class="display-none">
     <?php foreach($datas as $book){ 
-        if(isset($book['type'])){
-            if($book['type'] != "--"){
+        if(isset($book['category'])){
+            if($book['category'] != ""){
         ?> 
         <article class="one-cat">
             <!-- GENRE -->
             <div class="flex">
                 <div class="flex">
                     <div class="cat-img text-center">
-                        <img src="./App/Public/Books/images/<?= $book['icon']; ?>" alt="Genre : <?= $book['type']; ?>">
+                        <img src="./App/Public/Books/images/<?= $book['icon']; ?>" alt="Genre : <?= $book['category']; ?>">
                     </div>
-                    <p class="list-title"><?= $book['type']; ?></p>
+                    <p class="list-title"><?= $book['category']; ?></p>
                 </div>
                 <div class="flex cat-link">
                     <a onclick="genreModify(<?= $book['id']; ?>)"><i class="fa-solid fa-pencil"></i></a>
