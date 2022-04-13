@@ -1,8 +1,11 @@
 <?php include_once('./App/Views/admin/layouts/header.php');?>
 
+<?php if(isset($datas['feedback'])) {;?>
+    <div class="center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
+<?php }; ?>
 
 
-<section id="all-messages" class="">
+<section id="all-messages">
 
     <h1>Liste des messages</h1>   
     <?php 
@@ -20,7 +23,6 @@
                 <button id="btn-delete-<?= $msg['id']; ?>" onclick="modalDelete(<?= $msg['id']; ?>)"><a title="Supprimer ce message"><i class="fa-regular fa-trash-can lg"></i></a></button>
             </div>
         </article>
-
         
           <!-- DELETE CONFIRMATION MODAL FOR MESSAGES -->
           <div id="myModal<?= $msg['id']; ?>" class="modal display-none">

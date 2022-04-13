@@ -4,18 +4,6 @@ namespace Projet\Models;
 
 class AdminModel extends Manager{
 
-    // ICI
-    // public static function infoAdmins(){
-    //     $bdd = self::dbConnect();
-    //     $req = $bdd->prepare('SELECT * FROM administrators');
-    //     $req->execute();
-    //     $admins = [];
-    //     foreach( $req->fetchAll() as $admin){
-    //         array_push($admins, new self($admin));
-    //     }
-    //     return $admins;
-    // }
-
 
     public function allAdmins(){
         $bdd = self::dbConnect();
@@ -35,9 +23,9 @@ class AdminModel extends Manager{
         return $req;
     }
 
-    public function recupMdp($mail){
+    public function infoAdmin($mail){
         $bdd = $this->dbConnect();
-        $infoAdmin = $bdd->prepare('SELECT id, pseudo, mail, mdp, picture FROM administrators WHERE mail = ?');
+        $infoAdmin = $bdd->prepare('SELECT id, pseudo, mail, mdp, picture, role FROM administrators WHERE mail = ?');
         $infoAdmin->execute(array($mail));
         return $infoAdmin;
     }

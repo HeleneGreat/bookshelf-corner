@@ -91,4 +91,12 @@ class Controller{
         }
     }
 
+
+    protected function validAccess($path, $data = []){
+        if (!empty($_SESSION)){
+            return $this->viewAdmin($path, $data);
+        }else{
+            echo "Accès non autorisé";
+        }
+    }
 }

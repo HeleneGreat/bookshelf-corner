@@ -15,13 +15,21 @@ class MsgController extends Controller{
         } else {
             $userMessage = new UserMessage ("error", "Votre message n'a pas pu être envoyé. Veuillez réessayer.");
         }
-        return $this->viewFront("contact", $userMessage);
+        $data["feedback"] = $userMessage->formatedMessage();
+        return $this->viewFront("contact", $data);
     }
 
     function allMessages(){
         $messages = new \Projet\Models\MsgModel();
         $msg = $messages->allMessages();
         $data = $msg->fetchAll();
+        if(isset($_GET['status'])){
+            if($_GET['status'] == "success"){
+                $userMessage = new \UserMessage ("success", 'Votre message a bien été envoyé !');
+                // $userMessage = new UserMessage ("success", 'Le message a bien été supprimé !');
+        echo "toto";die;
+                $data["feedback"] = $userMessage->formatedMessage();
+        };}
         return $this->viewAdmin("dashboard/messages", $data);
     }
 
@@ -34,9 +42,9 @@ class MsgController extends Controller{
 
     function deleteMessage($id){
         $messages = new \Projet\Models\MsgModel();
-        $oneMessage = $messages->deleteMessage($id);
-        $message = $oneMessage->fetch();
-        header('Location: indexAdmin.php?action=messages');
+        $messages->deleteMessage($id);
+        
+        header('Location: indexAdmin.php?action=messages&status=success');
     }
     
 }

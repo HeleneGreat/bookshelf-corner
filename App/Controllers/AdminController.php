@@ -33,7 +33,7 @@ class AdminController extends Controller{
     function connexionAdminPost($mail, $mdp){
         // récupérer le mdp
         $user = new \Projet\Models\AdminModel();
-        $connexAdmin = $user->recupMdp($mail, $mdp);
+        $connexAdmin = $user->infoAdmin($mail);
 
         $result = $connexAdmin->fetch();
 
@@ -68,7 +68,9 @@ class AdminController extends Controller{
         $nbrMail = $countMails->countMessages();
         $nbMails = $nbrMail->fetch();
         $stats = array_merge($nbBooks, $nbMails);
-        return $this->viewAdmin("dashboard/dashboard", $stats);
+        $this->validAccess("dashboard/dashboard", $stats);
+        
+        
     }    
 
     /**********************************************************/
@@ -78,7 +80,12 @@ class AdminController extends Controller{
         // $comment = new \Projet\Models\AdminModel();
         // $allComments = $comment->allComments();
         // $comments = $allComments->fetchAll();
-        return $this->viewAdmin("dashboard/comments");
+        if(!empty($_SESSION)){
+           return $this->viewAdmin("dashboard/comments");
+        }else {
+            echo "Vous devez être connecté pour accéder à cet espace !";
+        }
+        
     }
 
 
@@ -93,25 +100,33 @@ class AdminController extends Controller{
     function infoAdmin(){
         $mail = $_SESSION['mail'];
         $user = new \Projet\Models\AdminModel();
-        $admin = $user->recupMdp($mail);
+        $admin = $user->infoAdmin($mail);
         $infoAdmin = $admin->fetch();
         return $infoAdmin;
     }
 
-    function account(){
-        $mail = $_SESSION['mail'];
-        $user = new \Projet\Models\AdminModel();
-        $admin = $user->recupMdp($mail);
-        $infoAdmin = $admin->fetch();
-        return $this->viewAdmin("dashboard/account", $infoAdmin);
+    function account(){        
+        if(!empty($_SESSION)){
+            $mail = $_SESSION['mail'];
+            $user = new \Projet\Models\AdminModel();
+            $admin = $user->infoAdmin($mail);
+            $infoAdmin = $admin->fetch();
+            return $this->viewAdmin("dashboard/account", $infoAdmin);
+        }else {
+            echo "Vous devez être connecté pour accéder à cet espace !";
+        }
     }
 
     function accountModify(){
         $mail = $_SESSION['mail'];
         $user = new \Projet\Models\AdminModel();
-        $admin = $user->recupMdp($mail);
+        $admin = $user->infoAdmin($mail);
         $infoAdmin = $admin->fetch();
-        return $this->viewAdmin("dashboard/account-modify", $infoAdmin);
+        if(!empty($_SESSION)){
+            return $this->viewAdmin("dashboard/account-modify", $infoAdmin);
+        }else {
+            echo "Vous devez être connecté pour accéder à cet espace !";
+        }
     }
 
     function accountModifyPost($data){

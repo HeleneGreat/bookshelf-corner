@@ -15,7 +15,15 @@ class BlogController extends Controller{
         $user = new \Projet\Models\BlogModel();
         $blogs = $user->blogInfo($id);
         $blog = $blogs->fetch();
-        return $this->viewAdmin("dashboard/parameters", $blog);
+        $admin = new \Projet\Models\AdminModel();
+        $thisAdmin = $admin->infoAdmin($_SESSION['mail']);
+        $infoAdmin = $thisAdmin->fetch();
+            if($infoAdmin['role'] === 1){
+               return $this->viewAdmin("dashboard/parameters", $blog); 
+            }
+            else{ echo "Vous n'avez pas accès à cette page"; }
+
+        
     }
     
     function blogModify($id){

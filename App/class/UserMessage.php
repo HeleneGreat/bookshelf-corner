@@ -20,4 +20,11 @@ class UserMessage{
         return $this->message;
     }
 
+    function formatedMessage() {
+        return [
+            "code" => $this->getCode(),
+            "message" => $this->getMessage()
+        ];
+    }
+
 }

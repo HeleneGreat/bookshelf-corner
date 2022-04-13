@@ -68,10 +68,8 @@
 
 <main>
 
-<?php
-if(isset($datas)){
-    if($datas->getCode() === "success"){?>
-        <div class="center success"><p><i class="fa-solid fa-circle-check"></i> <?= $datas->getMessage() ?></p></div>
-    <?php } elseif($datas->getCode() === "error"){ ?>
-        <div class="center error"><p><i class="fa-solid fa-circle-xmark"></i> <?= $datas->getMessage() ?></p></div>
-<?php };} ?>
+<?php if(isset($datas['feedback'])) {;?>
+    <div class="center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
+<?php }; ?>
+
+
