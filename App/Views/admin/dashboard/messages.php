@@ -1,8 +1,5 @@
 <?php include_once('./App/Views/admin/layouts/header.php');?>
 
-<?php if(isset($datas['feedback'])) {;?>
-    <div class="center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
-<?php }; ?>
 
 
 <section id="all-messages">
@@ -10,6 +7,7 @@
     <h1>Liste des messages</h1>   
     <?php 
     foreach($datas as $msg){ 
+        if(isset($msg['object'])){
         ?>
         <article class="flex">
             <div class="message-info flex justify-between align-items-center">
@@ -19,8 +17,8 @@
                 <p class="object"><?= $msg['object']; ?></p>
             </div>
             <div class="flex message-link">
-                <a href="indexAdmin.php?action=messageview&id=<?=$msg['id']; ?>" class="stretched-link"><i class="fa-solid fa-eye"></i></a>
-                <button id="btn-delete-<?= $msg['id']; ?>" onclick="modalDelete(<?= $msg['id']; ?>)"><a title="Supprimer ce message"><i class="fa-regular fa-trash-can lg"></i></a></button>
+                <a title="Lire ce message" href="indexAdmin.php?action=messageview&id=<?=$msg['id']; ?>" class="stretched-link"><i class="fa-solid fa-eye"></i></a>
+                <button title="Supprimer ce message" id="btn-delete-<?= $msg['id']; ?>" onclick="modalDelete(<?= $msg['id']; ?>)"><a><i class="fa-regular fa-trash-can lg"></i></a></button>
             </div>
         </article>
         
@@ -39,12 +37,7 @@
             </div>
         </div>
 
-        <?php } ?> 
+        <?php } ; }?> 
 </section>
-
-
-
-
-
 
 <?php include_once('./App/Views/admin/layouts/footer.php');?>

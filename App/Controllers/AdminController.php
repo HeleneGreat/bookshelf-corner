@@ -5,9 +5,9 @@ namespace Projet\Controllers;
 class AdminController extends Controller{
 
 
-/********************************************************/
-/******************* CONNECTION ADMIN *******************/
-/********************************************************/
+    /********************************************************/
+    /******************* CONNECTION ADMIN *******************/
+    /********************************************************/
     function addAdmin(){
         return $this->viewAdmin("createAdmin");
     }
@@ -56,9 +56,9 @@ class AdminController extends Controller{
         }
     }
 
-/*********************************************************/
-/*********************** DASHBOARD ***********************/
-/*********************************************************/
+    /*********************************************************/
+    /*********************** DASHBOARD ***********************/
+    /*********************************************************/
     function dashboard(){
         $countBooks = new \Projet\Models\BookModel();
         $nbrBook = $countBooks->countBooks();
@@ -69,8 +69,6 @@ class AdminController extends Controller{
         $nbMails = $nbrMail->fetch();
         $stats = array_merge($nbBooks, $nbMails);
         $this->validAccess("dashboard/dashboard", $stats);
-        
-        
     }    
 
     /**********************************************************/
@@ -80,12 +78,7 @@ class AdminController extends Controller{
         // $comment = new \Projet\Models\AdminModel();
         // $allComments = $comment->allComments();
         // $comments = $allComments->fetchAll();
-        if(!empty($_SESSION)){
-           return $this->viewAdmin("dashboard/comments");
-        }else {
-            echo "Vous devez être connecté pour accéder à cet espace !";
-        }
-        
+        return $this->validAccess("dashboard/comments");
     }
 
 
@@ -106,15 +99,12 @@ class AdminController extends Controller{
     }
 
     function account(){        
-        if(!empty($_SESSION)){
+        // if(!empty($_SESSION)){}
             $mail = $_SESSION['mail'];
             $user = new \Projet\Models\AdminModel();
             $admin = $user->infoAdmin($mail);
             $infoAdmin = $admin->fetch();
-            return $this->viewAdmin("dashboard/account", $infoAdmin);
-        }else {
-            echo "Vous devez être connecté pour accéder à cet espace !";
-        }
+            return $this->validAccess("dashboard/account", $infoAdmin);
     }
 
     function accountModify(){
@@ -122,11 +112,7 @@ class AdminController extends Controller{
         $user = new \Projet\Models\AdminModel();
         $admin = $user->infoAdmin($mail);
         $infoAdmin = $admin->fetch();
-        if(!empty($_SESSION)){
-            return $this->viewAdmin("dashboard/account-modify", $infoAdmin);
-        }else {
-            echo "Vous devez être connecté pour accéder à cet espace !";
-        }
+        $this->validAccess("dashboard/account-modify", $infoAdmin);
     }
 
     function accountModifyPost($data){

@@ -24,7 +24,7 @@
                 </div>
                 <div>
                     <p><label for="newGenre">Genre</label></p>
-                    <select id="newGenre" name="newGenre">
+                    <select id="newGenre" name="newGenre" required>
                         <option value="" class="placeholder" selected disabled hidden></option>
                         <?php foreach($datas as $data){?>
                             <option value="<?= $data['category']; ?>"><?= $data['category']; ?></option>
@@ -45,15 +45,15 @@
                 </div>
                 <div>
                     <p><label for="newNotation">Note du livre</label></p>
-                    <p><input name="newNotation" id="newNotation" type="range" min="0" max="5" step="1" value="0" oninput="this.nextElementSibling.value = this.value">
-                    <output>0</output> / 5</p>
+                    <p><input name="newNotation" id="newNotation" type="range" min="0" max="5" step="1" value="0">
+                    <output id="range-result">0</output> / 5</p>
                 </div> 
                 <!-- input file -->
                 <div>
                     <p id="displayImg">Couverture du livre</p>
                     <label for="picture" class="custom-file-upload ajout">
                         <img src="./App/Public/Admin/images/picture.png" alt="Ajouter une image" title="Ajouter une image">
-                        <input type="file" name="picture" id="inputImg" accept="image/*" class="">
+                        <input type="file" name="picture" id="inputImg" accept="image/*">
                     </label>
                     <p class="flex justify-center"><img class="display-none" src="" id="preview" alt=""></p>
                 </div>
@@ -63,8 +63,8 @@
             <div class="zones-text">
                 <div>
                     <p><label for="newCatchphrase">Accroche de l'article</label></p>
-                    <textarea class="catchphrase" name="newCatchphrase" id="newCatchphrase" maxlength="300" onKeyUp="count_it()"></textarea>
-                    <p id="count"><span id="counter"></span> / 300</p>
+                    <textarea class="catchphrase" name="newCatchphrase" id="newCatchphrase" maxlength="300"></textarea>
+                    <p id="count"><span id="counter">0</span> / 300</p>
                 </div>
                 <div>
                     <p><label for="newContent">Contenu de l'article</label></p>

@@ -2,6 +2,8 @@
 
 namespace Projet\Controllers;
 
+use Projet\Forms\UserMessage;
+
 class BookController extends Controller{
 
     // First admin methods, then front
@@ -46,14 +48,24 @@ class BookController extends Controller{
         $allGenres = $genre->allGenres();
         $genres = $allGenres->fetchAll();
         $datas = array_merge($books, $genres);
-        return $this->viewAdmin("dashboard/books", $datas);
+        if(isset($_GET['status'])){
+            if($_GET['status'] == "success-book"){
+                $userMessage = new UserMessage ("success", "Le livre a bien été supprimé !");
+                $datas["feedback"] = $userMessage->formatedMessage();
+            }
+            if($_GET['status'] == "success-cat"){
+                $userMessage = new UserMessage ("success", "La catégorie a bien été supprimée !");
+                $datas["feedback"] = $userMessage->formatedMessage();
+
+        }}
+        return $this->validAccess("dashboard/books", $datas);
     }
 
     function addLivre(){
         $books = new \Projet\Models\BookModel();
         $addCats = $books->categoriesList();
         $cats = $addCats->fetchAll();
-        return $this->viewAdmin("dashboard/book-add", $cats);
+        return $this->validAccess("dashboard/book-add", $cats);
     }
 
     function noCover(){
@@ -71,7 +83,7 @@ class BookController extends Controller{
         $books = new \Projet\Models\BookModel();
         $oneBook = $books->singleBook($id);
         $book = $oneBook->fetch();
-        return $this->viewAdmin("dashboard/book-view", $book);
+        return $this->validAccess("dashboard/book-view", $book);
     }
   
     function modifyLivre($id){
@@ -86,7 +98,7 @@ class BookController extends Controller{
             "book" => $book,
             "genres" => $genres
         ] ;
-        return $this->viewAdmin("dashboard/book-modify", $datas);
+        return $this->validAccess("dashboard/book-modify", $datas);
     }
 
     function modifyLivrePost($data){
@@ -99,7 +111,7 @@ class BookController extends Controller{
         $books = new \Projet\Models\BookModel();
         $oneBook = $books->deleteBook($id);
         $book = $oneBook->fetch();
-        header('Location: indexAdmin.php?action=livres');
+        header('Location: indexAdmin.php?action=livres&status=success-book');
     }
     
     /**************************/
@@ -126,7 +138,7 @@ class BookController extends Controller{
         $genres = new \Projet\Models\BookModel();
         $oneGenre = $genres->allGenres();
         $genre = $oneGenre->fetchAll();
-        return $this->viewAdmin("dashboard/books", $genre);
+        return $this->validAccess("dashboard/books", $genre);
     }
 
     function genreAddPost($data){
@@ -146,7 +158,7 @@ class BookController extends Controller{
         $genres = new \Projet\Models\BookModel();
         $oneGenre = $genres->deleteGenre($id);
         $genre = $oneGenre->fetch();
-        header('Location: indexAdmin.php?action=livres');
+        header('Location: indexAdmin.php?action=livres&status=success-cat');
     }
     
 
@@ -179,7 +191,6 @@ class BookController extends Controller{
         $books = new \Projet\Models\BookModel();
         $oneBook = $books->singleBook($id);
         $book = $oneBook->fetch();
-    
         return $this->viewFront("one-book", $book);
     }
 

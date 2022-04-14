@@ -48,7 +48,7 @@ main{
     width: 100%;
 }
 
-p, a{
+p, a, textarea{
     font-size: 22px;
 }
 
@@ -895,6 +895,11 @@ img.old-picture{
         bottom: 70px;
     }
 
+    .success, 
+    .error{
+        width: fit-content;
+    }
+
     /* *********************/
     /* ----- ACCOUNT ----- */
     /* *********************/
@@ -957,6 +962,11 @@ img.old-picture{
 
     .zones-text{
         width: 65%;
+    }
+    
+    .success, 
+    .error{
+        width: fit-content;
     }
 
     /* *******************/

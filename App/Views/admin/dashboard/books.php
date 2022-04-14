@@ -11,7 +11,7 @@
 </header>
 
 <!-- Books Tab -->
-<section id="all-books" class="">
+<section id="all-books">
     <?php foreach($datas as $book){ 
         if(isset($book['title'])){
         ?> 
@@ -23,9 +23,9 @@
                 <p class="list-date"><?= $book['created_at']; ?></p>
             </div>
             <div class="flex book-link">
-                <a href="indexAdmin.php?action=livresview&id=<?= $book['id']; ?>" class="stretched-link"><i class="fa-solid fa-eye"></i></a>
-                <a href="indexAdmin.php?action=livresmodify&id=<?= $book['id']; ?>"><i class="fa-solid fa-pencil lg"></i></a>
-                <button id="btn-delete-<?= $book['id']; ?>" onclick="modalDelete(<?= $book['id']; ?>)"><a title="Supprimer ce livre"><i class="fa-regular fa-trash-can lg"></i></a></button>
+                <a title="Voir ce livre" href="indexAdmin.php?action=livresview&id=<?= $book['id']; ?>" class="stretched-link"><i class="fa-solid fa-eye"></i></a>
+                <a title="Modifier ce livre" href="indexAdmin.php?action=livresmodify&id=<?= $book['id']; ?>"><i class="fa-solid fa-pencil lg"></i></a>
+                <button title="Supprimer ce livre" id="btn-delete-<?= $book['id']; ?>" onclick="modalDelete(<?= $book['id']; ?>)"><a><i class="fa-regular fa-trash-can lg"></i></a></button>
             </div>
         </article>
 
@@ -64,8 +64,8 @@
                     <p class="list-title"><?= $book['category']; ?></p>
                 </div>
                 <div class="flex cat-link">
-                    <a onclick="genreModify(<?= $book['id']; ?>)"><i class="fa-solid fa-pencil"></i></a>
-                    <button id="btn-delete-<?= $book['id']; ?>" onclick="modalDelete(<?= $book['id']; ?>)"><a title="Supprimer ce genre"><i class="fa-regular fa-trash-can"></i></a></button>
+                    <a title="Modifier la catégorie" onclick="genreModify(<?= $book['id']; ?>)"><i class="fa-solid fa-pencil"></i></a>
+                    <button title="Supprimer la catégorie" id="btn-delete-<?= $book['id']; ?>" onclick="modalDelete(<?= $book['id']; ?>)"><a><i class="fa-regular fa-trash-can"></i></a></button>
                     <!-- <a href="indexAdmin.php?action=genreDelete&id=<?= $book['id']; ?>"><i class="fa-regular fa-trash-can"></i></a> -->
                 </div>
             </div>
@@ -73,7 +73,7 @@
             <form id="modify<?= $book['id']; ?>" action="indexAdmin.php?action=genreModifyPost&id=<?= $book['id']; ?>" method="post" enctype="multipart/form-data" class="flex display-none">
                 <label for="picture" class="custom-file-upload-cat ajout">
                     <img src="./App/Public/Admin/images/picture.png" alt="Ajouter une icône" title="Ajouter une icône">
-                    <input type="file" name="picture" id="inputImg<?= $book['id']; ?>" accept="image/*" class="">
+                    <input type="file" name="picture" id="inputImg<?= $book['id']; ?>" accept="image/*">
                 </label>
                 <p><input type="text" name="newType" id="newType" placeholder="Nouveau titre de genre"></p>
                 <div class="cat-submit">
@@ -131,7 +131,7 @@
                 <p class="list-title"><?= $book['title']; ?></p>
             </div>
             <div class="switch">
-                <input type="checkbox" name="slider<?= $book['id']; ?>" value="<?= $book['id']; ?>" <?php if($book['slider'] == "1"){ echo "checked";} ?>>
+                <input title="Ajouter ou enlever du slider" type="checkbox" name="slider<?= $book['id']; ?>" value="<?= $book['id']; ?>" <?php if($book['slider'] == "1"){ echo "checked";} ?>>
                 <span class="slide"></span>
             </div>
         </article>

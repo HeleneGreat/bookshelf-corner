@@ -2,7 +2,7 @@
 
 namespace Projet\Controllers;
 
-use UserMessage;
+use Projet\Forms\UserMessage;
 
 class MsgController extends Controller{
 
@@ -25,25 +25,22 @@ class MsgController extends Controller{
         $data = $msg->fetchAll();
         if(isset($_GET['status'])){
             if($_GET['status'] == "success"){
-                $userMessage = new \UserMessage ("success", 'Votre message a bien été envoyé !');
-                // $userMessage = new UserMessage ("success", 'Le message a bien été supprimé !');
-        echo "toto";die;
+                $userMessage = new UserMessage ("success", "Le message a bien été supprimé !");
                 $data["feedback"] = $userMessage->formatedMessage();
-        };}
-        return $this->viewAdmin("dashboard/messages", $data);
+        }}
+        return $this->validAccess("dashboard/messages", $data);
     }
 
     function viewMessage($id){
         $messages = new \Projet\Models\MsgModel();
         $oneMsg = $messages->singleMessage($id);
         $data = $oneMsg->fetch();
-        return $this->viewAdmin("dashboard/message-view", $data);
+        return $this->validAccess("dashboard/message-view", $data);
     }
 
     function deleteMessage($id){
         $messages = new \Projet\Models\MsgModel();
         $messages->deleteMessage($id);
-        
         header('Location: indexAdmin.php?action=messages&status=success');
     }
     

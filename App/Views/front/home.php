@@ -3,7 +3,7 @@
 
 
 <section id="carousel" class="container">
-<div id="visible" class="">
+<div id="visible">
 
 <?php
 $first = true;

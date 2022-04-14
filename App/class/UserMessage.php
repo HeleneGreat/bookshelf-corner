@@ -1,5 +1,6 @@
 <?php
 
+namespace Projet\Forms;
 
 class UserMessage{
 

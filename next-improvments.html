@@ -25,6 +25,14 @@ https://espritweb.fr/comment-uploader-une-image-en-php/#:~:text=Pour%20envoyer%2
 * et si je créais une table catégorie ? L'admin pourra en rajouter
 * FAIRE UML BDD (obligatoire)
 
+ACCESSIBILITE
+* cf chrome extension wave pour voir les erreurs
+* menu burger sans js : le burger a un lien href qui renvoie vers une page avec la liste des liens.
+Dans le script :
+e.preventDefault();  ==> le js prend le pas sur le href
+burgerBtn.innerText = "X";
+navLinks.classList = "";
+
 
 SECURITÉ
 * créer différents profils d'utilisateurs pour la BDD
@@ -39,6 +47,7 @@ SECURITÉ
 * vérifier formulaire modif account admin, toutes les erreurs et possibilités
 * ajouter une vérif supplémentaire aux input qui créé ou modifie un titre (book, genre, mail admin..) 
 pour qu'il n'y en ait pas deux pareils
+* mdp de 8 caractères minimum (js)
 
 
 A AJOUTER SI J'AI LE TEMPS

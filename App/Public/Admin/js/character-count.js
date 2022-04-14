@@ -1,6 +1,8 @@
 // This function is used to count characters written in the catchphrase textarea
 
-function count_it() {
-    document.getElementById('counter').innerHTML = document.getElementById('newCatchphrase').value.length;
-}
-count_it();
+let catchphrase = document.getElementById('newCatchphrase');
+let counter = document.getElementById('counter');
+
+catchphrase.addEventListener('keyup', function(){
+    counter.innerHTML = catchphrase.value.length;
+})
