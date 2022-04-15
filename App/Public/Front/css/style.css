@@ -22,7 +22,8 @@ MEDIA QUERIES
 }
 
 /* utilisé sur les book cards + se connecter */
-button{
+button,
+#all-books a.btn-book{
     background-color: rgb(12, 117, 238);
     color: white;
     border: none;
@@ -31,25 +32,17 @@ button{
     padding: 8px 10px;
 }
 
-#all-books #book-card button{
-    position: absolute;
-    bottom: 30px;
-}
-
-button:hover{
+button:hover,
+#all-books a.btn-book:hover{
     cursor: pointer;
+    box-shadow: 0 0 9px rgb(184, 184, 184);
 }
 
-
-button:active {
+button:active,
+#all-books a.btn-book:active {
     box-shadow: inset 3px 3px 3px #0041c2,
                 inset -3px -3px 3px rgb(88, 155, 231);
    }
-
-
-
-
-
 
 /* *******************/
 /* ----- RESET ----- */
@@ -349,11 +342,15 @@ right: 25px;
     border-radius: 10px;
     height: 475px;
     margin-top: 30px;
-    padding: 10px;
+    padding: 20px 10px;
     background: #ffffff;
     box-shadow:  0 0 9px #cac9c9;
-    /* pour les boutons lien :*/
-    position: relative;
+}
+
+#all-books h3{
+    height: 60px;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 #all-books #book-card:hover{
@@ -367,9 +364,12 @@ right: 25px;
 
 #all-books #book-card img{
     width: 80%;
-    height: auto;
+    height: 300px;
     object-fit: cover;
-    padding: 10px;
+}
+
+#all-books #book-card button{
+    width: fit-content;
 }
 
 /* **************************************** */

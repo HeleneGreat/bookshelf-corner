@@ -719,6 +719,10 @@ img.old-picture{
     margin: auto;
 }
 
+#all-books .info{
+    max-width: 58%;
+}
+
 #book-cat .list-title,
 #book-slider .list-title,
 #all-books .list-title{

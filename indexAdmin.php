@@ -362,3 +362,7 @@ catch (Exception $e){
     // return $this->viewAdmin("error");
     echo $e->getMessage();
 }
+
+catch (Error $e){
+    return $this->validAccess('error');
+}

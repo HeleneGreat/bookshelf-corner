@@ -7,17 +7,20 @@
 
     <div class="flex-md justify-between-md">
     <?php foreach($datas as $book){ ?>
-        <a href="index.php?action=un-livre&id=<?= $book['id'] ?>">
-            <article id="book-card" class="center">
-                <h3 class="text-center"><?= $book['title']; ?></h3>
-                <p class="text-center"><img src="./App/Public/Books/images/<?= $book['picture']; ?>" alt="La couverture du roman <?= $book['title']; ?>"></p>
-                <div class="flex justify-center">
-                    <button>Lire l'article</button>
-                </div>
-                
+        
+            <article id="book-card" class="center flex col justify-between">
+                <h3 class="text-center"><?= 
+                substr($book['title'], 0, 30); 
+                if(strlen($book['title']) > 30){echo "[...]";}
+                ?></h3>
+                <p class="text-center">
+                    <a href="index.php?action=un-livre&id=<?= $book['id'] ?>">
+                        <img src="./App/Public/Books/images/<?= $book['picture']; ?>" alt="La couverture du roman <?= $book['title']; ?>">
+                    </a>
+                </p>
+                <a href="index.php?action=un-livre&id=<?= $book['id'] ?>" class="center btn-book">Lire l'article</a>
             </article>
-        </a>
-
+       
     <?php }; ?>
     </div>
 </section>

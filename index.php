@@ -64,7 +64,10 @@ try{
 }
 
 catch (Exception $e){
-    
-    // return $this->viewFront("errorLoading");
+    // return $this->viewFront("error");
     echo $e->getMessage();
+}
+
+catch (Error $e){
+    return $this->viewFront('error');
 }
