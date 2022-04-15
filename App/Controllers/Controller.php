@@ -94,9 +94,13 @@ class Controller{
 
     protected function validAccess($path, $data = []){
         if (!empty($_SESSION)){
-            return $this->viewAdmin($path, $data);
-        }else{
-            echo "Accès non autorisé";
+            if($_SESSION['mail'] != null){
+                return $this->viewAdmin($path, $data);
+            }else{
+                header('Location: indexAdmin.php?action=error&status=error&from=no-access');
+            }
+        }else{ 
+            header('Location: indexAdmin.php?action=error&status=error&from=no-access');
         }
     }
 }

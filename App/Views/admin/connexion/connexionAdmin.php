@@ -1,11 +1,8 @@
+<?php include_once('./App/Views/admin/layouts/head.php');?>
 
+<section id="admin-connexion" class="container text-center">
 
-
-<?php include_once('./App/Views/admin/layouts/header.php');?>
-
-<section id="new-admin" class="center">
-
-<h2>Se connecter en tant qu'administrateur</h2>
+    <h2>Se connecter en tant qu'administrateur</h2>
 
     <form action="indexAdmin.php?action=connexionAdminPost" method="post">
         <p><input type="email" name="adminMail" id="mail" placeholder="Votre adresse e-mail" value=""></p>
@@ -16,10 +13,9 @@
 
     </form>
 
-    <br>
-    <hr>
+
     <p class="p-btn">Vous n'avez pas de compte ?</p>
-    <p class="p-btn"><a class="btn" href="indexAdmin.php?action=createAccount">Créer un compte administrateur</a></p>
+    <p class="p-btn"><a class="btn center" href="indexAdmin.php?action=createAccount">Créer un compte administrateur</a></p>
 </section>
 
 <?php include_once('./App/Views/admin/layouts/footer.php');?>

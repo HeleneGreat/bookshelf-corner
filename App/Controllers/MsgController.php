@@ -28,14 +28,14 @@ class MsgController extends Controller{
                 $userMessage = new UserMessage ("success", "Le message a bien été supprimé !");
                 $data["feedback"] = $userMessage->formatedMessage();
         }}
-        return $this->validAccess("dashboard/messages", $data);
+        return $this->validAccess("messages", $data);
     }
 
     function viewMessage($id){
         $messages = new \Projet\Models\MsgModel();
         $oneMsg = $messages->singleMessage($id);
         $data = $oneMsg->fetch();
-        return $this->validAccess("dashboard/message-view", $data);
+        return $this->validAccess("message-view", $data);
     }
 
     function deleteMessage($id){

@@ -347,14 +347,22 @@ right: 25px;
 /* ****************************************** */
 #all-books #book-card{
     border-radius: 10px;
-    height: 450px;
+    height: 475px;
     margin-top: 30px;
     padding: 10px;
     background: #ffffff;
-    box-shadow:  5px 5px 6px #cac9c9,
-         -5px -5px 6px #fdfdfd;
+    box-shadow:  0 0 9px #cac9c9;
     /* pour les boutons lien :*/
     position: relative;
+}
+
+#all-books #book-card:hover{
+    box-shadow:  0 0 9px #989898;
+}
+
+#all-books #book-card p{
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 #all-books #book-card img{

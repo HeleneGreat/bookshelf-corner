@@ -14,7 +14,7 @@ class BookModel extends Manager{
     public function allBooks(){
         $bdd =$this->dbConnect();
         $req = $bdd->prepare(
-            'SELECT id, title, author, picture, created_at, location, slider 
+            'SELECT id, title, author, picture, DATE_FORMAT(created_at, "%d %M %Y") AS date, location, slider 
             FROM books 
             ORDER BY created_at DESC');
         $req->execute();
@@ -24,7 +24,7 @@ class BookModel extends Manager{
     public function singleBook($id){
         $bdd =$this->dbConnect();
         $req = $bdd->prepare(
-            'SELECT books.id, title, created_at, author, notation, catchphrase, content, edition, linkEdition, picture, location, year_publication, category 
+            'SELECT books.id, title, DATE_FORMAT(created_at, "%d %M %Y") AS date, author, notation, catchphrase, content, edition, linkEdition, picture, location, year_publication, category 
             FROM books 
             INNER JOIN genres 
             ON books.id_genre = genres.id 

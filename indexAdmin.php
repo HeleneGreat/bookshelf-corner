@@ -86,7 +86,7 @@ try{
         /******** TAB LIVRES ********/
         /****************************/
         elseif($_GET['action'] == 'livres'){
-            $bookController->livres();
+            $bookController->livresAll();
         }
 
         elseif ($_GET['action'] == "livresview"){
@@ -161,6 +161,10 @@ try{
         /****************************/
         /******** TAB GENRES ********/
         /****************************/
+        elseif($_GET['action'] == 'livres-genres'){
+            $bookController->livresGenres();
+        }
+
         elseif ($_GET['action'] == "genreAddPost"){
             $purpose = "genre";
             $folder = "Books";
@@ -187,21 +191,21 @@ try{
                 $fileName = $bookController->infoGenre($id)['icon'];
             }
             // unique name
-            if(!empty($_POST['newType'])){
-                $newName = $bookController->checkForDuplicate("genres", htmlspecialchars( $_POST['newType']));
-                if($newName == false){
-                    $genreName = htmlspecialchars( $_POST['newType']);
-                }
-                else{ 
-                    // $bookController->livres();
-                   }
-            } else{
-                $genreName = $bookController->infoGenre($id)['category'];
-            }
+            // if(!empty($_POST['newType'])){
+            //     $newName = $bookController->checkForDuplicate("genres", htmlspecialchars( $_POST['newType']));
+            //     if($newName == false){
+            //         $genreName = htmlspecialchars( $_POST['newType']);
+            //     }
+            //     else{ 
+            //         $bookController->livresGenres();
+            //        }
+            // } else{
+            //     $genreName = $bookController->infoGenre($id)['category'];
+            // }
             // Données issues du formulaire
             $data = [
                 ':id' => $id,
-                ':newType' => $genreName,
+                ':newType' => htmlspecialchars($_POST['newType']),
                 ':newIcon' => $fileName
             ];
             $bookController->genreModifyPost($data);
@@ -215,7 +219,11 @@ try{
         /****************************/
         /******** TAB SLIDER ********/
         /****************************/
-        elseif($_GET['action'] == "book-slider"){
+        elseif($_GET['action'] == 'livres-slider'){
+            $bookController->livresSlider();
+        }
+
+        elseif($_GET['action'] == "sliderModifyPost"){
             $bookController->sliderSelection($_POST);
         }
         
@@ -331,6 +339,15 @@ try{
         elseif ($_GET['action'] == "messageDelete"){
             $id = $_GET['id'];
             $messageController->deleteMessage($id);
+        }
+
+
+
+
+
+
+        elseif($_GET['action'] == "error"){
+            $adminController->error();
         }
 
     }   

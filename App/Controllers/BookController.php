@@ -9,17 +9,17 @@ class BookController extends Controller{
     // First admin methods, then front
 
     function infoLivre($id){
-        $books = new \Projet\Models\BookModel();
-        $oneBook = $books->singleBook($id);
-        $book = $oneBook->fetch();
-        return $book;
+        $new = new \Projet\Models\BookModel();
+        $data = $new->singleBook($id);
+        $datas = $data->fetch();
+        return $datas;
     }
 
     function infoGenre($id){
-        $genres = new \Projet\Models\BookModel();
-        $oneGenre = $genres->infoGenre($id);
-        $genre = $oneGenre->fetch();
-        return $genre;
+        $new = new \Projet\Models\BookModel();
+        $data = $new->infoGenre($id);
+        $datas = $data->fetch();
+        return $datas;
     }
 
 
@@ -39,33 +39,36 @@ class BookController extends Controller{
     /**************************/
     /********* LIVRES *********/
     /**************************/
-    function livres(){
-        $book = new \Projet\Models\BookModel();
-        $allBooks = $book->allBooks();
-        $books = $allBooks->fetchAll();
-
-        $genre = new \Projet\Models\BookModel();
-        $allGenres = $genre->allGenres();
-        $genres = $allGenres->fetchAll();
-        $datas = array_merge($books, $genres);
+    function livresAll(){
+        $new = new \Projet\Models\BookModel();
+        $data = $new->allBooks();
+        $datas = $data->fetchAll();
+        
+        // var_dump($datas);die;
         if(isset($_GET['status'])){
-            if($_GET['status'] == "success-book"){
-                $userMessage = new UserMessage ("success", "Le livre a bien été supprimé !");
-                $datas["feedback"] = $userMessage->formatedMessage();
+            if($_GET['status'] == "success"){
+                if($_GET['from'] == "add"){
+                    $userMessage = new UserMessage ("success", "Le livre a bien été ajouté !");
+                    $datas["feedback"] = $userMessage->formatedMessage();
+                }
+                elseif($_GET['from'] == "modify"){
+                    $userMessage = new UserMessage ("success", "Le livre a bien été modifié !");
+                    $datas["feedback"] = $userMessage->formatedMessage();
+                }
+                elseif($_GET['from'] == "delete"){
+                    $userMessage = new UserMessage ("success", "Le livre a bien été supprimé !");
+                    $datas["feedback"] = $userMessage->formatedMessage();
+                }
             }
-            if($_GET['status'] == "success-cat"){
-                $userMessage = new UserMessage ("success", "La catégorie a bien été supprimée !");
-                $datas["feedback"] = $userMessage->formatedMessage();
-
-        }}
-        return $this->validAccess("dashboard/books", $datas);
+        }
+        return $this->validAccess("books-all", $datas);
     }
 
     function addLivre(){
-        $books = new \Projet\Models\BookModel();
-        $addCats = $books->categoriesList();
-        $cats = $addCats->fetchAll();
-        return $this->validAccess("dashboard/book-add", $cats);
+        $new = new \Projet\Models\BookModel();
+        $data = $new->categoriesList();
+        $datas = $data->fetchAll();
+        return $this->validAccess("book-add", $datas);
     }
 
     function noCover(){
@@ -74,49 +77,60 @@ class BookController extends Controller{
     }
 
     function addLivrePost($data){
-        $books = new \Projet\Models\BookModel();
-        $oneBook = $books->addSingleBook($data);
-        header('Location: indexAdmin.php?action=livres');
+        $new = new \Projet\Models\BookModel();
+        $datas = $new->addSingleBook($data);
+        header('Location: indexAdmin.php?action=livres&status=success&from=add');
     }
 
     function viewLivre($id){
-        $books = new \Projet\Models\BookModel();
-        $oneBook = $books->singleBook($id);
-        $book = $oneBook->fetch();
-        return $this->validAccess("dashboard/book-view", $book);
+        $new = new \Projet\Models\BookModel();
+        $data = $new->singleBook($id);
+        $datas = $data->fetch();
+        return $this->validAccess("book-view", $datas);
     }
   
     function modifyLivre($id){
-        $books = new \Projet\Models\BookModel();
-        $oneBook = $books->singleBook($id);
-        $book = $oneBook->fetch();
+        $newFirst = new \Projet\Models\BookModel();
+        $dataFirst = $newFirst->singleBook($id);
+        $datasFirst = $dataFirst->fetch();
 
-        $genre = new \Projet\Models\BookModel();
-        $allGenres = $genre->categoriesList();
-        $genres = $allGenres->fetchAll();
+        $newSecond = new \Projet\Models\BookModel();
+        $dataSecond = $newSecond->categoriesList();
+        $datasSecond = $dataSecond->fetchAll();
         $datas = [
-            "book" => $book,
-            "genres" => $genres
+            "book" => $datasFirst,
+            "genres" => $datasSecond
         ] ;
-        return $this->validAccess("dashboard/book-modify", $datas);
+        return $this->validAccess("book-modify", $datas);
     }
 
     function modifyLivrePost($data){
-        $books = new \Projet\Models\BookModel();
-        $oneBook = $books->modifySingleBook($data);
-        header('Location: indexAdmin.php?action=livres');
+        $new = new \Projet\Models\BookModel();
+        $datas = $new->modifySingleBook($data);
+        header('Location: indexAdmin.php?action=livres&status=success&from=modify');
     }
 
     function deleteLivre($id){
-        $books = new \Projet\Models\BookModel();
-        $oneBook = $books->deleteBook($id);
-        $book = $oneBook->fetch();
-        header('Location: indexAdmin.php?action=livres&status=success-book');
+        $new = new \Projet\Models\BookModel();
+        $data = $new->deleteBook($id);
+        $datas = $data->fetch();
+        header('Location: indexAdmin.php?action=livres&status=success&from=delete');
     }
     
     /**************************/
     /********* SLIDER *********/
     /**************************/
+    function livresSlider(){
+        $new = new \Projet\Models\BookModel();
+        $data = $new->allBooks();
+        $datas = $data->fetchAll();
+        if(isset($_GET['status'])){
+            $userMessage = new UserMessage ("success", "Le slider a été mis à jour !");
+            $datas["feedback"] = $userMessage->formatedMessage();
+        }
+        return $this->validAccess("books-slider", $datas);
+    }
+
     function sliderSelection($data){
         // First, all books in the DBB are set to slider = 0
         $allBooks = new \Projet\Models\BookModel();
@@ -124,76 +138,87 @@ class BookController extends Controller{
         // Second, the books selected in the slider form are set to 1
         $books = new \Projet\Models\BookModel();
         $oneBook = $books->sliderOn($data);
-        header('Location: indexAdmin.php?action=livres');
+        header('Location: indexAdmin.php?action=livres-slider&status=success');
     }
 
     /**************************/
     /********* GENRES *********/
     /**************************/
+    function livresGenres(){
+        $new = new \Projet\Models\BookModel();
+        $data = $new->allGenres();
+        $datas = $data->fetchAll();
+        if(isset($_GET['status'])){
+            if($_GET['from'] == "add"){
+                $userMessage = new UserMessage ("success", "La catégorie a bien été ajoutée !");
+                $datas["feedback"] = $userMessage->formatedMessage();
+            }
+            elseif($_GET['from'] == "modify"){
+                $userMessage = new UserMessage ("success", "La catégorie a bien été modifiée !");
+                $datas["feedback"] = $userMessage->formatedMessage();
+            }
+            elseif($_GET['from'] == "delete"){
+                $userMessage = new UserMessage ("success", "La catégorie a bien été supprimée !");
+                $datas["feedback"] = $userMessage->formatedMessage();
+            }
+        }
+        return $this->validAccess("books-genres", $datas);
+    }
+
     function noIcon(){
         return "no-icon.png";
     }
 
     function allGenre(){
-        $genres = new \Projet\Models\BookModel();
-        $oneGenre = $genres->allGenres();
-        $genre = $oneGenre->fetchAll();
-        return $this->validAccess("dashboard/books", $genre);
+        $new = new \Projet\Models\BookModel();
+        $data = $new->allGenres();
+        $datas = $data->fetchAll();
+        return $this->validAccess("books-genres", $datas);
     }
 
     function genreAddPost($data){
-        $genres = new \Projet\Models\BookModel();
-        $oneGenre = $genres->genreAddPost($data);
-        header('Location: indexAdmin.php?action=livres');
+        $new = new \Projet\Models\BookModel();
+        $datas = $new->genreAddPost($data);
+        header('Location: indexAdmin.php?action=livres-genres&status=success&from=add');
     }
 
     function genreModifyPost($data){
-        $genres = new \Projet\Models\BookModel(); 
-        $oneGenre = $genres->genreModifyPost($data);
-       
-        header('Location: indexAdmin.php?action=livres');
+        $new = new \Projet\Models\BookModel(); 
+        $datas = $new->genreModifyPost($data);
+        header('Location: indexAdmin.php?action=livres-genres&status=success&from=modify');
     }
 
     function deleteGenre($id){
-        $genres = new \Projet\Models\BookModel();
-        $oneGenre = $genres->deleteGenre($id);
-        $genre = $oneGenre->fetch();
-        header('Location: indexAdmin.php?action=livres&status=success-cat');
+        $new = new \Projet\Models\BookModel();
+        $data = $new->deleteGenre($id);
+        // $datas = $data->fetch();
+        header('Location: indexAdmin.php?action=livres-genres&status=success&from=delete');
     }
     
-
-
     /*=======================================================*/
     /*=======================================================*/
     /*======================== FRONT ========================*/
     /*=======================================================*/
     /*=======================================================*/
-
-
-
-
     function home(){
-        $book = new \Projet\Models\BookModel();
-        $allBooks = $book->allBooks();
-        $books = $allBooks->fetchAll();
-        return $this->viewFront("home", $books);
+        $new = new \Projet\Models\BookModel();
+        $data = $new->allBooks();
+        $datas = $data->fetchAll();
+        return $this->viewFront("home", $datas);
     }
 
-
     function allBooks(){
-        $book = new \Projet\Models\BookModel();
-        $allBooks = $book->allBooks();
-        $books = $allBooks->fetchAll();
-        return $this->viewFront("all-books", $books);
+        $new = new \Projet\Models\BookModel();
+        $data = $new->allBooks();
+        $datas = $data->fetchAll();
+        return $this->viewFront("all-books", $datas);
     }
 
     function oneBook($id){
-        $books = new \Projet\Models\BookModel();
-        $oneBook = $books->singleBook($id);
-        $book = $oneBook->fetch();
-        return $this->viewFront("one-book", $book);
+        $new = new \Projet\Models\BookModel();
+        $data = $new->singleBook($id);
+        $datas = $data->fetch();
+        return $this->viewFront("one-book", $datas);
     }
-
-
 
 }

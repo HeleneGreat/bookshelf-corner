@@ -27,12 +27,12 @@ MEDIA QUERIES
 
 */
 
-
 /* *******************/
 /* ----- RESET ----- */
 /* *******************/
 :root{
     /* --dashboard: #b2c9fe ; */
+    --rouge: #ee5f4f;
     --dashboard: #265ddf ;
     --anthracite: rgb(44, 41, 41);
 }
@@ -65,7 +65,8 @@ p, a, textarea{
 /* ********************/
 /* ----- SET-UP ----- */
 /* ********************/
-h1{
+h1,
+h1 span{
     text-align: center;
     margin-bottom: 40px;
     font-size: 2rem;
@@ -77,7 +78,7 @@ a{
 }
 
 a:hover{
-    color: var(--rouge);
+    color: var(--dashboard);
 }
 
 ul{
@@ -317,6 +318,7 @@ z-index: 9999999;
 #nav-admin a:hover,
 #nav-admin .active{
     font-weight: bold;
+    color: var(--anthracite)
 }
 
 /* ******************************************** */
@@ -326,11 +328,26 @@ z-index: 9999999;
     margin-top: 80px;
 }
 
+/* ************************************************* */
+/* ---------------- CONNECTION ADMIN --------------- */
+/* ************************************************* */
+#new-admin,
+#admin-connexion{
+    margin-top: 30px;
+}
+
+#admin-connexion form{
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--anthracite);
+}
 
 /* *********************************************** */
 /* ---------------- DASHBOARD -------------------- */
 /* *********************************************** */
-
+#dashboard h1 span{
+    display: block;
+}
 
 /* ******************** */
 /* ------- FORMS------- */
@@ -566,7 +583,7 @@ a.btn:hover{
     font-size: 1.3rem;
     border-bottom: 3px solid rgba(204, 203, 203, 0.856);
     padding: 10px  0;
-    cursor: pointer;
+    position: relative;
 }
 
 #nav-books li:hover{
@@ -575,6 +592,14 @@ a.btn:hover{
 
 #nav-books li.active{
     border-bottom: 3px solid var(--dashboard);
+}
+
+#nav-books li a{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 #nav-books i{

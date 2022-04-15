@@ -2,6 +2,8 @@
 
 namespace Projet\Controllers;
 
+use Projet\Forms\UserMessage;
+
 class AdminController extends Controller{
 
 
@@ -9,7 +11,7 @@ class AdminController extends Controller{
     /******************* CONNECTION ADMIN *******************/
     /********************************************************/
     function addAdmin(){
-        return $this->viewAdmin("createAdmin");
+        return $this->viewAdmin("connexion/createAdmin");
     }
 
     // Formulaire de création d'un compte ADMIN :
@@ -18,7 +20,7 @@ class AdminController extends Controller{
 
         if(filter_var($mail, FILTER_VALIDATE_EMAIL)){
             $email = $createAdmin->createAdmin($pseudo, $mail, $mdp, $fileName);
-            return $this->viewAdmin("confirmeCreation");
+            return $this->viewAdmin("connexion/confirmeCreation");
         }
         else{
             // header('Location: App/Views/admin/error.php');
@@ -27,7 +29,7 @@ class AdminController extends Controller{
     }
 
     function connexionAdmin(){
-        return $this->viewAdmin("connexionAdmin");
+        return $this->viewAdmin("connexion/connexionAdmin");
     }
 
     function connexionAdminPost($mail, $mdp){
@@ -44,12 +46,8 @@ class AdminController extends Controller{
         $_SESSION['pseudo'] = $result['pseudo'];
         $_SESSION['picture'] = $result['picture'];
 
-        $countBooks = new \Projet\Models\BookModel();
-        $nbrBook = $countBooks->countBooks();
-        $nbBooks = $nbrBook->fetch();
-
         if ($isPasswordCorrect){
-            return $this->viewAdmin("dashboard/dashboard", $nbBooks);
+            header('Location: indexAdmin.php?action=dashboard');
         }
         else{
             echo "Identifiants erronés !";
@@ -68,7 +66,7 @@ class AdminController extends Controller{
         $nbrMail = $countMails->countMessages();
         $nbMails = $nbrMail->fetch();
         $stats = array_merge($nbBooks, $nbMails);
-        $this->validAccess("dashboard/dashboard", $stats);
+        $this->validAccess("dashboard", $stats);
     }    
 
     /**********************************************************/
@@ -78,7 +76,7 @@ class AdminController extends Controller{
         // $comment = new \Projet\Models\AdminModel();
         // $allComments = $comment->allComments();
         // $comments = $allComments->fetchAll();
-        return $this->validAccess("dashboard/comments");
+        return $this->validAccess("comments");
     }
 
 
@@ -99,12 +97,11 @@ class AdminController extends Controller{
     }
 
     function account(){        
-        // if(!empty($_SESSION)){}
-            $mail = $_SESSION['mail'];
-            $user = new \Projet\Models\AdminModel();
-            $admin = $user->infoAdmin($mail);
-            $infoAdmin = $admin->fetch();
-            return $this->validAccess("dashboard/account", $infoAdmin);
+        $mail = $_SESSION['mail'];
+        $user = new \Projet\Models\AdminModel();
+        $admin = $user->infoAdmin($mail);
+        $infoAdmin = $admin->fetch();
+        return $this->validAccess("account", $infoAdmin);
     }
 
     function accountModify(){
@@ -112,7 +109,7 @@ class AdminController extends Controller{
         $user = new \Projet\Models\AdminModel();
         $admin = $user->infoAdmin($mail);
         $infoAdmin = $admin->fetch();
-        $this->validAccess("dashboard/account-modify", $infoAdmin);
+        $this->validAccess("account-modify", $infoAdmin);
     }
 
     function accountModifyPost($data){
@@ -134,6 +131,18 @@ class AdminController extends Controller{
         header('Location: indexAdmin.php?action=blogParameters');
     }
 
-
+    function error(){
+        $datas = [];
+        if(isset($_GET['status'])){
+            if($_GET['status'] == "error"){
+                if($_GET['from'] == "no-access"){
+                    $userMessage = new UserMessage ("error", "Accès non autorisé !");
+                    $datas["feedback"] = $userMessage->formatedMessage();
+                }
+            }
+        }
+        return $this->viewAdmin("error", $datas);
+    }
+    
 
 }

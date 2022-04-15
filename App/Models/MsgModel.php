@@ -20,14 +20,14 @@ class MsgModel extends Manager{
 
     public function allMessages(){
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('SELECT id, gender, familyname, firstname, send_at, email, object, message FROM messages ORDER BY send_at DESC');
+        $req = $bdd->prepare('SELECT id, gender, familyname, firstname, DATE_FORMAT(send_at, "%d/%m/%Y à %kh%i") AS send_at, email, object, message FROM messages ORDER BY send_at DESC');
         $req->execute();
         return $req;
     }
 
     public function singleMessage($id){
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('SELECT id, gender, familyname, firstname, send_at, email, object, message FROM messages where id = ?');
+        $req = $bdd->prepare('SELECT id, gender, familyname, firstname, DATE_FORMAT(send_at, "%d/%m/%Y à %kh%i") AS send_at, email, object, message FROM messages where id = ?');
         $req->execute(array($id));
         return $req;
     }

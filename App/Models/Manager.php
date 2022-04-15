@@ -8,6 +8,7 @@ class Manager{
 
         try{
             $bdd = new \PDO('mysql:host=localhost;dbname=bookshelf_corner;charset=utf8', 'root', '');
+            $bdd->query("SET lc_time_names = 'fr_FR'");
             return $bdd;
         }
         

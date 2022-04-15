@@ -19,7 +19,7 @@ class BlogController extends Controller{
         $thisAdmin = $admin->infoAdmin($_SESSION['mail']);
         $infoAdmin = $thisAdmin->fetch();
             if($infoAdmin['role'] === 1){
-               return $this->viewAdmin("dashboard/parameters", $blog); 
+               return $this->viewAdmin("parameters", $blog); 
             }
             else{ echo "Vous n'avez pas accès à cette page"; }
 
@@ -34,7 +34,7 @@ class BlogController extends Controller{
         $thisAdmin = $admin->infoAdmin($_SESSION['mail']);
         $infoAdmin = $thisAdmin->fetch();
         if($infoAdmin['role'] === 1){
-            return $this->viewAdmin("dashboard/parameters-modify", $blog);
+            return $this->viewAdmin("parameters-modify", $blog);
         }else{ echo "Vous n'avez pas accès à cette page"; }
     }
 

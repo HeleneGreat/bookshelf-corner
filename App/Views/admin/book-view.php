@@ -36,7 +36,7 @@
             <p>Genre : <span class="bold"><?= $datas['category']; ?></span></p>
         </div>
         <div>
-            <p>Article publié le : <?= $datas['created_at']; ?></p>
+            <p>Article publié le : <?= $datas['date']; ?></p>
             <p>Edition : <a href="<?= $datas['linkEdition']; ?>" target="blank"><span class="bold"><?= $datas['edition']; ?></span></a></p>
             <p>Ville de l'intrigue : <span class="bold"><?= $datas['location']; ?></span></p>
         </div>

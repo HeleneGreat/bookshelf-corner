@@ -99,6 +99,7 @@
 
     <?php }}} ?> 
 
+    <!-- FORM ADD A NEW GENRE -->
     <article id="book-form" class="text-center">
         <h2>Ajouter une nouvelle catégorie</h2>
         <form action="indexAdmin.php?action=genreAddPost" method="post" enctype="multipart/form-data">

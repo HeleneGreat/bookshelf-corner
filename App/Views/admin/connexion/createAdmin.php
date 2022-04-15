@@ -1,6 +1,6 @@
-<?php include_once('./App/Views/admin/layouts/header.php'); ?>
+<?php include_once('./App/Views/admin/layouts/head.php'); ?>
 
-<section id="new-admin" class="center">
+<section id="new-admin" class="container text-center">
 
 <h2>Créer un nouvel administrateur</h2>
 
