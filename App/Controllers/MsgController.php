@@ -2,7 +2,7 @@
 
 namespace Projet\Controllers;
 
-use Projet\Forms\UserMessage;
+use Projet\Forms\SubmitMessage;
 
 class MsgController extends Controller{
 
@@ -11,9 +11,9 @@ class MsgController extends Controller{
         $msg = $messages->contactPost($data);
         
         if($msg != NULL){
-            $userMessage = new UserMessage ("success", 'Votre message a bien été envoyé !');
+            $userMessage = new SubmitMessage ("success", 'Votre message a bien été envoyé !');
         } else {
-            $userMessage = new UserMessage ("error", "Votre message n'a pas pu être envoyé. Veuillez réessayer.");
+            $userMessage = new SubmitMessage ("error", "Votre message n'a pas pu être envoyé. Veuillez réessayer.");
         }
         $data["feedback"] = $userMessage->formatedMessage();
         return $this->viewFront("contact", $data);
@@ -25,7 +25,7 @@ class MsgController extends Controller{
         $data = $msg->fetchAll();
         if(isset($_GET['status'])){
             if($_GET['status'] == "success"){
-                $userMessage = new UserMessage ("success", "Le message a bien été supprimé !");
+                $userMessage = new SubmitMessage ("success", "Le message a bien été supprimé !");
                 $data["feedback"] = $userMessage->formatedMessage();
         }}
         return $this->validAccess("messages", $data);

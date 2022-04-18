@@ -2,7 +2,7 @@
 
 namespace Projet\Controllers;
 
-use Projet\Forms\UserMessage;
+use Projet\Forms\SubmitMessage;
 
 class BookController extends Controller{
 
@@ -48,15 +48,15 @@ class BookController extends Controller{
         if(isset($_GET['status'])){
             if($_GET['status'] == "success"){
                 if($_GET['from'] == "add"){
-                    $userMessage = new UserMessage ("success", "Le livre a bien été ajouté !");
+                    $userMessage = new SubmitMessage ("success", "Le livre a bien été ajouté !");
                     $datas["feedback"] = $userMessage->formatedMessage();
                 }
                 elseif($_GET['from'] == "modify"){
-                    $userMessage = new UserMessage ("success", "Le livre a bien été modifié !");
+                    $userMessage = new SubmitMessage ("success", "Le livre a bien été modifié !");
                     $datas["feedback"] = $userMessage->formatedMessage();
                 }
                 elseif($_GET['from'] == "delete"){
-                    $userMessage = new UserMessage ("success", "Le livre a bien été supprimé !");
+                    $userMessage = new SubmitMessage ("success", "Le livre a bien été supprimé !");
                     $datas["feedback"] = $userMessage->formatedMessage();
                 }
             }
@@ -125,7 +125,7 @@ class BookController extends Controller{
         $data = $new->allBooks();
         $datas = $data->fetchAll();
         if(isset($_GET['status'])){
-            $userMessage = new UserMessage ("success", "Le slider a été mis à jour !");
+            $userMessage = new SubmitMessage ("success", "Le slider a été mis à jour !");
             $datas["feedback"] = $userMessage->formatedMessage();
         }
         return $this->validAccess("books-slider", $datas);
@@ -150,15 +150,15 @@ class BookController extends Controller{
         $datas = $data->fetchAll();
         if(isset($_GET['status'])){
             if($_GET['from'] == "add"){
-                $userMessage = new UserMessage ("success", "La catégorie a bien été ajoutée !");
+                $userMessage = new SubmitMessage ("success", "La catégorie a bien été ajoutée !");
                 $datas["feedback"] = $userMessage->formatedMessage();
             }
             elseif($_GET['from'] == "modify"){
-                $userMessage = new UserMessage ("success", "La catégorie a bien été modifiée !");
+                $userMessage = new SubmitMessage ("success", "La catégorie a bien été modifiée !");
                 $datas["feedback"] = $userMessage->formatedMessage();
             }
             elseif($_GET['from'] == "delete"){
-                $userMessage = new UserMessage ("success", "La catégorie a bien été supprimée !");
+                $userMessage = new SubmitMessage ("success", "La catégorie a bien été supprimée !");
                 $datas["feedback"] = $userMessage->formatedMessage();
             }
         }

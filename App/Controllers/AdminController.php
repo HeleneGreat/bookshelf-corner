@@ -2,7 +2,7 @@
 
 namespace Projet\Controllers;
 
-use Projet\Forms\UserMessage;
+use Projet\Forms\SubmitMessage;
 
 class AdminController extends Controller{
 
@@ -136,7 +136,7 @@ class AdminController extends Controller{
         if(isset($_GET['status'])){
             if($_GET['status'] == "error"){
                 if($_GET['from'] == "no-access"){
-                    $userMessage = new UserMessage ("error", "Accès non autorisé !");
+                    $userMessage = new SubmitMessage ("error", "Accès non autorisé !");
                     $datas["feedback"] = $userMessage->formatedMessage();
                 }
             }

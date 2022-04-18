@@ -3,7 +3,10 @@ reset
 GENERAL
 HEADER
 FOOTER
+HOME
+    * CAROUSEL
 ALL BOOKS
+ONE BOOK
 MEDIA QUERIES
 - min-width: 993px
 - min-width: 1201px
@@ -16,14 +19,14 @@ MEDIA QUERIES
 /************** VARIABLES TEMPORAIRES ************/
 
 
-.bg-all{
+.bg-all {
     /* background-color: rgba(230, 230, 230); */
     padding: 20px;
 }
 
 /* utilisé sur les book cards + se connecter */
 button,
-#all-books a.btn-book{
+#all-books a.btn-book {
     background-color: rgb(12, 117, 238);
     color: white;
     border: none;
@@ -33,7 +36,7 @@ button,
 }
 
 button:hover,
-#all-books a.btn-book:hover{
+#all-books a.btn-book:hover {
     cursor: pointer;
     box-shadow: 0 0 9px rgb(184, 184, 184);
 }
@@ -41,50 +44,51 @@ button:hover,
 button:active,
 #all-books a.btn-book:active {
     box-shadow: inset 3px 3px 3px #0041c2,
-                inset -3px -3px 3px rgb(88, 155, 231);
-   }
+        inset -3px -3px 3px rgb(88, 155, 231);
+}
 
 /* *******************/
 /* ----- RESET ----- */
 /* *******************/
-:root{
+:root {
     /* --rouge: #ec4e3d; */
     --rouge: #ee5f4f;
     --background: #dde1e7;
 }
 
-*{
-    padding:0;
-    margin:0;
-    color:rgb(44, 41, 41);
+* {
+    padding: 0;
+    margin: 0;
+    color: rgb(44, 41, 41);
     font-size: 2.5rem;
     font-family: 'Times New Roman', Times, serif;
 }
 
 /* default font-size reduced to 10px to make rem calculs easier*/
-html, body{ 
+html,
+body {
     font-size: 62.5%;
 }
 
-h1{
+h1 {
     font-size: 3.5rem;
     text-align: center;
     margin-bottom: 40px;
 }
 
-h2{
+h2 {
     font-size: 3.3rem;
 }
 
-a{
+a {
     text-decoration: none;
 }
 
-a:hover{
+a:hover {
     color: var(--rouge);
 }
 
-ul{
+ul {
     list-style-type: none;
 }
 
@@ -92,8 +96,8 @@ ul{
     font-family: 'uppereastsideregular';
     src: url('../fonts/UpperEastSide-webfont.eot');
     src: url('../fonts/UpperEastSide-webfont.woff2') format('woff2'),
-         url('../fonts/UpperEastSide-webfont.woff') format('woff'),
-         url('../fonts/UpperEastSide-webfont.ttf') format('ttf');
+        url('../fonts/UpperEastSide-webfont.woff') format('woff'),
+        url('../fonts/UpperEastSide-webfont.ttf') format('ttf');
     font-weight: normal;
     font-style: normal;
 }
@@ -101,49 +105,49 @@ ul{
 /* **************************************** */
 /* ---------------- GENERAL --------------- */
 /* **************************************** */
-.center{
+.center {
     margin: 0 auto;
 }
 
-.text-center{
+.text-center {
     text-align: center;
 }
 
-.flex{
+.flex {
     display: flex;
     flex-wrap: wrap;
 }
 
-.col{
+.col {
     flex-direction: column;
 }
 
-.justify-around{
+.justify-around {
     justify-content: space-around;
 }
 
-.justify-center{
+.justify-center {
     justify-content: center;
 }
 
-.justify-between{
+.justify-between {
     justify-content: space-between;
 }
 
-.justify-end{
+.justify-end {
     justify-content: flex-end;
 }
 
-.align-items-center{
+.align-items-center {
     align-items: center;
 }
 
-.container{
+.container {
     width: 90%;
     margin: 0 auto;
 }
 
-.btn{
+.btn {
     background-color: #ec4e3d;
     border: none;
     color: white;
@@ -153,7 +157,7 @@ ul{
     cursor: pointer;
 }
 
-.btn-small{
+.btn-small {
     background-color: #ec4e3d;
     border: none;
     color: white;
@@ -164,37 +168,37 @@ ul{
 }
 
 .btn:hover,
-.btn-small:hover{
+.btn-small:hover {
     box-shadow: inset 0 0 8px rgb(92, 91, 91);
 }
 
-.lg{
+.lg {
     display: none;
 }
 
-.success{
+.success {
     background-color: rgb(9, 184, 85);
 }
 
-.error{
+.error {
     background-color: var(--rouge);
 }
 
-.success, 
-.error{
+.success,
+.error {
     border-radius: 10px;
 }
 
-.success p, 
-.error p{
+.success p,
+.error p {
     color: white;
     padding: 15px 30px;
     margin-top: 15px;
     margin-bottom: 15px;
 }
 
-.success i, 
-.error i{
+.success i,
+.error i {
     color: white;
     margin-right: 15px;
 }
@@ -202,13 +206,13 @@ ul{
 /* *************************************** */
 /* ---------------- HEADER --------------- */
 /* *************************************** */
-#bandeau{
+#bandeau {
     background-color: var(--rouge);
     padding: 10px 0;
     margin-bottom: 50px;
 }
 
-#bandeau .logo{
+#bandeau .logo {
     width: 70px;
     height: 70px;
     padding: 7px;
@@ -216,13 +220,26 @@ ul{
     border-radius: 100%;
 }
 
-#bandeau h2{
+#bandeau h2 {
     color: white;
     font-size: 50px;
     font-weight: normal;
     letter-spacing: .1rem;
-    font-family:'uppereastsideregular', 'Times New Roman', Times, serif;
+    font-family: 'uppereastsideregular', 'Times New Roman', Times, serif;
+}
 
+#back-to-top {
+    position: fixed;
+    right: 20px;
+    bottom: 50px;
+}
+
+#back-to-top i {
+    border: 1px solid white;
+    border-radius: 50px;
+    color: var(--rouge);
+    background-color: white;
+    font-size: 3rem;
 }
 
 /* *****************/
@@ -230,7 +247,7 @@ ul{
 /* *****************/
 
 #open-menu,
-#close-menu{
+#close-menu {
     cursor: pointer;
     position: relative;
     width: 75px;
@@ -238,22 +255,22 @@ ul{
 }
 
 #open-menu,
-#close-menu{
-position: absolute;
-top: 15px;
-right: 25px;
+#close-menu {
+    position: absolute;
+    top: 15px;
+    right: 25px;
 }
 
 #open-menu:hover,
-#close-menu:hover{
+#close-menu:hover {
     cursor: pointer;
 }
 
-.title{
+.title {
     margin-right: 25%;
 }
 
-#nav-xs{
+#nav-xs {
     position: fixed;
     top: 0;
     left: 0;
@@ -264,7 +281,7 @@ right: 25px;
     transition: all 0.3s ease-in-out;
 }
 
-#nav-xs ul{
+#nav-xs ul {
     justify-content: space-around;
     height: 100%;
 }
@@ -272,12 +289,12 @@ right: 25px;
 #nav-xs li,
 #nav-xs li a,
 #nav-lg li,
-#nav-lg li a{
+#nav-lg li a {
     color: white;
-} 
+}
 
 /* menu mobile qui s'affiche par-dessus l'écran */
-#nav-xs.overlay{
+#nav-xs.overlay {
     visibility: visible;
     opacity: 1;
     width: 100%;
@@ -290,7 +307,7 @@ right: 25px;
 /* *************************************** */
 /* ---------------- FOOTER --------------- */
 /* *************************************** */
-#foot{
+#foot {
     background-color: var(--rouge);
     min-height: 150px;
     margin-top: 50px;
@@ -301,89 +318,130 @@ right: 25px;
 /* ****************************************** */
 
 
-/* **************************** */
-/* ---------- CAROUSEL--------- */
-/* **************************** */
+/* ***************************** */
+/* ---------- CAROUSEL --------- */
+/* ***************************** */
+
 #carousel{
+    width: 90%;
+    height: 350px;
     overflow: hidden;
- }
- 
- #carousel #visible{
-    position: relative;
-    width: 500%;
-    height: 500px;
- }
-#carousel article{
-    width: 200px;
-    height: 300px;
-    float: left;
-    margin: 100px 50px;
 }
 
 #carousel img{
-    width: 100%;
-    height: 100%;
+    width: 200px;
+    height: 300px;
     object-fit: cover;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0 10px;
 }
 
-#carousel article.selected{
-    width: 300px;
-    height: 500px;
+/* The selected image, at the center of the carousel */
+#carousel :nth-child(3){
+    width: 240px;
+    height: 360px;
+}
+
+/* First & last img of the carousel */
+#carousel :nth-child(1),
+#carousel :nth-child(5){
+    width: 150px;
+    height: 220px;
+}
+
+/* if there are other images, there are hidden  */
+#carousel :nth-child(n+6){
+    display: none;
+}
+
+#myCarousel a{
     margin: auto;
 }
 
-
+#myCarousel i{
+    color: var(--rouge);
+    font-size: 6rem;
+}
 
 
 /* ****************************************** */
 /* ---------------- ALL BOOKS --------------- */
 /* ****************************************** */
-#all-books #book-card{
+#all-books #book-card {
     border-radius: 10px;
     height: 475px;
     margin-top: 30px;
     padding: 20px 10px;
     background: #ffffff;
-    box-shadow:  0 0 9px #cac9c9;
+    box-shadow: 0 0 9px #cac9c9;
 }
 
-#all-books h3{
+#all-books h3 {
     height: 60px;
     margin-top: auto;
     margin-bottom: auto;
 }
 
-#all-books #book-card:hover{
-    box-shadow:  0 0 9px #989898;
+#all-books #book-card:hover {
+    box-shadow: 0 0 9px #989898;
 }
 
-#all-books #book-card p{
+#all-books #book-card p {
     margin-top: auto;
     margin-bottom: auto;
 }
 
-#all-books #book-card img{
+#all-books #book-card img {
     width: 80%;
     height: 300px;
     object-fit: cover;
 }
 
-#all-books #book-card button{
+#all-books #book-card button {
     width: fit-content;
 }
+
+/* ****************************************** */
+/* ---------------- ONE BOOKS --------------- */
+/* ****************************************** */
+.content,
+.catchphrase {
+    white-space: pre-line;
+}
+
+#one-book #info-book .cover {
+    width: 100%;
+}
+
+#one-book #info-book .cover img {
+    width: 100%;
+    height: auto;
+}
+
+#one-book #article-book .catchphrase {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+#one-book #article-book .content {
+    white-space: pre-line;
+}
+
 
 /* **************************************** */
 /* ---------------- CONTACT --------------- */
 /* **************************************** */
 #contact-left,
-#contact-right{
+#contact-right {
     width: 100%;
 }
 
-#contact-form select, 
-#contact-form textarea, 
-#contact-form input[type='text'], 
-#contact-form input[type='email']{
+#contact-form select,
+#contact-form textarea,
+#contact-form input[type='text'],
+#contact-form input[type='email'] {
     padding: 10px;
     background-color: #dde1e7;
     border: none;
@@ -392,43 +450,45 @@ right: 25px;
 
 }
 
-select, option{
+select,
+option {
     border: none;
 }
 
 select,
 textarea::placeholder,
-input::placeholder{
+input::placeholder {
     color: #8d8d8d;
 }
 
-#contact-form textarea:focus, 
-#contact-form input[type='text']:focus, 
-#contact-form input[type='email']:focus{
+#contact-form textarea:focus,
+#contact-form input[type='text']:focus,
+#contact-form input[type='email']:focus {
     border: none;
 }
 
 #contact-form textarea,
-#contact-form p{
+#contact-form p {
     margin-top: 30px;
 }
 
-#contact-form textarea{
+#contact-form textarea {
     min-width: 90%;
     max-width: 90%;
-    min-height: 300px; 
+    min-height: 300px;
 }
 
-#contact-form .rgpd{
+#contact-form .rgpd {
     text-align: justify;
 }
-#contact-form .rgpd label{
+
+#contact-form .rgpd label {
     clear: left;
 }
 
 /* radio button */
 input[type="checkbox"],
-input[type="radio"]{
+input[type="radio"] {
     appearance: none;
     background-color: white;
     margin: 0;
@@ -441,41 +501,42 @@ input[type="radio"]{
     place-content: center;
 }
 
-input[type="checkbox"]{
+input[type="checkbox"] {
     margin-right: 60px;
     border-radius: 5px;
     /* float: left; */
     display: inline-grid;
 }
-input[type="radio"]{
-    border-radius: 50%; 
+
+input[type="radio"] {
+    border-radius: 50%;
     margin-right: 60px;
 }
 
 /* before = quand le bouton est coché */
 input[type="checkbox"]::before,
-input[type="radio"]::before{
-content: "";
-width: 0.65em;
-height: 0.65em;
-transform: scale(0);
-box-shadow: inset 1em 1em var(--rouge);
+input[type="radio"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    box-shadow: inset 1em 1em var(--rouge);
 }
 
-input[type="radio"]::before{
-border-radius: 50%;
+input[type="radio"]::before {
+    border-radius: 50%;
 }
 
-input[type="checkbox"]::before{
+input[type="checkbox"]::before {
     border-radius: 2px;
 }
 
-input[type="checkbox"]:checked::before ,
+input[type="checkbox"]:checked::before,
 input[type="radio"]:checked::before {
-transform: scale(1);
+    transform: scale(1);
 }
 
-#send-btn{
+#send-btn {
     width: 60px;
     height: 60px;
     border-radius: 45px;
@@ -487,7 +548,7 @@ transform: scale(1);
     align-items: center;
 }
 
-#send-btn img{
+#send-btn img {
     width: 50%;
     height: 50%;
 }
@@ -502,52 +563,52 @@ transform: scale(1);
 /* ********************/
 /* ----- MEDIUM ----- */
 /* ********************/
-@media screen and (min-width:993px){
- 
-    .container{
+@media screen and (min-width:993px) {
+
+    .container {
         width: 80%;
         margin: 0 auto;
     }
 
-    .success, 
-    .error{
+    .success,
+    .error {
         width: fit-content;
     }
 
-    #bandeau .logo{
+    #bandeau .logo {
         width: 100px;
         height: auto;
         padding: 10px;
     }
 
-    .flex-md{
+    .flex-md {
         display: flex;
         flex-wrap: wrap;
     }
 
-    .justify-between-md{
+    .justify-between-md {
         justify-content: space-between;
     }
-        
+
     /* ****************************************** */
     /* ---------------- ALL BOOKS --------------- */
     /* ****************************************** */
-    #all-books #book-card{
+    #all-books #book-card {
         width: 250px;
     }
 
 
-    #contact-form textarea{
+    #contact-form textarea {
         min-width: 96%;
         max-width: 96%;
-        min-height: 440px; 
+        min-height: 440px;
     }
 
-    #contact-form #contact-left{
+    #contact-form #contact-left {
         width: 35%;
     }
 
-    #contact-form #contact-right{
+    #contact-form #contact-right {
         width: 60%;
     }
 }
@@ -557,78 +618,91 @@ transform: scale(1);
 /* *******************/
 /* ----- LARGE ----- */
 /* *******************/
-@media screen and (min-width:1201px){
-    
-    .flex-lg{
+@media screen and (min-width:1201px) {
+
+    .flex-lg {
         display: flex;
         flex-wrap: wrap;
     }
 
-    .justify-around-lg{
+    .justify-around-lg {
         justify-content: space-around;
     }
 
-    .justify-between-lg{
+    .justify-between-lg {
         justify-content: space-between;
     }
 
-    .justify-end-lg{
+    .justify-end-lg {
         justify-content: flex-end;
     }
 
-    .container{
+    .container {
         width: 1200px;
         margin: 0 auto;
     }
 
-    .success, 
-    .error{
+    .success,
+    .error {
         width: fit-content;
     }
-    
-    .mobile{
+
+    .mobile {
         display: none;
     }
 
-    #bandeau h2{
+    #bandeau h2 {
         margin-bottom: 20px;
     }
 
-    #nav-lg a{
+    #nav-lg a {
         letter-spacing: 0.1rem;
     }
 
     #open-menu:hover,
-    #close-menu:hover{
-        cursor:default;
+    #close-menu:hover {
+        cursor: default;
     }
 
-    .lg{
+    .lg {
         display: block;
     }
 
-    .head-lg{
+    .head-lg {
         width: 85%;
     }
 
-    .head-lg a{
+    .head-lg a {
         color: white;
         /* font-size: 1.3rem; */
     }
 
-    .head-lg h2{
+    .head-lg h2 {
         color: white;
         font-size: 85px;
     }
 
-    .title-lg{
+    .title-lg {
         width: 85%;
         align-self: flex-end;
     }
 
-    #send-btn{
+    #send-btn {
         display: none;
     }
 
+
+    /* ****************************************** */
+    /* ---------------- ONE BOOKS --------------- */
+    /* ****************************************** */
+    #one-book #info-book .cover {
+        width: 300px;
+        height: 430px;
+    }
+
+    #one-book #info-book .cover img {
+        width: 100%;
+        height: auto;
+    }
 
 }

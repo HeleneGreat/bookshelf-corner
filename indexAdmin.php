@@ -6,7 +6,7 @@ session_start();
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-require_once('./App/class/UserMessage.php');
+require_once('./App/form/SubmitMessage.php');
 
 try{
 

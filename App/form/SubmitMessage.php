@@ -2,7 +2,7 @@
 
 namespace Projet\Forms;
 
-class UserMessage{
+class SubmitMessage{
 
     private string $code;
     private string $message;

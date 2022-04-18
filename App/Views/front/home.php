@@ -2,22 +2,32 @@
 <?php include_once('layouts/header.php'); ?>
 
 
-<section id="carousel" class="container">
-<div id="visible">
 
-<?php
-$first = true;
-foreach($datas as $data){
-    if($data["slider"] == 1){?>
-    <article class="<?php if($first) { echo 'selected';}; ?>" id="slider-item-<?=$data['id']?>" onclick="selected(<?=$data['id']?>)">
-        <img src="./App/Public/Books/images/<?= $data['picture']; ?>" alt="">
-    </article>
-    <?php $first = false; ?>
 
-<?php }}; ?>
-  
+
+<section id="myCarousel" class="container flex justify-between">
+        <a href="/" id="prev"><i class="fa-solid fa-chevron-left"></i></a>
+
+    <div id="carousel" class="text-center">
+
+        <?php  foreach($datas as $data) { 
+            if($data['slider'] == 1){ ?>
+            <a href="" title="<?= $data['title']; ?>">
+                <img src="./App/Public/Books/images/<?= $data['picture']; ?>" />
+            </a>
+        <?php }}; ?>
+
     </div>
+        <a href="/" id="next"><i class="fa-solid fa-chevron-right"></i></a>
+
+    <!-- <div id="controllers" >
+        <a href="/" id="prev"><i class="fa-solid fa-chevron-left"></i></a>
+        <a href="/" id="next"><i class="fa-solid fa-chevron-right"></i></a>
+    </div> -->
 </section>
+
+
+
 
 
 <section class="container">

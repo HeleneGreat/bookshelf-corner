@@ -212,6 +212,7 @@ ul{
     display: block;
 }
 
+
 /* ****************************/
 /* ----- NAV - ANIMATION----- */
 /* ****************************/
@@ -609,6 +610,11 @@ a.btn:hover{
 /* ************************************** */
 /* ------- LIVRE + MESSAGE - VIEW ------- */
 /* ************************************** */
+.content,
+.catchphrase{
+    white-space: pre-line;
+}
+
 #one-message,
 #one-book{
     margin-top: 30px;

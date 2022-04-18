@@ -68,6 +68,11 @@
 
 <main>
 
+<!-- Button back to top of the page -->
+<div id="back-to-top">
+    <a href="#bandeau" title="Retour en haut de la page"><i class="fa-solid fa-circle-chevron-up"></i></a>
+</div>
+
 <?php if(isset($datas['feedback'])) {;?>
     <div class="center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
 <?php }; ?>
