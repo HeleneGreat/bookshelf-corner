@@ -45,6 +45,7 @@ class AdminController extends Controller{
         $_SESSION['mdp'] = $result['mdp'];
         $_SESSION['pseudo'] = $result['pseudo'];
         $_SESSION['picture'] = $result['picture'];
+        $_SESSION['role'] = $result['role'];
 
         if ($isPasswordCorrect){
             header('Location: indexAdmin.php?action=dashboard');

@@ -43,8 +43,6 @@ class BookController extends Controller{
         $new = new \Projet\Models\BookModel();
         $data = $new->allBooks();
         $datas = $data->fetchAll();
-        
-        // var_dump($datas);die;
         if(isset($_GET['status'])){
             if($_GET['status'] == "success"){
                 if($_GET['from'] == "add"){
@@ -215,9 +213,17 @@ class BookController extends Controller{
     }
 
     function oneBook($id){
-        $new = new \Projet\Models\BookModel();
-        $data = $new->singleBook($id);
-        $datas = $data->fetch();
+        $newFirst = new \Projet\Models\BookModel();
+        $dataFirst = $newFirst->singleBook($id);
+        $datasFirst = $dataFirst->fetch();
+
+        $newSecond = new \Projet\Models\CommentModel();
+        $dataSecond = $newSecond->allBookComments($id);
+        $datasSecond = $dataSecond->fetchAll();
+        $datas = [
+            "book" => $datasFirst,
+            "comments" => $datasSecond            
+        ];
         return $this->viewFront("one-book", $datas);
     }
 

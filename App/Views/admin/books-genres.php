@@ -18,9 +18,8 @@
                     <p class="list-title"><?= $data['category']; ?></p>
                 </div>
                 <div class="flex cat-link">
-                    <a title="Modifier la catégorie" onclick="genreModify(<?= $data['id']; ?>)"><i class="fa-solid fa-pencil"></i></a>
-                    <button title="Supprimer la catégorie" id="btn-delete-<?= $data['id']; ?>" onclick="modalDelete(<?= $data['id']; ?>)"><a><i class="fa-regular fa-trash-can"></i></a></button>
-                    <!-- <a href="indexAdmin.php?action=genreDelete&id=<?= $data['id']; ?>"><i class="fa-regular fa-trash-can"></i></a> -->
+                    <a id="modify-<?= $data['id']; ?>" title="Modifier la catégorie" class="modify-this"><i class="fa-solid fa-pencil"></i></a>
+                    <button title="Supprimer la catégorie" id="btn-delete-<?= $data['id']; ?>" class="btn-delete-this"><a><i class="fa-regular fa-trash-can"></i></a></button>
                 </div>
             </div>
             <!-- FORM MODIFY GENRE -->
@@ -39,13 +38,13 @@
           <!-- DELETE CONFIRMATION MODAL FOR GENRES -->
           <div id="myModal<?= $data['id']; ?>" class="modal display-none">
             <div class="modal-content text-center">
-                <span class="close bold" onclick="modalClose(<?= $data['id']; ?>)">X</span>
+                <span id="closing-<?= $data['id']; ?>" class="closing close bold">X</span>
                 <p><i class="fa-solid fa-trash-can"></i></p>
                 <p class="bold">Demande de confirmation</p>
                 <p>Êtes-vous sûr de vouloir supprimer ce genre littéraire :</p>
                 <p><span class="italic"><?= $data['category']; ?></span> ?</p>
                 <div class="flex justify-center">
-                    <a class="btn center" title="Retour" onclick="modalClose(<?= $data['id']; ?>)">Annuler</a>
+                    <a id="cancel-<?= $data['id']; ?>" class="cancel btn center" title="Retour">Annuler</a>
                     <a href="indexAdmin.php?action=genreDelete&id=<?= $data['id'];?>" title="Supprimer ce genre" class="btn center">Supprimer</a>
                 </div>
             </div>

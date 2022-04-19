@@ -32,7 +32,9 @@
         </ul>
         <ul><h3>Profil</h3>
             <li><a href="indexAdmin.php?action=account" title="Paramètres du compte"><i class="fas fa-user"></i> Mon compte</a></li>
+        <?php if($_SESSION['role'] == 1){ ?>
             <li><a href="indexAdmin.php?action=blogParameters" title="Paramètres du blog"><i class="fa-solid fa-gear"></i> Paramètres du site</a></li>
+        <?php };?>
             <li><a class="disconnect" href="indexAdmin.php?action=disconnect" title="Se déconnecter"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a></li>
         </ul>
     </nav>

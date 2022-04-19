@@ -27,12 +27,13 @@ class MsgModel extends Manager{
 
     public function singleMessage($id){
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('SELECT id, gender, familyname, firstname, DATE_FORMAT(send_at, "%d/%m/%Y à %kh%i") AS send_at, email, object, message FROM messages where id = ?');
+        $req = $bdd->prepare('SELECT id, gender, familyname, firstname, DATE_FORMAT(send_at, "%d/%m/%Y à %kh%i") AS send_at, email, object, message FROM messages WHERE id = ?');
         $req->execute(array($id));
         return $req;
     }
 
-    public function sendmessagePost($data){
+    // TODO : function non utilisée à supprimer ?
+    public function sendMessagePost($data){
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('INSERT INTO messages(gender, familyname, firstname, email, object, message) VALUES (:gender, :familyname, :firstname, :email, :object, :message');
         $req->execute(array($data));

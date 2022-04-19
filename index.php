@@ -14,6 +14,8 @@ try{
 
     $bookController = new \Projet\Controllers\BookController();
 
+    $commentController = new \Projet\Controllers\CommentController();
+
     $messageController = new \Projet\Controllers\MsgController();
 
     
@@ -50,6 +52,16 @@ try{
                 ':message' => htmlspecialchars($_POST['message'])
             ];
             $messageController->contactPost($data);
+        }
+
+        elseif($_GET['action'] == 'commentPost'){
+            $data = [
+                ':user_id' => 1,
+                ':book_id' => 13,
+                ':title' => htmlspecialchars(($_POST['title'])),
+                ':content' => htmlspecialchars(($_POST['content']))
+            ];
+            $commentController->commentPost($data);
         }
 
     }

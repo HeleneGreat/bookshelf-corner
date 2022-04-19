@@ -16,6 +16,8 @@ try{
 
     $blogController = new \Projet\Controllers\BlogController();
 
+    $commentController = new \Projet\Controllers\CommentController();
+
     $messageController = new \Projet\Controllers\MsgController();
 
 
@@ -319,7 +321,7 @@ try{
         /*********************** COMMENTS ***********************/
         /********************************************************/
         elseif($_GET['action'] == "comments"){
-            $adminController->comments();
+            $commentController->allComments();
         }   
 
 
@@ -331,7 +333,7 @@ try{
             $messageController->allMessages();
         }
 
-        elseif($_GET['action'] == "messageview"){
+        elseif($_GET['action'] == "messageView"){
             $id = $_GET['id'];
             $messageController->viewMessage($id);
         }   
@@ -364,5 +366,6 @@ catch (Exception $e){
 }
 
 catch (Error $e){
+    // TODO : add message d'erreur
     return $this->validAccess('error');
 }

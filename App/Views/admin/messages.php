@@ -17,21 +17,21 @@
                 <p class="object"><?= $msg['object']; ?></p>
             </div>
             <div class="flex message-link">
-                <a title="Lire ce message" href="indexAdmin.php?action=messageview&id=<?=$msg['id']; ?>" class="stretched-link"><i class="fa-solid fa-eye"></i></a>
-                <button title="Supprimer ce message" id="btn-delete-<?= $msg['id']; ?>" onclick="modalDelete(<?= $msg['id']; ?>)"><a><i class="fa-regular fa-trash-can lg"></i></a></button>
+                <a title="Lire ce message" href="indexAdmin.php?action=messageView&id=<?=$msg['id']; ?>" class="stretched-link"><i class="fa-solid fa-eye"></i></a>
+                <button title="Supprimer ce message" id="btn-delete-<?= $msg['id']; ?>" class="btn-delete-this"><a><i class="fa-regular fa-trash-can lg"></i></a></button>
             </div>
         </article>
         
           <!-- DELETE CONFIRMATION MODAL FOR MESSAGES -->
           <div id="myModal<?= $msg['id']; ?>" class="modal display-none">
             <div class="modal-content text-center">
-                <span class="close bold" onclick="modalClose(<?= $msg['id']; ?>)">X</span>
+                <span id="closing-<?= $msg['id']; ?>" class="closing close bold">X</span>
                 <p><i class="fa-solid fa-trash-can"></i></p>
                 <p class="bold">Demande de confirmation</p>
                 <p>Êtes-vous sûr de vouloir supprimer ce messages de :</p>
                 <p><span class="italic"><?= $msg['firstname']; $msg['familyname']; ?></span> ?</p>
                 <div class="flex justify-center">
-                    <a class="btn center" title="Retour" onclick="modalClose(<?= $msg['id']; ?>)">Annuler</a>
+                    <a id="cancel-<?= $msg['id']; ?>" class="cancel btn center" title="Retour">Annuler</a>
                     <a href="indexAdmin.php?action=messageDelete&id=<?= $msg['id'];?>" title="Supprimer ce message" class="btn center">Supprimer</a>
                 </div>
             </div>
