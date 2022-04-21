@@ -74,10 +74,37 @@ class BookController extends Controller{
         return "no-cover.png";
     }
 
-    function addLivrePost($data){
+    function addLivrePost($Post, $Files){
         $new = new \Projet\Models\BookModel();
-        $datas = $new->addSingleBook($data);
-        header('Location: indexAdmin.php?action=livres&status=success&from=add');
+        $data = [
+            ':newTitle' => htmlspecialchars( $Post['newTitle']),
+            ':newAuthor' => htmlspecialchars($Post['newAuthor']),
+            ':newYear_publication' => htmlspecialchars($Post['newYear_publication']),
+            ':newGenre' => htmlspecialchars($Post['newGenre']),
+            ':newEdition' => htmlspecialchars($Post['newEdition']),
+            ':newLinkEdition' => htmlspecialchars($Post['newLinkEdition']),
+            ':newLocation' => htmlspecialchars($Post['newLocation']),
+            ':newCatchphrase' => htmlspecialchars($Post['newCatchphrase']),
+            ':newContent' => htmlspecialchars($Post['newContent']),
+            ':newNotation' => htmlspecialchars($Post['newNotation'])
+        ];
+        $new->addSingleBook($data);
+        // Get book ID
+        $book = new \Projet\Models\BookModel();
+        $infoBook = $book->getId("books", "title", $data[':newTitle']);
+        $idBook = $infoBook->fetch();
+        $purpose = "book";
+        $folder = "Books";
+        if($Files['picture']['name'] !== ""){
+            $fileName = $this->verifyFiles($purpose, $folder, $idBook['id']);
+        } else{
+            $fileName = $this->noCover();
+        }
+        $data = [
+            ":id" => $idBook['id'],
+            ":picture" => $fileName
+        ];
+        $this->updatePicture($data, 'books');
     }
 
     function viewLivre($id){
@@ -102,8 +129,30 @@ class BookController extends Controller{
         return $this->validAccess("book-modify", $datas);
     }
 
-    function modifyLivrePost($data){
+    function modifyLivrePost($id, $Post, $Files){
         $new = new \Projet\Models\BookModel();
+        $purpose = "book";
+        $folder = "Books";
+        if(!empty($Files) && $Files['picture']['name'] !== ""){
+            $fileName = $this->verifyFiles($purpose, $folder, $id);
+        } else{
+            $fileName = $this->infoLivre($id)['picture'];
+        }
+        $data = [
+            ':id' => $_GET['id'],
+            ':newTitle' => htmlspecialchars($Post['newTitle']),
+            ':newAuthor' => htmlspecialchars($Post['newAuthor']),
+            ':newYear_publication' => htmlspecialchars($Post['newYear_publication']),
+            ':newGenre' => htmlspecialchars($Post['newGenre']),
+            ':newEdition' => htmlspecialchars($Post['newEdition']),
+            ':newLinkEdition' => htmlspecialchars($Post['newLinkEdition']),
+            ':newLocation' => htmlspecialchars($Post['newLocation']),
+            ':newCatchphrase' => htmlspecialchars($Post['newCatchphrase']),
+            ':newContent' => htmlspecialchars($Post['newContent']),
+            ':picture' => $fileName,
+            ':newNotation' => htmlspecialchars($Post['newNotation'])
+        ];
+
         $datas = $new->modifySingleBook($data);
         header('Location: indexAdmin.php?action=livres&status=success&from=modify');
     }
@@ -174,14 +223,42 @@ class BookController extends Controller{
         return $this->validAccess("books-genres", $datas);
     }
 
-    function genreAddPost($data){
+    function genreAddPost($Post, $Files){
         $new = new \Projet\Models\BookModel();
-        $datas = $new->genreAddPost($data);
-        header('Location: indexAdmin.php?action=livres-genres&status=success&from=add');
+        $data = [':newType' => htmlspecialchars($Post['newType'])];
+        $new->genreAddPost($data);
+        // Get book ID
+        $genre = new \Projet\Models\BookModel();
+        $infoGenre = $genre->getId("genres", "category", $data[':newType']);
+        $idGenre = $infoGenre->fetch();
+        $purpose = "genre";
+        $folder = "Books";
+        if($Files['picture']['name'] !== ""){
+            $fileName = $this->verifyFiles($purpose, $folder, $idGenre['id']);
+        } else{
+            $fileName = $this->noIcon();
+        }
+        $data = [
+            ":id" => $idGenre['id'],
+            ":picture" => $fileName
+        ];
+        $this->updatePicture($data, 'genres');
     }
 
-    function genreModifyPost($data){
+    function genreModifyPost($id, $Post, $Files){
         $new = new \Projet\Models\BookModel(); 
+        $purpose = "genre";
+        $folder = "Books";
+        if(!empty($Files) && $Files['picture']['name'] !== ""){
+            $fileName = $this->verifyFiles($purpose, $folder, $id);
+        } else{
+            $fileName = $this->infoGenre($id)['picture'];
+        }
+        $data = [
+            ':id' => $id,
+            ':newType' => htmlspecialchars($Post['newType']),
+            ':picture' => $fileName
+        ];
         $datas = $new->genreModifyPost($data);
         header('Location: indexAdmin.php?action=livres-genres&status=success&from=modify');
     }

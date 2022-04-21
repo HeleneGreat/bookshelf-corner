@@ -13,7 +13,7 @@
             <div class="flex">
                 <div class="flex">
                     <div class="cat-img text-center">
-                        <img src="./App/Public/Books/images/<?= $data['icon']; ?>" alt="Genre : <?= $data['category']; ?>">
+                        <img src="./App/Public/Books/images/<?= $data['picture']; ?>" alt="Genre : <?= $data['category']; ?>">
                     </div>
                     <p class="list-title"><?= $data['category']; ?></p>
                 </div>

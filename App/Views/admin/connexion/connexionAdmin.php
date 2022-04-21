@@ -1,4 +1,9 @@
 <?php include_once('./App/Views/admin/layouts/head.php');?>
+  
+ <!-- Div for error management -->
+ <?php if(isset($datas['feedback'])) {;?>
+    <div class="center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
+<?php }; ?>
 
 <section id="admin-connexion" class="container text-center">
 

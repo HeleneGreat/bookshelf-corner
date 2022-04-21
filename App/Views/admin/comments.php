@@ -1,6 +1,4 @@
-<?php include_once('./App/Views/admin/layouts/header.php');
-// var_dump($datas); die;
-?>
+<?php include_once('./App/Views/admin/layouts/header.php');?>
 
 
 <section id="all-comments">

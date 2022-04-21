@@ -12,47 +12,59 @@ class Controller{
         include('./App/Views/admin/' . $viewName . '.php');
     }
 
-    function verifyFiles($purpose, $folder){
+    protected function validAccess($path, $data = []){
+        if (!empty($_SESSION)){
+            if($_SESSION['mail'] != null){
+                return $this->viewAdmin($path, $data);
+            }else{
+                header('Location: indexAdmin.php?action=error&status=error&from=no-access');
+            }
+        }else{ 
+            header('Location: indexAdmin.php?action=error&status=error&from=no-access');
+        }
+    }
+
+    function verifyFiles($purpose, $folder, $id){
         if(isset($_FILES['picture'])){
             $tmpName = $_FILES['picture']['tmp_name'];
             $name = $_FILES['picture']['name'];
             $size = $_FILES['picture']['size'];
             $error = $_FILES['picture']['error'];
         };
-        
         // Get the file extension
         $tabExtension = explode('.', $name);
         $extension = strtolower(end($tabExtension));
-
         // Extensions accepted
         $extensions = ['jpg', 'png', 'jpeg', 'gif', 'webp'];
-
-        // Max size accepted in octet (8000000 octets = 8 Mo)
-        $maxSize = 8000000;
-
+        // Max size accepted in octet (2000000 octets = 2 Mo)
+        $maxSize = 2000000;
         if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
-            date_default_timezone_set("Europe/Paris");
-            // Files are renamed like this example : "logo_2022-03-29_16-25-36.png"
-            $fileName = $purpose . "_" . date("Y-m-d_H-i-s") . "." . $extension;
-            // Files are saved in the App
+            // Files are renamed like this example : "admin_22.png"
+            $fileName = $purpose . "_" . $id . "." . $extension;
+            // Files are saved in the App folders
             move_uploaded_file($tmpName, "./App/Public/$folder/images/" . $fileName);
             return $fileName;
         }
+        else { echo "Une erreur est survenue. Vous devez ajouter une image de profil. La taille du fichier est limitée à 2 Mo. "; }
+    }
 
-        else if($error == 1) { 
-            echo "La taille du fichier est trop grande"; }
-        else if($error == 2) { 
-            echo "La taille du fichier est trop grande"; }
-        else if($error == 3) { 
-            echo "Téléchargement du fichier incomplet"; }
-        else if($error == 4) { 
-            echo "Aucun fichier téléchargé"; }
-        else if($error == 6) { 
-            echo "Il manque un fichier temporaire"; }
-        else if($error == 7) { 
-            echo "Impossible d'enregistrer le fichier"; }
-        else if($error == 8) { 
-            echo "Une extension PHP a empêché le téléchargement du fichier"; }
+    // After creation in BDD, update the BDD with the picture name
+    function updatePicture($data, $table){
+        if($table === 'administrators'){
+            $new = new \Projet\Models\AdminModel();
+            $datas = $new->updatePicture($data, $table); 
+            header('Location: indexAdmin.php?action=connexionAdmin&status=success&from=create');
+        }
+        if($table === 'books'){
+            $new = new \Projet\Models\BookModel(); 
+            $datas = $new->updatePicture($data, $table); 
+            header('Location: indexAdmin.php?action=livres&status=success&from=add');
+        }
+        if($table === 'genres'){
+            $new = new \Projet\Models\BookModel(); 
+            $datas = $new->updatePicture($data, $table);
+            header('Location: indexAdmin.php?action=livres-genres&status=success&from=add');
+        }       
     }
 
     function checkForDuplicate($table, $newName){
@@ -92,15 +104,5 @@ class Controller{
     }
 
 
-    protected function validAccess($path, $data = []){
-        if (!empty($_SESSION)){
-            if($_SESSION['mail'] != null){
-                return $this->viewAdmin($path, $data);
-            }else{
-                header('Location: indexAdmin.php?action=error&status=error&from=no-access');
-            }
-        }else{ 
-            header('Location: indexAdmin.php?action=error&status=error&from=no-access');
-        }
-    }
+    
 }

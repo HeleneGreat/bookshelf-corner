@@ -16,10 +16,10 @@ class AdminModel extends Manager{
     /******************* ADMIN CONNECTION *******************/
     /********************************************************/
 
-    public static function createAdmin ($pseudo, $mail, $mdp, $fileName){
+    public static function createAdmin ($data){
         $bdd = self::dbConnect();
-        $req = $bdd->prepare('INSERT INTO administrators(pseudo, mail, mdp, picture) VALUE(?, ?, ?, ?)');
-        $req->execute(array($pseudo, $mail, $mdp, $fileName));
+        $req = $bdd->prepare('INSERT INTO administrators(pseudo, mail, mdp) VALUE(:pseudo, :mail, :mdp)');
+        $req->execute($data);
         return $req;
     }
 

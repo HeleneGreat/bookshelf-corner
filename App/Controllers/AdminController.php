@@ -14,39 +14,70 @@ class AdminController extends Controller{
         return $this->viewAdmin("connexion/createAdmin");
     }
 
-    // Formulaire de création d'un compte ADMIN :
-    function createAdminPost ($pseudo, $mail, $mdp, $fileName){
-        $createAdmin = new \Projet\Models\AdminModel;#($data=[]);
-
-        if(filter_var($mail, FILTER_VALIDATE_EMAIL)){
-            $email = $createAdmin->createAdmin($pseudo, $mail, $mdp, $fileName);
-            return $this->viewAdmin("connexion/confirmeCreation");
+    function createAdminPost ($Post, $Files){
+        $createAdmin = new \Projet\Models\AdminModel;
+        $pseudo = htmlspecialchars($Post['adminPseudo']);
+        $mail = htmlspecialchars($Post['adminMail']);
+        $pass = htmlspecialchars($Post['adminMdp']);
+        $mdp = password_hash($pass, PASSWORD_DEFAULT);
+        $picture = $Files['picture']['name'];
+        $data = [
+            ':pseudo' => $pseudo,
+            ':mail' => $mail,
+            ':mdp' => $mdp,
+        ];
+        if(!empty($pseudo) && (!empty($mail) && (!empty($mdp) && (!empty($picture))))){
+            if(filter_var($mail, FILTER_VALIDATE_EMAIL)){
+                // create admin in BDD
+                $createAdmin->createAdmin($data);
+                // Get his ID
+                $user = new \Projet\Models\AdminModel;
+                $admin = $user->getId("administrators", "mail", $mail);
+                $idAdmin = $admin->fetch();
+                // Second: save his picture
+                $purpose = "admin";
+                $folder = "Admin";
+                $fileName = $this->verifyFiles($purpose, $folder, $idAdmin['id']);
+                // Third: update BDD with new picture name
+                $data = [
+                    "id" => $idAdmin['id'],
+                    "picture" => $fileName
+                ];
+                $this->updatePicture($data, 'administrators');
+            }
         }
         else{
-            // header('Location: App/Views/admin/error.php');
-            echo "bug";
+            $userMessage = new SubmitMessage ("error", "Tous les champs doivent être remplis !");
+            $data["feedback"] = $userMessage->formatedMessage();
+            return $this->viewFront("error", $data);
         }
     }
 
     function connexionAdmin(){
-        return $this->viewAdmin("connexion/connexionAdmin");
+        $datas=[];
+        if(isset($_GET['status'])){
+            if($_GET['status'] == "success"){
+                if($_GET['from'] == "create"){
+                    $userMessage = new SubmitMessage ("success", "Le compte administrateur a bien été créé !");
+                    $datas["feedback"] = $userMessage->formatedMessage();
+                }
+            }
+        }
+        return $this->viewAdmin("connexion/connexionAdmin", $datas);
     }
 
     function connexionAdminPost($mail, $mdp){
         // récupérer le mdp
         $user = new \Projet\Models\AdminModel();
         $connexAdmin = $user->infoAdmin($mail);
-
         $result = $connexAdmin->fetch();
-
         $isPasswordCorrect = password_verify($mdp, $result['mdp']);
-
+        $_SESSION['id'] = $result['id'];
         $_SESSION['mail'] = $result['mail'];
         $_SESSION['mdp'] = $result['mdp'];
         $_SESSION['pseudo'] = $result['pseudo'];
         $_SESSION['picture'] = $result['picture'];
         $_SESSION['role'] = $result['role'];
-
         if ($isPasswordCorrect){
             header('Location: indexAdmin.php?action=dashboard');
         }
@@ -80,17 +111,11 @@ class AdminController extends Controller{
         return $this->validAccess("comments");
     }
 
-
-
-   
-
-
-
     /*********************************************************/
     /********************* ADMIN ACCOUNT *********************/
     /*********************************************************/
-    function infoAdmin(){
-        $mail = $_SESSION['mail'];
+    function infoAdmin($email = NULL){
+        if(isset($email)){$mail = $email;} else{ $mail = $_SESSION['mail'];};
         $user = new \Projet\Models\AdminModel();
         $admin = $user->infoAdmin($mail);
         $infoAdmin = $admin->fetch();
@@ -113,25 +138,52 @@ class AdminController extends Controller{
         $this->validAccess("account-modify", $infoAdmin);
     }
 
-    function accountModifyPost($data){
+    function accountModifyPost($Post, $Files){
         $admin = new \Projet\Models\AdminModel();
+        $id = $_SESSION['id'];
+        $purpose = "admin";
+        $folder = "Admin";
+        // Check if there is a new picture uploaded
+        if($Files['picture']['name'] !== ""){
+            $fileName = $this->verifyFiles($purpose, $folder, $id);
+        } else{
+            $fileName = $_SESSION['picture'] ;
+        }
+        // Psw update
+        if(!empty($Post['newAdminPsw'])){
+            // Check if actual psw is correct
+            $actualAdminPsw = htmlspecialchars($Post['actualAdminPsw']);
+            $getInfo = $this->infoAdmin();    
+            $isPasswordCorrect = password_verify($actualAdminPsw, $getInfo['mdp']);
+            if ($isPasswordCorrect){
+                $newPsw = $Post['newAdminPsw'];
+                $newMdp = password_hash($newPsw, PASSWORD_DEFAULT);                    
+            }
+            else{
+                echo "Mot de passe incorrect";
+                $this->accountModify(); 
+            }
+        }
+        // Update the $_SESSION information with this update
+        $_SESSION['pseudo'] = htmlspecialchars($Post['newPseudo']);
+        $_SESSION['mail'] = htmlspecialchars($Post['newMail']);
+        $_SESSION['picture'] = $fileName;
+        // Update the DBB 
+        $data = [
+            ':id' => $id,
+            ':picture' => $fileName,
+            ':newPseudo' => htmlspecialchars($Post['newPseudo']),
+            ':newMail' => htmlspecialchars($Post['newMail']),
+            ':newAdminPsw' => $newMdp
+        ];
+
         $infoAdmin = $admin->modifyAccountPost($data);
         header('Location: indexAdmin.php?action=account');
     }
 
-
-    /*********************************************************/
-    /******************** BLOG PARAMETERS ********************/
-    /*********************************************************/
-    
-
-
-    function blogModifyPost($data){
-        $user = new \Projet\Models\AdminModel();
-        $blogs = $user->blogModifyPost($data);
-        header('Location: indexAdmin.php?action=blogParameters');
-    }
-
+    /**********************************************************/
+    /******************** ERROR MANAGEMENT ********************/
+    /**********************************************************/
     function error(){
         $datas = [];
         if(isset($_GET['status'])){
@@ -145,5 +197,4 @@ class AdminController extends Controller{
         return $this->viewAdmin("error", $datas);
     }
     
-
 }
