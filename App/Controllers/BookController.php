@@ -139,7 +139,7 @@ class BookController extends Controller{
             $fileName = $this->infoLivre($id)['picture'];
         }
         $data = [
-            ':id' => $_GET['id'],
+            ':id' => $id,
             ':newTitle' => htmlspecialchars($Post['newTitle']),
             ':newAuthor' => htmlspecialchars($Post['newAuthor']),
             ':newYear_publication' => htmlspecialchars($Post['newYear_publication']),
@@ -254,9 +254,15 @@ class BookController extends Controller{
         } else{
             $fileName = $this->infoGenre($id)['picture'];
         }
+        if($Post['newType'] != ""){
+            $newType = htmlspecialchars($Post['newType']);
+        }
+        else{
+            $newType = $this->infoGenre($id)['category'];
+        }
         $data = [
             ':id' => $id,
-            ':newType' => htmlspecialchars($Post['newType']),
+            ':newType' => $newType,
             ':picture' => $fileName
         ];
         $datas = $new->genreModifyPost($data);

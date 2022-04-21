@@ -28,7 +28,7 @@
                     <img src="./App/Public/Admin/images/picture.png" alt="Ajouter une icône" title="Ajouter une icône">
                     <input type="file" name="picture" id="inputImg<?= $data['id']; ?>" accept="image/*">
                 </label>
-                <p><input type="text" name="newType" id="newType" placeholder="Nouveau titre de genre"></p>
+                <p><input type="text" name="newType" id="newType" value="<?= $data['category']; ?>"></p>
                 <div class="cat-submit">
                     <p><input type="submit" value="Modifier"></p>
                 </div>
