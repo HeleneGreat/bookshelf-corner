@@ -110,20 +110,6 @@ try{
         elseif ($_GET['action'] == "genreModifyPost"){
             $id = $_GET['id'];
             $bookController->genreModifyPost($id, $_POST, $_FILES);
-            // unique name
-            // if(!empty($_POST['newType'])){
-            //     $newName = $bookController->checkForDuplicate("genres", htmlspecialchars( $_POST['newType']));
-            //     if($newName == false){
-            //         $genreName = htmlspecialchars( $_POST['newType']);
-            //     }
-            //     else{ 
-            //         $bookController->livresGenres();
-            //        }
-            // } else{
-            //     $genreName = $bookController->infoGenre($id)['category'];
-            // }
-            // Données issues du formulaire
-            
         }  
 
         elseif ($_GET['action'] == "genreDelete"){

@@ -44,7 +44,6 @@ class BookController extends Controller{
         $data = $new->allBooks();
         $datas = $data->fetchAll();
         if(isset($_GET['status'])){
-            if($_GET['status'] == "success"){
                 if($_GET['from'] == "add"){
                     $userMessage = new SubmitMessage ("success", "Le livre a bien été ajouté !");
                     $datas["feedback"] = $userMessage->formatedMessage();
@@ -57,7 +56,10 @@ class BookController extends Controller{
                     $userMessage = new SubmitMessage ("success", "Le livre a bien été supprimé !");
                     $datas["feedback"] = $userMessage->formatedMessage();
                 }
-            }
+                elseif($_GET['from'] == "duplicate"){
+                    $userMessage = new SubmitMessage ("error", "Ce livre existe déjà !");
+                    $datas["feedback"] = $userMessage->formatedMessage();
+                }
         }
         return $this->validAccess("books-all", $datas);
     }
@@ -138,9 +140,20 @@ class BookController extends Controller{
         } else{
             $fileName = $this->infoLivre($id)['picture'];
         }
+         // unique book name
+        if(!empty($Post['newTitle'])){
+            if($Post['newTitle'] != ""){
+                $newName = $this->checkForDuplicate("books", htmlspecialchars($Post['newTitle']));
+                if($newName == "nameOk"){
+                    $bookName = htmlspecialchars($Post['newTitle']);
+                }
+            }
+        } else{
+           $bookName = $this->infoLivre($id)['title'];
+        }
         $data = [
             ':id' => $id,
-            ':newTitle' => htmlspecialchars($Post['newTitle']),
+            ':newTitle' => $bookName,
             ':newAuthor' => htmlspecialchars($Post['newAuthor']),
             ':newYear_publication' => htmlspecialchars($Post['newYear_publication']),
             ':newGenre' => htmlspecialchars($Post['newGenre']),
@@ -152,7 +165,6 @@ class BookController extends Controller{
             ':picture' => $fileName,
             ':newNotation' => htmlspecialchars($Post['newNotation'])
         ];
-
         $datas = $new->modifySingleBook($data);
         header('Location: indexAdmin.php?action=livres&status=success&from=modify');
     }
@@ -208,6 +220,10 @@ class BookController extends Controller{
                 $userMessage = new SubmitMessage ("success", "La catégorie a bien été supprimée !");
                 $datas["feedback"] = $userMessage->formatedMessage();
             }
+            elseif($_GET['from'] == "duplicate"){
+                $userMessage = new SubmitMessage ("error", "Cette catégorie existe déjà !");
+                $datas["feedback"] = $userMessage->formatedMessage();
+            }
         }
         return $this->validAccess("books-genres", $datas);
     }
@@ -254,15 +270,20 @@ class BookController extends Controller{
         } else{
             $fileName = $this->infoGenre($id)['picture'];
         }
-        if($Post['newType'] != ""){
-            $newType = htmlspecialchars($Post['newType']);
-        }
-        else{
-            $newType = $this->infoGenre($id)['category'];
+        // unique genre name
+        if(!empty($Post['newType'])){
+             if($Post['newType'] != ""){
+                $newName = $this->checkForDuplicate("genres", htmlspecialchars($Post['newType']));
+                if($newName == "nameOk"){
+                    $genreName = htmlspecialchars($Post['newType']);
+                }
+            }
+        } else{
+            $genreName = $this->infoGenre($id)['category'];
         }
         $data = [
             ':id' => $id,
-            ':newType' => $newType,
+            ':newType' => $genreName,
             ':picture' => $fileName
         ];
         $datas = $new->genreModifyPost($data);

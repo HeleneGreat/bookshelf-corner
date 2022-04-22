@@ -69,7 +69,7 @@ class AdminController extends Controller{
     function connexionAdminPost($mail, $mdp){
         // récupérer le mdp
         $user = new \Projet\Models\AdminModel();
-        $connexAdmin = $user->infoAdmin($mail);
+        $connexAdmin = $user->infoConnexion($mail);
         $result = $connexAdmin->fetch();
         $isPasswordCorrect = password_verify($mdp, $result['mdp']);
         $_SESSION['id'] = $result['id'];
@@ -114,26 +114,26 @@ class AdminController extends Controller{
     /*********************************************************/
     /********************* ADMIN ACCOUNT *********************/
     /*********************************************************/
-    function infoAdmin($email = NULL){
-        if(isset($email)){$mail = $email;} else{ $mail = $_SESSION['mail'];};
+    function infoAdmin($id){
+        // if(isset($email)){$mail = $email;} else{$mail = $_SESSION['mail'];};
         $user = new \Projet\Models\AdminModel();
-        $admin = $user->infoAdmin($mail);
+        $admin = $user->infoAdmin($id);
         $infoAdmin = $admin->fetch();
         return $infoAdmin;
     }
 
     function account(){        
-        $mail = $_SESSION['mail'];
+        $id = $_SESSION['id'];
         $user = new \Projet\Models\AdminModel();
-        $admin = $user->infoAdmin($mail);
+        $admin = $user->infoAdmin($id);
         $infoAdmin = $admin->fetch();
         return $this->validAccess("account", $infoAdmin);
     }
 
     function accountModify(){
-        $mail = $_SESSION['mail'];
+        $id = $_SESSION['id'];
         $user = new \Projet\Models\AdminModel();
-        $admin = $user->infoAdmin($mail);
+        $admin = $user->infoAdmin($id);
         $infoAdmin = $admin->fetch();
         $this->validAccess("account-modify", $infoAdmin);
     }
@@ -143,17 +143,16 @@ class AdminController extends Controller{
         $id = $_SESSION['id'];
         $purpose = "admin";
         $folder = "Admin";
-        // Check if there is a new picture uploaded
         if($Files['picture']['name'] !== ""){
             $fileName = $this->verifyFiles($purpose, $folder, $id);
         } else{
-            $fileName = $_SESSION['picture'] ;
+            $fileName = $this->infoAdmin($id)['picture'] ;
         }
         // Psw update
         if(!empty($Post['newAdminPsw'])){
             // Check if actual psw is correct
             $actualAdminPsw = htmlspecialchars($Post['actualAdminPsw']);
-            $getInfo = $this->infoAdmin();    
+            $getInfo = $this->infoAdmin($id);    
             $isPasswordCorrect = password_verify($actualAdminPsw, $getInfo['mdp']);
             if ($isPasswordCorrect){
                 $newPsw = $Post['newAdminPsw'];
@@ -164,20 +163,49 @@ class AdminController extends Controller{
                 $this->accountModify(); 
             }
         }
+        // unique email
+        if(!empty($Post['newMail'])){
+            if($Post['newMail'] != ""){
+                $newMail = $this->checkForDuplicate("administrators", htmlspecialchars($Post['newMail']));
+                if($newMail == "mailOk"){
+                    $adminMail = htmlspecialchars($Post['newMail']);
+                }
+                else{
+                    $adminMail = $this->infoAdmin($id)['mail'];
+                    $redirection = header('Location: indexAdmin.php?action=account&status=error&from=modifyMail');
+                }
+            }
+        } else{
+            $adminMail = $this->infoAdmin($id)['mail'];
+        }
+        // unique pseudo
+        if(!empty($Post['newPseudo'])){
+            if($Post['newPseudo'] != ""){
+                $newPseudo = $this->checkForDuplicate("administrators", htmlspecialchars($Post['newPseudo']));
+                if($newPseudo == "pseudoOk"){
+                    $adminPseudo = htmlspecialchars($Post['newPseudo']);
+                }else{
+                $adminPseudo = $this->infoAdmin($id)['pseudo'];
+                }
+            }
+        } else{
+            $adminPseudo = $this->infoAdmin($id)['pseudo'];
+        }
+        
         // Update the $_SESSION information with this update
-        $_SESSION['pseudo'] = htmlspecialchars($Post['newPseudo']);
-        $_SESSION['mail'] = htmlspecialchars($Post['newMail']);
+        $_SESSION['pseudo'] = $adminPseudo;
+        $_SESSION['mail'] = $adminMail;
         $_SESSION['picture'] = $fileName;
+        $_SESSION['mdp'] = $newMdp;
         // Update the DBB 
         $data = [
             ':id' => $id,
             ':picture' => $fileName,
-            ':newPseudo' => htmlspecialchars($Post['newPseudo']),
-            ':newMail' => htmlspecialchars($Post['newMail']),
+            ':newPseudo' => $adminPseudo,
+            ':newMail' => $adminMail,
             ':newAdminPsw' => $newMdp
         ];
-
-        $infoAdmin = $admin->modifyAccountPost($data);
+        $admin->modifyAccountPost($data);
         header('Location: indexAdmin.php?action=account');
     }
 

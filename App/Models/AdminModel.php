@@ -23,10 +23,17 @@ class AdminModel extends Manager{
         return $req;
     }
 
-    public function infoAdmin($mail){
+    public function infoConnexion($mail){
         $bdd = $this->dbConnect();
         $infoAdmin = $bdd->prepare('SELECT id, pseudo, mail, mdp, picture, role FROM administrators WHERE mail = ?');
         $infoAdmin->execute(array($mail));
+        return $infoAdmin;
+    }
+
+    public function infoAdmin($id){
+        $bdd = $this->dbConnect();
+        $infoAdmin = $bdd->prepare('SELECT id, pseudo, mail, mdp, picture, role FROM administrators WHERE id = ?');
+        $infoAdmin->execute(array($id));
         return $infoAdmin;
     }
 

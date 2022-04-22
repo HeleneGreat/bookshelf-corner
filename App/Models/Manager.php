@@ -35,4 +35,15 @@ class Manager{
         return $req;
     }
 
+    public function checkForDuplicate($table, $column, $data){
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare(
+            "SELECT id
+            FROM {$table}
+            WHERE {$column} = '{$data}'"
+        );
+        $req->execute();
+        return $req;
+    }
+
 }

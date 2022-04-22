@@ -1,4 +1,4 @@
-<?php include_once('./App/Views/admin/layouts/header.php');?>
+<?php include_once('./App/Views/admin/layouts/header.php'); ?>
 
 <section id="account">
     <h1>Mon compte</h1>

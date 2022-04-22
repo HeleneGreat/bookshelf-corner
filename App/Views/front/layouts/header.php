@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $currentPageTitle; ?> | The Bookshelf Corner</title>
+    <title><?= $currentPageTitle; ?> | <?= $blog['name']; ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./App/Public/front/css/style.css">
     
@@ -15,8 +15,8 @@
 <!-- NAV SMALL MOBILE -->
 <div class="mobile container">
     <div class="title flex justify-between align-items-center">
-        <p><img class="logo container" src="./App/Public/Front/images/bookshelf.png" alt=""></p>
-        <h2 class="text-center">The Bookshelf Corner</h2>
+        <p><img class="logo container" src="./App/Public/Admin/images/<?= $blog['logo']; ?>" alt=""></p>
+        <h2 class="text-center"><?= $blog['name']; ?></h2>
     </div>
 
     <div>
@@ -40,12 +40,12 @@
 <!-- NAV BIG SCREEN (lg) -->
 <div class="lg align-items-center container">
     <div class="flex justify-between">
-        <p><img class="logo container" src="./App/Public/Front/images/bookshelf.png" alt=""></p>
+        <p><img class="logo container" src="./App/Public/Admin/images/<?= $blog['logo']; ?>" alt=""></p>
         <!-- Title + research + connexion -->
 
         <div class="head-lg flex col justify-between">
             <div class="title-lg flex justify-between">
-                <h2>The Bookshelf Corner</h2>
+                <h2><?= $blog['name']; ?></h2>
                 <div>
                     <input type="search" placeholder="Rechercher">
                     <button><a href="indexAdmin.php">Se connecter</a></button>

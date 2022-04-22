@@ -5,6 +5,9 @@ namespace Projet\Controllers;
 class Controller{
 
     function viewFront($viewName, $datas = null){
+        $new = new \Projet\Models\BlogModel();
+        $blogs = $new->blogInfo(1);
+        $blog = $blogs->fetch();
         include('./App/Views/front/' . $viewName . '.php');
     }
 
@@ -40,7 +43,7 @@ class Controller{
         $maxSize = 2000000;
         if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
             // Files are renamed like this example : "admin_22.png"
-            $fileName = $purpose . "_" . $id . "." . $extension;
+            $fileName = filter_var($purpose . "_" . $id . "." . $extension);
             // Files are saved in the App folders
             move_uploaded_file($tmpName, "./App/Public/$folder/images/" . $fileName);
             return $fileName;
@@ -68,34 +71,41 @@ class Controller{
     }
 
     function checkForDuplicate($table, $newName){
-        if($table == "admins"){
+        if($table == "administrators"){
             $admin = new \Projet\Models\AdminModel();
-            $admins = $admin->allAdmins();
-            $check = $admins->fetchAll();
-            if (in_array($newName, $check)){
-                return false;
-            } else{
-                return true;
-            } 
+            if(str_contains($newName, "@")){
+                $admins = $admin->checkForDuplicate($table, "mail", $newName);
+                $result = $admins->fetch();
+                if(empty($result)){
+                    return "mailOk";
+                }
+            }
+            if(!str_contains($newName, "@")){
+                $admins = $admin->checkForDuplicate($table, "pseudo", $newName);
+                $result = $admins->fetch();
+                if(empty($result)){
+                    return "pseudoOk";
+                }
+            }          
         }
         elseif($table == "books"){
             $book = new \Projet\Models\BookModel();
-            $books = $book->allBooks();
-            $check = $books->fetchAll();
-            if (in_array($newName, $check)){
-                return false;
-            } else{
-                return true;
+            $books = $book->checkForDuplicate($table, "title", $newName);
+            $result = $books->fetch();
+            if(empty($result)){
+                return "nameOk";
+            }else{
+                header('Location: indexAdmin.php?action=livres&status=error&from=duplicate');
             }
         }
         elseif($table == "genres"){
-            $genre = new \Projet\Models\BookModel();
-            $genres = $genre->allGenres();
-            $check = $genres->fetchAll();
-            if (in_array($newName, $check)){
-                return false;
-            } else{
-                return true;
+            $new = new \Projet\Models\BookModel();
+            $genre = $new->checkForDuplicate($table, "category", $newName);
+            $result = $genre->fetch();
+            if(empty($result)){
+                return "nameOk";
+            }else{
+                header('Location: indexAdmin.php?action=livres-genres&status=error&from=duplicate');
             }
         }
         else{

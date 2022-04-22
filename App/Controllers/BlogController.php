@@ -16,7 +16,7 @@ class BlogController extends Controller{
         $blogs = $user->blogInfo($id);
         $blog = $blogs->fetch();
         $admin = new \Projet\Models\AdminModel();
-        $thisAdmin = $admin->infoAdmin($_SESSION['mail']);
+        $thisAdmin = $admin->infoAdmin($_SESSION['id']);
         $infoAdmin = $thisAdmin->fetch();
             if($infoAdmin['role'] === 1){
                return $this->viewAdmin("parameters", $blog); 
@@ -29,7 +29,7 @@ class BlogController extends Controller{
         $blogs = $user->blogInfo($id);
         $blog = $blogs->fetch();  
         $admin = new \Projet\Models\AdminModel();
-        $thisAdmin = $admin->infoAdmin($_SESSION['mail']);
+        $thisAdmin = $admin->infoAdmin($_SESSION['id']);
         $infoAdmin = $thisAdmin->fetch();
         if($infoAdmin['role'] === 1){
             return $this->viewAdmin("parameters-modify", $blog);
