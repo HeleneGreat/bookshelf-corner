@@ -67,18 +67,18 @@ class AdminController extends Controller{
     }
 
     function connexionAdminPost($mail, $mdp){
-        // récupérer le mdp
+        // get password
         $user = new \Projet\Models\AdminModel();
         $connexAdmin = $user->infoConnexion($mail);
         $result = $connexAdmin->fetch();
         $isPasswordCorrect = password_verify($mdp, $result['mdp']);
-        $_SESSION['id'] = $result['id'];
-        $_SESSION['mail'] = $result['mail'];
-        $_SESSION['mdp'] = $result['mdp'];
-        $_SESSION['pseudo'] = $result['pseudo'];
-        $_SESSION['picture'] = $result['picture'];
-        $_SESSION['role'] = $result['role'];
         if ($isPasswordCorrect){
+            $_SESSION['id'] = $result['id'];
+            $_SESSION['mail'] = $result['mail'];
+            $_SESSION['mdp'] = $result['mdp'];
+            $_SESSION['pseudo'] = $result['pseudo'];
+            $_SESSION['picture'] = $result['picture'];
+            $_SESSION['role'] = $result['role'];
             header('Location: indexAdmin.php?action=dashboard');
         }
         else{
@@ -93,7 +93,6 @@ class AdminController extends Controller{
         $countBooks = new \Projet\Models\BookModel();
         $nbrBook = $countBooks->countBooks();
         $nbBooks = $nbrBook->fetch();
-        
         $countMails = new \Projet\Models\MsgModel();
         $nbrMail = $countMails->countMessages();
         $nbMails = $nbrMail->fetch();
@@ -126,8 +125,30 @@ class AdminController extends Controller{
         $id = $_SESSION['id'];
         $user = new \Projet\Models\AdminModel();
         $admin = $user->infoAdmin($id);
-        $infoAdmin = $admin->fetch();
-        return $this->validAccess("account", $infoAdmin);
+        $datas = $admin->fetch();
+        if(isset($_GET['status'])){
+            if($_GET['status'] == "error"){
+                if($_GET['from'] == "modifyMail"){
+                    $userMessage = new SubmitMessage ("error", "Un compte est déjà associé à ce mail !");
+                    $datas["feedback"] = $userMessage->formatedMessage();
+                }
+                if($_GET['from'] == "modifyPseudo"){
+                    $userMessage = new SubmitMessage ("error", "Ce pseudo est déjà utilisé !");
+                    $datas["feedback"] = $userMessage->formatedMessage();
+                }
+                if($_GET['from'] == "modifyMailPseudo"){
+                    $userMessage = new SubmitMessage ("error", "Ce mail et ce pseudo sont déjà utilisés !");
+                    $datas["feedback"] = $userMessage->formatedMessage();
+                }
+            }
+            if($_GET['status'] == "success"){
+                if($_GET['from'] == "modify"){
+                    $userMessage = new SubmitMessage ("success", "Vos informations ont bien été modifiées !");
+                    $datas["feedback"] = $userMessage->formatedMessage();
+                }
+            }
+        }
+        return $this->validAccess("account", $datas);
     }
 
     function accountModify(){
@@ -138,18 +159,18 @@ class AdminController extends Controller{
         $this->validAccess("account-modify", $infoAdmin);
     }
 
-    function accountModifyPost($Post, $Files){
+    function accountModifyPost($id, $Post, $Files){
         $admin = new \Projet\Models\AdminModel();
-        $id = $_SESSION['id'];
         $purpose = "admin";
         $folder = "Admin";
+        $redirection = null;
         if($Files['picture']['name'] !== ""){
             $fileName = $this->verifyFiles($purpose, $folder, $id);
         } else{
             $fileName = $this->infoAdmin($id)['picture'] ;
         }
         // Psw update
-        if(!empty($Post['newAdminPsw'])){
+        if(!empty($Post['newAdminPsw']) || $Post['newAdminPsw'] != ""){
             // Check if actual psw is correct
             $actualAdminPsw = htmlspecialchars($Post['actualAdminPsw']);
             $getInfo = $this->infoAdmin($id);    
@@ -162,17 +183,23 @@ class AdminController extends Controller{
                 echo "Mot de passe incorrect";
                 $this->accountModify(); 
             }
+        }else{
+            $newMdp = $this->infoAdmin($id)['mdp'];
         }
         // unique email
         if(!empty($Post['newMail'])){
             if($Post['newMail'] != ""){
-                $newMail = $this->checkForDuplicate("administrators", htmlspecialchars($Post['newMail']));
-                if($newMail == "mailOk"){
-                    $adminMail = htmlspecialchars($Post['newMail']);
-                }
-                else{
-                    $adminMail = $this->infoAdmin($id)['mail'];
-                    $redirection = header('Location: indexAdmin.php?action=account&status=error&from=modifyMail');
+                if($Post['newMail'] != $_SESSION['mail']){
+                    $newMail = $this->checkForDuplicate("administrators", htmlspecialchars($Post['newMail']));
+                    if($newMail == "mailOk"){
+                        $adminMail = htmlspecialchars($Post['newMail']);
+                    }
+                    else{
+                        $adminMail = $this->infoAdmin($id)['mail'];
+                        $redirection = "pbMail";
+                    }
+                }else{
+                    $adminMail = $_SESSION['mail'];
                 }
             }
         } else{
@@ -181,20 +208,28 @@ class AdminController extends Controller{
         // unique pseudo
         if(!empty($Post['newPseudo'])){
             if($Post['newPseudo'] != ""){
-                $newPseudo = $this->checkForDuplicate("administrators", htmlspecialchars($Post['newPseudo']));
-                if($newPseudo == "pseudoOk"){
-                    $adminPseudo = htmlspecialchars($Post['newPseudo']);
+                if($Post['newPseudo'] != $_SESSION['pseudo']){
+                    $newPseudo = $this->checkForDuplicate("administrators", htmlspecialchars($Post['newPseudo']));
+                    if($newPseudo == "pseudoOk"){
+                        $adminPseudo = htmlspecialchars($Post['newPseudo']);
+                    }else{
+                        $adminPseudo = $this->infoAdmin($id)['pseudo'];
+                        $redirection .= "pbPseudo";
+                    }
                 }else{
-                $adminPseudo = $this->infoAdmin($id)['pseudo'];
+                    $adminPseudo = $_SESSION['pseudo'];
                 }
             }
-        } else{
+        }else{
             $adminPseudo = $this->infoAdmin($id)['pseudo'];
         }
-        
         // Update the $_SESSION information with this update
-        $_SESSION['pseudo'] = $adminPseudo;
-        $_SESSION['mail'] = $adminMail;
+        if($redirection == null || !str_contains($redirection != null, "pbPseudo")){
+            $_SESSION['pseudo'] = $adminPseudo;
+        }
+        if($redirection == null || !str_contains($redirection, "pbMail")){
+            $_SESSION['mail'] = $adminMail;
+        }        
         $_SESSION['picture'] = $fileName;
         $_SESSION['mdp'] = $newMdp;
         // Update the DBB 
@@ -206,7 +241,15 @@ class AdminController extends Controller{
             ':newAdminPsw' => $newMdp
         ];
         $admin->modifyAccountPost($data);
-        header('Location: indexAdmin.php?action=account');
+        if (!isset($redirection)){
+            header('Location: indexAdmin.php?action=account&status=success&from=modify');
+        }elseif ($redirection == "pbMail"){
+            header('Location: indexAdmin.php?action=account&status=error&from=modifyMail');
+        }elseif ($redirection == "pbPseudo"){
+            header('Location: indexAdmin.php?action=account&status=error&from=modifyPseudo');
+        }elseif ($redirection == "pbMailpbPseudo"){
+            header('Location: indexAdmin.php?action=account&status=error&from=modifyMailPseudo');
+        }
     }
 
     /**********************************************************/

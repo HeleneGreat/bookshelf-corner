@@ -157,7 +157,8 @@ try{
         }
 
         elseif($_GET['action'] == "accountModifyPost"){
-            $adminController->accountModifyPost($_POST, $_FILES);
+            $id = $_GET['id'];
+            $adminController->accountModifyPost($id, $_POST, $_FILES);
         }
         
         /*********************************************************/

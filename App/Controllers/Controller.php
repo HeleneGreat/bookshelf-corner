@@ -76,14 +76,14 @@ class Controller{
             if(str_contains($newName, "@")){
                 $admins = $admin->checkForDuplicate($table, "mail", $newName);
                 $result = $admins->fetch();
-                if(empty($result)){
+                if(empty($result) || $result['id'] == $_SESSION['id']){
                     return "mailOk";
                 }
             }
             if(!str_contains($newName, "@")){
                 $admins = $admin->checkForDuplicate($table, "pseudo", $newName);
                 $result = $admins->fetch();
-                if(empty($result)){
+                if(empty($result) || $result = false || $result['id'] == $_SESSION['id']){
                     return "pseudoOk";
                 }
             }          
