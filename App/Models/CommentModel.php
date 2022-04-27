@@ -18,10 +18,24 @@ class CommentModel extends Manager{
         return $req;
     }
 
-    public function allBookComments($id){
+    // Every comment ever published
+    public function allComments(){
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'SELECT comments.id, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, users.pseudo, users.picture, comments.title, comments.content
+            FROM comments
+            INNER JOIN books ON book_id = books.id
+            INNER JOIN users ON user_id = users.id
+            ORDER BY comments.created_at DESC');
+        $req->execute();
+        return $req;
+    }
+
+    // All comments related to THIS book article
+    public function allBookComments($id){
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare(
+            'SELECT comments.id, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, users.pseudo, users.picture, comments.title AS commentTitle, comments.content AS commentContent
             FROM comments
             INNER JOIN books ON book_id = books.id
             INNER JOIN users ON user_id = users.id 
@@ -34,7 +48,7 @@ class CommentModel extends Manager{
     public function singleComment($id){
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
-            'SELECT comments.id, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, comments.title, comments.content, users.pseudo, users.picture, users.mail, books.title
+            'SELECT comments.id, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, comments.title AS commentTitle, comments.content AS commentContent, users.pseudo, users.picture, users.mail, books.title AS bookTitle
             FROM comments
             INNER JOIN books ON book_id = books.id
             INNER JOIN users ON user_id = users.id

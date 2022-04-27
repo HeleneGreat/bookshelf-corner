@@ -152,6 +152,10 @@ ul{
     display: none;
 }
 
+.dashboard{
+    color: var(--dashboard);
+}
+
 .required{
     color: red;
 }
@@ -616,11 +620,11 @@ a.btn:hover{
 }
 
 #one-message,
+#one-comment,
 #one-book{
     margin-top: 30px;
 }
 
-#one-message h2,
 #one-book h2{
     margin-top: 20px;
     margin-bottom: 20px;
@@ -637,13 +641,18 @@ a.btn:hover{
     object-fit: cover;
 }
 
+#one-comment p,
 #one-message p{
     margin-bottom: 15px;
 }
 
+#one-comment .msg-content,
 #one-message .msg-content{
     margin-top: 30px;
+    white-space: pre-line;
 }
+
+
 
 /* **************************** */
 /* ------ LIVRES - FORMS ------ */
@@ -756,20 +765,28 @@ img.old-picture{
 }
 
 #one-comments h1,
+#all-comments h1,
+#one-comment h1,
 #one-message h1,
 #all-messages h1{
     margin-top: 20px;
 }
 
+#all-comments .comment-info .time,
+#all-messages .message-info .time{
+    width: 195px;
+}
+
 #all-comments .comment-info,
 #all-messages .message-info{
     width: 80%;
-    height: 50px;
+    min-height: 50px;
 }
 
 #all-comments .comment-info .object,
 #all-messages .message-info .object{
-    width: 190px;
+    /* width: 190px; */
+    width: 300px;
 }
 
 /* ******************************* */
@@ -940,6 +957,14 @@ img.old-picture{
         width: fit-content;
     }
 
+    #all-comments .comment-info{
+        width: 100%;
+    }
+    
+    #all-comments .comment-info .object{
+        width: 300px;
+    }
+
     /* *********************/
     /* ----- ACCOUNT ----- */
     /* *********************/
@@ -1034,6 +1059,7 @@ img.old-picture{
     }
 
     #dashboard,
+    #one-comment,
     #one-message,
     #one-book,
     #book-form,
@@ -1088,6 +1114,13 @@ img.old-picture{
         bottom: 70px;
     }
 
+    #all-comments .comment-info{
+        width: 80%;
+    }
+
+    #all-comments .comment-info .object{
+        width: 320px;
+    }
 
 }
 

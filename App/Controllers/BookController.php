@@ -44,22 +44,22 @@ class BookController extends Controller{
         $data = $new->allBooks();
         $datas = $data->fetchAll();
         if(isset($_GET['status'])){
-                if($_GET['from'] == "add"){
-                    $userMessage = new SubmitMessage ("success", "Le livre a bien été ajouté !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
-                elseif($_GET['from'] == "modify"){
-                    $userMessage = new SubmitMessage ("success", "Le livre a bien été modifié !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
-                elseif($_GET['from'] == "delete"){
-                    $userMessage = new SubmitMessage ("success", "Le livre a bien été supprimé !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
-                elseif($_GET['from'] == "duplicate"){
-                    $userMessage = new SubmitMessage ("error", "Ce livre existe déjà !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
+            if($_GET['from'] == "add"){
+                $userMessage = new SubmitMessage ("success", "Le livre a bien été ajouté !");
+                $datas["feedback"] = $userMessage->formatedMessage();
+            }
+            elseif($_GET['from'] == "modify"){
+                $userMessage = new SubmitMessage ("success", "Le livre a bien été modifié !");
+                $datas["feedback"] = $userMessage->formatedMessage();
+            }
+            elseif($_GET['from'] == "delete"){
+                $userMessage = new SubmitMessage ("success", "Le livre a bien été supprimé !");
+                $datas["feedback"] = $userMessage->formatedMessage();
+            }
+            elseif($_GET['from'] == "duplicate"){
+                $userMessage = new SubmitMessage ("error", "Ce livre existe déjà !");
+                $datas["feedback"] = $userMessage->formatedMessage();
+            }
         }
         return $this->validAccess("books-all", $datas);
     }

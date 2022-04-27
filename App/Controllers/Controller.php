@@ -11,20 +11,28 @@ class Controller{
         include('./App/Views/front/' . $viewName . '.php');
     }
 
+    function viewUser($viewName, $datas = null){
+        if (!empty($_SESSION) && $_SESSION['role'] === 0){
+            include('./App/Views/admin/' . $viewName . '.php');
+        }else{
+            header('Location: index.php?action=error&status=error&from=no-user-account');
+        }
+    }
+
     function viewAdmin($viewName, $datas = null){
         include('./App/Views/admin/' . $viewName . '.php');
     }
 
     protected function validAccess($path, $data = []){
-        if (!empty($_SESSION)){
-            if($_SESSION['mail'] != null){
+        if (!empty($_SESSION) && $_SESSION['role'] > 0){
+            // if($_SESSION['mail'] != null){
                 return $this->viewAdmin($path, $data);
             }else{
                 header('Location: indexAdmin.php?action=error&status=error&from=no-access');
             }
-        }else{ 
-            header('Location: indexAdmin.php?action=error&status=error&from=no-access');
-        }
+        // }else{ 
+        //     header('Location: indexAdmin.php?action=error&status=error&from=no-access');
+        // }
     }
 
     function verifyFiles($purpose, $folder, $id){
@@ -51,7 +59,7 @@ class Controller{
         else { echo "Une erreur est survenue. Vous devez ajouter une image de profil. La taille du fichier est limitée à 2 Mo. "; }
     }
 
-    // After creation in BDD, update the BDD with the picture name
+    // After row creation in BDD, update the BDD with the picture name
     function updatePicture($data, $table){
         if($table === 'administrators'){
             $new = new \Projet\Models\AdminModel();
@@ -68,51 +76,39 @@ class Controller{
             $datas = $new->updatePicture($data, $table);
             header('Location: indexAdmin.php?action=livres-genres&status=success&from=add');
         }       
+        if($table === 'users'){
+            $new = new \Projet\Models\UserModel(); 
+            $datas = $new->updatePicture($data, $table);
+            header('Location: indexAdmin.php?action=connexionUser&status=success&from=create');
+        }       
     }
 
-    function checkForDuplicate($table, $newName){
+    function checkForDuplicate($table, $newdata){
         if($table == "administrators"){
-            $admin = new \Projet\Models\AdminModel();
-            if(str_contains($newName, "@")){
-                $admins = $admin->checkForDuplicate($table, "mail", $newName);
-                $result = $admins->fetch();
-                if(empty($result) || $result['id'] == $_SESSION['id']){
-                    return "mailOk";
-                }
+            $new = new \Projet\Models\AdminModel();
+            if(str_contains($newdata, "@")){
+                $column = "mail";
             }
-            if(!str_contains($newName, "@")){
-                $admins = $admin->checkForDuplicate($table, "pseudo", $newName);
-                $result = $admins->fetch();
-                if(empty($result) || $result = false || $result['id'] == $_SESSION['id']){
-                    return "pseudoOk";
-                }
-            }          
-        }
-        elseif($table == "books"){
-            $book = new \Projet\Models\BookModel();
-            $books = $book->checkForDuplicate($table, "title", $newName);
-            $result = $books->fetch();
-            if(empty($result)){
-                return "nameOk";
-            }else{
-                header('Location: indexAdmin.php?action=livres&status=error&from=duplicate');
+            if(!str_contains($newdata, "@")){
+                $column = "pseudo";
             }
-        }
-        elseif($table == "genres"){
+        }elseif($table == "books"){
             $new = new \Projet\Models\BookModel();
-            $genre = $new->checkForDuplicate($table, "category", $newName);
-            $result = $genre->fetch();
-            if(empty($result)){
-                return "nameOk";
-            }else{
-                header('Location: indexAdmin.php?action=livres-genres&status=error&from=duplicate');
-            }
-        }
-        else{
+            $column = 'title';
+            $redirection = "livres";
+        }elseif($table == "genres"){
+            $new = new \Projet\Models\BookModel();
+            $column = 'category';
+            $redirection = "livres-genres";
+        }else{
             echo "Un des arguments a été mal enregistré";
         }
+        $data = $new->checkForDuplicate($table, $column, $newdata);
+        $result = $data->fetch();
+        if(empty($result) || $result = false || $result['id'] == $_SESSION['id']){
+            return "nameOk";
+        }elseif($table == "books" || $table == "genres"){
+            header('Location: indexAdmin.php?action=' . $redirection . '&status=error&from=duplicate');
+        }
     }
-
-
-    
 }

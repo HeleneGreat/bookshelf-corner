@@ -11,13 +11,13 @@
         ?>
         <article class="flex">
             <div class="message-info flex justify-between align-items-center">
-                <p><?= $msg['send_at']; ?></p>
+                <p class="time"><?= $msg['send_at']; ?></p>
                 <p><?= $msg['firstname']; ?></p>
                 <p><?= $msg['familyname']; ?></p>
                 <p class="object"><?= $msg['object']; ?></p>
             </div>
             <div class="flex message-link">
-                <a title="Lire ce message" href="indexAdmin.php?action=messageView&id=<?=$msg['id']; ?>" class="stretched-link"><i class="fa-solid fa-eye"></i></a>
+                <a title="Lire ce message" href="indexAdmin.php?action=messagesView&id=<?=$msg['id']; ?>" class="stretched-link"><i class="fa-solid fa-eye"></i></a>
                 <button title="Supprimer ce message" id="btn-delete-<?= $msg['id']; ?>" class="btn-delete-this"><a><i class="fa-regular fa-trash-can lg"></i></a></button>
             </div>
         </article>
@@ -32,7 +32,7 @@
                 <p><span class="italic"><?= $msg['firstname']; $msg['familyname']; ?></span> ?</p>
                 <div class="flex justify-center">
                     <a id="cancel-<?= $msg['id']; ?>" class="cancel btn center" title="Retour">Annuler</a>
-                    <a href="indexAdmin.php?action=messageDelete&id=<?= $msg['id'];?>" title="Supprimer ce message" class="btn center">Supprimer</a>
+                    <a href="indexAdmin.php?action=messagesDelete&id=<?= $msg['id'];?>" title="Supprimer ce message" class="btn center">Supprimer</a>
                 </div>
             </div>
         </div>

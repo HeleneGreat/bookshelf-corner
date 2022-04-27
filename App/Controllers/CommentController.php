@@ -34,13 +34,13 @@ class CommentController extends Controller{
         $comments = new \Projet\Models\CommentModel();
         $comm = $comments->singleComment($id);
         $data = $comm->fetch();
-        return $this->validAccess("message-view", $data);
+        return $this->validAccess("comment-view", $data);
     }
 
     function deleteComment($id){
         $comments = new \Projet\Models\CommentModel();
         $comments->deleteComment($id);
-        header('Location: indexAdmin.php?action=messages&status=success');
+        header('Location: indexAdmin.php?action=comments&status=success');
     }
     
 }

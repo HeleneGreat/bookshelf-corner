@@ -16,7 +16,7 @@
             <p><span class="italic"><?= $datas['firstname']; $datas['familyname']; ?></span> ?</p>
             <div class="flex justify-center">
                 <a id="cancel" class="btn center" title="Retour">Annuler</a>
-                <a href="indexAdmin.php?action=messageDelete&id=<?= $datas['id'];?>" title="Supprimer ce message" class="btn center">Supprimer</a>
+                <a href="indexAdmin.php?action=messagesDelete&id=<?= $datas['id'];?>" title="Supprimer ce message" class="btn center">Supprimer</a>
             </div>
         </div>
     </div>

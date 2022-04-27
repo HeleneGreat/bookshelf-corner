@@ -11,6 +11,8 @@ require_once('./App/form/SubmitMessage.php');
 try{
 
     $adminController = new \Projet\Controllers\AdminController();
+
+    $userController = new \Projet\Controllers\UserController();
     
     $bookController = new \Projet\Controllers\BookController();
 
@@ -135,14 +137,31 @@ try{
             $messageController->allMessages();
         }
 
-        elseif($_GET['action'] == "messageView"){
+        elseif($_GET['action'] == "messagesView"){
             $id = $_GET['id'];
             $messageController->viewMessage($id);
         }   
 
-        elseif ($_GET['action'] == "messageDelete"){
+        elseif ($_GET['action'] == "messagesDelete"){
             $id = $_GET['id'];
             $messageController->deleteMessage($id);
+        }
+
+        /********************************************************/
+        /*********************** COMMENTS ***********************/
+        /********************************************************/
+        elseif($_GET['action'] == "comments"){
+            $commentController->allComments();
+        }  
+
+        elseif($_GET['action'] == "commentsView"){
+            $id = $_GET['id'];
+            $commentController->viewComment($id);
+        }   
+
+        elseif ($_GET['action'] == "commentsDelete"){
+            $id = $_GET['id'];
+            $commentController->deleteComment($id);
         }
 
         /*********************************************************/
@@ -178,13 +197,25 @@ try{
             $id = "1";            
             $blogController->blogModifyPost($id, $_POST, $_FILES);
         }
-   
+        
         /********************************************************/
-        /*********************** COMMENTS ***********************/
         /********************************************************/
-        elseif($_GET['action'] == "comments"){
-            $commentController->allComments();
-        }   
+        /********************* USER ACCOUNT *********************/
+        /********************************************************/
+        /********************************************************/
+        elseif ($_GET['action'] == "userDashboard"){
+            $userController->userDashboard();
+        }
+
+        elseif ($_GET['action'] == "disconnect"){
+            session_destroy();
+            $userController->connexionUser();
+        }
+
+
+
+
+
 
         elseif($_GET['action'] == "error"){
             $adminController->error();

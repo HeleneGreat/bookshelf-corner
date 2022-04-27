@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./App/Public/front/css/style.css">
     
 </head>
-<body>
+<body>    
 <header id="bandeau">
 
 <!-- NAV SMALL MOBILE -->
@@ -30,6 +30,13 @@
             <li><a href="index.php?action=livres">Livres</a></li>
             <li><a href="index.php?action=about">A propos</a></li>
             <li><a href="index.php?action=contact">Me contacter</a></li>
+            <?php if(empty($_SESSION)){ ?>
+                <li><a href="indexAdmin.php?action=createUser">Créer un compte</a></li>
+            <?php }elseif($_SESSION['role'] > 0){ ?>
+                <li><a href="indexAdmin.php?action=dashboard">Espace admin</a></li>
+            <?php }elseif($_SESSION['role'] === 0){ ?>
+                <li><a href="indexAdmin.php?action=userConnexion">Mon compte</a></li>
+            <?php }; ?>
         </ul>
         <div class="flex justify-end">
             <img id="close-menu" class="menu-toggle" src="./App/Public/Front/images/70723_book_read_icon.png" alt="">
@@ -47,8 +54,13 @@
             <div class="title-lg flex justify-between">
                 <h2><?= $blog['name']; ?></h2>
                 <div>
-                    <input type="search" placeholder="Rechercher">
-                    <button><a href="indexAdmin.php">Se connecter</a></button>
+                <?php if(empty($_SESSION)){ ?>
+                    <button><a href="index.php?action=connexionUser">Se Connecter</a></button>
+                <?php }elseif($_SESSION['role'] > 0){ ?>
+                    <button><a href="indexAdmin.php?action=dashboard">Espace admin</a></button>
+                <?php }elseif($_SESSION['role'] === 0){ ?>
+                    <button><a href="indexAdmin.php?action=user-account">Mon compte</a></button>
+                <?php }; ?>
                 </div>
             </div>
 
@@ -74,7 +86,7 @@
 </div>
 
 <?php if(isset($datas['feedback'])) {;?>
-    <div class="center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
+    <div class="container center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
 <?php }; ?>
 
 

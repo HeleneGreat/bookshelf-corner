@@ -36,6 +36,9 @@
 <!-- All comments about this book -->
 <section id="all-comments" class="container">
     <h2 class="text-center">Toutes vos réactions</h2>
+    <?php if(empty($datas['comments'])){?>
+        <p class="text-center">Soyez le premier à commenter cet article !</p>
+    <?php };?>
     <?php foreach ($datas['comments'] as $data){ ?>
         <article class="flex-md">
             <div class="user-info">
@@ -44,8 +47,8 @@
                 <p class="date">Publié le <?= $data['created_at']; ?></p>
             </div>
             <div class="comment">
-                <p class="title bold"><?= $data['title']; ?></p>
-                <p><?= $data['content']; ?></p>
+                <p class="title bold"><?= $data['commentTitle']; ?></p>
+                <p><?= $data['commentContent']; ?></p>
             </div>
         </article>
     <?php }; ?>

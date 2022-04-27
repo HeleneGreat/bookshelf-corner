@@ -100,16 +100,6 @@ class AdminController extends Controller{
         $this->validAccess("dashboard", $stats);
     }    
 
-    /**********************************************************/
-    /********************* ADMIN COMMENTS *********************/
-    /**********************************************************/
-    function comments(){
-        // $comment = new \Projet\Models\AdminModel();
-        // $allComments = $comment->allComments();
-        // $comments = $allComments->fetchAll();
-        return $this->validAccess("comments");
-    }
-
     /*********************************************************/
     /********************* ADMIN ACCOUNT *********************/
     /*********************************************************/
@@ -121,7 +111,7 @@ class AdminController extends Controller{
         return $infoAdmin;
     }
 
-    function account(){        
+    function account(){
         $id = $_SESSION['id'];
         $user = new \Projet\Models\AdminModel();
         $admin = $user->infoAdmin($id);
@@ -138,6 +128,10 @@ class AdminController extends Controller{
                 }
                 if($_GET['from'] == "modifyMailPseudo"){
                     $userMessage = new SubmitMessage ("error", "Ce mail et ce pseudo sont déjà utilisés !");
+                    $datas["feedback"] = $userMessage->formatedMessage();
+                }
+                if($_GET['from'] == "modifyPsw"){
+                    $userMessage = new SubmitMessage ("error", "Mot de passe incorrect !");
                     $datas["feedback"] = $userMessage->formatedMessage();
                 }
             }
@@ -164,61 +158,51 @@ class AdminController extends Controller{
         $purpose = "admin";
         $folder = "Admin";
         $redirection = null;
-        if($Files['picture']['name'] !== ""){
-            $fileName = $this->verifyFiles($purpose, $folder, $id);
-        } else{
-            $fileName = $this->infoAdmin($id)['picture'] ;
-        }
+        // Picture update
+        ($Files['picture']['name'] !== "") ? $fileName = $this->verifyFiles($purpose, $folder, $id) : $fileName = $this->infoAdmin($id)['picture'] ;
         // Psw update
-        if(!empty($Post['newAdminPsw']) || $Post['newAdminPsw'] != ""){
+        if(!empty($Post['newPsw']) || $Post['newPsw'] != ""){
             // Check if actual psw is correct
-            $actualAdminPsw = htmlspecialchars($Post['actualAdminPsw']);
+            $actualAdminPsw = htmlspecialchars($Post['actualPsw']);
             $getInfo = $this->infoAdmin($id);    
             $isPasswordCorrect = password_verify($actualAdminPsw, $getInfo['mdp']);
-            if ($isPasswordCorrect){
-                $newPsw = $Post['newAdminPsw'];
+            if ($isPasswordCorrect == true){
+                $newPsw = $Post['newPsw'];
                 $newMdp = password_hash($newPsw, PASSWORD_DEFAULT);                    
             }
             else{
-                echo "Mot de passe incorrect";
-                $this->accountModify(); 
+                header('Location: indexAdmin.php?action=account&status=error&from=modifyPsw');
+                return;
             }
         }else{
             $newMdp = $this->infoAdmin($id)['mdp'];
         }
         // unique email
-        if(!empty($Post['newMail'])){
-            if($Post['newMail'] != ""){
-                if($Post['newMail'] != $_SESSION['mail']){
-                    $newMail = $this->checkForDuplicate("administrators", htmlspecialchars($Post['newMail']));
-                    if($newMail == "mailOk"){
-                        $adminMail = htmlspecialchars($Post['newMail']);
-                    }
-                    else{
-                        $adminMail = $this->infoAdmin($id)['mail'];
-                        $redirection = "pbMail";
-                    }
+        if(!empty($Post['newMail']) || $Post['newMail'] != ""){
+            if($Post['newMail'] != $_SESSION['mail']){
+                $newMail = $this->checkForDuplicate("administrators", htmlspecialchars($Post['newMail']));
+                if($newMail == "nameOk"){
+                    $adminMail = htmlspecialchars($Post['newMail']);
                 }else{
-                    $adminMail = $_SESSION['mail'];
+                    $adminMail = $this->infoAdmin($id)['mail'];
+                    $redirection = "pbMail";
                 }
             }
-        } else{
+        }else{
             $adminMail = $this->infoAdmin($id)['mail'];
         }
         // unique pseudo
-        if(!empty($Post['newPseudo'])){
-            if($Post['newPseudo'] != ""){
-                if($Post['newPseudo'] != $_SESSION['pseudo']){
-                    $newPseudo = $this->checkForDuplicate("administrators", htmlspecialchars($Post['newPseudo']));
-                    if($newPseudo == "pseudoOk"){
-                        $adminPseudo = htmlspecialchars($Post['newPseudo']);
-                    }else{
-                        $adminPseudo = $this->infoAdmin($id)['pseudo'];
-                        $redirection .= "pbPseudo";
-                    }
+        if(!empty($Post['newPseudo']) || $Post['newPseudo'] != ""){
+            if($Post['newPseudo'] != $_SESSION['pseudo']){
+                $newPseudo = $this->checkForDuplicate("administrators", htmlspecialchars($Post['newPseudo']));
+                if($newPseudo == "nameOk"){
+                    $adminPseudo = htmlspecialchars($Post['newPseudo']);
                 }else{
-                    $adminPseudo = $_SESSION['pseudo'];
+                    $adminPseudo = $this->infoAdmin($id)['pseudo'];
+                    $redirection .= "pbPseudo";
                 }
+            }else{
+                $adminPseudo = $_SESSION['pseudo'];
             }
         }else{
             $adminPseudo = $this->infoAdmin($id)['pseudo'];

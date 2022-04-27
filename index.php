@@ -18,6 +18,8 @@ try{
 
     $messageController = new \Projet\Controllers\MsgController();
 
+    $userController = new \Projet\Controllers\UserController();
+
     
     if (isset($_GET['action'])){
         
@@ -62,6 +64,39 @@ try{
                 ':content' => htmlspecialchars(($_POST['content']))
             ];
             $commentController->commentPost($data);
+        }
+
+        /********************************************************/
+        /********************************************************/
+        /********************* USER ACCOUNT *********************/
+        /********************************************************/
+        /********************************************************/
+        elseif($_GET['action'] == "createUser"){           
+            $userController->createUser();
+        }
+
+        elseif($_GET['action'] == "createUserPost"){           
+            $userController->createUserPost($_POST, $_FILES);
+        }
+
+        elseif($_GET['action'] == "connexionUser"){           
+            $userController->connexionUser();
+        }
+
+        elseif ($_GET['action'] == "connexionUserPost"){
+            $mail = $_POST['userMail'];
+            $mdp = $_POST['userMdp'];            
+            $userController->connexionUserPost($mail, $mdp);
+        }
+
+
+
+
+
+
+
+        elseif($_GET['action'] == 'error'){
+            $controllerFront->error();
         }
 
     }
