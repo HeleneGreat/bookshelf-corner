@@ -9,6 +9,7 @@ DASHBOARD
     * forms
     * btn icon top
     * modal box
+USER DASHBOARD
 DASHBOARD - LIVRES
     * livres - nav
     * livres - view
@@ -320,6 +321,11 @@ z-index: 9999999;
     font-weight: bold;
 }
 
+#nav-admin .disconnect:hover{
+    color: red;
+    font-size: 1.4rem;
+}
+
 #nav-admin a:hover,
 #nav-admin .active{
     font-weight: bold;
@@ -357,6 +363,8 @@ z-index: 9999999;
 /* ******************** */
 /* ------- FORMS------- */
 /* ******************** */
+#comment-modify input,
+#comment-modify textarea,
 .one-cat input, 
 #parameters input, 
 #account input, 
@@ -364,9 +372,12 @@ z-index: 9999999;
 #book-form option, 
 #book-form select{
     padding: 8px 10px;
-    font-size: 18px;
+    /* font-size: 18px; */
+    font-size: 22px;
 }
 
+#comment-modify input, 
+#comment-modify textarea, 
 .one-cat input, 
 #parameters input, 
 #account input, 
@@ -378,6 +389,8 @@ z-index: 9999999;
     border: 1px solid var(--dashboard);
 }
 
+#comment-modify input:focus, 
+#comment-modify textarea:focus, 
 .one-cat input, 
 #parameters input, 
 #account input:focus, 
@@ -551,6 +564,83 @@ a.btn:hover{
     background-color: rgba(151, 151, 151, 0.902);
 }
 
+/* ********************************************* */
+/* --------------- USER DASHBOARD -------------- */
+/* ********************************************* */
+#dashboard #all-comments .stats{
+    margin-bottom: 20px;
+}
+
+#dashboard #all-comments article{
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+#dashboard #all-comments .user-info,
+#dashboard #all-comments .comment{
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#dashboard #all-comments .user-info{
+    background-color: #c6c6c6;
+    height: 100px;
+}
+
+#dashboard #all-comments .user-info img{
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    float: left;
+    padding-right: 10px;
+}
+
+#dashboard #all-comments .user-info .date{
+    font-size: 1.2rem;
+}
+
+#dashboard #all-comments .comment{
+    background-color: #e4e4e4;
+}
+
+#dashboard #all-comments .comment .content{
+    white-space: pre-line;
+}
+
+#dashboard #all-comments .user-info .pseudo,
+#dashboard #all-comments .comment .title{
+    color: var(--main);
+    padding-bottom: 10px;
+}
+
+#dashboard #all-comments .actions{
+    margin-top: 15px;
+}
+
+#dashboard #all-comments a{
+    padding: 10px 13px 10px;
+}
+
+#dashboard #all-comments i{
+    color: var(--dashboard);
+}
+
+#comment-modify input,
+#comment-modify textarea{
+    min-width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+#comment-modify textarea{
+    min-height: 350px;
+}
+
+#comment-modify button{
+    width: fit-content;
+}
+
 /* ******************************************** */
 /* ---------- DASHBOARD - LIVRES -------------- */
 /* ******************************************** */
@@ -651,8 +741,6 @@ a.btn:hover{
     margin-top: 30px;
     white-space: pre-line;
 }
-
-
 
 /* **************************** */
 /* ------ LIVRES - FORMS ------ */
@@ -764,6 +852,7 @@ img.old-picture{
     cursor: pointer;
 }
 
+#comment-modify h1,
 #one-comments h1,
 #all-comments h1,
 #one-comment h1,
@@ -965,6 +1054,34 @@ img.old-picture{
         width: 300px;
     }
 
+    /* *************************** */
+    /* ------ USER DASHBOARD ----- */
+    /* *************************** */
+    #dashboard #all-comments .user-info,
+    #dashboard #all-comments .comment{
+        padding: 20px
+    }
+
+    #dashboard #all-comments .user-info{
+        width: 20%;
+        height: auto;
+        text-align: center;
+    }
+
+    #dashboard #all-comments .user-info img{
+        float: none;
+        margin-bottom: 10px;
+        padding: 0;
+    }
+
+    #dashboard #all-comments .comment{
+        width: 80%;
+    }
+
+    #dashboard #all-comments a{
+        padding: 10px;
+    }
+
     /* *********************/
     /* ----- ACCOUNT ----- */
     /* *********************/
@@ -1058,15 +1175,7 @@ img.old-picture{
         opacity: 1;
     }
 
-    #dashboard,
-    #one-comment,
-    #one-message,
-    #one-book,
-    #book-form,
-    #message,
-    #comment,
-    #account,
-    #parameters{
+    .container-lg{
         margin-left: 20px;
         margin-top: 20px;
     }
@@ -1081,6 +1190,13 @@ img.old-picture{
         padding: 10px;
         margin-left: 10px;
         margin-right: 10px;
+    }
+    #dashboard #all-comments a{
+        padding: 0;
+    }
+
+    #dashboard #all-comments i{
+        padding: 8px;
     }
 
     #all-comments a:hover,

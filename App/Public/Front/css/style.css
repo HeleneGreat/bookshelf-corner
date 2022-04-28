@@ -451,7 +451,6 @@ ul {
     white-space: pre-line;
 }
 
-
 /* ************************************* */
 /* ---------------- FORM --------------- */
 /* ************************************* */
@@ -540,7 +539,6 @@ textarea:focus{
 
 #all-comments .comment{
     background-color: #e4e4e4;
-    white-space: pre-line;
 }
 
 #all-comments .user-info .pseudo,

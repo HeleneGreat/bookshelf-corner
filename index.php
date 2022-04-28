@@ -57,13 +57,8 @@ try{
         }
 
         elseif($_GET['action'] == 'commentPost'){
-            $data = [
-                ':user_id' => 1,
-                ':book_id' => 13,
-                ':title' => htmlspecialchars(($_POST['title'])),
-                ':content' => htmlspecialchars(($_POST['content']))
-            ];
-            $commentController->commentPost($data);
+            $id = $_GET['id'];
+            $commentController->commentPost($id, $_POST);
         }
 
         /********************************************************/

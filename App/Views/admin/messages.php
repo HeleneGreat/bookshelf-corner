@@ -1,8 +1,6 @@
 <?php include_once('./App/Views/admin/layouts/header.php');?>
 
-
-
-<section id="all-messages">
+<section id="all-messages" class="container-lg">
 
     <h1>Liste des messages</h1>   
     <?php 

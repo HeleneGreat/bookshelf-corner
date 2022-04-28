@@ -32,7 +32,8 @@ let deleteBtns = document.querySelectorAll('.btn-delete-this');
 if(deleteBtns.length > 0){
     deleteBtns.forEach(btn => {
         let id = btn.id.split('-').pop();
-        btn.addEventListener('click', function(){
+        btn.addEventListener('click', function(event){
+            event.preventDefault();
             let modal = document.getElementById('myModal' + id);
             modal.classList.remove('display-none');
             window.onclick = function(event){

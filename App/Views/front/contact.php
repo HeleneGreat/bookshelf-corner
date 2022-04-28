@@ -2,6 +2,11 @@
  include_once('layouts/header.php'); 
 ?>
 
+ <!-- Div for error management -->
+ <?php if(isset($datas['feedback'])) {;?>
+        <div id="feedback" class="center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
+<?php }; ?>
+
 <section class="container bg-contact">
     <h1>Nous contacter</h1>
 

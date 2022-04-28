@@ -37,7 +37,7 @@
         <?php if($_SESSION['role'] === 2){ ?>
             <li><a href="indexAdmin.php?action=blogParameters" title="Paramètres du blog"><i class="fa-solid fa-gear"></i> Paramètres du site</a></li>
         <?php };?>
-            <li><a class="disconnect" href="indexAdmin.php?action=disconnect" title="Se déconnecter"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a></li>
+            <li><a class="disconnect" href="indexAdmin.php?action=<?= $_SESSION['role'] === 0 ? "userDisconnect" : "disconnect";?>" title="Se déconnecter"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a></li>
         </ul>
     </nav>
 
@@ -46,5 +46,5 @@
    
  <!-- Div for error management -->
  <?php if(isset($datas['feedback'])) {;?>
-        <div class="center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
+        <div id="feedback" class="center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
 <?php }; ?>

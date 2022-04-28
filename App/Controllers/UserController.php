@@ -93,11 +93,33 @@ class UserController extends Controller{
     }
 
     function userDashboard(){
+        $new = new \Projet\Models\UserModel();
+        $allComment = $new->allUserComments($_SESSION['id']);
+        $allComments = $allComment->fetchAll();
         $countComments = new \Projet\Models\UserModel();
         $nbrComment = $countComments->countUserComments($_SESSION['id']);
-        $datas = $nbrComment->fetch();
+        $nbComments = $nbrComment->fetch();
+        $datas = [
+            'allComments' => $allComments,
+            'nbComments' => $nbComments
+        ];
+        if(isset($_GET['status'])){
+            if($_GET['status'] == "success"){
+                if($_GET['from'] == "deleteComment"){
+                    $userMessage = new SubmitMessage ("success", "Votre commentaire a bien été supprimé !");
+                    $datas["feedback"] = $userMessage->formatedMessage();
+                }
+            }
+            if($_GET['status'] == "success"){
+                if($_GET['from'] == "modifyComment"){
+                    $userMessage = new SubmitMessage ("success", "Votre commentaire a bien été mis à jour !");
+                    $datas["feedback"] = $userMessage->formatedMessage();
+                }
+            }
+        }
         return $this->viewUser("dashboard", $datas);
     }
+
 
 
 }

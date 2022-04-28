@@ -25,14 +25,12 @@ class Controller{
 
     protected function validAccess($path, $data = []){
         if (!empty($_SESSION) && $_SESSION['role'] > 0){
-            // if($_SESSION['mail'] != null){
+            if($_SESSION['mail'] != null){
                 return $this->viewAdmin($path, $data);
             }else{
                 header('Location: indexAdmin.php?action=error&status=error&from=no-access');
             }
-        // }else{ 
-        //     header('Location: indexAdmin.php?action=error&status=error&from=no-access');
-        // }
+        }
     }
 
     function verifyFiles($purpose, $folder, $id){

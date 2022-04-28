@@ -14,7 +14,7 @@ class UserModel extends Manager{
     // Number of comments written by that user
     public function countUserComments($userId){
         $bdd =$this->dbConnect();
-        $req = $bdd->prepare('SELECT COUNT(id) FROM comments WHERE id = ?');
+        $req = $bdd->prepare('SELECT COUNT(id) AS nbComments FROM comments WHERE user_id = ?');
         $req->execute(array($userId));
         return $req;
     }
@@ -23,7 +23,7 @@ class UserModel extends Manager{
     public function allUserComments($userId){
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
-            'SELECT comments.id, books.id, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, comments.title AS commentTitle, comments.content AS commentContent, books.title AS bookTitle
+            'SELECT comments.id AS commentId, books.id AS bookId, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, comments.title AS commentTitle, comments.content AS commentContent, books.picture AS bookCover, books.title AS bookTitle
             FROM comments
             INNER JOIN books ON book_id = books.id
             INNER JOIN users ON user_id = users.id 

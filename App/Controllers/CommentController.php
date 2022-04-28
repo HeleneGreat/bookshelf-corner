@@ -6,16 +6,16 @@ use Projet\Forms\SubmitMessage;
 
 class CommentController extends Controller{
 
-    function commentPost($data){
+    function commentPost($id, $Post){
         $comment = new \Projet\Models\CommentModel();
+        $data = [
+            ':user_id' => $_SESSION['id'],
+            ':book_id' => $id,
+            ':title' => htmlspecialchars(($Post['title'])),
+            ':content' => htmlspecialchars(($Post['content']))
+        ];
         $comm = $comment->commentPost($data);
-        if($comm != NULL){
-            $userMessage = new SubmitMessage ("success", 'Votre commentaire a bien été publié !');
-        } else {
-            $userMessage = new SubmitMessage ("error", "Votre commentaire n'a pas pu être envoyé. Veuillez réessayer.");
-        }
-        $data["feedback"] = $userMessage->formatedMessage();
-        header('Location: index.php?action=un-livre&id=' . $data[':book_id']);
+        header('Location: index.php?action=un-livre&id=' . $data[':book_id']. '&status=success&from=addComment#feedback');
     }
 
     function allComments(){
@@ -37,10 +37,41 @@ class CommentController extends Controller{
         return $this->validAccess("comment-view", $data);
     }
 
+    // For the admin to delete any comment
     function deleteComment($id){
         $comments = new \Projet\Models\CommentModel();
         $comments->deleteComment($id);
         header('Location: indexAdmin.php?action=comments&status=success');
     }
+           
+    /******************************/
+    /************ USER ************/
+    /******************************/
+    // For the user to delete one of his comments
+    function userDeleteComment($id){
+        $comments = new \Projet\Models\CommentModel();
+        $comments->deleteComment($id);
+        header('Location: indexAdmin.php?action=userDashboard&status=success&from=deleteComment');
+    }
+
+    // For the user to modify one of his comments
+    function commentModify($id){
+        $comments = new \Projet\Models\CommentModel();
+        $comm = $comments->singleComment($id);
+        $data = $comm->fetch();
+        return $this->viewUser("user-comment-modify", $data);
+    }
+
+    function commentModifyPost($id, $Post){
+        $comments = new \Projet\Models\CommentModel();
+        $data = [
+            ':id' => $id,
+            ':title' => htmlspecialchars($Post['title']),
+            ':content' => htmlspecialchars($Post['content'])
+        ];
+        $comm = $comments->commentModifyPost($data);
+        header('Location: indexAdmin.php?action=userDashboard&status=success&from=modifyComment');
+    }
+
     
 }

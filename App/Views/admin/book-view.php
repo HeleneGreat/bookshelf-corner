@@ -1,6 +1,6 @@
 <?php include_once('./App/Views/admin/layouts/header.php');?>
 
-<section id="one-book">
+<section id="one-book" class="container-lg">
     <div class="retour"><a href="indexAdmin.php?action=livres" title="Retour"><i class="fas fa-arrow-circle-left"></i></a></div>
 
     <div id="btn-delete" class="delete"><a title="Supprimer ce livre" class="fa-stack"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-trash-can fa-stack-1x"></i></a></div>

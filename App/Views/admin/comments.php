@@ -1,7 +1,7 @@
 <?php include_once('./App/Views/admin/layouts/header.php');?>
 
 
-<section id="all-comments">
+<section id="all-comments" class="container-lg">
 
     <h1>Liste des commentaires</h1>   
     <?php 
@@ -20,7 +20,7 @@
             </div>
         </article>
         
-          <!-- DELETE CONFIRMATION MODAL FOR COMMENTS -->
+        <!-- DELETE CONFIRMATION MODAL FOR COMMENTS -->
         <div id="myModal<?= $data['id']; ?>" class="modal display-none">
             <div class="modal-content text-center">
                 <span id="closing-<?= $data['id']; ?>" class="closing close bold">X</span>

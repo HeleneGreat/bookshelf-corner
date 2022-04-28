@@ -61,6 +61,11 @@ class AdminController extends Controller{
                     $userMessage = new SubmitMessage ("success", "Le compte administrateur a bien été créé !");
                     $datas["feedback"] = $userMessage->formatedMessage();
                 }
+            }elseif($_GET['status'] == "error"){
+                if($_GET['from'] == "mailconnexion"){
+                    $userMessage = new SubmitMessage ("error", "Aucun compte n'est associé à cette adresse mail !");
+                    $datas["feedback"] = $userMessage->formatedMessage();
+                }
             }
         }
         return $this->viewAdmin("connexion/connexionAdmin", $datas);
@@ -71,18 +76,22 @@ class AdminController extends Controller{
         $user = new \Projet\Models\AdminModel();
         $connexAdmin = $user->infoConnexion($mail);
         $result = $connexAdmin->fetch();
-        $isPasswordCorrect = password_verify($mdp, $result['mdp']);
-        if ($isPasswordCorrect){
-            $_SESSION['id'] = $result['id'];
-            $_SESSION['mail'] = $result['mail'];
-            $_SESSION['mdp'] = $result['mdp'];
-            $_SESSION['pseudo'] = $result['pseudo'];
-            $_SESSION['picture'] = $result['picture'];
-            $_SESSION['role'] = $result['role'];
-            header('Location: indexAdmin.php?action=dashboard');
-        }
-        else{
-            echo "Identifiants erronés !";
+        if(!empty($result)){
+            $isPasswordCorrect = password_verify($mdp, $result['mdp']);
+            if ($isPasswordCorrect){
+                $_SESSION['id'] = $result['id'];
+                $_SESSION['mail'] = $result['mail'];
+                $_SESSION['mdp'] = $result['mdp'];
+                $_SESSION['pseudo'] = $result['pseudo'];
+                $_SESSION['picture'] = $result['picture'];
+                $_SESSION['role'] = $result['role'];
+                header('Location: indexAdmin.php?action=dashboard');
+            }
+            else{
+                echo "Identifiants erronés !";
+            }
+        }else{
+            header('Location: indexAdmin.php?action=connexionAdmin&status=error&from=mailconnexion');
         }
     }
 

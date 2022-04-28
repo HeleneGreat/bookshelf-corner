@@ -1,6 +1,6 @@
 <?php include_once('./App/Views/admin/layouts/header.php');?>
 
-<section id="one-message">
+<section id="one-message" class="container-lg">
     <div class="retour"><a href="indexAdmin.php?action=messages" title="Retour"><i class="fas fa-arrow-circle-left"></i></a></div>
 
     <div id="btn-delete" class="delete"><a title="Supprimer ce message" class="fa-stack"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-trash-can fa-stack-1x"></i></a></div>
@@ -20,7 +20,6 @@
             </div>
         </div>
     </div>
-
     
     <article>
         <h1 class="text-center">Message de <?= $datas['firstname']; ?></h1>

@@ -35,7 +35,7 @@
             <?php }elseif($_SESSION['role'] > 0){ ?>
                 <li><a href="indexAdmin.php?action=dashboard">Espace admin</a></li>
             <?php }elseif($_SESSION['role'] === 0){ ?>
-                <li><a href="indexAdmin.php?action=userConnexion">Mon compte</a></li>
+                <li><a href="indexAdmin.php?action=userDashboard">Mon compte</a></li>
             <?php }; ?>
         </ul>
         <div class="flex justify-end">
@@ -59,7 +59,7 @@
                 <?php }elseif($_SESSION['role'] > 0){ ?>
                     <button><a href="indexAdmin.php?action=dashboard">Espace admin</a></button>
                 <?php }elseif($_SESSION['role'] === 0){ ?>
-                    <button><a href="indexAdmin.php?action=user-account">Mon compte</a></button>
+                    <button><a href="indexAdmin.php?action=userDashboard">Mon compte</a></button>
                 <?php }; ?>
                 </div>
             </div>
@@ -84,9 +84,3 @@
 <div id="back-to-top">
     <a href="#bandeau" title="Retour en haut de la page"><i class="fa-solid fa-circle-chevron-up"></i></a>
 </div>
-
-<?php if(isset($datas['feedback'])) {;?>
-    <div class="container center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
-<?php }; ?>
-
-

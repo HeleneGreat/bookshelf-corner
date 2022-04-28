@@ -207,14 +207,25 @@ try{
             $userController->userDashboard();
         }
 
-        elseif ($_GET['action'] == "disconnect"){
+        elseif ($_GET['action'] == "commentModify"){
+            $id = $_GET['id'];
+            $commentController->commentModify($id);
+        }
+
+        elseif ($_GET['action'] == "commentModifyPost"){
+            $id = $_GET['id'];
+            $commentController->commentModifyPost($id, $_POST);
+        }
+
+        elseif ($_GET['action'] == "commentDelete"){
+            $id = $_GET['id'];
+            $commentController->userDeleteComment($id);
+        }
+
+        elseif ($_GET['action'] == "userDisconnect"){
             session_destroy();
             $userController->connexionUser();
         }
-
-
-
-
 
 
         elseif($_GET['action'] == "error"){

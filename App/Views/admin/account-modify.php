@@ -1,6 +1,6 @@
 <?php include_once('./App/Views/admin/layouts/header.php');?>
 
-<section id="account">
+<section id="account" class="container-lg">
     <div class="retour"><a href="indexAdmin.php?action=account"><i class="fas fa-arrow-circle-left"></i></a></div>
 
     <h1>Modifier mon compte</h1>

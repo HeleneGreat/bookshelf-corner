@@ -2,7 +2,7 @@
 
 <!-- This page is only displayed on the Supra admin account -->
 
-<section id="parameters">
+<section id="parameters" class="container-lg">
 
     <h1>Paramètres du site</h1> 
     <p>Titre du blog : <span class="bold"><?= $datas['name'];?></span></p>

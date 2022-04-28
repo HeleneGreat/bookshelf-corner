@@ -57,8 +57,19 @@ class CommentModel extends Manager{
         return $req;
     }
 
+    public function commentModifyPost($data){
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare(
+            'UPDATE comments
+            SET title = :title, content = :content
+            WHERE id = :id'
+        );
+        $req->execute($data); 
+        return $req;
+    }
+
     public function deleteComment($id){
-        $bdd =$this->dbConnect();
+        $bdd = $this->dbConnect();
         $req = $bdd->prepare('DELETE FROM comments WHERE id = ?');
         $req->execute(array($id));
         return $req;
