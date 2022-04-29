@@ -25,7 +25,6 @@ try{
         
         if($_GET['action'] == 'livres'){
             $bookController->allBooks();
-            // $bookController->pagination("books");
         }
         
         elseif($_GET['action'] == 'un-livre'){

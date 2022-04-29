@@ -94,6 +94,7 @@ class UserController extends Controller{
 
     function userDashboard(){
         $pagination = $this->pagination("comments");
+        // TODO jusqu'ici OK !!
         $new = new \Projet\Models\UserModel();
         $allComment = $new->allUserComments($_SESSION['id'], $pagination);
         $allComments = $allComment->fetchAll();
@@ -102,10 +103,11 @@ class UserController extends Controller{
         $nbComments = $nbrComment->fetch();
         $datas = [
             'allComments' => $allComments,
-            'nbComments' => $nbComments
+            'nbComments' => $nbComments['nbComments'],
+            'pages' => $pagination['pages'],
+            'currentPage' => $pagination['currentPage'],
+            
         ];
-        $datas['pages'] = $pagination['pages'];
-        $datas['currentPage'] = $pagination['currentPage'];
         if(isset($_GET['status'])){
             if($_GET['status'] == "success"){
                 if($_GET['from'] == "deleteComment"){

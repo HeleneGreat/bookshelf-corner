@@ -12,7 +12,7 @@
     <!-- User dashboard -->
         <?php }else{ ?>
             <div id="all-comments">
-            <p class="stats">Nombre total de <span class="bold">commentaires</span> publiés : <span class="bold"><?= $datas['nbComments']['nbComments']; ?></span></p>
+            <p class="stats">Nombre total de <span class="bold">commentaires</span> publiés : <span class="bold"><?= $datas['nbComments']; ?></span></p>
             <?php foreach($datas['allComments'] as $comment){ ?>
                 <article class="flex-md">
                     <div class="user-info">
@@ -43,7 +43,25 @@
                         </div>
                     </div>
                 </div>
-            <?php }; ?>        
+            <?php }; ?>
+                <nav>
+                    <ul id="pagination" class="flex justify-center">
+                        <!-- PREVIOUS PAGE -->
+                        <li class="<?= ($datas['currentPage'] == 1) ? "display-none" : "" ?>">
+                            <a class="controller previous" title="Page précédente" href="indexAdmin.php?action=userDashboard&page=<?= $datas['currentPage'] - 1 ?>"><</a>
+                        </li>
+                        <?php for($page = 1; $page <= $datas['pages']; $page++): ?>
+                            <!-- ALL PAGES NUMBER -->
+                            <li class="<?= ($datas['currentPage'] == $page) ? "bold active" : "not-active" ?>">
+                                <a class="nb-page" href="indexAdmin.php?action=userDashboard&page=<?= $page ?>" ><?= $page ?></a>
+                            </li>
+                        <?php endfor ?>
+                            <!-- NEXT PAGE -->
+                            <li class="<?= ($datas['currentPage'] == $datas['pages']) ? "display-none" : "" ?>">
+                            <a class="controller next" title="Page suivante" href="indexAdmin.php?action=userDashboard&page=<?= $datas['currentPage'] + 1 ?>">></a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         <?php }; ?>        
     </div>

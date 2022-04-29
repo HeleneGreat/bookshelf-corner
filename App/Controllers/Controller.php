@@ -22,7 +22,7 @@ class Controller{
         }
     }
 
-    function viewAdmin($viewName, $datas = null){$new = new \Projet\Models\BlogModel();
+    function viewAdmin($viewName, $datas = null){
         $new = new \Projet\Models\BlogModel();
         $blogs = $new->blogInfo(1);
         $blog = $blogs->fetch();      
@@ -125,7 +125,9 @@ class Controller{
         if($table === "books"){
             $new = new \Projet\Models\BookModel();
             $perPage = 8;
-            $totalItems = $new->countBooks();
+            $totalItem = $new->countBooks();
+            $totalItems = $totalItem->fetch();
+            $totalItems = $totalItems['COUNT(id)'];
         }elseif($table === "messages"){
             $new = new \Projet\Models\MsgModel();
             $perPage = 15;
@@ -133,9 +135,10 @@ class Controller{
         }elseif($table === "comments"){
             $new = new \Projet\Models\UserModel();
             $perPage = 6;
-            $id = $_SESSION['id'];
-            $totalItems = $new->countUserComments($_SESSION['id']);
-        }
+            $totalItem = $new->countUserComments($_SESSION['id']);
+            $totalItems = $totalItem->fetch();
+            $totalItems = $totalItems['nbComments'];
+        }        
         // Get number of pages
         $pages = ceil($totalItems / $perPage);
         // Get first page item

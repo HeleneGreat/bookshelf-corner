@@ -8,7 +8,6 @@
     <div class="flex-md justify-between-md">
     <?php 
     foreach($datas['book'] as $book){ ?>
-        
             <article id="book-card" class="center flex col justify-between">
                 <h3 class="text-center"><?= 
                 substr($book['title'], 0, 30); 
@@ -28,18 +27,18 @@
 
 
 <nav>
-    <ul class="pagination">
-        <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
+    <ul id="pagination">
+        <!-- PREVIOUS PAGE -->
         <li class="<?= ($datas['currentPage'] == 1) ? "display-none" : "" ?>">
             <a href="index.php?action=livres&page=<?= $datas['currentPage'] - 1 ?>">Précédente</a>
         </li>
         <?php for($page = 1; $page <= $datas['pages']; $page++): ?>
-            <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
+            <!-- ALL PAGES NUMBER -->
             <li class="<?= ($datas['currentPage'] == $page) ? "bold" : "" ?>">
                 <a href="index.php?action=livres&page=<?= $page ?>" ><?= $page ?></a>
             </li>
         <?php endfor ?>
-            <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
+            <!-- NEXT PAGE -->
             <li class="<?= ($datas['currentPage'] == $datas['pages']) ? "display-none" : "" ?>">
             <a href="index.php?action=livres&page=<?= $datas['currentPage'] + 1 ?>">Suivante</a>
         </li>
