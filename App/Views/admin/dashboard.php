@@ -49,5 +49,4 @@
     </div>
 
 </section>
-<?php include_once('./App/Views/admin/layouts/footer.php');
-?>
+<?php include_once('./App/Views/admin/layouts/footer.php');?>

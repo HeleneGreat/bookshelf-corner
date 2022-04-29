@@ -7,11 +7,14 @@ class Controller{
     function viewFront($viewName, $datas = null){
         $new = new \Projet\Models\BlogModel();
         $blogs = $new->blogInfo(1);
-        $blog = $blogs->fetch();
+        $blog = $blogs->fetch();        
         include('./App/Views/front/' . $viewName . '.php');
     }
 
     function viewUser($viewName, $datas = null){
+        $new = new \Projet\Models\BlogModel();
+        $blogs = $new->blogInfo(1);
+        $blog = $blogs->fetch();
         if (!empty($_SESSION) && $_SESSION['role'] === 0){
             include('./App/Views/admin/' . $viewName . '.php');
         }else{
@@ -19,7 +22,10 @@ class Controller{
         }
     }
 
-    function viewAdmin($viewName, $datas = null){
+    function viewAdmin($viewName, $datas = null){$new = new \Projet\Models\BlogModel();
+        $new = new \Projet\Models\BlogModel();
+        $blogs = $new->blogInfo(1);
+        $blog = $blogs->fetch();      
         include('./App/Views/admin/' . $viewName . '.php');
     }
 
@@ -109,4 +115,39 @@ class Controller{
             header('Location: indexAdmin.php?action=' . $redirection . '&status=error&from=duplicate');
         }
     }
+
+    function pagination($table){
+        if(isset($_GET['page']) && !empty($_GET['page'])){
+            $currentPage = (int) strip_tags($_GET['page']);
+        }else{
+            $currentPage = 1;
+        }
+        if($table === "books"){
+            $new = new \Projet\Models\BookModel();
+            $perPage = 8;
+            $totalItems = $new->countBooks();
+        }elseif($table === "messages"){
+            $new = new \Projet\Models\MsgModel();
+            $perPage = 15;
+            $totalItems = $new->countItems($table);
+        }elseif($table === "comments"){
+            $new = new \Projet\Models\UserModel();
+            $perPage = 6;
+            $id = $_SESSION['id'];
+            $totalItems = $new->countUserComments($_SESSION['id']);
+        }
+        // Get number of pages
+        $pages = ceil($totalItems / $perPage);
+        // Get first page item
+        $firstItem = ($currentPage * $perPage) - $perPage;
+        $datas = [
+            'currentPage' => $currentPage,
+            'pages' => $pages,
+            ':firstItem' => $firstItem,
+            ':perPage' => $perPage,
+            ':totalItems' => $totalItems
+        ];
+        return $datas;
+    }
+
 }

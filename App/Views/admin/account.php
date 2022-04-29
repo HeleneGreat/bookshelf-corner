@@ -5,7 +5,7 @@
     <div class="flex-md">
         <div>
             <p>Mon image de profil :</p>
-            <img src="./App/Public/Admin/images/<?= $datas['picture']; ?>" alt="Image de profil de <?= $datas['pseudo']; ?>">
+            <img src="./App/Public/<?= $_SESSION['role'] > 0 ? "Admin" : "Users" ; ?>/images/<?= $datas['picture']; ?>" alt="Image de profil de <?= $datas['pseudo']; ?>">
         </div>
         <div id="admin-info">
             <p>Mon pseudo : <span class="bold"><?= $datas['pseudo']; ?></span></p>

@@ -20,7 +20,7 @@ class UserModel extends Manager{
     }
 
     // All comments written by that user
-    public function allUserComments($userId){
+    public function allUserComments($userId, $pagination){
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'SELECT comments.id AS commentId, books.id AS bookId, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, comments.title AS commentTitle, comments.content AS commentContent, books.picture AS bookCover, books.title AS bookTitle
@@ -28,7 +28,10 @@ class UserModel extends Manager{
             INNER JOIN books ON book_id = books.id
             INNER JOIN users ON user_id = users.id 
             WHERE users.id = ?
-            ORDER BY comments.created_at DESC');
+            ORDER BY comments.created_at DESC
+            LIMIT :firstItem, :perPage');
+        $req->bindValue(':firstItem', $pagination[':firstItem'], $bdd::PARAM_INT);
+        $req->bindValue(':perPage', $pagination[':perPage'], $bdd::PARAM_INT);
         $req->execute(array($userId));
         return $req;
     }

@@ -16,7 +16,7 @@
             </div>
             <div class="flex message-link">
                 <a title="Lire ce message" href="indexAdmin.php?action=messagesView&id=<?=$msg['id']; ?>" class="stretched-link"><i class="fa-solid fa-eye"></i></a>
-                <button title="Supprimer ce message" id="btn-delete-<?= $msg['id']; ?>" class="btn-delete-this"><a><i class="fa-regular fa-trash-can lg"></i></a></button>
+                <a href="indexAdmin.php?action=messagesDelete&id=<?= $msg['id'];?>" title="Supprimer ce message" id="btn-delete-<?= $msg['id']; ?>" class="btn-delete-this"><i class="fa-regular fa-trash-can lg"></i></a>
             </div>
         </article>
         

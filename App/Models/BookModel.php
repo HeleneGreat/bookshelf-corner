@@ -10,13 +10,27 @@ class BookModel extends Manager{
         $req->execute();
         return $req;
     }
-    
+
     public function allBooks(){
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'SELECT id, title, author, picture, DATE_FORMAT(created_at, "%d %M %Y") AS date, location, slider 
             FROM books 
-            ORDER BY created_at DESC');
+            ORDER BY created_at DESC'
+        );
+        $req->execute();
+        return $req;
+    }
+
+    public function allBooksPagination($pagination){
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare(
+            'SELECT id, title, author, picture, DATE_FORMAT(created_at, "%d %M %Y") AS date, location, slider 
+            FROM books 
+            ORDER BY created_at DESC
+            LIMIT :firstItem, :perPage');
+        $req->bindValue(':firstItem', $pagination[':firstItem'], $bdd::PARAM_INT);
+        $req->bindValue(':perPage', $pagination[':perPage'], $bdd::PARAM_INT);
         $req->execute();
         return $req;
     }

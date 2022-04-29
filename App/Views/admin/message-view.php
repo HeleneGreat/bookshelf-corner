@@ -3,7 +3,7 @@
 <section id="one-message" class="container-lg">
     <div class="retour"><a href="indexAdmin.php?action=messages" title="Retour"><i class="fas fa-arrow-circle-left"></i></a></div>
 
-    <div id="btn-delete" class="delete"><a title="Supprimer ce message" class="fa-stack"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-trash-can fa-stack-1x"></i></a></div>
+    <div id="btn-delete" class="delete"><a href="indexAdmin.php?action=messagesDelete&id=<?= $datas['id'];?>" title="Supprimer ce message" class="fa-stack"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-trash-can fa-stack-1x"></i></a></div>
 
 
     <!-- DELETE CONFIRMATION MODAL -->

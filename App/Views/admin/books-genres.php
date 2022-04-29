@@ -19,7 +19,7 @@
                 </div>
                 <div class="flex cat-link">
                     <a id="modify-<?= $data['id']; ?>" title="Modifier la catégorie" class="modify-this"><i class="fa-solid fa-pencil"></i></a>
-                    <button title="Supprimer la catégorie" id="btn-delete-<?= $data['id']; ?>" class="btn-delete-this"><a><i class="fa-regular fa-trash-can"></i></a></button>
+                    <a href="indexAdmin.php?action=genreDelete&id=<?= $data['id'];?>" title="Supprimer la catégorie" id="btn-delete-<?= $data['id']; ?>" class="btn-delete-this"><i class="fa-regular fa-trash-can"></i></a>
                 </div>
             </div>
             <!-- FORM MODIFY GENRE -->

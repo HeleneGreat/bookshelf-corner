@@ -311,9 +311,12 @@ class BookController extends Controller{
     }
 
     function allBooks(){
+        $pagination = $this->pagination("books");
         $new = new \Projet\Models\BookModel();
-        $data = $new->allBooks();
-        $datas = $data->fetchAll();
+        $data = $new->allBooksPagination($pagination);
+        $datas['book'] = $data->fetchAll();
+        $datas['pages'] = $pagination['pages'];
+        $datas['currentPage'] = $pagination['currentPage'];
         return $this->viewFront("all-books", $datas);
     }
 

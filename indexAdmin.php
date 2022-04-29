@@ -222,10 +222,19 @@ try{
             $commentController->userDeleteComment($id);
         }
 
+        elseif($_GET['action'] == "userAccount"){
+            $userController->userAccount();
+        }
+
+
         elseif ($_GET['action'] == "userDisconnect"){
             session_destroy();
             $userController->connexionUser();
         }
+
+
+
+
 
 
         elseif($_GET['action'] == "error"){

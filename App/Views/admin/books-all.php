@@ -20,7 +20,7 @@
             <div class="flex book-link">
                 <a title="Voir ce livre" href="indexAdmin.php?action=livresview&id=<?= $book['id']; ?>" class="stretched-link"><i class="fa-solid fa-eye"></i></a>
                 <a title="Modifier ce livre" href="indexAdmin.php?action=livresmodify&id=<?= $book['id']; ?>"><i class="fa-solid fa-pencil lg"></i></a>
-                <button title="Supprimer ce livre" id="btn-delete-<?= $book['id']; ?>" class="btn-delete-this"><a><i class="fa-regular fa-trash-can lg"></i></a></button>
+                <a href="indexAdmin.php?action=livresdelete&id=<?= $book['id'];?>" title="Supprimer ce livre" id="btn-delete-<?= $book['id']; ?>" class="btn-delete-this"><i class="fa-regular fa-trash-can lg"></i></a>
             </div>
         </article>
 

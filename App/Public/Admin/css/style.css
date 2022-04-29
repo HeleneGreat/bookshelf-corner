@@ -208,7 +208,6 @@ ul{
     font-family:'uppereastsideregular', 'Times New Roman', Times, serif;
 }
 
-/* ICI */
 .btn {
     background-color: white;
     padding: 10px 20px;
@@ -216,7 +215,6 @@ ul{
     text-align: center;
     display: block;
 }
-
 
 /* ****************************/
 /* ----- NAV - ANIMATION----- */
@@ -1082,6 +1080,10 @@ img.old-picture{
         padding: 10px;
     }
 
+    #dashboard #all-comments .btn{
+        padding: 10px 20px;
+    }
+
     /* *********************/
     /* ----- ACCOUNT ----- */
     /* *********************/
@@ -1236,6 +1238,10 @@ img.old-picture{
 
     #all-comments .comment-info .object{
         width: 320px;
+    }
+
+    #dashboard #all-comments .btn{
+        padding: 10px 20px;
     }
 
 }

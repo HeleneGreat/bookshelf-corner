@@ -156,6 +156,10 @@ ul {
     margin: 0 auto;
 }
 
+.display-none{
+    display: none;
+}
+
 .bold{
     font-weight: bold;
 }

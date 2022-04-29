@@ -1,12 +1,13 @@
 <?php $currentPageTitle = "Derniers livres lus"; ?>
-<?php include ('layouts/header.php')?>
+<?php include ('layouts/header.php');?>
 
 
 <section id="all-books" class="container bg-all">
     <h1>Les derniers livres que nous avons dévorés</h1>
 
     <div class="flex-md justify-between-md">
-    <?php foreach($datas as $book){ ?>
+    <?php 
+    foreach($datas['book'] as $book){ ?>
         
             <article id="book-card" class="center flex col justify-between">
                 <h3 class="text-center"><?= 
@@ -25,6 +26,25 @@
     </div>
 </section>
 
+
+<nav>
+    <ul class="pagination">
+        <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
+        <li class="<?= ($datas['currentPage'] == 1) ? "display-none" : "" ?>">
+            <a href="index.php?action=livres&page=<?= $datas['currentPage'] - 1 ?>">Précédente</a>
+        </li>
+        <?php for($page = 1; $page <= $datas['pages']; $page++): ?>
+            <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
+            <li class="<?= ($datas['currentPage'] == $page) ? "bold" : "" ?>">
+                <a href="index.php?action=livres&page=<?= $page ?>" ><?= $page ?></a>
+            </li>
+        <?php endfor ?>
+            <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
+            <li class="<?= ($datas['currentPage'] == $datas['pages']) ? "display-none" : "" ?>">
+            <a href="index.php?action=livres&page=<?= $datas['currentPage'] + 1 ?>">Suivante</a>
+        </li>
+    </ul>
+</nav>
 
 
 

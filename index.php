@@ -25,6 +25,7 @@ try{
         
         if($_GET['action'] == 'livres'){
             $bookController->allBooks();
+            // $bookController->pagination("books");
         }
         
         elseif($_GET['action'] == 'un-livre'){
@@ -111,5 +112,6 @@ catch (Exception $e){
 }
 
 catch (Error $e){
-    return $this->viewFront('error');
+    // return $this->viewFront('error');
+    echo $e->getMessage();
 }

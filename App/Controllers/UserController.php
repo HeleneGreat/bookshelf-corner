@@ -93,8 +93,9 @@ class UserController extends Controller{
     }
 
     function userDashboard(){
+        $pagination = $this->pagination("comments");
         $new = new \Projet\Models\UserModel();
-        $allComment = $new->allUserComments($_SESSION['id']);
+        $allComment = $new->allUserComments($_SESSION['id'], $pagination);
         $allComments = $allComment->fetchAll();
         $countComments = new \Projet\Models\UserModel();
         $nbrComment = $countComments->countUserComments($_SESSION['id']);
@@ -103,6 +104,8 @@ class UserController extends Controller{
             'allComments' => $allComments,
             'nbComments' => $nbComments
         ];
+        $datas['pages'] = $pagination['pages'];
+        $datas['currentPage'] = $pagination['currentPage'];
         if(isset($_GET['status'])){
             if($_GET['status'] == "success"){
                 if($_GET['from'] == "deleteComment"){
@@ -120,6 +123,12 @@ class UserController extends Controller{
         return $this->viewUser("dashboard", $datas);
     }
 
-
+    function userAccount(){
+        $id = $_SESSION['id'];
+        $user = new \Projet\Models\UserModel();
+        $users = $user->infoUser($id);
+        $datas = $users->fetch();
+        return $this->viewUser("account", $datas);
+    }
 
 }

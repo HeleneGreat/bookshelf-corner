@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $currentPageTitle; ?> | <?= $blog['name']; ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./App/Public/front/css/style.css">
-    
+    <link rel="stylesheet" href="./App/Public/front/css/style.css">    
 </head>
 <body>    
 <header id="bandeau">
@@ -31,7 +30,7 @@
             <li><a href="index.php?action=about">A propos</a></li>
             <li><a href="index.php?action=contact">Me contacter</a></li>
             <?php if(empty($_SESSION)){ ?>
-                <li><a href="indexAdmin.php?action=createUser">Créer un compte</a></li>
+                <li><a href="indexAdmin.php?action=connexionUser">Se Connecter</a></li>
             <?php }elseif($_SESSION['role'] > 0){ ?>
                 <li><a href="indexAdmin.php?action=dashboard">Espace admin</a></li>
             <?php }elseif($_SESSION['role'] === 0){ ?>

@@ -1,4 +1,5 @@
-<?php include_once('./App/Views/admin/layouts/head.php'); ?>
+<?php include_once('./App/Views/admin/layouts/head.php');
+ ?>
 
 <!-- Blur element when mobile nav is open -->
 <div id="blur" class="display-none"></div>
@@ -8,7 +9,7 @@
 <header>
     <div id="bandeau-admin">
         <div class="container">
-            <h2>The Bookshelf Corner</h2>
+            <h2><?= $blog['name']; ?></h2>
             <h3>Espace admin</h3>
         </div>
         <div id="open-menu" class="menu-toggle mobile"><i class="fas fa-bars"></i></div>
@@ -22,7 +23,7 @@
             <p><?= $_SESSION['pseudo'] ;?></p>
         </div>
         <ul>
-            <li><a href="index.php" title="The Bookshelf Corner"><i class="fas fa-arrow-left"></i> Retourner au blog</a></li>
+            <li><a href="index.php" title="<?= $blog['name']; ?>"><i class="fas fa-arrow-left"></i> Retourner au blog</a></li>
             <li><a href="indexAdmin.php?action=<?= $_SESSION['role'] === 0 ? "userDashboard" : "dashboard";?>" title="Tableau de bord"><i class="fas fa-chart-line"></i> Tableau de bord</a></li>
         </ul>
         <?php if($_SESSION['role'] > 0){ ?>
@@ -33,7 +34,7 @@
         </ul>
         <?php }; ?>
         <ul><h3>Profil</h3>
-            <li><a href="indexAdmin.php?action=account" title="Paramètres du compte"><i class="fas fa-user"></i> Mon compte</a></li>
+            <li><a href="indexAdmin.php?action=<?= $_SESSION['role'] > 0 ? 'account' :'userAccount'; ?>" title="Paramètres du compte"><i class="fas fa-user"></i> Mon compte</a></li>
         <?php if($_SESSION['role'] === 2){ ?>
             <li><a href="indexAdmin.php?action=blogParameters" title="Paramètres du blog"><i class="fa-solid fa-gear"></i> Paramètres du site</a></li>
         <?php };?>

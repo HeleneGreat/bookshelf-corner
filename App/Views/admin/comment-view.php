@@ -3,7 +3,7 @@
 <section id="one-comment" class="container-lg">
     <div class="retour"><a href="indexAdmin.php?action=comments" title="Retour"><i class="fas fa-arrow-circle-left"></i></a></div>
 
-    <div id="btn-delete" class="delete"><a title="Supprimer ce comment" class="fa-stack"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-trash-can fa-stack-1x"></i></a></div>
+    <div id="btn-delete" class="delete"><a href="indexAdmin.php?action=commentsDelete&id=<?= $datas['id'];?>" title="Supprimer ce comment" class="fa-stack"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-trash-can fa-stack-1x"></i></a></div>
 
 
     <!-- DELETE CONFIRMATION MODAL -->
