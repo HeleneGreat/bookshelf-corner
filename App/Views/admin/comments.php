@@ -5,7 +5,7 @@
 
     <h1>Liste des commentaires</h1>   
     <?php 
-    foreach($datas as $data){ 
+    foreach($datas['comments'] as $data){ 
         if(isset($data['pseudo'])){
         ?>
         <article class="flex">
@@ -34,7 +34,25 @@
                 </div>
             </div>
         </div>
-        <?php } ; }?> 
+    <?php } ; }?> 
+    <nav>
+        <ul id="pagination" class="flex justify-center">
+            <!-- PREVIOUS PAGE -->
+            <li class="<?= ($datas['currentPage'] == 1) ? "display-none" : "" ?>">
+                <a class="controller previous" title="Page précédente" href="indexAdmin.php?action=comments&page=<?= $datas['currentPage'] - 1 ?>"><</a>
+            </li>
+            <!-- ALL PAGES NUMBER -->
+            <?php for($page = 1; $page <= $datas['pages']; $page++): ?>
+                <li class="<?= ($datas['currentPage'] == $page) ? "bold active" : "not-active" ?>">
+                    <a class="nb-page" href="indexAdmin.php?action=comments&page=<?= $page ?>"><?= $page ?></a>
+                </li>
+            <?php endfor ?>
+                <!-- NEXT PAGE -->
+                <li class="<?= ($datas['currentPage'] == $datas['pages']) ? "display-none" : "" ?>">
+                <a class="controller next" title="Page suivante" href="indexAdmin.php?action=comments&page=<?= $datas['currentPage'] + 1 ?>">></a>
+            </li>
+        </ul>
+    </nav>
 </section>
 
 <?php include_once('./App/Views/admin/layouts/footer.php');?>

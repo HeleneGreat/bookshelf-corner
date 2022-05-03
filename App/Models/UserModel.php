@@ -11,6 +11,13 @@ class UserModel extends Manager{
         return $req;
     }
 
+    public function countUsers(){
+        $bdd =$this->dbConnect();
+        $req = $bdd->prepare('SELECT COUNT(id) FROM users WHERE id');
+        $req->execute();
+        return $req;
+    }
+
     // Number of comments written by that user
     public function countUserComments($userId){
         $bdd =$this->dbConnect();

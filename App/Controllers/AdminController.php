@@ -76,6 +76,7 @@ class AdminController extends Controller{
         $user = new \Projet\Models\AdminModel();
         $connexAdmin = $user->infoConnexion($mail);
         $result = $connexAdmin->fetch();
+        // var_dump($result);die;
         if(!empty($result)){
             $isPasswordCorrect = password_verify($mdp, $result['mdp']);
             if ($isPasswordCorrect){
@@ -105,8 +106,20 @@ class AdminController extends Controller{
         $countMails = new \Projet\Models\MsgModel();
         $nbrMail = $countMails->countMessages();
         $nbMails = $nbrMail->fetch();
-        $stats = array_merge($nbBooks, $nbMails);
-        $this->validAccess("dashboard", $stats);
+        $countComments = new \Projet\Models\CommentModel();
+        $nbrComment = $countComments->countComments();
+        $nbComments = $nbrComment->fetch();
+        $countUsers = new \Projet\Models\UserModel();
+        $nbrUser = $countUsers->countUsers();
+        $nbUsers = $nbrUser->fetch();
+        $datas = [
+            'nbBooks' => $nbBooks[0],
+            'nbMails' => $nbMails[0],
+            'nbComments' => $nbComments[0],
+            'nbUsers' => $nbUsers[0]
+        ];
+        // $stats = array_merge($nbBooks, $nbMails);
+        $this->validAccess("dashboard", $datas);
     }    
 
     /*********************************************************/

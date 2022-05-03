@@ -19,17 +19,32 @@ class CommentModel extends Manager{
     }
 
     // Every comment ever published
-    public function allComments(){
+    public function allCommentsPagination($pagination){
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'SELECT comments.id, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, users.pseudo, users.picture, comments.title, comments.content
             FROM comments
             INNER JOIN books ON book_id = books.id
             INNER JOIN users ON user_id = users.id
-            ORDER BY comments.created_at DESC');
+            ORDER BY comments.created_at DESC
+            LIMIT :firstItem, :perPage');
+        $req->bindValue(':firstItem', $pagination[':firstItem'], $bdd::PARAM_INT);
+        $req->bindValue(':perPage', $pagination[':perPage'], $bdd::PARAM_INT);
         $req->execute();
         return $req;
     }
+
+    // public function allComments(){
+    //     $bdd = $this->dbConnect();
+    //     $req = $bdd->prepare(
+    //         'SELECT comments.id, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, users.pseudo, users.picture, comments.title, comments.content
+    //         FROM comments
+    //         INNER JOIN books ON book_id = books.id
+    //         INNER JOIN users ON user_id = users.id
+    //         ORDER BY comments.created_at DESC');
+    //     $req->execute();
+    //     return $req;
+    // }
 
     // All comments related to THIS book article
     public function allBookComments($id){

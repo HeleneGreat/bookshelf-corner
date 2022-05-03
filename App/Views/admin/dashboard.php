@@ -6,8 +6,10 @@
     <div class="flex justify-around"></div>
     <!-- Admin dashboard -->
         <?php if($_SESSION['role'] > 0){ ?>
-        <p>Nombre total de <span class="bold">livres</span> : <span class="bold"><?= $datas[0]; ?></span></p>
-        <p>Nombre total de <span class="bold">messages</span> reçus : <span class="bold"><?= $datas[1]; ?></span></p>
+        <p>Nombre total de <span class="bold">livres</span> : <span class="bold"><?= $datas['nbBooks']; ?></span></p>
+        <p>Nombre total de <span class="bold">messages</span> reçus : <span class="bold"><?= $datas['nbMails']; ?></span></p>
+        <p>Nombre total de <span class="bold">commentaires</span> sur le blog : <span class="bold"><?= $datas['nbComments']; ?></span></p>
+        <p>Nombre total de <span class="bold">comptes utilisateurs</span> : <span class="bold"><?= $datas['nbUsers']; ?></span></p>
 
     <!-- User dashboard -->
         <?php }else{ ?>
@@ -50,10 +52,10 @@
                         <li class="<?= ($datas['currentPage'] == 1) ? "display-none" : "" ?>">
                             <a class="controller previous" title="Page précédente" href="indexAdmin.php?action=userDashboard&page=<?= $datas['currentPage'] - 1 ?>"><</a>
                         </li>
+                        <!-- ALL PAGES NUMBER -->
                         <?php for($page = 1; $page <= $datas['pages']; $page++): ?>
-                            <!-- ALL PAGES NUMBER -->
                             <li class="<?= ($datas['currentPage'] == $page) ? "bold active" : "not-active" ?>">
-                                <a class="nb-page" href="indexAdmin.php?action=userDashboard&page=<?= $page ?>" ><?= $page ?></a>
+                                <a class="nb-page" href="indexAdmin.php?action=userDashboard&page=<?= $page ?>"><?= $page ?></a>
                             </li>
                         <?php endfor ?>
                             <!-- NEXT PAGE -->

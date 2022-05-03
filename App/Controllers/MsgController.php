@@ -19,16 +19,31 @@ class MsgController extends Controller{
         return $this->viewFront("contact", $data);
     }
 
+    // function allMessages(){
+    //     $messages = new \Projet\Models\MsgModel();
+    //     $msg = $messages->allMessages();
+    //     $data = $msg->fetchAll();
+    //     if(isset($_GET['status'])){
+    //         if($_GET['status'] == "success"){
+    //             $userMessage = new SubmitMessage ("success", "Le message a bien été supprimé !");
+    //             $data["feedback"] = $userMessage->formatedMessage();
+    //     }}
+    //     return $this->validAccess("messages", $data);
+    // }
+
     function allMessages(){
+        $pagination = $this->pagination("messages");
         $messages = new \Projet\Models\MsgModel();
-        $msg = $messages->allMessages();
-        $data = $msg->fetchAll();
+        $msg = $messages->allMessagesPagination($pagination);
+        $datas['messages'] = $msg->fetchAll();
+        $datas['pages'] = $pagination['pages'];
+        $datas['currentPage'] = $pagination['currentPage'];
         if(isset($_GET['status'])){
             if($_GET['status'] == "success"){
                 $userMessage = new SubmitMessage ("success", "Le message a bien été supprimé !");
                 $data["feedback"] = $userMessage->formatedMessage();
         }}
-        return $this->validAccess("messages", $data);
+        return $this->validAccess("messages", $datas);
     }
 
     function viewMessage($id){

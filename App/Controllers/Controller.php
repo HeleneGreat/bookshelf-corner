@@ -132,13 +132,19 @@ class Controller{
             $new = new \Projet\Models\MsgModel();
             $perPage = 15;
             $totalItems = $new->countItems($table);
-        }elseif($table === "comments"){
+        }elseif($table === "comments" && $_SESSION['role'] > 0){
+            $new = new \Projet\Models\CommentModel();
+            $perPage = 15;
+            $totalItem = $new->countComments($table);
+            $totalItems = $totalItem->fetch();
+            $totalItems = $totalItems['COUNT(id)'];
+        }elseif($table === "comments" && $_SESSION['role'] == 0){
             $new = new \Projet\Models\UserModel();
             $perPage = 6;
             $totalItem = $new->countUserComments($_SESSION['id']);
             $totalItems = $totalItem->fetch();
             $totalItems = $totalItems['nbComments'];
-        }        
+        }
         // Get number of pages
         $pages = ceil($totalItems / $perPage);
         // Get first page item

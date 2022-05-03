@@ -25,22 +25,21 @@
     </div>
 </section>
 
-
 <nav>
-    <ul id="pagination">
+    <ul id="pagination" class="center flex justify-center">
         <!-- PREVIOUS PAGE -->
-        <li class="<?= ($datas['currentPage'] == 1) ? "display-none" : "" ?>">
-            <a href="index.php?action=livres&page=<?= $datas['currentPage'] - 1 ?>">Précédente</a>
+        <li class="<?= ($datas['currentPage'] == 1) ? "display-none" : "" ?> previous">
+            <a class="controller " title="Page précédente" href="index.php?action=livres&page=<?= $datas['currentPage'] - 1 ?>"><i class="fa-solid fa-chevron-left"></i></a>
         </li>
         <?php for($page = 1; $page <= $datas['pages']; $page++): ?>
             <!-- ALL PAGES NUMBER -->
-            <li class="<?= ($datas['currentPage'] == $page) ? "bold" : "" ?>">
-                <a href="index.php?action=livres&page=<?= $page ?>" ><?= $page ?></a>
+            <li class="<?= ($datas['currentPage'] == $page) ? "bold active" : "not-active" ?>">
+                <a class="nb-page" href="index.php?action=livres&page=<?= $page ?>"><?= $page ?></a>
             </li>
         <?php endfor ?>
             <!-- NEXT PAGE -->
-            <li class="<?= ($datas['currentPage'] == $datas['pages']) ? "display-none" : "" ?>">
-            <a href="index.php?action=livres&page=<?= $datas['currentPage'] + 1 ?>">Suivante</a>
+            <li class="<?= ($datas['currentPage'] == $datas['pages']) ? "display-none" : "" ?> next">
+            <a class="controller" title="Page suivante" href="index.php?action=livres&page=<?= $datas['currentPage'] + 1 ?>"><i class="fa-solid fa-chevron-right"></i></a>
         </li>
     </ul>
 </nav>

@@ -3,19 +3,14 @@
 A FAIRE ABSOLUMENT
 * fichier htaccess (page 404). Fichier .env aussi ?
 * ETOILES notation
-* pas possible de créer deux comptes avec le même mail
 * champs confirmation création mdp
-* Pas d'accès au dashboard si admin non identifié
-* modification d'un article / livre : drag and drop pour ajouter l'image + INPUT FILE save local
-https://espritweb.fr/comment-uploader-une-image-en-php/#:~:text=Pour%20envoyer%20l'image%20dans,lequel%20on%20souhaite%20l'uploader.
-* breadscumbs / fil d'ariane
 * lié l'admin à l'article écrit
 * balise head title avec variable du nom de la page en cours
-* pagination dans la liste des livres
 * gestion des erreurs
-* et si je créais une table catégorie ? L'admin pourra en rajouter
 * FAIRE UML BDD (obligatoire)
-* API => open library API
+* API => open library API ?
+* BDD books : enlever les colonnes (+ requêtes) superflues
+* page à propos
 
 ACCESSIBILITE / PERFORMANCES
 * cf chrome extension wave pour voir les erreurs
@@ -28,37 +23,46 @@ navLinks.classList = "";
 * page RGPD
 
 SECURITÉ
-* créer différents profils d'utilisateurs pour la BDD
-(après mise en ligne BDD, vérifier que ces profils ont été gardés)
 * session_regenerate_id
 * session time out
-* empêcher l'accès aux pages admin aux personnes non autorisées
 * empêcher d'accéder aux actions via les url (ex : delete)
 * formulaireS htmlspecialchars
 * les functions du controller et model doivent toutes être publiques ?
-* captcha pour les formulaires de contact (pour éviter les spams)
 * vérifier formulaire modif account admin, toutes les erreurs et possibilités
-* ajouter une vérif supplémentaire aux input qui créé ou modifie un titre (book, genre, mail admin..) 
-pour qu'il n'y en ait pas deux pareils
 * mdp de 8 caractères minimum (js)
 * création d'un nouvel admin dans le supraAdmin, pas accès à tous
 
 
 A AJOUTER SI J'AI LE TEMPS
-* Ajouter un localStorage pour les tabs Livres, pour éviter de revenir au 1er onglet après une action
 * API villes pour positionner les articles sur une carte
 * richtext pour que l'admin rédige ses articles avec des options de mise en forme
 * derniers articles qui défilent horizontalement en page d'accueil
 * accessibilité : cf w3C et standards du web
-* plusieurs admin possibles = comment décider qui peut créer compte + ajouter "écrit par" sur les article
+* plusieurs admin = ajouter "écrit par" sur les article
 * image effet parallaxe
 * ajout d'une image : la réduire automatiquement
+* input files : drag and drop pour ajouter l'image
+* captcha pour les formulaires de contact (pour éviter les spams)
 
 
-BookModels
-function allBooks() => requête : ai-je finalement besoin de la localisation ?
 
 
+!!!!!!!! THIS IS DONE !!!!!!!!
+OK enregister photos sous nom ID
+OK traiter les $_POST dans le controller
+OK pb quandmodif genre, si nom vide => change le nom en ""
+OK mettre le logo + nom du blog en php dans le header
+OK modifier compte admin sans modifier mdp
+OK pas deux fois le même nom :
+    OK - genre
+    OK - livre
+    OK - mail
+    OK - pseudo
+OK Exception : si ce mail appartient à ce compte
+OK CF NICO : account modify -> wrong psw = session partially lost avec redirect
+OK tentative de connexion si mail n'existe pas
+OK supprimer un élément sans modal box si JS désativé (prevent default)
+OK finir les commentaires
 
 
 

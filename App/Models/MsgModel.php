@@ -25,6 +25,17 @@ class MsgModel extends Manager{
         return $req;
     }
 
+    public function allMessagesPagination($pagination){
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare(
+            'SELECT id, gender, familyname, firstname, DATE_FORMAT(send_at, "%d/%m/%Y à %kh%i") AS send_at, email, object, message FROM messages ORDER BY send_at DESC
+            LIMIT :firstItem, :perPage');
+        $req->bindValue(':firstItem', $pagination[':firstItem'], $bdd::PARAM_INT);
+        $req->bindValue(':perPage', $pagination[':perPage'], $bdd::PARAM_INT);
+        $req->execute();
+        return $req;
+    }
+
     public function singleMessage($id){
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('SELECT id, gender, familyname, firstname, DATE_FORMAT(send_at, "%d/%m/%Y à %kh%i") AS send_at, email, object, message FROM messages WHERE id = ?');

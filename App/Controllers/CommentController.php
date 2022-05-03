@@ -18,16 +18,31 @@ class CommentController extends Controller{
         header('Location: index.php?action=un-livre&id=' . $data[':book_id']. '&status=success&from=addComment#feedback');
     }
 
+    // function allComments(){
+    //     $comments = new \Projet\Models\CommentModel();
+    //     $comm = $comments->allComments();
+    //     $data = $comm->fetchAll();
+    //     if(isset($_GET['status'])){
+    //         if($_GET['status'] == "success"){
+    //             $userMessage = new SubmitMessage ("success", "Le commmentaire a bien été supprimé !");
+    //             $data["feedback"] = $userMessage->formatedMessage();
+    //     }}
+    //     return $this->validAccess("comments", $data);
+    // }
+
     function allComments(){
+        $pagination = $this->pagination("comments");
         $comments = new \Projet\Models\CommentModel();
-        $comm = $comments->allComments();
-        $data = $comm->fetchAll();
+        $comm = $comments->allCommentsPagination($pagination);
+        $datas['comments'] = $comm->fetchAll();
+        $datas['pages'] = $pagination['pages'];
+        $datas['currentPage'] = $pagination['currentPage'];
         if(isset($_GET['status'])){
             if($_GET['status'] == "success"){
                 $userMessage = new SubmitMessage ("success", "Le commmentaire a bien été supprimé !");
                 $data["feedback"] = $userMessage->formatedMessage();
         }}
-        return $this->validAccess("comments", $data);
+        return $this->validAccess("comments", $datas);
     }
 
     function viewComment($id){
