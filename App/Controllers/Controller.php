@@ -125,8 +125,7 @@ class Controller{
         if($table === "books"){
             $new = new \Projet\Models\BookModel();
             $perPage = 8;
-            $totalItem = $new->countBooks();
-            $totalItems = $totalItem->fetch();
+            $totalItems = $new->countBooks();
             $totalItems = $totalItems['COUNT(id)'];
         }elseif($table === "messages"){
             $new = new \Projet\Models\MsgModel();
@@ -135,8 +134,7 @@ class Controller{
         }elseif($table === "comments" && $_SESSION['role'] > 0){
             $new = new \Projet\Models\CommentModel();
             $perPage = 15;
-            $totalItem = $new->countComments($table);
-            $totalItems = $totalItem->fetch();
+            $totalItems = $new->countComments($table);
             $totalItems = $totalItems['COUNT(id)'];
         }elseif($table === "comments" && $_SESSION['role'] == 0){
             $new = new \Projet\Models\UserModel();

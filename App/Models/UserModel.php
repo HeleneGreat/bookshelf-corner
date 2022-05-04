@@ -6,7 +6,7 @@ class UserModel extends Manager{
 
     public function allUsers(){
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('SELECT pseudo, mail FROM users');
+        $req = $bdd->prepare('SELECT id, pseudo, mail, picture FROM users ORDER BY id DESC');
         $req->execute();
         return $req;
     }
@@ -15,7 +15,8 @@ class UserModel extends Manager{
         $bdd =$this->dbConnect();
         $req = $bdd->prepare('SELECT COUNT(id) FROM users WHERE id');
         $req->execute();
-        return $req;
+        $result = $req->fetch();
+        return $result;
     }
 
     // Number of comments written by that user

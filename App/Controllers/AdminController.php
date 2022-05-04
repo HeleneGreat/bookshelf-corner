@@ -101,24 +101,31 @@ class AdminController extends Controller{
     /*********************************************************/
     function dashboard(){
         $countBooks = new \Projet\Models\BookModel();
-        $nbrBook = $countBooks->countBooks();
-        $nbBooks = $nbrBook->fetch();
+        $nbBooks = $countBooks->countBooks();
+        $lastBooks = $countBooks->allBooks();
+        $lastBook = $lastBooks->fetch();
         $countMails = new \Projet\Models\MsgModel();
-        $nbrMail = $countMails->countMessages();
-        $nbMails = $nbrMail->fetch();
+        $nbMails = $countMails->countMessages();
+        $lastMails = $countMails->allMessages();
+        $lastMail = $lastMails->fetch();
         $countComments = new \Projet\Models\CommentModel();
-        $nbrComment = $countComments->countComments();
-        $nbComments = $nbrComment->fetch();
+        $nbComments = $countComments->countComments();
+        $lastComments = $countComments->allComments();
+        $lastComment = $lastComments->fetch();
         $countUsers = new \Projet\Models\UserModel();
-        $nbrUser = $countUsers->countUsers();
-        $nbUsers = $nbrUser->fetch();
+        $nbUsers = $countUsers->countUsers();
+        $lastUsers = $countUsers->allUsers();
+        $lastUser = $lastUsers->fetch();
         $datas = [
             'nbBooks' => $nbBooks[0],
+            'lastBook' => $lastBook,
             'nbMails' => $nbMails[0],
+            'lastMail' => $lastMail,
             'nbComments' => $nbComments[0],
-            'nbUsers' => $nbUsers[0]
+            'lastComment' => $lastComment,
+            'nbUsers' => $nbUsers[0],
+            'lastUser' => $lastUser
         ];
-        // $stats = array_merge($nbBooks, $nbMails);
         $this->validAccess("dashboard", $datas);
     }    
 

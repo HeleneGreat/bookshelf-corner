@@ -8,7 +8,8 @@ class BookModel extends Manager{
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('SELECT COUNT(id) FROM books WHERE id');
         $req->execute();
-        return $req;
+        $result = $req->fetch();
+        return $result;
     }
 
     public function allBooks(){
@@ -16,7 +17,7 @@ class BookModel extends Manager{
         $req = $bdd->prepare(
             'SELECT id, title, author, picture, DATE_FORMAT(created_at, "%d %M %Y") AS date, location, slider 
             FROM books 
-            ORDER BY created_at DESC'
+            ORDER BY id DESC'
         );
         $req->execute();
         return $req;
@@ -27,7 +28,7 @@ class BookModel extends Manager{
         $req = $bdd->prepare(
             'SELECT id, title, author, picture, DATE_FORMAT(created_at, "%d %M %Y") AS date, location, slider 
             FROM books 
-            ORDER BY created_at DESC
+            ORDER BY id DESC
             LIMIT :firstItem, :perPage');
         $req->bindValue(':firstItem', $pagination[':firstItem'], $bdd::PARAM_INT);
         $req->bindValue(':perPage', $pagination[':perPage'], $bdd::PARAM_INT);

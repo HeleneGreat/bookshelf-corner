@@ -6,7 +6,9 @@ class MsgModel extends Manager{
 
     public function contactPost($data){
         $bdd =$this->dbConnect();
-        $req = $bdd->prepare('INSERT INTO messages (gender, familyname, firstname, email, object, message) VALUES (:gender, :familyname, :firstname, :email, :object, :message)');
+        $req = $bdd->prepare(
+            'INSERT INTO messages (gender, familyname, firstname, email, object, message)
+            VALUES (:gender, :familyname, :firstname, :email, :object, :message)');
         $req->execute($data);
         return $req;
     }
@@ -15,12 +17,16 @@ class MsgModel extends Manager{
         $bdd =$this->dbConnect();
         $req = $bdd->prepare('SELECT COUNT(id) FROM messages WHERE id');
         $req->execute();
-        return $req;
+        $result = $req->fetch();
+        return $result;
     }
 
     public function allMessages(){
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('SELECT id, gender, familyname, firstname, DATE_FORMAT(send_at, "%d/%m/%Y à %kh%i") AS send_at, email, object, message FROM messages ORDER BY send_at DESC');
+        $req = $bdd->prepare(
+            'SELECT id, gender, familyname, firstname, DATE_FORMAT(send_at, "%d/%m/%Y à %kh%i") AS send_at, email, object, message
+            FROM messages
+            ORDER BY id DESC');
         $req->execute();
         return $req;
     }
@@ -28,7 +34,9 @@ class MsgModel extends Manager{
     public function allMessagesPagination($pagination){
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
-            'SELECT id, gender, familyname, firstname, DATE_FORMAT(send_at, "%d/%m/%Y à %kh%i") AS send_at, email, object, message FROM messages ORDER BY send_at DESC
+            'SELECT id, gender, familyname, firstname, DATE_FORMAT(send_at, "%d/%m/%Y à %kh%i") AS send_at, email, object, message
+            FROM messages
+            ORDER BY id DESC
             LIMIT :firstItem, :perPage');
         $req->bindValue(':firstItem', $pagination[':firstItem'], $bdd::PARAM_INT);
         $req->bindValue(':perPage', $pagination[':perPage'], $bdd::PARAM_INT);
@@ -38,7 +46,10 @@ class MsgModel extends Manager{
 
     public function singleMessage($id){
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('SELECT id, gender, familyname, firstname, DATE_FORMAT(send_at, "%d/%m/%Y à %kh%i") AS send_at, email, object, message FROM messages WHERE id = ?');
+        $req = $bdd->prepare(
+            'SELECT id, gender, familyname, firstname, DATE_FORMAT(send_at, "%d/%m/%Y à %kh%i") AS send_at, email, object, message
+            FROM messages
+            WHERE id = ?');
         $req->execute(array($id));
         return $req;
     }
@@ -46,7 +57,9 @@ class MsgModel extends Manager{
     // TODO : function non utilisée à supprimer ?
     public function sendMessagePost($data){
         $bdd = $this->dbConnect();
-        $req = $bdd->prepare('INSERT INTO messages(gender, familyname, firstname, email, object, message) VALUES (:gender, :familyname, :firstname, :email, :object, :message');
+        $req = $bdd->prepare(
+            'INSERT INTO messages(gender, familyname, firstname, email, object, message)
+            VALUES (:gender, :familyname, :firstname, :email, :object, :message');
         $req->execute(array($data));
         return $req;
     }
