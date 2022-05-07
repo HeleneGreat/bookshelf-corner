@@ -58,6 +58,7 @@ button:active,
 /* *******************/
 :root {
     /* --main: #ec4e3d; */
+    --jaune: #eed64f;
     --main: #ee5f4f;
     --background: #dde1e7;
 }
@@ -163,6 +164,10 @@ ul {
 
 .bold {
     font-weight: bold;
+}
+
+.italic{
+    font-style: italic;
 }
 
 .required {
@@ -475,11 +480,19 @@ ul {
 }
 
 /* ****************************************** */
-/* ---------------- ONE BOOKS --------------- */
+/* ---------------- ONE BOOK --------------- */
 /* ****************************************** */
 .content,
 .catchphrase {
     white-space: pre-line;
+}
+
+#one-book .date{
+    text-align: left;
+}
+
+#one-book #info-book{
+    margin-top: 20px;
 }
 
 #one-book #info-book .cover {
@@ -491,6 +504,26 @@ ul {
     height: auto;
 }
 
+#one-book #info-book .book-identity{
+    background-color: var(--main);
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+}
+
+#one-book #info-book .book-identity li{
+    font-size: 2rem;
+}
+
+#one-book #info-book .book-identity li svg{
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+ svg g path{
+    width: 300px;
+ }
 #one-book #article-book .catchphrase {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -795,6 +828,33 @@ input[type="radio"]:checked::before {
         width: 60%;
     }
 
+    /* ****************************************** */
+    /* ---------------- ONE BOOK --------------- */
+    /* ****************************************** */
+    #one-book #info-book .cover{
+        width: 300px;
+        height: 430px;
+    }
+
+    #one-book #info-book .cover img {
+        width: 100%;
+        height: auto;
+    }
+
+    #one-book #info-book .cover,
+    #one-book #info-book .book-identity{
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+
+    #one-book #info-book .book-identity{
+        height: 270px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
     /* ************************** */
     /* ------ COMMENTS BOOK ----- */
     /* ************************** */
@@ -903,18 +963,12 @@ input[type="radio"]:checked::before {
     }
 
 
-    /* ****************************************** */
-    /* ---------------- ONE BOOKS --------------- */
-    /* ****************************************** */
-    #one-book #info-book .cover {
-        width: 300px;
-        height: 430px;
+    #one-book #info-book .cover,
+    #one-book #info-book .book-identity{
+        margin-right: 20px;
+        margin-left: 20px;
     }
-
-    #one-book #info-book .cover img {
-        width: 100%;
-        height: auto;
-    }
+    
 
     /* ***************************************** */
     /* ---------------- COMMENTS --------------- */
