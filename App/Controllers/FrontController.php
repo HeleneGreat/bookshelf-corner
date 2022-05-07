@@ -5,13 +5,6 @@ namespace Projet\Controllers;
 use Projet\Forms\SubmitMessage;
 
 class FrontController extends Controller{
-    function home(){
-
-        // $homeFront = new \Projet\Models\FrontModel();
-        // $accueil = $homeFront->viewFront();
-
-        return $this->viewFront("home");
-    }
 
     function contact(){
         return $this->viewFront("contact");
@@ -36,8 +29,45 @@ class FrontController extends Controller{
         }
         return $this->viewFront("error", $datas);
     }
-
  
+    function home(){
+        $new = new \Projet\Models\BookModel();
+        $data = $new->allBooks();
+        $datas = $data->fetchAll();
+        return $this->viewFront("home", $datas);
+    }
+
+    function allBooks(){
+        $pagination = $this->pagination("books");
+        $new = new \Projet\Models\BookModel();
+        $data = $new->allBooksPagination($pagination);
+        $datas['book'] = $data->fetchAll();
+        $datas['pages'] = $pagination['pages'];
+        $datas['currentPage'] = $pagination['currentPage'];
+        return $this->viewFront("all-books", $datas);
+    }
+
+    function oneBook($id){
+        $newFirst = new \Projet\Models\BookModel();
+        $dataFirst = $newFirst->singleBook($id);
+        $datasFirst = $dataFirst->fetch();
+        $newSecond = new \Projet\Models\CommentModel();
+        $dataSecond = $newSecond->allBookComments($id);
+        $datasSecond = $dataSecond->fetchAll();
+        $datas = [
+            "book" => $datasFirst,
+            "comments" => $datasSecond            
+        ];
+        if(isset($_GET['status'])){
+            if($_GET['status'] == "success"){
+                if($_GET['from'] == "addComment"){
+                    $userMessage = new SubmitMessage ("success", "Votre commentaire a bien été publié !");
+                    $datas["feedback"] = $userMessage->formatedMessage();
+                }
+            }
+        }
+        return $this->viewFront("one-book", $datas);
+    }
 
 
 }

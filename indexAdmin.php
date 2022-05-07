@@ -16,6 +16,8 @@ try{
     
     $bookController = new \Projet\Controllers\BookController();
 
+    $genreController = new \Projet\Controllers\GenreController();
+
     $blogController = new \Projet\Controllers\BlogController();
 
     $commentController = new \Projet\Controllers\CommentController();
@@ -102,21 +104,21 @@ try{
         /******** TAB GENRES ********/
         /****************************/
         elseif($_GET['action'] == 'livres-genres'){
-            $bookController->livresGenres();
+            $genreController->livresGenres();
         }
 
         elseif ($_GET['action'] == "genreAddPost"){
-            $bookController->genreAddPost($_POST, $_FILES);
+            $genreController->genreAddPost($_POST, $_FILES);
         }
 
         elseif ($_GET['action'] == "genreModifyPost"){
             $id = $_GET['id'];
-            $bookController->genreModifyPost($id, $_POST, $_FILES);
+            $genreController->genreModifyPost($id, $_POST, $_FILES);
         }  
 
         elseif ($_GET['action'] == "genreDelete"){
             $id = $_GET['id'];
-            $bookController->deleteGenre($id);
+            $genreController->deleteGenre($id);
         }
 
         /****************************/

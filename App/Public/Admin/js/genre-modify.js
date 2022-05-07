@@ -2,8 +2,6 @@
 
 function genreModify(id){
     let modifyGenre = document.getElementById('modify' + id);
-
-    // modifyGenre.classList.toggle('display-none');
 }
 
 

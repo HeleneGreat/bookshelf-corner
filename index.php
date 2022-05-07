@@ -12,8 +12,6 @@ try{
 
     $controllerFront = new \Projet\Controllers\FrontController();
 
-    $bookController = new \Projet\Controllers\BookController();
-
     $commentController = new \Projet\Controllers\CommentController();
 
     $messageController = new \Projet\Controllers\MsgController();
@@ -24,12 +22,12 @@ try{
     if (isset($_GET['action'])){
         
         if($_GET['action'] == 'livres'){
-            $bookController->allBooks();
+            $controllerFront->allBooks();
         }
         
         elseif($_GET['action'] == 'un-livre'){
             $id = $_GET['id'];
-            $bookController->oneBook($id);
+            $controllerFront->oneBook($id);
         }
         
         elseif($_GET['action'] == 'lieux'){
@@ -97,7 +95,7 @@ try{
     }
 
     else{
-        $bookController->home();
+        $controllerFront->home();
     }
 
 

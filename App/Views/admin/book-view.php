@@ -1,4 +1,5 @@
-<?php include_once('./App/Views/admin/layouts/header.php');?>
+<?php $currentPageTitle = $datas['title'] ;
+include_once('./App/Views/admin/layouts/header.php');?>
 
 <section id="one-book" class="container-lg">
     <div class="retour"><a href="indexAdmin.php?action=livres" title="Retour"><i class="fas fa-arrow-circle-left"></i></a></div>
@@ -16,7 +17,7 @@
             <p><span class="italic"><?= $datas['title']; ?></span> ?</p>
             <div class="flex justify-center">
                 <a id="cancel" class="btn center" title="Retour">Annuler</a>
-                <a href="indexAdmin.php?action=livresdelete&id=<?= $datas['ID'];?>" title="Supprimer ce livre" class="btn center">Supprimer</a>
+                <a href="indexAdmin.php?action=livresdelete&id=<?= $datas['id'];?>" title="Supprimer ce livre" class="btn center">Supprimer</a>
             </div>
         </div>
     </div>
