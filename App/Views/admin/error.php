@@ -1,4 +1,5 @@
-<?php include_once('./App/Views/admin/layouts/head.php');?>
+<?php $currentPageTitle = "Erreur";
+ include_once('./App/Views/admin/layouts/head.php');?>
 
  <!-- Div for error management -->
  <?php if(isset($datas['feedback'])) {;?>

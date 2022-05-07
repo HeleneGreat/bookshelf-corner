@@ -1,4 +1,5 @@
-<?php include_once('./App/Views/admin/layouts/head.php'); ?>
+<?php $currentPageTitle = "Créer un nouvel administrateur";
+ include_once('./App/Views/admin/layouts/head.php'); ?>
 
 <section id="new-admin" class="container text-center">
 

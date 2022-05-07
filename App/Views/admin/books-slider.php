@@ -1,4 +1,4 @@
-<?php 
+<?php $currentPageTitle = "Le carousel en page d'accueil";
     include_once('./App/Views/admin/layouts/header.php');
     include_once('./App/Views/admin/layouts/header-books.php');
 

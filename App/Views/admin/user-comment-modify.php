@@ -1,4 +1,5 @@
-<?php include_once('./App/Views/admin/layouts/header.php');?>
+<?php $currentPageTitle = "Modifier mon commentaire";
+ include_once('./App/Views/admin/layouts/header.php');?>
 
 
 <section id="comment-modify" class="container-lg">

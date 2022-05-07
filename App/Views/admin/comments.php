@@ -1,4 +1,5 @@
-<?php include_once('./App/Views/admin/layouts/header.php');?>
+<?php $currentPageTitle = "Tous les commentaires";
+ include_once('./App/Views/admin/layouts/header.php');?>
 
 
 <section id="all-comments" class="container-lg">

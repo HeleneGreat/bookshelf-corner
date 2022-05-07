@@ -1,4 +1,5 @@
-<?php include_once('./App/Views/admin/layouts/header.php');?>
+<?php $currentPageTitle = "Ajouter un livre";
+ include_once('./App/Views/admin/layouts/header.php');?>
 
 <section id="book-form" class="container-lg">
 

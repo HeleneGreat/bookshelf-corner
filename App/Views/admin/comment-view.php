@@ -1,4 +1,5 @@
-<?php include_once('./App/Views/admin/layouts/header.php');?>
+<?php $currentPageTitle = "Commentaire de " . $datas['pseudo'];
+ include_once('./App/Views/admin/layouts/header.php');?>
 
 <section id="one-comment" class="container-lg">
     <div class="retour"><a href="indexAdmin.php?action=comments" title="Retour"><i class="fas fa-arrow-circle-left"></i></a></div>

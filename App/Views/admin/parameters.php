@@ -1,4 +1,5 @@
-<?php include_once('./App/Views/admin/layouts/header.php');?>
+<?php $currentPageTitle = "Paramètres du site";
+ include_once('./App/Views/admin/layouts/header.php');?>
 
 <!-- This page is only displayed on the Supra admin account -->
 

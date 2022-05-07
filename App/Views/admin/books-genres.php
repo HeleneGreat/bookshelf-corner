@@ -1,4 +1,4 @@
-<?php 
+<?php $currentPageTitle = "Toutes les catégories";
     include_once('./App/Views/admin/layouts/header.php');
     include_once('./App/Views/admin/layouts/header-books.php');
 ?>

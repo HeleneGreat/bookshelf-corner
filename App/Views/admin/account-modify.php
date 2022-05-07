@@ -1,4 +1,5 @@
-<?php include_once('./App/Views/admin/layouts/header.php');?>
+<?php $currentPageTitle = "Modifier mon compte";
+include_once('./App/Views/admin/layouts/header.php');?>
 
 <section id="account" class="container-lg">
     <div class="retour"><a href="indexAdmin.php?action=account"><i class="fas fa-arrow-circle-left"></i></a></div>

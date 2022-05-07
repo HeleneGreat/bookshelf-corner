@@ -1,4 +1,5 @@
-<?php include_once('./App/Views/admin/layouts/header.php'); ?>
+<?php $currentPageTitle = "Mon compte";
+ include_once('./App/Views/admin/layouts/header.php'); ?>
 
 <section id="account" class="container-lg">
     <h1>Mon compte</h1>

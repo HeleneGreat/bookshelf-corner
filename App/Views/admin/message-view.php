@@ -1,4 +1,5 @@
-<?php include_once('./App/Views/admin/layouts/header.php');?>
+<?php $currentPageTitle = "Message de " . $datas['firstname'];
+ include_once('./App/Views/admin/layouts/header.php');?>
 
 <section id="one-message" class="container-lg">
     <div class="retour"><a href="indexAdmin.php?action=messages" title="Retour"><i class="fas fa-arrow-circle-left"></i></a></div>

@@ -391,6 +391,12 @@ z-index: 9999999;
     cursor: help;
 }
 
+#dashboard #stats article .last{
+    height: 80%;
+    margin-top: 15px;
+    justify-content: center;
+}
+
 #dashboard #stats article img{
     border: 1px solid var(--dashboard);
     margin-top: 10px;
@@ -411,9 +417,22 @@ z-index: 9999999;
 }
 
 #dashboard #stats article#comments-stat a p{
-    margin-top: 10px;
+    /* margin-top: 10px; */
     font-size: 1.3rem;
     text-align: center;
+}
+
+#dashboard #stats article#message-stat a{
+    margin-top: 20px;
+}
+
+#dashboard #stats article#comments-stat a div p{
+    width: 48%;
+}
+
+#dashboard #stats article#message-stat a p{
+    padding-left: 20px;
+    padding-top: 20px;
 }
 
 /* ******************** */
@@ -909,6 +928,11 @@ img.old-picture{
 #all-books article{
     border-bottom: 1px solid rgba(204, 203, 203, 0.856);
     position: relative;
+}
+
+#all-comments article:nth-of-type(even),
+#all-messages article:nth-of-type(even){
+    background-color: #e6e6e6;
 }
 
 #book-slider img,

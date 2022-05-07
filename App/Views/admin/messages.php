@@ -1,4 +1,5 @@
-<?php include_once('./App/Views/admin/layouts/header.php');?>
+<?php $currentPageTitle = "Tous les messages";
+ include_once('./App/Views/admin/layouts/header.php');?>
 
 <section id="all-messages" class="container-lg">
 

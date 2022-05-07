@@ -3,7 +3,7 @@
 <section id="one-book" class="container-lg">
     <div class="retour"><a href="indexAdmin.php?action=livres" title="Retour"><i class="fas fa-arrow-circle-left"></i></a></div>
 
-    <div id="btn-delete" class="delete"><a href="indexAdmin.php?action=livresdelete&id=<?= $datas['ID'];?>" title="Supprimer ce livre" class="fa-stack"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-trash-can fa-stack-1x"></i></a></div>
+    <div id="btn-delete" class="delete"><a href="indexAdmin.php?action=livresdelete&id=<?= $datas['id'];?>" title="Supprimer ce livre" class="fa-stack"><i class="fa-solid fa-circle fa-stack-2x"></i><i class="fa-solid fa-trash-can fa-stack-1x"></i></a></div>
 
 
     <!-- DELETE CONFIRMATION MODAL -->
