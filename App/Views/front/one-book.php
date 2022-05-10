@@ -53,7 +53,7 @@ include ('layouts/header.php');
                             elseif($datas['book']['notation'] == 2){ echo "Sans plus, ce livre ne m'a rien inspiré.";}
                             elseif($datas['book']['notation'] == 3){ echo "Un bon moment passé en compagnie de ce livre.";}
                             elseif($datas['book']['notation'] == 4){ echo "Un très bon livre, qui se dévore tout seul!";}
-                            else{ echo "Un veritable coup de cœur, à lire immédiatement!!";}
+                            else{ echo "Un véritable coup de cœur, à lire immédiatement!!";}
                         ?></span>
                     </li>
                 </ul>

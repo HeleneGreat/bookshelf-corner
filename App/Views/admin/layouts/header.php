@@ -44,6 +44,11 @@
 
     <main >
 
+<!-- Button back to top of the page -->
+<div id="back-to-top">
+    <a href="#bandeau-admin" title="Retour en haut de la page"><i class="fa-solid fa-circle-chevron-up"></i></a>
+</div>
+
    
  <!-- Div for error management -->
  <?php if(isset($datas['feedback'])) {;?>

@@ -40,13 +40,6 @@ MEDIA QUERIES
     --anthracite: rgb(44, 41, 41);
 }
 
-*{
-    padding:0;
-    margin:0;
-    color:var(--anthracite);
-    font-family: 'Times New Roman', Times, serif;
-}
-
 main{
     width: 100%;
 }
@@ -57,12 +50,45 @@ p, a, textarea{
 
 @font-face {
     font-family: 'uppereastsideregular';
-    src: url('../../Front/fonts/UpperEastSide-webfont.eot');
-    src: url('../../Front/fonts/UpperEastSide-webfont.woff2') format('woff2'),
-         url('../../Front/fonts/UpperEastSide-webfont.woff') format('woff'),
+    src: url('../../Front/fonts/UpperEastSide-webfont.woff') format('woff'),
          url('../../Front/fonts/UpperEastSide-webfont.ttf') format('ttf');
     font-weight: normal;
     font-style: normal;
+}
+
+@font-face {
+    font-family: 'roboto';
+    src: url('../fonts/Roboto-Regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'roboto';
+    src: url('../fonts/Roboto-Italic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'roboto';
+    src: url('../fonts/Roboto-Bold-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'roboto';
+    src: url('../fonts/Roboto-BoldItalic-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+*{
+    padding:0;
+    margin:0;
+    color:var(--anthracite);
+    font-family: 'roboto', 'Times New Roman', Times, serif;
 }
 
 /* ********************/
@@ -218,6 +244,21 @@ ul{
     display: block;
 }
 
+#back-to-top {
+    position: fixed;
+    right: 20px;
+    bottom: 50px;
+    z-index: 999999999;
+}
+
+#back-to-top i {
+    border: 1px solid white;
+    border-radius: 50px;
+    color: var(--dashboard);
+    background-color: white;
+    font-size: 2.5rem;
+}
+
 /* ****************************/
 /* ----- NAV - ANIMATION----- */
 /* ****************************/
@@ -304,6 +345,7 @@ z-index: 9999999;
 }
 
 #nav-admin li{
+    line-height: 1.2rem;
     margin-top: 10px;
 }
 
@@ -323,7 +365,7 @@ z-index: 9999999;
 
 #nav-admin .disconnect:hover{
     color: red;
-    font-size: 1.4rem;
+    text-decoration: underline;
 }
 
 #nav-admin a:hover,
@@ -1002,7 +1044,7 @@ img.old-picture{
 
 #all-comments .comment-info .time,
 #all-messages .message-info .time{
-    width: 195px;
+    width: 212px;
 }
 
 #all-comments .comment-info,
@@ -1321,6 +1363,11 @@ img.old-picture{
     #bandeau-admin{
         position: sticky;
         width: 100%;
+    }
+
+    #back-to-top {
+        right: 50px;
+        bottom: 70px;;
     }
 
     #nav-admin{

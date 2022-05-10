@@ -63,14 +63,6 @@ button:active,
     --background: #dde1e7;
 }
 
-* {
-    padding: 0;
-    margin: 0;
-    color: rgb(44, 41, 41);
-    font-size: 2.5rem;
-    font-family: 'Times New Roman', Times, serif;
-}
-
 /* default font-size reduced to 10px to make rem calculs easier*/
 html,
 body {
@@ -105,12 +97,50 @@ ul {
 
 @font-face {
     font-family: 'uppereastsideregular';
-    src: url('../fonts/UpperEastSide-webfont.eot');
-    src: url('../fonts/UpperEastSide-webfont.woff2') format('woff2'),
-        url('../fonts/UpperEastSide-webfont.woff') format('woff'),
-        url('../fonts/UpperEastSide-webfont.ttf') format('ttf');
+    src: url('../fonts/UpperEastSide-webfont.woff') format('woff'),
+    url('../fonts/UpperEastSide-webfont.ttf') format('ttf');
     font-weight: normal;
     font-style: normal;
+}
+
+@font-face {
+    font-family: 'quicksand';
+    src: url('../fonts/quicksand-regular-webfont.woff2') format('woff2'),
+    url('../fonts/quicksand-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'quicksand';
+    src: url('../fonts/quicksand-bold-webfont.woff2') format('woff2'),
+         url('../fonts/quicksand-bold-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'quicksand';
+    src: url('../fonts/quicksand-italic-webfont.woff2') format('woff2'),
+         url('../fonts/quicksand-italic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'quicksand';
+    src: url('../fonts/quicksand-bolditalic-webfont.woff2') format('woff2'),
+         url('../fonts/quicksand-bolditalic-webfont.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    color: rgb(44, 41, 41);
+    font-size: 2.5rem;
+    font-family: 'quicksand', 'Times New Roman', Times, serif;
 }
 
 /* **************************************** */
