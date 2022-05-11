@@ -34,18 +34,6 @@ include_once('./App/Views/admin/layouts/header.php');?>
                     </select>
                 </div>
                 <div>
-                    <p><label for="newEdition">Nom de l'éditeur</label></p>
-                    <p><input type="text" name="newEdition" id="newEdition" value="<?= $datas['book']['edition']; ?>"></p>
-                </div>
-                <div>
-                    <p><label for="newLinkEdition">Lien vers le site de l'éditeur</label></p>
-                    <p><input type="url" name="newLinkEdition" id="newLinkEdition" value="<?= $datas['book']['linkEdition']; ?>"></p>
-                </div>
-                <div>
-                    <p><label for="newLocation">Ville où se déroule l'intrigue</label></p>
-                    <p><input type="text" name="newLocation" id="newLocation" value="<?= $datas['book']['location']; ?>"></p>
-                </div>
-                <div>
                     <p><label for="newNotation">Note du livre</label></p>
                     <p><input name="newNotation" id="newNotation" type="range" min="0" max="5" step="1" value="<?= $datas['book']['notation']; ?>">
                     <output id="range-result"><?= $datas['book']['notation']; ?></output> / 5</p>

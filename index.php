@@ -30,10 +30,6 @@ try{
             $controllerFront->oneBook($id);
         }
         
-        elseif($_GET['action'] == 'lieux'){
-            $controllerFront->lieux();
-        }
-
         elseif($_GET['action'] == 'about'){
             $controllerFront->about();
         }

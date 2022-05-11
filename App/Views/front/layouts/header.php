@@ -26,7 +26,6 @@
         
         <ul class="flex col center">
             <li><a href="index.php">Accueil</a></li>
-            <li><a href="index.php?action=lieux">Lieux</a></li>
             <li><a href="index.php?action=livres">Livres</a></li>
             <li><a href="index.php?action=about">A propos</a></li>
             <li><a href="index.php?action=contact">Me contacter</a></li>
@@ -67,7 +66,6 @@
             <nav id="nav-lg">
                 <ul class="flex justify-between">
                     <li><a href="index.php">Accueil</a></li>
-                    <li><a href="index.php?action=lieux">Lieux</a></li>
                     <li><a href="index.php?action=livres">Livres</a></li>
                     <li><a href="index.php?action=about">A propos</a></li>
                     <li><a href="index.php?action=contact">Me contacter</a></li>

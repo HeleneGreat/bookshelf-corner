@@ -14,7 +14,6 @@
             <img src="./App/Public/Books/images/<?= $book['picture']; ?>" alt="Couverture <?= $book['title']; ?>">
             <div class='info'>
                 <p class="list-title"><?= $book['title']; ?></p>
-                <p class="list-location"><?= $book['location']; ?></p>
                 <p class="list-date"><?= $book['date']; ?></p>
             </div>
             <div class="flex book-link">

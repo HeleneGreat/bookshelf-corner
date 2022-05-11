@@ -45,8 +45,8 @@ class BookController extends Controller{
         return $this->validAccess("book-add", $datas);
     }
 
+    // Default image if no book cover is submited
     function noCover(){
-        // Default image if no book cover is submited
         return "no-cover.png";
     }
 
@@ -57,9 +57,6 @@ class BookController extends Controller{
             ':newAuthor' => htmlspecialchars($Post['newAuthor']),
             ':newYear_publication' => htmlspecialchars($Post['newYear_publication']),
             ':newGenre' => htmlspecialchars($Post['newGenre']),
-            ':newEdition' => htmlspecialchars($Post['newEdition']),
-            ':newLinkEdition' => htmlspecialchars($Post['newLinkEdition']),
-            ':newLocation' => htmlspecialchars($Post['newLocation']),
             ':newCatchphrase' => htmlspecialchars($Post['newCatchphrase']),
             ':newContent' => htmlspecialchars($Post['newContent']),
             ':newNotation' => htmlspecialchars($Post['newNotation'])
@@ -132,9 +129,6 @@ class BookController extends Controller{
             ':newAuthor' => htmlspecialchars($Post['newAuthor']),
             ':newYear_publication' => htmlspecialchars($Post['newYear_publication']),
             ':newGenre' => htmlspecialchars($Post['newGenre']),
-            ':newEdition' => htmlspecialchars($Post['newEdition']),
-            ':newLinkEdition' => htmlspecialchars($Post['newLinkEdition']),
-            ':newLocation' => htmlspecialchars($Post['newLocation']),
             ':newCatchphrase' => htmlspecialchars($Post['newCatchphrase']),
             ':newContent' => htmlspecialchars($Post['newContent']),
             ':picture' => $fileName,

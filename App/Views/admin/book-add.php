@@ -33,18 +33,6 @@
                     </select>
                 </div>
                 <div>
-                    <p><label for="newEdition">Nom de l'éditeur</label></p>
-                    <p><input type="text" name="newEdition" id="newEdition"></p>
-                </div>
-                <div>
-                    <p><label for="newLinkEdition">Lien vers le site de l'éditeur</label></p>
-                    <p><input type="url" name="newLinkEdition" id="newLinkEdition"></p>
-                </div>
-                <div>
-                    <p><label for="newLocation">Ville où se déroule l'intrigue</label></p>
-                    <p><input type="text" name="newLocation" id="newLocation"></p>
-                </div>
-                <div>
                     <p><label for="newNotation">Note du livre</label></p>
                     <p><input name="newNotation" id="newNotation" type="range" min="0" max="5" step="1" value="0">
                     <output id="range-result">0</output> / 5</p>

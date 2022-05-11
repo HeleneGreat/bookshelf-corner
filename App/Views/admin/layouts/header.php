@@ -44,13 +44,16 @@
 
     <main >
 
-<!-- Button back to top of the page -->
-<div id="back-to-top">
-    <a href="#bandeau-admin" title="Retour en haut de la page"><i class="fa-solid fa-circle-chevron-up"></i></a>
-</div>
+    <!-- Button back to top of the page -->
+    <!-- not shown on book pages, where there already is a fixed bottom button -->
+    <?php if($_GET['action'] !== "livres" && $_GET['action'] !== "livresview"){;?>
+        <div id="back-to-top">
+            <a href="#bandeau-admin" title="Retour en haut de la page"><i class="fa-solid fa-circle-chevron-up"></i></a>
+        </div>
+    <?php } ;?>
 
-   
- <!-- Div for error management -->
- <?php if(isset($datas['feedback'])) {;?>
+    
+    <!-- Div for error management -->
+    <?php if(isset($datas['feedback'])) {;?>
         <div id="feedback" class="center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
-<?php }; ?>
+    <?php }; ?>

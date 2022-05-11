@@ -955,6 +955,11 @@ input[type="radio"]:checked::before {
     #bandeau h2 {
         margin-bottom: 20px;
     }
+    
+    #back-to-top {
+        right: 50px;
+        bottom: 70px;;
+    }
 
     #nav-lg a {
         letter-spacing: 0.1rem;

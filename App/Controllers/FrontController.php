@@ -14,10 +14,6 @@ class FrontController extends Controller{
         return $this->viewFront("about");
     }
 
-    function lieux(){
-        return $this->viewFront("lieux");
-    }
-
     function error(){
         if(isset($_GET['status'])){
             if($_GET['status'] == "error"){
