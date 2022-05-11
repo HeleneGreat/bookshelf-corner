@@ -2,6 +2,8 @@
 reset
 GENERAL
 HEADER
+    * NAV
+    * NAV BOOK CATEGORIES
 FOOTER
 HOME
     * CAROUSEL
@@ -12,6 +14,7 @@ COMMENTS
     * COMMENTS FORM
     * COMMENTS BOOK
 CONTACT
+PAGE 404
 USER CONNEXION
 MEDIA QUERIES
 - min-width: 993px
@@ -264,6 +267,14 @@ ul {
     margin-right: 15px;
 }
 
+main{
+    /* header = 210px
+    footer =  150px */
+    min-height: -webkit-calc(100vh - 360px);
+    min-height: -moz-calc(100vh - 360px);
+    min-height: calc(100vh - 360px);
+}
+
 /* *************************************** */
 /* ---------------- HEADER --------------- */
 /* *************************************** */
@@ -271,6 +282,7 @@ ul {
     background-color: var(--main);
     padding: 10px 0;
     margin-bottom: 50px;
+    z-index: 99999999;
 }
 
 #bandeau .logo {
@@ -307,7 +319,6 @@ ul {
 /* *****************/
 /* ----- NAV ----- */
 /* *****************/
-
 #open-menu,
 #close-menu {
     cursor: pointer;
@@ -364,6 +375,11 @@ ul {
     background-color: var(--main);
     z-index: 99999999;
 }
+
+/* *********************************/
+/* ----- NAV BOOK CATEGORIES ----- */
+/* *********************************/
+
 
 
 /* *************************************** */
@@ -426,7 +442,6 @@ ul {
     font-size: 6rem;
 }
 
-
 /* ****************************************** */
 /* ---------------- ALL BOOKS --------------- */
 /* ****************************************** */
@@ -440,7 +455,6 @@ ul {
 }
 
 #all-books h3 {
-    height: 60px;
     margin-top: auto;
     margin-bottom: auto;
 }
@@ -454,6 +468,10 @@ ul {
     margin-bottom: auto;
 }
 
+#all-books #book-card p.date{
+    font-size: 1.8rem;
+}
+
 #all-books #book-card img {
     width: 80%;
     height: 300px;
@@ -464,6 +482,21 @@ ul {
     width: fit-content;
 }
 
+#all-books #cat h1{
+    margin-bottom: 0;
+    margin-left: 10px;
+}
+
+#all-books #cat h1 span{
+    font-size: inherit;
+    color: inherit;
+}
+
+#all-books #cat img{
+    width: 125px;
+    height: 125px;
+    object-fit: cover;
+}
 
 /* ********************************************* */
 /* ----------------- PAGINATION ---------------- */
@@ -678,7 +711,6 @@ textarea:focus {
     border: none;
     outline: none;
     width: 90%;
-
 }
 
 select,
@@ -784,6 +816,26 @@ input[type="radio"]:checked::before {
     height: 50%;
 }
 
+/* ***************************************** */
+/* ---------------- PAGE 404 --------------- */
+/* ***************************************** */
+#error h1{
+    margin-top: 40px;
+    font-size: 4rem;
+}
+
+#error p{
+    margin-top: 60px;
+    border-radius: 30px;
+    padding: 10px 30px;
+    background-color: var(--main);
+    width: fit-content;
+}
+
+#error p, #error a{
+    color: white;
+}
+
 /* *********************************************** */
 /* ---------------- USER CONNEXION --------------- */
 /* *********************************************** */
@@ -795,10 +847,6 @@ input[type="radio"]:checked::before {
 #user-connexion .unregistered p:last-child {
     margin-top: 30px;
 }
-
-
-
-
 
 
 
@@ -952,6 +1000,13 @@ input[type="radio"]:checked::before {
         display: none;
     }
 
+    .lg {
+        display: block;
+    }
+
+    /* ********************************/
+    /* ----------- HEADER ----------- */
+    /* ********************************/
     #bandeau h2 {
         margin-bottom: 20px;
     }
@@ -961,6 +1016,9 @@ input[type="radio"]:checked::before {
         bottom: 70px;;
     }
 
+    /* *****************/
+    /* ----- NAV ----- */
+    /* *****************/
     #nav-lg a {
         letter-spacing: 0.1rem;
     }
@@ -970,17 +1028,12 @@ input[type="radio"]:checked::before {
         cursor: default;
     }
 
-    .lg {
-        display: block;
-    }
-
     .head-lg {
         width: 85%;
     }
 
     .head-lg a {
         color: white;
-        /* font-size: 1.3rem; */
     }
 
     .head-lg h2 {
@@ -993,17 +1046,40 @@ input[type="radio"]:checked::before {
         align-self: flex-end;
     }
 
+    /* *********************************/
+    /* ----- NAV BOOK CATEGORIES ----- */
+    /* *********************************/
+    #bandeau #nav-lg .submenu{
+        position: relative;
+    }
+
+    #bandeau #nav-lg .book-cat{
+        padding: 20px;
+        display: none;
+        background-color: var(--main);
+        position: absolute;
+        left: -65%;
+        box-shadow: 0 10px 15px grey;
+        z-index: 999;
+    }
+
+    #bandeau #nav-lg .submenu:hover > .book-cat{
+        display: block;
+    }
+
+    #bandeau #nav-lg .book-cat li{
+        padding: 8px 0;
+    }
+
     #send-btn {
         display: none;
     }
-
 
     #one-book #info-book .cover,
     #one-book #info-book .book-identity{
         margin-right: 20px;
         margin-left: 20px;
     }
-    
 
     /* ***************************************** */
     /* ---------------- COMMENTS --------------- */

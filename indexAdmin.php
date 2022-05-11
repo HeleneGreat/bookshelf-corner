@@ -234,15 +234,18 @@ try{
             $userController->connexionUser();
         }
 
-
-
-
-
-
         elseif($_GET['action'] == "error"){
             $adminController->error();
         }
-    }   
+
+        else{
+            header('Location: indexAdmin.php?error=notFound');
+        }
+    }
+
+    elseif(isset($_GET['error'])){
+        $adminController->error404();
+    }
 
     else{
         $adminController->connexionAdmin();

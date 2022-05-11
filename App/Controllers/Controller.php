@@ -5,9 +5,12 @@ namespace Projet\Controllers;
 class Controller{
 
     function viewFront($viewName, $datas = null){
-        $new = new \Projet\Models\BlogModel();
-        $blogs = $new->blogInfo(1);
-        $blog = $blogs->fetch();        
+        $newBlog = new \Projet\Models\BlogModel();
+        $blogs = $newBlog->blogInfo(1);
+        $blog = $blogs->fetch();
+        $newGenre = new \Projet\Models\GenreModel()    ;
+        $allGenres = $newGenre->allGenres();
+        $genres = $allGenres->fetchAll();
         include('./App/Views/front/' . $viewName . '.php');
     }
 

@@ -280,5 +280,13 @@ class AdminController extends Controller{
         }
         return $this->viewAdmin("error", $datas);
     }
-    
+
+    function error404(){
+        if(!empty($_SESSION) && $_SESSION['role'] === 0){
+            return $this->viewUser("error404");
+        }else{
+            return $this->viewAdmin("error404");
+        }
+    }
+
 }

@@ -15,6 +15,7 @@ class FrontController extends Controller{
     }
 
     function error(){
+        $datas = [];
         if(isset($_GET['status'])){
             if($_GET['status'] == "error"){
                 if($_GET['from'] == "no-user-account"){
@@ -33,11 +34,14 @@ class FrontController extends Controller{
         return $this->viewFront("home", $datas);
     }
 
-    function allBooks(){
+    function allBooks($idGenre){
         $pagination = $this->pagination("books");
-        $new = new \Projet\Models\BookModel();
-        $data = $new->allBooksPagination($pagination);
-        $datas['book'] = $data->fetchAll();
+        $newBook = new \Projet\Models\BookModel();
+        $book = $newBook->allBooksPagination($pagination, $idGenre);
+        $datas['book'] = $book->fetchAll();
+        $newGenre = new \Projet\Models\GenreModel();
+        $genre = $newGenre->infoGenre($idGenre);
+        $datas['genre'] = $genre->fetch();
         $datas['pages'] = $pagination['pages'];
         $datas['currentPage'] = $pagination['currentPage'];
         return $this->viewFront("all-books", $datas);
@@ -63,6 +67,10 @@ class FrontController extends Controller{
             }
         }
         return $this->viewFront("one-book", $datas);
+    }
+
+    function error404(){
+        return $this->viewFront("error404");
     }
 
 

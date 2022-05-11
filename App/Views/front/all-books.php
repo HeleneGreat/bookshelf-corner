@@ -3,7 +3,14 @@
 
 
 <section id="all-books" class="container bg-all">
+<?php if(isset($_GET['category']) && $_GET['category'] > 0) { ?>
+    <div id="cat" class="flex justify-center align-items-center">
+        <p><img src="./App/Public/Books/images/<?= $datas['genre']['picture'] ;?>" alt="<?= $datas['genre']['category'] ;?>"></p>
+        <h1>Catégorie <span class="italic"><?= $datas['genre']['category'] ;?></span></h1>
+    </div>
+<?php }else{ ?>
     <h1>Les derniers livres que nous avons dévorés</h1>
+<?php } ;?>
 
     <div class="flex-md justify-between-md">
     <?php 
@@ -13,9 +20,10 @@
                 substr($book['title'], 0, 30); 
                 if(strlen($book['title']) > 30){echo "[...]";}
                 ?></h3>
+                <p class="text-center date"><?= $book['date'] ?></p>
                 <p class="text-center">
                     <a href="index.php?action=un-livre&id=<?= $book['id'] ?>">
-                        <img src="./App/Public/Books/images/<?= $book['picture']; ?>" alt="La couverture du roman <?= $book['title']; ?>">
+                        <img src="./App/Public/Books/images/<?= $book['bookPicture']; ?>" alt="La couverture du roman <?= $book['title']; ?>">
                     </a>
                 </p>
                 <a href="index.php?action=un-livre&id=<?= $book['id'] ?>" class="center btn-book">Lire l'article</a>

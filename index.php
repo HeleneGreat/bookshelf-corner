@@ -22,7 +22,12 @@ try{
     if (isset($_GET['action'])){
         
         if($_GET['action'] == 'livres'){
-            $controllerFront->allBooks();
+            if(isset($_GET['category'])){
+                $idGenre = $_GET['category'];
+                $controllerFront->allBooks($idGenre);
+            }else{
+                $controllerFront->allBooks(0);
+            }
         }
         
         elseif($_GET['action'] == 'un-livre'){
@@ -78,22 +83,22 @@ try{
             $userController->connexionUserPost($mail, $mdp);
         }
 
-
-
-
-
-
-
         elseif($_GET['action'] == 'error'){
             $controllerFront->error();
         }
 
+        else{
+            header('Location: index.php?error=notFound');
+        }
+    }
+
+    elseif(isset($_GET['error'])){
+        $controllerFront->error404();
     }
 
     else{
         $controllerFront->home();
     }
-
 
 
 

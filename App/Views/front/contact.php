@@ -41,7 +41,6 @@
         </div>
         <p class="rgpd"><input type="checkbox" name="rgpd" required><label for="rgpd">En cochant cette case, vous acceptez que les données transmises soient conservées. Aucun traitement commercial n'en sera fait, et elles ne seront pas transmises à des tiers.</label></p>
 
-        <!-- <p class="center"><input type="submit" class="btn lg"></p> -->
         <button type="submit" class="btn center lg">Envoyer</button>
 
         <!-- Mobile link to send the message-->

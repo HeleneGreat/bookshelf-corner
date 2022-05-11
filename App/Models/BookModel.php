@@ -23,13 +23,22 @@ class BookModel extends Manager{
         return $req;
     }
 
-    public function allBooksPagination($pagination){
+    public function allBooksPagination($pagination, $idGenre){
+        if($idGenre > 0){
+            $category = "WHERE genres.id = " . $idGenre;
+        }else{
+            $category = "";
+        }
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
-            'SELECT id, title, author, picture, DATE_FORMAT(created_at, "%d %M %Y") AS date, slider 
-            FROM books 
-            ORDER BY id DESC
-            LIMIT :firstItem, :perPage');
+            "SELECT genres.id, category, genres.picture AS catPicture, 
+            books.id, title, books.picture AS bookPicture, DATE_FORMAT(created_at, '%d %M %Y') AS date 
+            FROM genres
+            INNER JOIN books 
+            ON genres.id = books.id_genre
+            {$category}
+            ORDER BY books.id DESC
+            LIMIT :firstItem, :perPage");
         $req->bindValue(':firstItem', $pagination[':firstItem'], $bdd::PARAM_INT);
         $req->bindValue(':perPage', $pagination[':perPage'], $bdd::PARAM_INT);
         $req->execute();
