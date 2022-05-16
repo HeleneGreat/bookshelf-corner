@@ -50,29 +50,32 @@ class FrontController extends Controller{
         else{
             return $this->viewFront("error404");
         }
-        
     }
 
     function oneBook($id){
         $newFirst = new \Projet\Models\BookModel();
         $dataFirst = $newFirst->singleBook($id);
         $datasFirst = $dataFirst->fetch();
-        $newSecond = new \Projet\Models\CommentModel();
-        $dataSecond = $newSecond->allBookComments($id);
-        $datasSecond = $dataSecond->fetchAll();
-        $datas = [
-            "book" => $datasFirst,
-            "comments" => $datasSecond            
-        ];
-        if(isset($_GET['status'])){
-            if($_GET['status'] == "success"){
-                if($_GET['from'] == "addComment"){
-                    $userMessage = new SubmitMessage ("success", "Votre commentaire a bien été publié !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
+        if($datasFirst != false){
+            $newSecond = new \Projet\Models\CommentModel();
+            $dataSecond = $newSecond->allBookComments($id);
+            $datasSecond = $dataSecond->fetchAll();
+            $datas = [
+                "book" => $datasFirst,
+                "comments" => $datasSecond            
+            ];
+            if(isset($_GET['status'])){
+                if($_GET['status'] == "success"){
+                    if($_GET['from'] == "addComment"){
+                        $userMessage = new SubmitMessage ("success", "Votre commentaire a bien été publié !");
+                        $datas["feedback"] = $userMessage->formatedMessage();
+                    }
                 }
             }
+            return $this->viewFront("one-book", $datas);
+        }else{
+            return $this->viewFront("error404");
         }
-        return $this->viewFront("one-book", $datas);
     }
 
     function error404(){
