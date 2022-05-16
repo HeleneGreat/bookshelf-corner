@@ -97,8 +97,7 @@ class Controller
         }       
     }
 
-    function checkForDuplicate($table, $newdata)
-    {
+    function checkForDuplicate($table, $newdata){
         if($table == "administrators"){
             $new = new \Projet\Models\AdminModel();
             if(str_contains($newdata, "@")){

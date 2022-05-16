@@ -55,8 +55,7 @@ class BookController extends Controller
         return "no-cover.png";
     }
 
-    function addLivrePost($Post, $Files)
-    {
+    function addLivrePost($Post, $Files){
         $new = new \Projet\Models\BookModel();
         $data = [
             ':newTitle' => htmlspecialchars( $Post['newTitle']),
