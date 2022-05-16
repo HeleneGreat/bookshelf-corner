@@ -2,7 +2,8 @@
 
 namespace Projet\Forms;
 
-class SubmitMessage{
+class SubmitMessage
+{
 
     private string $code;
     private string $message;
@@ -13,15 +14,18 @@ class SubmitMessage{
         $this->message = $message;
     }
 
-    function getCode(){
+    function getCode()
+    {
         return $this->code;
     }
 
-    function getMessage(){
+    function getMessage()
+    {
         return $this->message;
     }
 
-    function formatedMessage() {
+    function formatedMessage()
+    {
         return [
             "code" => $this->getCode(),
             "message" => $this->getMessage()

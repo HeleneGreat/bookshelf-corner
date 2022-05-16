@@ -4,17 +4,20 @@ namespace Projet\Controllers;
 
 use Projet\Forms\SubmitMessage;
 
-class AdminController extends Controller{
+class AdminController extends Controller
+{
 
 
     /********************************************************/
     /******************* CONNECTION ADMIN *******************/
     /********************************************************/
-    function addAdmin(){
+    function addAdmin()
+    {
         return $this->viewAdmin("connexion/createAdmin");
     }
 
-    function createAdminPost ($Post, $Files){
+    function createAdminPost ($Post, $Files)
+    {
         $createAdmin = new \Projet\Models\AdminModel;
         $pseudo = htmlspecialchars($Post['adminPseudo']);
         $mail = htmlspecialchars($Post['adminMail']);
@@ -53,7 +56,8 @@ class AdminController extends Controller{
         }
     }
 
-    function connexionAdmin(){
+    function connexionAdmin()
+    {
         $datas=[];
         if(isset($_GET['status'])){
             if($_GET['status'] == "success"){
@@ -71,7 +75,8 @@ class AdminController extends Controller{
         return $this->viewAdmin("connexion/connexionAdmin", $datas);
     }
 
-    function connexionAdminPost($mail, $mdp){
+    function connexionAdminPost($mail, $mdp)
+    {
         // get password
         $user = new \Projet\Models\AdminModel();
         $connexAdmin = $user->infoConnexion($mail);
@@ -99,7 +104,8 @@ class AdminController extends Controller{
     /*********************************************************/
     /*********************** DASHBOARD ***********************/
     /*********************************************************/
-    function dashboard(){
+    function dashboard()
+    {
         $countBooks = new \Projet\Models\BookModel();
         $nbBooks = $countBooks->countBooks();
         $lastBooks = $countBooks->allBooks();
@@ -132,14 +138,16 @@ class AdminController extends Controller{
     /*********************************************************/
     /********************* ADMIN ACCOUNT *********************/
     /*********************************************************/
-    function infoAdmin($id){
+    function infoAdmin($id)
+    {
         $user = new \Projet\Models\AdminModel();
         $admin = $user->infoAdmin($id);
         $infoAdmin = $admin->fetch();
         return $infoAdmin;
     }
 
-    function account(){
+    function account()
+    {
         $id = $_SESSION['id'];
         $user = new \Projet\Models\AdminModel();
         $admin = $user->infoAdmin($id);
@@ -173,7 +181,8 @@ class AdminController extends Controller{
         return $this->validAccess("account", $datas);
     }
 
-    function accountModify(){
+    function accountModify()
+    {
         $id = $_SESSION['id'];
         $user = new \Projet\Models\AdminModel();
         $admin = $user->infoAdmin($id);
@@ -181,7 +190,8 @@ class AdminController extends Controller{
         $this->validAccess("account-modify", $infoAdmin);
     }
 
-    function accountModifyPost($id, $Post, $Files){
+    function accountModifyPost($id, $Post, $Files)
+    {
         $admin = new \Projet\Models\AdminModel();
         $purpose = "admin";
         $folder = "Admin";
@@ -267,7 +277,8 @@ class AdminController extends Controller{
     /**********************************************************/
     /******************** ERROR MANAGEMENT ********************/
     /**********************************************************/
-    function error(){
+    function error()
+    {
         $datas = [];
         if(isset($_GET['status'])){
             if($_GET['status'] == "error"){

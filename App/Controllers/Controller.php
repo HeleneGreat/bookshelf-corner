@@ -2,9 +2,11 @@
 
 namespace Projet\Controllers;
 
-class Controller{
+class Controller
+{
 
-    function viewFront($viewName, $datas = null){
+    function viewFront($viewName, $datas = null)
+    {
         $newBlog = new \Projet\Models\BlogModel();
         $blogs = $newBlog->blogInfo(1);
         $blog = $blogs->fetch();
@@ -14,7 +16,8 @@ class Controller{
         include('./App/Views/front/' . $viewName . '.php');
     }
 
-    function viewUser($viewName, $datas = null){
+    function viewUser($viewName, $datas = null)
+    {
         $new = new \Projet\Models\BlogModel();
         $blogs = $new->blogInfo(1);
         $blog = $blogs->fetch();
@@ -25,14 +28,16 @@ class Controller{
         }
     }
 
-    function viewAdmin($viewName, $datas = null){
+    function viewAdmin($viewName, $datas = null)
+    {
         $new = new \Projet\Models\BlogModel();
         $blogs = $new->blogInfo(1);
         $blog = $blogs->fetch();      
         include('./App/Views/admin/' . $viewName . '.php');
     }
 
-    protected function validAccess($path, $data = []){
+    protected function validAccess($path, $data = [])
+    {
         if (!empty($_SESSION) && $_SESSION['role'] > 0){
             if($_SESSION['mail'] != null){
                 return $this->viewAdmin($path, $data);
@@ -42,7 +47,8 @@ class Controller{
         }
     }
 
-    function verifyFiles($purpose, $folder, $id){
+    function verifyFiles($purpose, $folder, $id)
+    {
         if(isset($_FILES['picture'])){
             $tmpName = $_FILES['picture']['tmp_name'];
             $name = $_FILES['picture']['name'];
@@ -67,7 +73,8 @@ class Controller{
     }
 
     // After row creation in BDD, update the BDD with the picture name
-    function updatePicture($data, $table){
+    function updatePicture($data, $table)
+    {
         if($table === 'administrators'){
             $new = new \Projet\Models\AdminModel();
             $datas = $new->updatePicture($data, $table); 
@@ -90,7 +97,8 @@ class Controller{
         }       
     }
 
-    function checkForDuplicate($table, $newdata){
+    function checkForDuplicate($table, $newdata)
+    {
         if($table == "administrators"){
             $new = new \Projet\Models\AdminModel();
             if(str_contains($newdata, "@")){
@@ -119,7 +127,8 @@ class Controller{
         }
     }
 
-    function pagination($table){
+    function pagination($table)
+    {
         if(isset($_GET['page']) && !empty($_GET['page'])){
             $currentPage = (int) strip_tags($_GET['page']);
         }else{
@@ -160,7 +169,8 @@ class Controller{
         return $datas;
     }
 
-    function error404(){
+    function error404()
+    {
         if(!empty($_SESSION) && $_SESSION['role'] === 0){
             return $this->viewUser("error404");
         }else{

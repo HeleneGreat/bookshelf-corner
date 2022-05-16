@@ -4,16 +4,19 @@ namespace Projet\Controllers;
 
 use Projet\Forms\SubmitMessage;
 
-class GenreController extends Controller{
+class GenreController extends Controller
+{
     
-    function infoGenre($id){
+    function infoGenre($id)
+    {
         $new = new \Projet\Models\GenreModel();
         $data = $new->infoGenre($id);
         $datas = $data->fetch();
         return $datas;
     }
 
-    function livresGenres(){
+    function livresGenres()
+    {
         $new = new \Projet\Models\GenreModel();
         $data = $new->allGenres();
         $datas = $data->fetchAll();
@@ -38,18 +41,21 @@ class GenreController extends Controller{
         return $this->validAccess("books-genres", $datas);
     }
 
-    function noIcon(){
+    function noIcon()
+    {
         return "no-icon.png";
     }
 
-    function allGenre(){
+    function allGenre()
+    {
         $new = new \Projet\Models\GenreModel();
         $data = $new->allGenres();
         $datas = $data->fetchAll();
         return $this->validAccess("books-genres", $datas);
     }
 
-    function genreAddPost($Post, $Files){
+    function genreAddPost($Post, $Files)
+    {
         $new = new \Projet\Models\GenreModel();
         $data = [':newType' => htmlspecialchars($Post['newType'])];
         $new->genreAddPost($data);
@@ -71,7 +77,8 @@ class GenreController extends Controller{
         $this->updatePicture($data, 'genres');
     }
 
-    function genreModifyPost($id, $Post, $Files){
+    function genreModifyPost($id, $Post, $Files)
+    {
         $new = new \Projet\Models\GenreModel(); 
         $purpose = "genre";
         $folder = "Books";
@@ -100,7 +107,8 @@ class GenreController extends Controller{
         header('Location: indexAdmin.php?action=livres-genres&status=success&from=modify');
     }
 
-    function deleteGenre($id){
+    function deleteGenre($id)
+    {
         $new = new \Projet\Models\GenreModel();
         $data = $new->deleteGenre($id);
         header('Location: indexAdmin.php?action=livres-genres&status=success&from=delete');

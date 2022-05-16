@@ -4,9 +4,11 @@ namespace Projet\Controllers;
 
 use Projet\Forms\SubmitMessage;
 
-class CommentController extends Controller{
+class CommentController extends Controller
+{
 
-    function commentPost($id, $Post){
+    function commentPost($id, $Post)
+    {
         $comment = new \Projet\Models\CommentModel();
         $data = [
             ':user_id' => $_SESSION['id'],
@@ -18,7 +20,8 @@ class CommentController extends Controller{
         header('Location: index.php?action=un-livre&id=' . $data[':book_id']. '&status=success&from=addComment#feedback');
     }
 
-    // function allComments(){
+    // function allComments()
+    // {
     //     $comments = new \Projet\Models\CommentModel();
     //     $comm = $comments->allComments();
     //     $data = $comm->fetchAll();
@@ -30,7 +33,8 @@ class CommentController extends Controller{
     //     return $this->validAccess("comments", $data);
     // }
 
-    function allComments(){
+    function allComments()
+    {
         $pagination = $this->pagination("comments");
         $comments = new \Projet\Models\CommentModel();
         $comm = $comments->allCommentsPagination($pagination);
@@ -45,7 +49,8 @@ class CommentController extends Controller{
         return $this->validAccess("comments", $datas);
     }
 
-    function viewComment($id){
+    function viewComment($id)
+    {
         $comments = new \Projet\Models\CommentModel();
         $comm = $comments->singleComment($id);
         $data = $comm->fetch();
@@ -57,7 +62,8 @@ class CommentController extends Controller{
     }
 
     // For the admin to delete any comment
-    function deleteComment($id){
+    function deleteComment($id)
+    {
         $comments = new \Projet\Models\CommentModel();
         $comments->deleteComment($id);
         header('Location: indexAdmin.php?action=comments&status=success');
@@ -67,14 +73,16 @@ class CommentController extends Controller{
     /************ USER ************/
     /******************************/
     // For the user to delete one of his comments
-    function userDeleteComment($id){
+    function userDeleteComment($id)
+    {
         $comments = new \Projet\Models\CommentModel();
         $comments->deleteComment($id);
         header('Location: indexAdmin.php?action=userDashboard&status=success&from=deleteComment');
     }
 
     // For the user to modify one of his comments
-    function commentModify($id){
+    function commentModify($id)
+    {
         $comments = new \Projet\Models\CommentModel();
         $comm = $comments->singleComment($id);
         $data = $comm->fetch();
@@ -85,7 +93,8 @@ class CommentController extends Controller{
         }
     }
 
-    function commentModifyPost($id, $Post){
+    function commentModifyPost($id, $Post)
+    {
         $comments = new \Projet\Models\CommentModel();
         $data = [
             ':id' => $id,

@@ -2,16 +2,19 @@
 
 namespace Projet\Models;
 
-class CommentModel extends Manager{
+class CommentModel extends Manager
+{
 
-    public function commentPost($data){
+    public function commentPost($data)
+    {
         $bdd =$this->dbConnect();
         $req = $bdd->prepare('INSERT INTO comments (user_id, book_id, title, content) VALUES (:user_id, :book_id, :title, :content)');
         $req->execute($data);
         return $req;
     }
 
-    public function countComments(){
+    public function countComments()
+    {
         $bdd =$this->dbConnect();
         $req = $bdd->prepare('SELECT COUNT(id) FROM comments WHERE id');
         $req->execute();
@@ -20,7 +23,8 @@ class CommentModel extends Manager{
     }
 
     // Every comment ever published
-    public function allCommentsPagination($pagination){
+    public function allCommentsPagination($pagination)
+    {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'SELECT comments.id, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, users.pseudo, users.picture, comments.title, comments.content
@@ -35,7 +39,8 @@ class CommentModel extends Manager{
         return $req;
     }
 
-    public function allComments(){
+    public function allComments()
+    {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'SELECT comments.id AS commentId, books.id AS bookId, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, users.pseudo, users.picture AS userPicture, comments.title, comments.content, books.picture AS bookPicture, books.title AS bookTitle
@@ -48,7 +53,8 @@ class CommentModel extends Manager{
     }
 
     // All comments related to THIS book article
-    public function allBookComments($id){
+    public function allBookComments($id)
+    {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'SELECT comments.id, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, users.pseudo, users.picture, comments.title AS commentTitle, comments.content AS commentContent
@@ -61,7 +67,8 @@ class CommentModel extends Manager{
         return $req;
     }
 
-    public function singleComment($id){
+    public function singleComment($id)
+    {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'SELECT comments.id, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, comments.title AS commentTitle, comments.content AS commentContent, users.pseudo, users.picture, users.mail, books.title AS bookTitle
@@ -73,7 +80,8 @@ class CommentModel extends Manager{
         return $req;
     }
 
-    public function commentModifyPost($data){
+    public function commentModifyPost($data)
+    {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'UPDATE comments
@@ -84,7 +92,8 @@ class CommentModel extends Manager{
         return $req;
     }
 
-    public function deleteComment($id){
+    public function deleteComment($id)
+    {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('DELETE FROM comments WHERE id = ?');
         $req->execute(array($id));

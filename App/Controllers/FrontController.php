@@ -4,17 +4,21 @@ namespace Projet\Controllers;
 
 use Projet\Forms\SubmitMessage;
 
-class FrontController extends Controller{
+class FrontController extends Controller
+{
 
-    function contact(){
+    function contact()
+    {
         return $this->viewFront("contact");
     }
 
-    function about(){
+    function about()
+    {
         return $this->viewFront("about");
     }
 
-    function error(){
+    function error()
+    {
         $datas = [];
         if(isset($_GET['status'])){
             if($_GET['status'] == "error"){
@@ -27,14 +31,16 @@ class FrontController extends Controller{
         return $this->viewFront("error", $datas);
     }
  
-    function home(){
+    function home()
+    {
         $new = new \Projet\Models\BookModel();
         $data = $new->allBooks();
         $datas = $data->fetchAll();
         return $this->viewFront("home", $datas);
     }
 
-    function allBooks($idGenre){
+    function allBooks($idGenre)
+    {
         $pagination = $this->pagination("books");
         $newBook = new \Projet\Models\BookModel();
         $book = $newBook->allBooksPagination($pagination, $idGenre);
@@ -52,7 +58,8 @@ class FrontController extends Controller{
         }
     }
 
-    function oneBook($id){
+    function oneBook($id)
+    {
         $newFirst = new \Projet\Models\BookModel();
         $dataFirst = $newFirst->singleBook($id);
         $datasFirst = $dataFirst->fetch();
@@ -78,7 +85,8 @@ class FrontController extends Controller{
         }
     }
 
-    function error404(){
+    function error404()
+    {
         return $this->viewFront("error404");
     }
 

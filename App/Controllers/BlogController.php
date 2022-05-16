@@ -2,16 +2,19 @@
 
 namespace Projet\Controllers;
 
-class BlogController extends Controller{
+class BlogController extends Controller
+{
 
-    function blogInfo($id){
+    function blogInfo($id)
+    {
         $user = new \Projet\Models\BlogModel();
         $blogs = $user->blogInfo($id);
         $blog = $blogs->fetch();
         return $blog;
     }
 
-    function blogParameters($id){
+    function blogParameters($id)
+    {
         $user = new \Projet\Models\BlogModel();
         $blogs = $user->blogInfo($id);
         $blog = $blogs->fetch();
@@ -24,7 +27,8 @@ class BlogController extends Controller{
             else{ echo "Vous n'avez pas accès à cette page"; }       
     }
     
-    function blogModify($id){
+    function blogModify($id)
+    {
         $user = new \Projet\Models\BlogModel();
         $blogs = $user->blogInfo($id);
         $blog = $blogs->fetch();  
@@ -33,10 +37,12 @@ class BlogController extends Controller{
         $infoAdmin = $thisAdmin->fetch();
         if($infoAdmin['role'] === 2){
             return $this->viewAdmin("parameters-modify", $blog);
-        }else{ echo "Vous n'avez pas accès à cette page"; }
+        }else{
+            echo "Vous n'avez pas accès à cette page"; }
     }
     
-    function blogModifyPost($id, $Post, $Files){
+    function blogModifyPost($id, $Post, $Files)
+    {
         $user = new \Projet\Models\AdminModel();
         $purpose = "logo";
         $folder = "Admin";

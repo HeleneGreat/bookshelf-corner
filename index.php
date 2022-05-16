@@ -8,7 +8,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 require_once('./App/form/SubmitMessage.php');
 
 
-try{
+try
+{
 
     $controllerFront = new \Projet\Controllers\FrontController();
 
@@ -19,31 +20,40 @@ try{
     $userController = new \Projet\Controllers\UserController();
 
     
-    if (isset($_GET['action'])){
+    if (isset($_GET['action']))
+    {
         
-        if($_GET['action'] == 'livres'){
-            if(isset($_GET['category'])){
+        if($_GET['action'] == 'livres')
+        {
+            if(isset($_GET['category']))
+            {
                 $idGenre = $_GET['category'];
                 $controllerFront->allBooks($idGenre);
-            }else{
+            }
+            else
+            {
                 $controllerFront->allBooks(0);
             }
         }
         
-        elseif($_GET['action'] == 'un-livre'){
+        elseif($_GET['action'] == 'un-livre')
+        {
             $id = $_GET['id'];
             $controllerFront->oneBook($id);
         }
         
-        elseif($_GET['action'] == 'about'){
+        elseif($_GET['action'] == 'about')
+        {
             $controllerFront->about();
         }
         
-        elseif($_GET['action'] == 'contact'){
+        elseif($_GET['action'] == 'contact')
+        {
             $controllerFront->contact();
         }
         
-        elseif($_GET['action'] == 'contactPost'){
+        elseif($_GET['action'] == 'contactPost')
+        {
             $data = [
                 ':gender' => htmlspecialchars($_POST['gender']),
                 ':familyname' => htmlspecialchars($_POST['familyname']),
@@ -55,7 +65,8 @@ try{
             $messageController->contactPost($data);
         }
 
-        elseif($_GET['action'] == 'commentPost'){
+        elseif($_GET['action'] == 'commentPost')
+        {
             $id = $_GET['id'];
             $commentController->commentPost($id, $_POST);
         }
@@ -65,38 +76,46 @@ try{
         /********************* USER ACCOUNT *********************/
         /********************************************************/
         /********************************************************/
-        elseif($_GET['action'] == "createUser"){           
+        elseif($_GET['action'] == "createUser")
+        {           
             $userController->createUser();
         }
 
-        elseif($_GET['action'] == "createUserPost"){           
+        elseif($_GET['action'] == "createUserPost")
+        {           
             $userController->createUserPost($_POST, $_FILES);
         }
 
-        elseif($_GET['action'] == "connexionUser"){           
+        elseif($_GET['action'] == "connexionUser")
+        {           
             $userController->connexionUser();
         }
 
-        elseif ($_GET['action'] == "connexionUserPost"){
+        elseif ($_GET['action'] == "connexionUserPost")
+        {
             $mail = $_POST['userMail'];
             $mdp = $_POST['userMdp'];            
             $userController->connexionUserPost($mail, $mdp);
         }
 
-        elseif($_GET['action'] == 'error'){
+        elseif($_GET['action'] == 'error')
+        {
             $controllerFront->error();
         }
 
-        else{
+        else
+        {
             header('Location: index.php?error=notFound');
         }
     }
 
-    elseif(isset($_GET['error'])){
+    elseif(isset($_GET['error']))
+    {
         $controllerFront->error404();
     }
 
-    else{
+    else
+    {
         $controllerFront->home();
     }
 
@@ -104,12 +123,14 @@ try{
 
 }
 
-catch (Exception $e){
+catch (Exception $e)
+{
     // return $this->viewFront("error");
     echo $e->getMessage();
 }
 
-catch (Error $e){
+catch (Error $e)
+{
     // return $this->viewFront('error');
     echo $e->getMessage();
 }

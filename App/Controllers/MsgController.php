@@ -4,9 +4,11 @@ namespace Projet\Controllers;
 
 use Projet\Forms\SubmitMessage;
 
-class MsgController extends Controller{
+class MsgController extends Controller
+{
 
-    function contactPost($data){
+    function contactPost($data)
+    {
         $messages = new \Projet\Models\MsgModel();
         $msg = $messages->contactPost($data);
         
@@ -19,7 +21,8 @@ class MsgController extends Controller{
         return $this->viewFront("contact", $data);
     }
 
-    // function allMessages(){
+    // function allMessages()
+    // {
     //     $messages = new \Projet\Models\MsgModel();
     //     $msg = $messages->allMessages();
     //     $data = $msg->fetchAll();
@@ -31,7 +34,8 @@ class MsgController extends Controller{
     //     return $this->validAccess("messages", $data);
     // }
 
-    function allMessages(){
+    function allMessages()
+    {
         $pagination = $this->pagination("messages");
         $messages = new \Projet\Models\MsgModel();
         $msg = $messages->allMessagesPagination($pagination);
@@ -46,7 +50,8 @@ class MsgController extends Controller{
         return $this->validAccess("messages", $datas);
     }
 
-    function viewMessage($id){
+    function viewMessage($id)
+    {
         $messages = new \Projet\Models\MsgModel();
         $oneMsg = $messages->singleMessage($id);
         $data = $oneMsg->fetch();
@@ -57,7 +62,8 @@ class MsgController extends Controller{
         }
     }
 
-    function deleteMessage($id){
+    function deleteMessage($id)
+    {
         $messages = new \Projet\Models\MsgModel();
         $messages->deleteMessage($id);
         header('Location: indexAdmin.php?action=messages&status=success');

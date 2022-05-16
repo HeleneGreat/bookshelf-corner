@@ -2,7 +2,8 @@
 
 namespace Projet\Models;
 
-class GenreModel extends Manager{
+class GenreModel extends Manager
+{
 
     public function allGenres(){
         $bdd = $this->dbConnect();

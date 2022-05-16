@@ -2,9 +2,11 @@
 
 namespace Projet\Models;
 
-class BookModel extends Manager{
+class BookModel extends Manager
+{
 
-    public function countBooks(){
+    public function countBooks()
+    {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('SELECT COUNT(id) FROM books WHERE id');
         $req->execute();
@@ -12,7 +14,8 @@ class BookModel extends Manager{
         return $result;
     }
 
-    public function allBooks(){
+    public function allBooks()
+    {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'SELECT id, title, author, picture, DATE_FORMAT(created_at, "%d %M %Y") AS date, slider 
@@ -23,7 +26,8 @@ class BookModel extends Manager{
         return $req;
     }
 
-    public function allBooksPagination($pagination, $idGenre){
+    public function allBooksPagination($pagination, $idGenre)
+    {
         if($idGenre > 0){
             $category = "WHERE genres.id = " . $idGenre;
         }else{
@@ -45,7 +49,8 @@ class BookModel extends Manager{
         return $req;
     }
 
-    public function singleBook($id){
+    public function singleBook($id)
+    {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'SELECT books.id, title, DATE_FORMAT(created_at, "%d %M %Y") AS date, author, notation, catchphrase, content, books.picture, year_publication, category 
@@ -57,7 +62,8 @@ class BookModel extends Manager{
         return $req;
     }
 
-    public function addSingleBook($data){
+    public function addSingleBook($data)
+    {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'INSERT INTO books(title, author, notation, catchphrase, id_genre, content, year_publication) 
@@ -66,7 +72,8 @@ class BookModel extends Manager{
         return $req;
     }
 
-    public function modifySingleBook($data){
+    public function modifySingleBook($data)
+    {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'UPDATE books 
@@ -76,7 +83,8 @@ class BookModel extends Manager{
         return $req;
     }
 
-    public function deleteBook($id){
+    public function deleteBook($id)
+    {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('DELETE FROM books WHERE id = ?');
         $req->execute(array($id));
@@ -87,9 +95,9 @@ class BookModel extends Manager{
     /**************************/
     /********* SLIDER *********/
     /**************************/
-    
 // All slider colomns are set to 0
-    public function sliderOff(){
+    public function sliderOff()
+    {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('UPDATE books SET slider = "0"');
         $req->execute();
@@ -97,7 +105,8 @@ class BookModel extends Manager{
     }
 
 // The ones selected in the form are set to 1
-    public function sliderOn($data){
+    public function sliderOn($data)
+    {
         $bdd = $this->dbConnect();
         foreach($data as $slider){
             $req = $bdd->prepare('UPDATE books SET slider = "1" WHERE id = ?');

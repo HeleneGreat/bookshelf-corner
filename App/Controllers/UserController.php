@@ -4,18 +4,21 @@ namespace Projet\Controllers;
 
 use Projet\Forms\SubmitMessage;
 
-class UserController extends Controller{
+class UserController extends Controller
+{
 
 
     /*******************************************************/
     /******************* CONNECTION USER *******************/
     /*******************************************************/
 
-    function createUser(){
+    function createUser()
+    {
         return $this->viewFront("user-create");
     }
 
-    function createUserPost ($Post, $Files){
+    function createUserPost ($Post, $Files)
+    {
         $createUser = new \Projet\Models\UserModel;
         $pseudo = htmlspecialchars($Post['userPseudo']);
         $mail = htmlspecialchars($Post['userMail']);
@@ -28,7 +31,8 @@ class UserController extends Controller{
             ':mdp' => $mdp,
         ];        
         
-        if(!empty($pseudo) && (!empty($mail) && (!empty($mdp)))){
+        if(!empty($pseudo) && (!empty($mail) && (!empty($mdp))))
+        {
             if(filter_var($mail, FILTER_VALIDATE_EMAIL)){
                 // create user in BDD
                 $createUser->createUser($data);
@@ -59,7 +63,8 @@ class UserController extends Controller{
         }
     }
 
-    function connexionUser(){
+    function connexionUser()
+    {
         $datas=[];
         if(isset($_GET['status'])){
             if($_GET['status'] == "success"){
@@ -72,7 +77,8 @@ class UserController extends Controller{
         return $this->viewFront("user-connexion", $datas);
     }
 
-    function connexionUserPost($mail, $mdp){
+    function connexionUserPost($mail, $mdp)
+    {
         $user = new \Projet\Models\UserModel();
         $connexUser = $user->infoConnexion($mail);
         $result = $connexUser->fetch();
@@ -91,7 +97,8 @@ class UserController extends Controller{
         }
     }
 
-    function userDashboard(){
+    function userDashboard()
+    {
         $pagination = $this->pagination("comments");
         $new = new \Projet\Models\UserModel();
         $allComment = $new->allUserComments($_SESSION['id'], $pagination);
@@ -122,7 +129,8 @@ class UserController extends Controller{
         return $this->viewUser("dashboard", $datas);
     }
 
-    function userAccount(){
+    function userAccount()
+    {
         $id = $_SESSION['id'];
         $user = new \Projet\Models\UserModel();
         $users = $user->infoUser($id);

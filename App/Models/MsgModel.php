@@ -2,9 +2,11 @@
 
 namespace Projet\Models;
 
-class MsgModel extends Manager{
+class MsgModel extends Manager
+{
 
-    public function contactPost($data){
+    public function contactPost($data)
+    {
         $bdd =$this->dbConnect();
         $req = $bdd->prepare(
             'INSERT INTO messages (gender, familyname, firstname, email, object, message)
@@ -13,7 +15,8 @@ class MsgModel extends Manager{
         return $req;
     }
 
-    public function countMessages(){
+    public function countMessages()
+    {
         $bdd =$this->dbConnect();
         $req = $bdd->prepare('SELECT COUNT(id) FROM messages WHERE id');
         $req->execute();
@@ -21,7 +24,8 @@ class MsgModel extends Manager{
         return $result;
     }
 
-    public function allMessages(){
+    public function allMessages()
+    {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'SELECT id, gender, familyname, firstname, DATE_FORMAT(send_at, "%d/%m/%Y à %kh%i") AS send_at, email, object, message
@@ -31,7 +35,8 @@ class MsgModel extends Manager{
         return $req;
     }
 
-    public function allMessagesPagination($pagination){
+    public function allMessagesPagination($pagination)
+    {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'SELECT id, gender, familyname, firstname, DATE_FORMAT(send_at, "%d/%m/%Y à %kh%i") AS send_at, email, object, message
@@ -44,7 +49,8 @@ class MsgModel extends Manager{
         return $req;
     }
 
-    public function singleMessage($id){
+    public function singleMessage($id)
+    {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'SELECT id, gender, familyname, firstname, DATE_FORMAT(send_at, "%d/%m/%Y à %kh%i") AS send_at, email, object, message
@@ -55,7 +61,8 @@ class MsgModel extends Manager{
     }
 
     // TODO : function non utilisée à supprimer ?
-    public function sendMessagePost($data){
+    public function sendMessagePost($data)
+    {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'INSERT INTO messages(gender, familyname, firstname, email, object, message)
@@ -64,7 +71,8 @@ class MsgModel extends Manager{
         return $req;
     }
 
-    public function deleteMessage($id){
+    public function deleteMessage($id)
+    {
         $bdd =$this->dbConnect();
         $req = $bdd->prepare('DELETE FROM messages WHERE id = ?');
         $req->execute(array($id));
