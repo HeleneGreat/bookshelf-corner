@@ -84,23 +84,29 @@ class BookController extends Controller{
         $new = new \Projet\Models\BookModel();
         $data = $new->singleBook($id);
         $datas = $data->fetch();
-
-        return $this->validAccess("book-view", $datas);
+        if($datas != false){
+            return $this->validAccess("book-view", $datas);
+        }else{
+            return $this->error404();
+        }
     }
   
     function modifyLivre($id){
         $newFirst = new \Projet\Models\BookModel();
         $dataFirst = $newFirst->singleBook($id);
         $datasFirst = $dataFirst->fetch();
-
-        $newSecond = new \Projet\Models\GenreModel();
-        $dataSecond = $newSecond->categoriesList();
-        $datasSecond = $dataSecond->fetchAll();
-        $datas = [
-            "book" => $datasFirst,
-            "genres" => $datasSecond
-        ] ;
-        return $this->validAccess("book-modify", $datas);
+        if($datasFirst != false){
+            $newSecond = new \Projet\Models\GenreModel();
+            $dataSecond = $newSecond->categoriesList();
+            $datasSecond = $dataSecond->fetchAll();
+            $datas = [
+                "book" => $datasFirst,
+                "genres" => $datasSecond
+            ] ;
+            return $this->validAccess("book-modify", $datas);
+        }else{
+            return $this->error404();
+        }
     }
 
     function modifyLivrePost($id, $Post, $Files){
@@ -141,7 +147,6 @@ class BookController extends Controller{
     function deleteLivre($id){
         $new = new \Projet\Models\BookModel();
         $data = $new->deleteBook($id);
-        $datas = $data->fetch();
         header('Location: indexAdmin.php?action=livres&status=success&from=delete');
     }
     

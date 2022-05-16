@@ -73,7 +73,6 @@ class UserController extends Controller{
     }
 
     function connexionUserPost($mail, $mdp){
-        // get password
         $user = new \Projet\Models\UserModel();
         $connexUser = $user->infoConnexion($mail);
         $result = $connexUser->fetch();

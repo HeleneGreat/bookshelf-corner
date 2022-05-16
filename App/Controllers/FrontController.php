@@ -39,12 +39,18 @@ class FrontController extends Controller{
         $newBook = new \Projet\Models\BookModel();
         $book = $newBook->allBooksPagination($pagination, $idGenre);
         $datas['book'] = $book->fetchAll();
-        $newGenre = new \Projet\Models\GenreModel();
-        $genre = $newGenre->infoGenre($idGenre);
-        $datas['genre'] = $genre->fetch();
-        $datas['pages'] = $pagination['pages'];
-        $datas['currentPage'] = $pagination['currentPage'];
-        return $this->viewFront("all-books", $datas);
+        if(!empty($datas['book'])){
+            $newGenre = new \Projet\Models\GenreModel();
+            $genre = $newGenre->infoGenre($idGenre);
+            $datas['genre'] = $genre->fetch();
+            $datas['pages'] = $pagination['pages'];
+            $datas['currentPage'] = $pagination['currentPage'];
+            return $this->viewFront("all-books", $datas);
+        }
+        else{
+            return $this->viewFront("error404");
+        }
+        
     }
 
     function oneBook($id){

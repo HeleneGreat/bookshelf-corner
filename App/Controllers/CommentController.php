@@ -49,7 +49,11 @@ class CommentController extends Controller{
         $comments = new \Projet\Models\CommentModel();
         $comm = $comments->singleComment($id);
         $data = $comm->fetch();
-        return $this->validAccess("comment-view", $data);
+        if($data != false){
+            return $this->validAccess("comment-view", $data);
+        }else{
+            return $this->error404();
+        }
     }
 
     // For the admin to delete any comment
@@ -74,7 +78,11 @@ class CommentController extends Controller{
         $comments = new \Projet\Models\CommentModel();
         $comm = $comments->singleComment($id);
         $data = $comm->fetch();
-        return $this->viewUser("user-comment-modify", $data);
+        if($data != false){
+            return $this->viewUser("user-comment-modify", $data);
+        }else{
+            return $this->error404();
+        }
     }
 
     function commentModifyPost($id, $Post){

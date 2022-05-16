@@ -50,7 +50,11 @@ class MsgController extends Controller{
         $messages = new \Projet\Models\MsgModel();
         $oneMsg = $messages->singleMessage($id);
         $data = $oneMsg->fetch();
-        return $this->validAccess("message-view", $data);
+        if($data != false){
+            return $this->validAccess("message-view", $data);
+        }else{
+            return $this->error404();
+        }
     }
 
     function deleteMessage($id){
