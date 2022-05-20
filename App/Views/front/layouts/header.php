@@ -13,10 +13,17 @@
     </div>
     <nav id="nav-xs" class="flex">
         <ul class="flex col center">
-            <li><a href="index.php">Accueil</a></li>
-            <li><a href="index.php?action=livres">Livres</a></li>
-            <li><a href="index.php?action=about">A propos</a></li>
-            <li><a href="index.php?action=contact">Me contacter</a></li>
+            <li><a href="index.php" <?php if(!isset($_GET['action'])){echo "class='active'";} ?>>Accueil</a></li>
+            <li><a href="index.php?action=livres" <?php if(isset($_GET['action']) && $_GET['action'] == "livres"){echo "class='active'";} ?>>Livres</a>
+                <ul class="book-cat">
+                    <?php foreach($genres as $genre){ ;?>
+                    <li><a href="index.php?action=livres&category=<?= $genre['id'] ;?>"
+                    <?php if(isset($_GET['category']) && $_GET['category'] == $genre['id']){echo "class='subactive'";} ?>><?= $genre['category'] ;?></a></li>
+                    <?php } ;?>
+                </ul>
+            </li>
+            <li><a href="index.php?action=about" <?php if(isset($_GET['action']) && $_GET['action'] == "about"){echo "class='active'";} ?>>A propos</a></li>
+            <li><a href="index.php?action=contact" <?php if(isset($_GET['action']) && $_GET['action'] == "contact"){echo "class='active'";} ?>>Nous contacter</a></li>
             <?php if(empty($_SESSION)){ ?>
                 <li><a href="indexAdmin.php?action=connexionUser">Se Connecter</a></li>
             <?php }elseif($_SESSION['role'] > 0){ ?>
@@ -51,16 +58,19 @@
 
             <nav id="nav-lg">
                 <ul class="flex justify-between">
-                    <li><a href="index.php">Accueil</a></li>
-                    <li class="submenu text-center"><a href="index.php?action=livres">Livres</a>
+                    <li class=""><a href="index.php" <?php if(!isset($_GET['action'])){echo "class='active'";} ?>>Accueil</a></li>
+                    <li class="submenu text-center"><a href="index.php?action=livres" <?php if(isset($_GET['action']) && $_GET['action'] == "livres"){echo "class='active'";} ?>>Livres</a>
                         <ul class="book-cat">
                             <?php foreach($genres as $genre){ ;?>
-                            <li><a href="index.php?action=livres&category=<?= $genre['id'] ;?>"><?= $genre['category'] ;?></a></li>
+                            <li><a href="index.php?action=livres&category=<?= $genre['id'] ;?>"
+                            <?php if(isset($_GET['category']) && $_GET['category'] == $genre['id']){echo "class='subactive'";} ?>><?= $genre['category'] ;?></a></li>
                             <?php } ;?>
                         </ul>
                     </li>
-                    <li><a href="index.php?action=about">A propos</a></li>
-                    <li><a href="index.php?action=contact">Me contacter</a></li>
+                    <li><a href="index.php?action=about"
+                        <?php if(isset($_GET['action']) && $_GET['action'] == "about"){echo "class='active'";} ?>>A propos</a></li>
+                    <li><a href="index.php?action=contact" 
+                        <?php if(isset($_GET['action']) && $_GET['action'] == "contact"){echo "class='active'";} ?>>Nous contacter</a></li>
                 </ul>
             </nav>
         </div>

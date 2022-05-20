@@ -8,7 +8,11 @@
         <p><img src="./App/Public/Books/images/<?= $datas['genre']['picture'] ;?>" alt="<?= $datas['genre']['category'] ;?>"></p>
         <h1>Catégorie <span class="italic"><?= $datas['genre']['category'] ;?></span></h1>
     </div>
-<?php }else{ ?>
+<?php if(empty($datas['book'])){?>
+    <div class="no-book-cat">
+        <p>Nous n'avons pas encore lu de livres de cette catégorie, n'hésitez pas à revenir plus tard !</p>
+    </div>
+ <?php }}else{ ?>
     <h1>Les derniers livres que nous avons dévorés</h1>
 <?php } ;?>
 
