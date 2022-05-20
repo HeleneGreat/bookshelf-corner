@@ -36,7 +36,8 @@ MEDIA QUERIES
 :root{
     /* --dashboard: #b2c9fe ; */
     --rouge: #ee5f4f;
-    --dashboard: #265ddf ;
+    /* --dashboard: #265ddf ; */
+    --dashboard: #3786ED ;
     --anthracite: rgb(44, 41, 41);
 }
 

@@ -13,13 +13,16 @@ function display(images, links) {
   allLinks = [...links];
   carousel.innerHTML = "";
 
+  for(let i in allLinks){
+    let link = document.createElement('a');
+    link.href = allLinks[i].href;
+    link.title = allLinks[i].title;
+    carousel.appendChild(link);
 
-
-  allImages.forEach(img => { 
     let image = document.createElement('img');
-    image.src = img.src;
-    carousel.appendChild(image);
-  });
+    image.src = allImages[i].src;
+    link.appendChild(image);
+  }
 
 }
 
@@ -27,35 +30,41 @@ prev.addEventListener('click', (e) => {
   e.preventDefault();
   let poped = allImages.pop();
   let newImages = [poped, ...allImages];
+  let popped = allLinks.pop();
+  let newLinks = [popped, ...allLinks];
 
-  display(newImages)
+  display(newImages, newLinks)
 });
 
 next.addEventListener('click', (e) => {
   e.preventDefault();
   let shifted = allImages.shift();
   let newImages = [...allImages, shifted];
+  let shiftted = allLinks.shift();
+  let newLinks = [...allLinks, shiftted];
 
-  display(newImages)
+  display(newImages, newLinks)
 });
 
 // Next & Prev actions through keyboard arrows
-window.addEventListener('keydown', function(evt){
-    if (evt.key == "ArrowLeft"){
-        let poped = allImages.pop();
-        let newImages = [poped, ...allImages];
-        display(newImages)
+window.addEventListener('load', function(){
+  window.onkeydown = function(event){
+    if (event.key == "ArrowLeft"){
+      let poped = allImages.pop();
+      let newImages = [poped, ...allImages];
+      let popped = allLinks.pop();
+      let newLinks = [popped, ...allLinks];
+      display(newImages, newLinks)
     }
-    else if (evt.key == "ArrowRight"){
-        let shifted = allImages.shift();
-        let newImages = [...allImages, shifted];
-        display(newImages);
+    else if (event.key == "ArrowRight"){
+      let shifted = allLinks.shift();
+      let newLinks = [...allLinks, shifted];
+      let shiftted = allImages.shift();
+      let newImages = [...allImages, shiftted];
+      display(newImages, newLinks);
     }
-    evt.preventDefault();
+  }
 })
-
-   
-
 
 
 

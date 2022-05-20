@@ -36,7 +36,7 @@ MEDIA QUERIES
 /* utilisé sur les book cards + se connecter */
 button,
 #all-books a.btn-book {
-    background-color: rgb(12, 117, 238);
+    background-color: #3786ED;
     color: white;
     border: none;
     border-radius: 30px;
@@ -64,6 +64,7 @@ button:active,
     --jaune: #eed64f;
     --main: #ee5f4f;
     --background: #dde1e7;
+    --secondary: #3786ED ;
 }
 
 /* default font-size reduced to 10px to make rem calculs easier*/
@@ -400,7 +401,7 @@ main{
 /* *************************************** */
 /* ---------------- FOOTER --------------- */
 /* *************************************** */
-#foot {
+#foot{
     background-color: var(--main);
     min-height: 150px;
     margin-top: 50px;
@@ -415,13 +416,13 @@ main{
 /* ---------- CAROUSEL --------- */
 /* ***************************** */
 
-#carousel {
+#carousel{
     width: 90%;
     height: 350px;
     overflow: hidden;
 }
 
-#carousel img {
+#carousel img{
     width: 200px;
     height: 300px;
     object-fit: cover;
@@ -431,36 +432,62 @@ main{
 }
 
 /* The selected image, at the center of the carousel */
-#carousel :nth-child(3) {
+#carousel :nth-child(3) img{
     width: 240px;
     height: 360px;
 }
 
 /* First & last img of the carousel */
-#carousel :nth-child(1),
-#carousel :nth-child(5) {
+#carousel :nth-child(1) img,
+#carousel :nth-child(5) img{
     width: 150px;
     height: 220px;
 }
 
 /* if there are other images, there are hidden  */
-#carousel :nth-child(n+6) {
+#carousel :nth-child(n+6) img{
     display: none;
 }
 
-#myCarousel a {
+#myCarousel a{
     margin: auto;
 }
 
-#myCarousel i {
+#myCarousel i{
     color: var(--main);
     font-size: 6rem;
+}
+
+/* ************************** */
+/* ----- CATEGORIES LIST ---- */
+/* ************************** */
+#cat-grid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#cat-grid .grille{
+    min-width: 150px;
+    margin: 10px auto;
+    text-align: center;
+    border-radius: 30px;
+    height: 180px;
+    justify-content: center;
+}
+#cat-grid .grille{
+    background-color: #fdfdbe;
+}
+
+#cat-grid .grille p{
+    color: var(--main);
+    font-weight: bold;
 }
 
 /* ****************************************** */
 /* ---------------- ALL BOOKS --------------- */
 /* ****************************************** */
-#all-books #book-card {
+#all-books #book-card{
     border-radius: 10px;
     height: 475px;
     margin-top: 30px;
@@ -469,12 +496,12 @@ main{
     box-shadow: 0 0 9px #cac9c9;
 }
 
-#all-books h3 {
+#all-books h3{
     margin-top: auto;
     margin-bottom: auto;
 }
 
-#all-books #book-card:hover {
+#all-books #book-card:hover{
     box-shadow: 0 0 9px #989898;
 }
 
@@ -904,6 +931,42 @@ input[type="radio"]:checked::before {
         justify-content: space-between;
     }
 
+    .md{
+        display: block;
+    }
+
+
+    /* ************************** */
+    /* ----- CATEGORIES LIST ---- */
+    /* ************************** */
+    #cat-grid{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+    }
+
+    #cat-grid .grille-empty,
+    #cat-grid .grille{
+        text-align: center;
+        border-radius: 30px;
+        width: 180px;
+        height: 180px;
+        justify-content: center;
+    }
+    #cat-grid .grille{
+        background-color: #fdfdbe;
+    }
+
+    #cat-grid .grille-empty{
+        background-color: var(--secondary);
+    }
+
+    #cat-grid .grille p{
+        color: var(--main);
+        font-weight: bold;
+    }
     /* ****************************************** */
     /* ---------------- ALL BOOKS --------------- */
     /* ****************************************** */
