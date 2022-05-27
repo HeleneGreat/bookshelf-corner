@@ -14,7 +14,10 @@ class FrontController extends Controller
 
     function about()
     {
-        return $this->viewFront("about");
+        $new = new \Projet\Models\AdminModel;
+        $admins = $new->allAdmins();
+        $allAdmins = $admins->fetchAll();
+        return $this->viewFront("about", $allAdmins);
     }
 
     function error()

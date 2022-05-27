@@ -71,6 +71,7 @@ button:active,
 html,
 body {
     font-size: 62.5%;
+    scroll-behavior: smooth;
 }
 
 h1 {
@@ -183,6 +184,10 @@ ul {
     justify-content: flex-end;
 }
 
+.justify-evenly {
+    justify-content: space-evenly;
+}
+
 .align-items-center {
     align-items: center;
 }
@@ -202,6 +207,11 @@ ul {
 
 .italic{
     font-style: italic;
+}
+
+.main{
+    color: var(--main);
+    font-weight: bold;
 }
 
 .required {
@@ -269,8 +279,6 @@ ul {
 }
 
 main{
-    /* header = 210px
-    footer =  150px */
     min-height: -webkit-calc(100vh - 360px);
     min-height: -moz-calc(100vh - 360px);
     min-height: calc(100vh - 360px);
@@ -393,6 +401,7 @@ main{
 }
 
 #bandeau li a:hover,
+#bandeau li .active,
 #bandeau .book-cat a:hover,
 #bandeau .book-cat .subactive{
     border-bottom: solid 1px white;
@@ -484,43 +493,57 @@ main{
     font-weight: bold;
 }
 
-/* ****************************************** */
-/* ---------------- ALL BOOKS --------------- */
-/* ****************************************** */
-#all-books #book-card{
+/* **************************************** */
+/* ----------- ALL BOOKS + ABOUT ---------- */
+/* **************************************** */
+#about .admin-card,
+#all-books .book-card{
+    width: 100%;
     border-radius: 10px;
-    height: 475px;
     margin-top: 30px;
     padding: 20px 10px;
     background: #ffffff;
     box-shadow: 0 0 9px #cac9c9;
 }
 
+#all-books .book-card{
+    height: 475px;
+}
+
+#about .admin-card{
+    height: 300px;
+}
+
+#abouts h3,
 #all-books h3{
     margin-top: auto;
     margin-bottom: auto;
 }
 
-#all-books #book-card:hover{
+#about .admin-card:hover,
+#all-books .book-card:hover{
     box-shadow: 0 0 9px #989898;
 }
 
-#all-books #book-card p {
+#all-books .book-card p {
     margin-top: auto;
     margin-bottom: auto;
 }
 
-#all-books #book-card p.date{
+#all-books .book-card p.date{
     font-size: 1.8rem;
 }
 
-#all-books #book-card img {
+#all-books .book-card img{
     width: 80%;
-    height: 300px;
     object-fit: cover;
 }
 
-#all-books #book-card button {
+#all-books .book-card img{
+    height: 300px;
+}
+
+#all-books .book-card button{
     width: fit-content;
 }
 
@@ -542,6 +565,69 @@ main{
 
 #all-books .no-book-cat{
     margin: 80px 0;
+}
+
+#about .quote{
+    margin-top : 30px;
+    height: 300px; 
+    background-color: var(--main);
+    box-shadow: inset 14px 14px 28px #9d3f34,
+            inset -14px -14px 28px #9d3f34; 
+}
+
+#about .admin-card h3{
+    width: 100%;
+}
+
+#about .quote .text-box{
+    width: 100%;
+    height: 100%;
+    
+}
+
+#about .quote .text-box h3{
+    position: relative;
+    padding-bottom: 10px;
+}
+
+#about .quote .text-box h3,
+#about .quote .text-box p{
+    text-align: center;
+    color: white;
+    width: fit-content;
+}
+
+#about p{
+    margin-bottom: 20px;
+}
+
+#about > p{
+    text-align: justify;
+}
+
+#about .quote .text-box i.fa-quote-left{
+    position: absolute;
+    left: 30px;
+    top: -50px;
+    color: white;
+}
+#about .quote .text-box i.fa-quote-right{
+    position: absolute;
+    right: 30px;
+    bottom: -50px;
+    color: white;
+}
+
+#about img.float{
+    float: right;
+    height: 280px;
+}
+
+#about .admin-card img{
+    width: auto;
+    max-width: 90%;
+    height: 80%;
+    object-fit: cover;
 }
 
 /* ********************************************* */
@@ -970,7 +1056,8 @@ input[type="radio"]:checked::before {
     /* ****************************************** */
     /* ---------------- ALL BOOKS --------------- */
     /* ****************************************** */
-    #all-books #book-card {
+    #about .admin-card,
+    #all-books .book-card {
         width: 250px;
     }
 
@@ -1039,7 +1126,32 @@ input[type="radio"]:checked::before {
         width: 80%;
     }
 
+    /* ************************** */
+    /* ---------- ABOUT --------- */
+    /* ************************** */
+    #about .quote{
+        position: relative;
+    }
 
+    #about .quote div{
+        position: absolute;
+    }
+
+    #about img.float{
+        height: 570px;
+        position: relative;
+        z-index: 99999;
+    }
+    
+    #about .quote .text-box i.fa-quote-left{
+        left: -75px;
+        top: -25px;
+    }
+
+    #about .quote .text-box i.fa-quote-right{
+        right: -75px;
+        bottom: -40px;
+    }
 
 
 }
@@ -1050,6 +1162,10 @@ input[type="radio"]:checked::before {
 /* ----- LARGE ----- */
 /* *******************/
 @media screen and (min-width:1201px) {
+
+    p, span{
+        font-size: 2rem;
+    }
 
     .flex-lg {
         display: flex;
@@ -1126,6 +1242,14 @@ input[type="radio"]:checked::before {
     .title-lg {
         width: 85%;
         align-self: flex-end;
+    }
+
+    #bandeau li .active{
+        color: white;
+        background-color: var(--main);
+        padding: 0;
+        font-weight: normal;
+        border-radius: 0;
     }
 
     /* *********************************/

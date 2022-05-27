@@ -3,6 +3,7 @@
 
 
 <section id="all-books" class="container bg-all">
+    <!-- Books per category -->
 <?php if(isset($_GET['category']) && $_GET['category'] > 0) { ?>
     <div id="cat" class="flex justify-center align-items-center">
         <p><img src="./App/Public/Books/images/<?= $datas['genre']['picture'] ;?>" alt="<?= $datas['genre']['category'] ;?>"></p>
@@ -12,6 +13,7 @@
     <div class="no-book-cat">
         <p>Nous n'avons pas encore lu de livres de cette catégorie, n'hésitez pas à revenir plus tard !</p>
     </div>
+    <!-- All books -->
  <?php }}else{ ?>
     <h1>Les derniers livres que nous avons dévorés</h1>
 <?php } ;?>
@@ -19,24 +21,24 @@
     <div class="flex-md justify-between-md">
     <?php 
     foreach($datas['book'] as $book){ ?>
-            <article id="book-card" class="center flex col justify-between">
-                <h3 class="text-center"><?= 
-                substr($book['title'], 0, 30); 
-                if(strlen($book['title']) > 30){echo "[...]";}
-                ?></h3>
-                <p class="text-center date"><?= $book['date'] ?></p>
-                <p class="text-center">
-                    <a href="index.php?action=un-livre&id=<?= $book['id'] ?>">
-                        <img src="./App/Public/Books/images/<?= $book['bookPicture']; ?>" alt="La couverture du roman <?= $book['title']; ?>">
-                    </a>
-                </p>
-                <a href="index.php?action=un-livre&id=<?= $book['id'] ?>" class="center btn-book">Lire l'article</a>
-            </article>
-       
+        <article class="book-card center flex col justify-between">
+            <h3 class="text-center"><?= 
+            substr($book['title'], 0, 30); 
+            if(strlen($book['title']) > 30){echo "[...]";}
+            ?></h3>
+            <p class="text-center date"><?= $book['date'] ?></p>
+            <p class="text-center">
+                <a href="index.php?action=un-livre&id=<?= $book['id'] ?>">
+                    <img src="./App/Public/Books/images/<?= $book['bookPicture']; ?>" alt="La couverture du roman <?= $book['title']; ?>">
+                </a>
+            </p>
+            <a href="index.php?action=un-livre&id=<?= $book['id'] ?>" class="center btn-book">Lire l'article</a>
+        </article>  
     <?php }; ?>
     </div>
 </section>
 
+<!-- Pagination -->
 <nav>
     <ul id="pagination" class="center flex justify-center">
         <!-- PREVIOUS PAGE -->

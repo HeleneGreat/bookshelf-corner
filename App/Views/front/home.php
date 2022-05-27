@@ -27,7 +27,7 @@
 </section>
 
 <section class="container">
-    <h2 class="text-center">Nos catégories de livres</h2>
+    <h2 class="text-center">Nos catégories de lecture</h2>
     <div id="cat-grid">
         <?php foreach($genres as $genre){ ;?>
         <a href="index.php?action=livres&category=<?= $genre['id'] ;?>">

@@ -7,7 +7,7 @@ class AdminModel extends Manager
     public function allAdmins()
     {
         $bdd = self::dbConnect();
-        $req = $bdd->prepare('SELECT pseudo, mail FROM administrators');
+        $req = $bdd->prepare('SELECT pseudo, mail, picture FROM administrators');
         $req->execute();
         return $req;
     }

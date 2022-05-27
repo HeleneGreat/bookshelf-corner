@@ -41,6 +41,10 @@ MEDIA QUERIES
     --anthracite: rgb(44, 41, 41);
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 main{
     width: 100%;
 }
