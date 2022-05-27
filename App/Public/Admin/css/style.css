@@ -923,6 +923,8 @@ a.btn:hover{
     white-space: pre-line;
 }
 
+
+
 /* **************************** */
 /* ------ LIVRES - FORMS ------ */
 /* **************************** */
@@ -1059,8 +1061,11 @@ img.old-picture{
 
 #all-comments .comment-info .object,
 #all-messages .message-info .object{
-    /* width: 190px; */
     width: 300px;
+}
+
+#all-comments .admin{
+    color: var(--dashboard)
 }
 
 /* ******************************* */

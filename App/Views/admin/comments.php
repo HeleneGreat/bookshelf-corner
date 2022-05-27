@@ -5,14 +5,13 @@
 <section id="all-comments" class="container-lg">
 
     <h1>Liste des commentaires</h1>   
-    <?php 
-    foreach($datas['comments'] as $data){ 
-        if(isset($data['pseudo'])){
+    <?php foreach($datas['comments'] as $data){ 
+        if(isset($data['id'])){
         ?>
         <article class="flex">
             <div class="comment-info flex justify-between align-items-center">
                 <p class="time"><?= $data['created_at']; ?></p>
-                <p><?= $data['pseudo']; ?></p>
+                <?= isset($data['userPseudo']) ? "<p>".$data['userPseudo'] : "<p class='admin'>".$data['adminPseudo']; ?></p>
                 <p class="object"><?= $data['title']; ?></p>
             </div>
             <div class="flex comment-link">
@@ -28,7 +27,9 @@
                 <p><i class="fa-solid fa-trash-can"></i></p>
                 <p class="bold">Demande de confirmation</p>
                 <p>Êtes-vous sûr de vouloir supprimer ce commentaire de :</p>
-                <p><span class="italic"><?= $data['pseudo']; ?></span> ?</p>
+                <p><span class="italic">
+                    <?= isset($data['userPseudo']) ? $data['userPseudo'] : $data['adminPseudo'];?>
+                </span> ?</p>
                 <div class="flex justify-center">
                     <a id="cancel-<?= $data['id']; ?>" class="cancel btn center" title="Retour">Annuler</a>
                     <a href="indexAdmin.php?action=commentsDelete&id=<?= $data['id'];?>" title="Supprimer ce commentaire" class="btn center">Supprimer</a>

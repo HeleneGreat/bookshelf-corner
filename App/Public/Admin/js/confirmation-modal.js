@@ -1,7 +1,8 @@
 /* This opens a modal box when the delete btn is clicked */
 let btn = document.getElementById('btn-delete');
 if (btn){
-    btn.onclick = function(){
+    btn.onclick = function(event){
+        event.preventDefault();
         modal.classList.remove('display-none');
     }
 }

@@ -29,11 +29,12 @@ class CommentModel extends Manager
     {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
-            'SELECT comments.id, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, users.pseudo, users.picture, comments.title, comments.content
+            'SELECT comments.id, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, users.pseudo AS userPseudo, users.picture AS userPicture, administrators.pseudo AS adminPseudo, administrators.picture AS adminPicture, comments.title, comments.content
             FROM comments
-            INNER JOIN books ON book_id = books.id
-            INNER JOIN users ON user_id = users.id
-            ORDER BY comments.created_at DESC
+            INNER JOIN books ON comments.book_id = books.id
+            LEFT JOIN users ON comments.user_id = users.id
+            LEFT JOIN administrators ON comments.admin_id = administrators.id
+            ORDER BY comments.id DESC
             LIMIT :firstItem, :perPage');
         $req->bindValue(':firstItem', $pagination[':firstItem'], $bdd::PARAM_INT);
         $req->bindValue(':perPage', $pagination[':perPage'], $bdd::PARAM_INT);
@@ -41,14 +42,16 @@ class CommentModel extends Manager
         return $req;
     }
 
+    // TODO is this function used ?
     public function allComments()
     {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'SELECT comments.id AS commentId, books.id AS bookId, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, users.pseudo, users.picture AS userPicture, comments.title, comments.content, books.picture AS bookPicture, books.title AS bookTitle
             FROM comments
-            INNER JOIN books ON book_id = books.id
-            INNER JOIN users ON user_id = users.id
+            INNER JOIN books ON comments.book_id = books.id
+            LEFT JOIN users ON comments.user_id = users.id
+            LEFT JOIN administrators ON comments.admin_id = administrators.id
             ORDER BY comments.id DESC');
         $req->execute();
         return $req;
@@ -74,10 +77,11 @@ class CommentModel extends Manager
     {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
-            'SELECT comments.id, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, comments.title AS commentTitle, comments.content AS commentContent, users.pseudo, users.picture, users.mail, books.title AS bookTitle
+            'SELECT comments.id, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, comments.title AS commentTitle, comments.content AS commentContent, users.pseudo AS userPseudo, users.picture AS userPicture, administrators.pseudo AS adminPseudo, administrators.picture AS adminPicture, users.mail AS userMail, administrators.mail AS adminMail, books.title AS bookTitle
             FROM comments
-            INNER JOIN books ON book_id = books.id
-            INNER JOIN users ON user_id = users.id
+            INNER JOIN books ON comments.book_id = books.id
+            LEFT JOIN users ON comments.user_id = users.id
+            LEFT JOIN administrators ON comments.admin_id = administrators.id
             WHERE comments.id = ?');
         $req->execute(array($id));
         return $req;
