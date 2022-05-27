@@ -53,10 +53,12 @@ class BookModel extends Manager
     {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
-            'SELECT books.id, title, DATE_FORMAT(created_at, "%d %M %Y") AS date, author, notation, catchphrase, content, books.picture, year_publication, category 
+            'SELECT books.id, title, DATE_FORMAT(created_at, "%d %M %Y") AS date, author, notation, catchphrase, content, books.picture, year_publication, category, administrators.pseudo
             FROM books 
             INNER JOIN genres 
             ON books.id_genre = genres.id 
+            INNER JOIN administrators
+            ON books.id_admin = administrators.id
             WHERE books.id = ?');
         $req->execute(array($id));
         return $req;
@@ -66,8 +68,8 @@ class BookModel extends Manager
     {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
-            'INSERT INTO books(title, author, notation, catchphrase, id_genre, content, year_publication) 
-            VALUES(:newTitle, :newAuthor, :newNotation, :newCatchphrase, (SELECT id FROM genres WHERE category = :newGenre), :newContent, :newYear_publication)');
+            'INSERT INTO books(title, author, notation, catchphrase, id_genre, content, year_publication, id_admin) 
+            VALUES(:newTitle, :newAuthor, :newNotation, :newCatchphrase, (SELECT id FROM genres WHERE category = :newGenre), :newContent, :newYear_publication, :adminId)');
         $req->execute($data);
         return $req;
     }

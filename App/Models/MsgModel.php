@@ -7,7 +7,7 @@ class MsgModel extends Manager
 
     public function contactPost($data)
     {
-        $bdd =$this->dbConnect();
+        $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'INSERT INTO messages (gender, familyname, firstname, email, object, message)
             VALUES (:gender, :familyname, :firstname, :email, :object, :message)');
@@ -17,7 +17,7 @@ class MsgModel extends Manager
 
     public function countMessages()
     {
-        $bdd =$this->dbConnect();
+        $bdd = $this->dbConnect();
         $req = $bdd->prepare('SELECT COUNT(id) FROM messages WHERE id');
         $req->execute();
         $result = $req->fetch();
@@ -73,7 +73,7 @@ class MsgModel extends Manager
 
     public function deleteMessage($id)
     {
-        $bdd =$this->dbConnect();
+        $bdd = $this->dbConnect();
         $req = $bdd->prepare('DELETE FROM messages WHERE id = ?');
         $req->execute(array($id));
         return $req;

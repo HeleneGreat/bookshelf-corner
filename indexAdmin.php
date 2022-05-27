@@ -95,7 +95,8 @@ try
 
         elseif ($_GET['action'] == "livresaddPost")
         {
-            $newBook = $bookController->addLivrePost($_POST, $_FILES);
+            $admin = strval($_SESSION['id']);
+            $newBook = $bookController->addLivrePost($_POST, $_FILES, $admin);
         }
 
         elseif ($_GET['action'] == "livresmodify")

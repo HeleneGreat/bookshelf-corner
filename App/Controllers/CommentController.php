@@ -7,31 +7,25 @@ use Projet\Forms\SubmitMessage;
 class CommentController extends Controller
 {
 
-    function commentPost($id, $Post)
+    function commentPost($idBook, $Post)
     {
         $comment = new \Projet\Models\CommentModel();
         $data = [
             ':user_id' => $_SESSION['id'],
-            ':book_id' => $id,
+            ':book_id' => $idBook,
             ':title' => htmlspecialchars(($Post['title'])),
             ':content' => htmlspecialchars(($Post['content']))
         ];
-        $comm = $comment->commentPost($data);
+        if($_SESSION['role'] == 0){
+            $data[':user_id'] = $_SESSION['id'];
+            $data[':admin_id'] = null;
+        } elseif($_SESSION['role'] > 0){
+            $data[':admin_id'] = $_SESSION['id'];
+            $data[':user_id'] = null;
+        }
+        $comment->commentPost($data);
         header('Location: index.php?action=un-livre&id=' . $data[':book_id']. '&status=success&from=addComment#feedback');
     }
-
-    // function allComments()
-    // {
-    //     $comments = new \Projet\Models\CommentModel();
-    //     $comm = $comments->allComments();
-    //     $data = $comm->fetchAll();
-    //     if(isset($_GET['status'])){
-    //         if($_GET['status'] == "success"){
-    //             $userMessage = new SubmitMessage ("success", "Le commmentaire a bien été supprimé !");
-    //             $data["feedback"] = $userMessage->formatedMessage();
-    //     }}
-    //     return $this->validAccess("comments", $data);
-    // }
 
     function allComments()
     {

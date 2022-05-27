@@ -35,7 +35,7 @@ include_once('./App/Views/admin/layouts/header.php');?>
                 </div>
                 <div>
                     <p><label for="newNotation">Note du livre</label></p>
-                    <p><input name="newNotation" id="newNotation" type="range" min="0" max="5" step="1" value="<?= $datas['book']['notation']; ?>">
+                    <p><input name="newNotation" id="newNotation" type="range" min="1" max="5" step="1" value="<?= $datas['book']['notation']; ?>">
                     <output id="range-result"><?= $datas['book']['notation']; ?></output> / 5</p>
                 </div>
                 <!-- input file -->

@@ -716,9 +716,11 @@ main{
     margin-top: 10px;
     margin-bottom: 10px;
 }
- svg g path{
+
+svg g path{
     width: 300px;
- }
+}
+
 #one-book #article-book .catchphrase {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -823,6 +825,11 @@ textarea:focus {
 #all-comments .comment .title {
     color: var(--main);
     padding-bottom: 10px;
+}
+
+#all-comments .user-info .admin-comment,
+#all-comments .comment .admin-comment {
+    color: var(--secondary);
 }
 
 

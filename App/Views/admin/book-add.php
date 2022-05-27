@@ -34,8 +34,8 @@
                 </div>
                 <div>
                     <p><label for="newNotation">Note du livre</label></p>
-                    <p><input name="newNotation" id="newNotation" type="range" min="0" max="5" step="1" value="0">
-                    <output id="range-result">0</output> / 5</p>
+                    <p><input name="newNotation" id="newNotation" type="range" min="1" max="5" step="1" value="1">
+                    <output id="range-result">1</output> / 5</p>
                 </div> 
                 <!-- input file -->
                 <div>

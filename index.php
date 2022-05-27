@@ -67,8 +67,8 @@ try
 
         elseif($_GET['action'] == 'commentPost')
         {
-            $id = $_GET['id'];
-            $commentController->commentPost($id, $_POST);
+            $idBook = $_GET['id'];
+            $commentController->commentPost($idBook, $_POST);
         }
 
         /********************************************************/

@@ -55,16 +55,17 @@ class BookController extends Controller
         return "no-cover.png";
     }
 
-    function addLivrePost($Post, $Files){
+    function addLivrePost($Post, $Files, $admin){
         $new = new \Projet\Models\BookModel();
         $data = [
-            ':newTitle' => htmlspecialchars( $Post['newTitle']),
+            ':newTitle' => htmlspecialchars($Post['newTitle']),
             ':newAuthor' => htmlspecialchars($Post['newAuthor']),
             ':newYear_publication' => htmlspecialchars($Post['newYear_publication']),
             ':newGenre' => htmlspecialchars($Post['newGenre']),
             ':newCatchphrase' => htmlspecialchars($Post['newCatchphrase']),
             ':newContent' => htmlspecialchars($Post['newContent']),
-            ':newNotation' => htmlspecialchars($Post['newNotation'])
+            ':newNotation' => htmlspecialchars($Post['newNotation']),
+            ":adminId" => $admin
         ];
         $new->addSingleBook($data);
         // Get book ID
