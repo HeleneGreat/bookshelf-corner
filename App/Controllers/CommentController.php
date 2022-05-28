@@ -6,7 +6,10 @@ use Projet\Forms\SubmitMessage;
 
 class CommentController extends Controller
 {
-
+    /*************************************/
+    /*************** FRONT ***************/
+    /*************************************/
+    // Form a add a new comment under a book review
     function commentPost($idBook, $Post)
     {
         $comment = new \Projet\Models\CommentModel();
@@ -27,6 +30,10 @@ class CommentController extends Controller
         header('Location: index.php?action=un-livre&id=' . $data[':book_id']. '&status=success&from=addComment#feedback');
     }
 
+    /*************************************/
+    /*************** ADMIN ***************/
+    /*************************************/
+    // List all comments in the admin account
     function allComments()
     {
         $pagination = $this->pagination("comments");
@@ -43,6 +50,7 @@ class CommentController extends Controller
         return $this->validAccess("comments", $datas);
     }
 
+    // For the admin to read this comment
     function viewComment($id)
     {
         $comments = new \Projet\Models\CommentModel();
@@ -55,38 +63,89 @@ class CommentController extends Controller
         }
     }
 
-    // For the admin to delete any comment
-    function deleteComment($id)
+    // For the admin to delete this user comment
+    function deleteUserComment($id)
     {
         $comments = new \Projet\Models\CommentModel();
         $comments->deleteComment($id);
         header('Location: indexAdmin.php?action=comments&status=success');
     }
-           
-    /******************************/
-    /************ USER ************/
-    /******************************/
-    // For the user to delete one of his comments
-    function userDeleteComment($id)
+    
+    /*****************************************/
+    /********* USER OR ADMIN ACCOUNT *********/
+    /*****************************************/
+    // All the comments added from that user or admin account
+    function accountComments()
+    {
+        if($_SESSION['role'] == 0){
+            $table = "user_id";
+        }else{
+            $table = "admin_id";
+        }
+        $pagination = $this->pagination("comments");
+        $new = new \Projet\Models\CommentModel();
+        $allComment = $new->allAccountComments($_SESSION['id'], $table, $pagination);
+        $allComments = $allComment->fetchAll();
+        $countComments = new \Projet\Models\CommentModel();
+        $nbrComment = $countComments->countAccountComments($_SESSION['id'], $table);
+        $nbComments = $nbrComment->fetch();
+        $datas = [
+            'allComments' => $allComments,
+            'nbComments' => $nbComments['nbComments'],
+            'pages' => $pagination['pages'],
+            'currentPage' => $pagination['currentPage']
+        ];
+        if(isset($_GET['status'])){
+            if($_GET['status'] == "success"){
+                if($_GET['from'] == "deleteComment"){
+                    $userMessage = new SubmitMessage ("success", "Votre commentaire a bien été supprimé !");
+                    $datas["feedback"] = $userMessage->formatedMessage();
+                }
+            }
+            if($_GET['status'] == "success"){
+                if($_GET['from'] == "modifyComment"){
+                    $userMessage = new SubmitMessage ("success", "Votre commentaire a bien été mis à jour !");
+                    $datas["feedback"] = $userMessage->formatedMessage();
+                }
+            }
+        }
+        if($_SESSION['role'] == 0){
+            return $this->viewUser("dashboard", $datas);
+        }else{
+            return $this->validAccess("comments-mine", $datas);
+        }
+    }
+
+    // For the User or Admin to delete one of his comments
+    function deleteComment($id)
     {
         $comments = new \Projet\Models\CommentModel();
         $comments->deleteComment($id);
-        header('Location: indexAdmin.php?action=userDashboard&status=success&from=deleteComment');
+        if($_SESSION['role'] == 0){
+            header('Location: indexAdmin.php?action=userDashboard&status=success&from=deleteComment');
+        }else{
+            header('Location: indexAdmin.php?action=comments-mine&status=success&from=deleteComment');
+        }
     }
 
-    // For the user to modify one of his comments
+    // For the User or Admin to modify one of his comments
     function commentModify($id)
     {
         $comments = new \Projet\Models\CommentModel();
         $comm = $comments->singleComment($id);
         $data = $comm->fetch();
         if($data != false){
-            return $this->viewUser("user-comment-modify", $data);
+            if($_SESSION['role'] == 0){
+                return $this->viewUser("user-comment-modify", $data);
+            }else{
+                return $this->validAccess("comment-modify", $data);
+            }
         }else{
             return $this->error404();
         }
     }
 
+    // Save in DB the comment modify form
     function commentModifyPost($id, $Post)
     {
         $comments = new \Projet\Models\CommentModel();
@@ -96,7 +155,11 @@ class CommentController extends Controller
             ':content' => htmlspecialchars($Post['content'])
         ];
         $comm = $comments->commentModifyPost($data);
-        header('Location: indexAdmin.php?action=userDashboard&status=success&from=modifyComment');
+        if($_SESSION['role'] == 0){
+            header('Location: indexAdmin.php?action=userDashboard&status=success&from=modifyComment');
+        }else{
+            header('Location: indexAdmin.php?action=comments-mine&status=success&from=modifyComment');
+        }
     }
 
     

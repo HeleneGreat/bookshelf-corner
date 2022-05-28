@@ -5,7 +5,7 @@ include_once('./App/Views/admin/layouts/header.php') ;
 <section id="dashboard" class="container-lg">
     <h1>Bienvenue sur votre tableau de bord, <span><?= $_SESSION['pseudo']; ?> !</span></h1>
 
-    <!-- Admin dashboard -->
+    <!-- ADMIN DASHBOARD -->
     <?php if($_SESSION['role'] > 0){ ?>
     <div id="stats" class="flex justify-between">
         <!-- Books -->
@@ -67,7 +67,7 @@ include_once('./App/Views/admin/layouts/header.php') ;
         </article>
     </div>
         
-        <!-- User dashboard -->
+        <!-- USER DASHBOARD -->
         <?php }else{ ?>
             <div id="all-comments">
             <p class="stats">Nombre total de <span class="bold">commentaires</span> publiés : <span class="bold"><?= $datas['nbComments']; ?></span></p>

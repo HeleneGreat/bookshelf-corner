@@ -854,23 +854,30 @@ a.btn:hover{
 /* **************************** */
 /* ------- LIVRES - NAV ------- */
 /* **************************** */
-#nav-books li{
-    width: 33.33%;
+#nav-secondary li{
     font-size: 1.3rem;
     border-bottom: 3px solid rgba(204, 203, 203, 0.856);
     padding: 10px  0;
     position: relative;
 }
 
-#nav-books li:hover{
+.nav-comments li{
+    width: 49.9%;
+}
+
+.nav-books li{
+    width: 33.33%;
+}
+
+#nav-secondary li:hover{
     border-bottom: 3px solid rgba(139, 139, 139, 0.856);
 }
 
-#nav-books li.active{
+#nav-secondary li.active{
     border-bottom: 3px solid var(--dashboard);
 }
 
-#nav-books li a{
+#nav-secondary li a{
     position: absolute;
     top: 0;
     right: 0;
@@ -878,7 +885,7 @@ a.btn:hover{
     left: 0;
 }
 
-#nav-books i{
+#nav-secondary i{
     display: block;
 }
 

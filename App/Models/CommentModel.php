@@ -15,6 +15,7 @@ class CommentModel extends Manager
         return $req;
     }
 
+    // Count all comments
     public function countComments()
     {
         $bdd =$this->dbConnect();
@@ -104,6 +105,32 @@ class CommentModel extends Manager
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('DELETE FROM comments WHERE id = ?');
         $req->execute(array($id));
+        return $req;
+    }
+
+    // All comments written by that User or Admin
+    public function allAccountComments($accountId, $table, $pagination)
+    {
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare(
+            "SELECT comments.id AS commentId, books.id AS bookId, DATE_FORMAT(comments.created_at, '%d %M %Y à %kh%i') AS created_at, comments.title AS commentTitle, comments.content AS commentContent, books.picture AS bookCover, books.title AS bookTitle
+            FROM comments
+            INNER JOIN books ON book_id = books.id
+            WHERE {$table} = {$accountId}
+            ORDER BY comments.created_at DESC
+            LIMIT :firstItem, :perPage");
+        $req->bindValue(':firstItem', $pagination[':firstItem'], $bdd::PARAM_INT);
+        $req->bindValue(':perPage', $pagination[':perPage'], $bdd::PARAM_INT);
+        $req->execute();
+        return $req;
+    }
+
+    // Count all comments from that User or Admin
+    public function countAccountComments($accountId, $table)
+    {
+        $bdd =$this->dbConnect();
+        $req = $bdd->prepare("SELECT COUNT(id) AS nbComments FROM comments WHERE {$table} = ?");
+        $req->execute(array($accountId));
         return $req;
     }
     

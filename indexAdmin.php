@@ -180,19 +180,35 @@ try
         /********************************************************/
         elseif($_GET['action'] == "comments")
         {
-            $commentController->allComments();
-        }  
+            if($_SESSION['role'] > 0){
+                $commentController->allComments();
+            }else{
+                $commentController->accountComments();
+
+            }
+        }
+
+        elseif($_GET['action'] == "comments-mine")
+        {
+            $commentController->accountComments();
+        }
 
         elseif($_GET['action'] == "commentsView")
         {
             $id = $_GET['id'];
             $commentController->viewComment($id);
-        }   
+        }
+
+        elseif ($_GET['action'] == "commentModify")
+        {
+            $id = $_GET['id'];
+            $commentController->commentModify($id);
+        }
 
         elseif ($_GET['action'] == "commentsDelete")
         {
             $id = $_GET['id'];
-            $commentController->deleteComment($id);
+            $commentController->deleteUserComment($id);
         }
 
         /*********************************************************/
@@ -245,12 +261,6 @@ try
             $userController->userDashboard();
         }
 
-        elseif ($_GET['action'] == "commentModify")
-        {
-            $id = $_GET['id'];
-            $commentController->commentModify($id);
-        }
-
         elseif ($_GET['action'] == "commentModifyPost")
         {
             $id = $_GET['id'];
@@ -260,7 +270,7 @@ try
         elseif ($_GET['action'] == "commentDelete")
         {
             $id = $_GET['id'];
-            $commentController->userDeleteComment($id);
+            $commentController->deleteComment($id);
         }
 
         elseif($_GET['action'] == "userAccount")
