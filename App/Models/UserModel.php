@@ -76,4 +76,11 @@ class UserModel extends Manager
         return $infoUser;
     }
 
+    public function modifyUserAccountPost($data)
+    {
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare('UPDATE users SET pseudo = :newPseudo, mail = :newMail, mdp = :newUserPsw, picture = :picture WHERE id = :id');
+        $req->execute($data);
+        return $req;
+    }
 }

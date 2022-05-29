@@ -19,10 +19,13 @@ class CommentController extends Controller
             ':title' => htmlspecialchars(($Post['title'])),
             ':content' => htmlspecialchars(($Post['content']))
         ];
-        if($_SESSION['role'] == 0){
+        if($_SESSION['role'] == 0)
+        {
             $data[':user_id'] = $_SESSION['id'];
             $data[':admin_id'] = null;
-        } elseif($_SESSION['role'] > 0){
+        }
+        elseif($_SESSION['role'] > 0)
+        {
             $data[':admin_id'] = $_SESSION['id'];
             $data[':user_id'] = null;
         }
@@ -42,11 +45,11 @@ class CommentController extends Controller
         $datas['comments'] = $comm->fetchAll();
         $datas['pages'] = $pagination['pages'];
         $datas['currentPage'] = $pagination['currentPage'];
-        if(isset($_GET['status'])){
-            if($_GET['status'] == "success"){
-                $userMessage = new SubmitMessage ("success", "Le commmentaire a bien été supprimé !");
-                $data["feedback"] = $userMessage->formatedMessage();
-        }}
+        if(isset($_GET['status']))
+        {
+            $statusMessage = new SubmitMessage("","");
+            $datas['feedback'] = $statusMessage->commentsMessage();
+        }
         return $this->validAccess("comments", $datas);
     }
 
@@ -56,9 +59,12 @@ class CommentController extends Controller
         $comments = new \Projet\Models\CommentModel();
         $comm = $comments->singleComment($id);
         $data = $comm->fetch();
-        if($data != false){
+        if($data != false)
+        {
             return $this->validAccess("comment-view", $data);
-        }else{
+        }
+        else
+        {
             return $this->error404();
         }
     }
@@ -68,7 +74,7 @@ class CommentController extends Controller
     {
         $comments = new \Projet\Models\CommentModel();
         $comments->deleteComment($id);
-        header('Location: indexAdmin.php?action=comments&status=success');
+        header('Location: indexAdmin.php?action=comments&status=success&from=admindelete');
     }
     
     /*****************************************/
@@ -96,18 +102,8 @@ class CommentController extends Controller
             'currentPage' => $pagination['currentPage']
         ];
         if(isset($_GET['status'])){
-            if($_GET['status'] == "success"){
-                if($_GET['from'] == "deleteComment"){
-                    $userMessage = new SubmitMessage ("success", "Votre commentaire a bien été supprimé !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
-            }
-            if($_GET['status'] == "success"){
-                if($_GET['from'] == "modifyComment"){
-                    $userMessage = new SubmitMessage ("success", "Votre commentaire a bien été mis à jour !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
-            }
+            $statusMessage = new SubmitMessage("","");
+            $datas['feedback'] = $statusMessage->commentsMessage();
         }
         if($_SESSION['role'] == 0){
             return $this->viewUser("comments-mine", $datas);
@@ -121,11 +117,7 @@ class CommentController extends Controller
     {
         $comments = new \Projet\Models\CommentModel();
         $comments->deleteComment($id);
-        if($_SESSION['role'] == 0){
-            header('Location: indexAdmin.php?action=userDashboard&status=success&from=deleteComment');
-        }else{
-            header('Location: indexAdmin.php?action=comments-mine&status=success&from=deleteComment');
-        }
+        header('Location: indexAdmin.php?action=comments-mine&status=success&from=deleteComment');
     }
 
     // For the User or Admin to modify one of his comments
@@ -135,12 +127,16 @@ class CommentController extends Controller
         $comm = $comments->singleComment($id);
         $data = $comm->fetch();
         if($data != false){
-            if($_SESSION['role'] == 0){
-                return $this->viewUser("user-comment-modify", $data);
-            }else{
+            if($_SESSION['role'] == 0)
+            {
+                return $this->viewUser("comment-modify", $data);
+            }else
+            {
                 return $this->validAccess("comment-modify", $data);
             }
-        }else{
+        }
+        else
+        {
             return $this->error404();
         }
     }
@@ -154,12 +150,8 @@ class CommentController extends Controller
             ':title' => htmlspecialchars($Post['title']),
             ':content' => htmlspecialchars($Post['content'])
         ];
-        $comm = $comments->commentModifyPost($data);
-        if($_SESSION['role'] == 0){
-            header('Location: indexAdmin.php?action=userDashboard&status=success&from=modifyComment');
-        }else{
-            header('Location: indexAdmin.php?action=comments-mine&status=success&from=modifyComment');
-        }
+        $comments->commentModifyPost($data);
+        header('Location: indexAdmin.php?action=comments-mine&status=success&from=modifyComment');
     }
 
     

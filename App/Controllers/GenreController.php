@@ -21,22 +21,8 @@ class GenreController extends Controller
         $data = $new->allGenres();
         $datas = $data->fetchAll();
         if(isset($_GET['status'])){
-            if($_GET['from'] == "add"){
-                $userMessage = new SubmitMessage ("success", "La catégorie a bien été ajoutée !");
-                $datas["feedback"] = $userMessage->formatedMessage();
-            }
-            elseif($_GET['from'] == "modify"){
-                $userMessage = new SubmitMessage ("success", "La catégorie a bien été modifiée !");
-                $datas["feedback"] = $userMessage->formatedMessage();
-            }
-            elseif($_GET['from'] == "delete"){
-                $userMessage = new SubmitMessage ("success", "La catégorie a bien été supprimée !");
-                $datas["feedback"] = $userMessage->formatedMessage();
-            }
-            elseif($_GET['from'] == "duplicate"){
-                $userMessage = new SubmitMessage ("error", "Cette catégorie existe déjà !");
-                $datas["feedback"] = $userMessage->formatedMessage();
-            }
+            $statusMessage = new SubmitMessage("","");
+            $datas['feedback'] = $statusMessage->modifyAccountMessage();
         }
         return $this->validAccess("books-genres", $datas);
     }

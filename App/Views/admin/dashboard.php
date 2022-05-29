@@ -78,11 +78,11 @@ include_once('./App/Views/admin/layouts/header.php') ;
                     <a title="Voir ce commentaire sur le blog" href="index.php?action=un-livre&id=<?=$datas['lastComment']['bookId'];?>#comment<?= $datas['lastComment']['commentId'];?>">
                         <p>Le <?=$datas['lastComment']['created_at']; ?></p>
                         <div class="flex justify-between align-items-center">
-                            <p><img class="avatar" src="./App/Public/Users/images/<?=$datas['lastComment']['userPicture']; ?>" alt="Image du profil de <?=$datas['lastComment']['pseudo']; ?>"></p>
+                            <p><img class="avatar" src="./App/Public/Users/images/<?=$datas['lastComment']['userPicture']; ?>" alt="Image du profil de <?=$datas['lastComment']['userPseudo']; ?>"></p>
                             <p><img class="cover" src="./App/Public/Books/images/<?=$datas['lastComment']['bookPicture']; ?>" alt="Couverture du livre <?=$datas['lastComment']['bookTitle']; ?>"></p>
                         </div>
                         <div class="flex justify-between">
-                            <p><?=$datas['lastComment']['pseudo']; ?></p>
+                            <p><?=$datas['lastComment']['userPseudo']; ?></p>
                             <p><?=$datas['lastComment']['bookTitle']; ?></p>
                         </div>
                     </a>

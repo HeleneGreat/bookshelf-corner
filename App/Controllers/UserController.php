@@ -113,13 +113,111 @@ class UserController extends Controller
         return $this->viewUser("dashboard", $datas);
     }
 
+    function infoUser($id)
+    {
+        $new = new \Projet\Models\UserModel();
+        $user = $new->infoUser($id);
+        $infoUser = $user->fetch();
+        return $infoUser;
+    }
+
     function userAccount()
     {
         $id = $_SESSION['id'];
         $user = new \Projet\Models\UserModel();
         $users = $user->infoUser($id);
         $datas = $users->fetch();
+        if(isset($_GET['status'])){
+            $statusMessage = new SubmitMessage("","");
+            $datas['feedback'] = $statusMessage->modifyAccountMessage();
+        }
         return $this->viewUser("account", $datas);
     }
 
+    // Modify User account
+    function userAccountModifyPost($id, $Post, $Files)
+    {
+        $user = new \Projet\Models\UserModel();
+        $purpose = "user";
+        $folder = "Users";
+        $redirection = null;
+        // Picture update
+        ($Files['picture']['name'] !== "") ? $fileName = $this->verifyFiles($purpose, $folder, $id) : $fileName = $this->infoUser($id)['picture'] ;
+        // Psw update
+        if(!empty($Post['newPsw']) || $Post['newPsw'] != ""){
+            // Check if actual psw is correct
+            $actualUserPsw = htmlspecialchars($Post['actualPsw']);
+            $getInfo = $this->infoUser($id);    
+            $isPasswordCorrect = password_verify($actualUserPsw, $getInfo['mdp']);
+            if ($isPasswordCorrect == true){
+                $newPsw = $Post['newPsw'];
+                $newMdp = password_hash($newPsw, PASSWORD_DEFAULT);                    
+            }
+            else{
+                header('Location: indexAdmin.php?action=userAccount&status=error&from=modifyPsw');
+                return;
+            }
+        }else{
+            $newMdp = $this->infoUser($id)['mdp'];
+        }
+        // unique email
+        if(!empty($Post['newMail']) || $Post['newMail'] != ""){
+            if($Post['newMail'] != $_SESSION['mail']){
+                $newMail = $this->checkForDuplicate("users", htmlspecialchars($Post['newMail']));
+                if($newMail == "nameOk"){
+                    $userMail = htmlspecialchars($Post['newMail']);
+                }else{
+                    $userMail = $this->infoUser($id)['mail'];
+                    $redirection = "pbMail";
+                }
+            }else{
+                $userMail = $this->infoUser($id)['mail'];
+            }
+        }else{
+            $userMail = $this->infoUser($id)['mail'];
+        }
+        // unique pseudo
+        if(!empty($Post['newPseudo']) || $Post['newPseudo'] != ""){
+            if($Post['newPseudo'] != $_SESSION['pseudo']){
+                $newPseudo = $this->checkForDuplicate("users", htmlspecialchars($Post['newPseudo']));
+                if($newPseudo == "nameOk"){
+                    $userPseudo = htmlspecialchars($Post['newPseudo']);
+                }else{
+                    $userPseudo = $this->infoUser($id)['pseudo'];
+                    $redirection .= "pbPseudo";
+                }
+            }else{
+                $userPseudo = $_SESSION['pseudo'];
+            }
+        }else{
+            $userPseudo = $this->infoUser($id)['pseudo'];
+        }
+        // Update the $_SESSION information with this update
+        if($redirection == null || !str_contains($redirection != null, "pbPseudo")){
+            $_SESSION['pseudo'] = $userPseudo;
+        }
+        if($redirection == null || !str_contains($redirection, "pbMail")){
+            $_SESSION['mail'] = $userMail;
+        }        
+        $_SESSION['picture'] = $fileName;
+        $_SESSION['mdp'] = $newMdp;
+        // Update the DBB 
+        $data = [
+            ':id' => $id,
+            ':picture' => $fileName,
+            ':newPseudo' => $userPseudo,
+            ':newMail' => $userMail,
+            ':newUserPsw' => $newMdp
+        ];
+        $user->modifyUserAccountPost($data);
+        if (!isset($redirection)){
+            header('Location: indexAdmin.php?action=userAccount&status=success&from=modify');
+        }elseif ($redirection == "pbMail"){
+            header('Location: indexAdmin.php?action=userAccount&status=error&from=modifyMail');
+        }elseif ($redirection == "pbPseudo"){
+            header('Location: indexAdmin.php?action=userAccount&status=error&from=modifyPseudo');
+        }elseif ($redirection == "pbMailpbPseudo"){
+            header('Location: indexAdmin.php?action=userAccount&status=error&from=modifyMailPseudo');
+        }
+    }
 }

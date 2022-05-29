@@ -267,6 +267,12 @@ try
             $commentController->commentModifyPost($id, $_POST);
         }
 
+        elseif($_GET['action'] == "userAccountModifyPost")
+        {
+            $id = $_GET['id'];
+            $userController->userAccountModifyPost($id, $_POST, $_FILES);
+        }
+
         elseif ($_GET['action'] == "commentDelete")
         {
             $id = $_GET['id'];

@@ -98,8 +98,12 @@ class Controller
     }
 
     function checkForDuplicate($table, $newdata){
-        if($table == "administrators"){
-            $new = new \Projet\Models\AdminModel();
+        if($table == "administrators" || $table == "users"){
+            if($table == "administrators"){
+                $new = new \Projet\Models\AdminModel();
+            }elseif($table == "users"){
+                $new = new \Projet\Models\UserModel();
+            }
             if(str_contains($newdata, "@")){
                 $column = "mail";
             }

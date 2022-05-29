@@ -2,15 +2,15 @@
 include_once('./App/Views/admin/layouts/header.php');?>
 
 <section id="account" class="container-lg">
-    <div class="retour"><a href="indexAdmin.php?action=account"><i class="fas fa-arrow-circle-left"></i></a></div>
+    <div class="retour"><a href="indexAdmin.php?action=<?= $_SESSION['role'] == 0 ? 'userAccount' : 'account'?>"><i class="fas fa-arrow-circle-left"></i></a></div>
 
     <h1>Modifier mon compte</h1>
 
-    <form action="indexAdmin.php?action=accountModifyPost&id=<?= $datas['id']; ?>" method="post" enctype='multipart/form-data'>
+    <form action="indexAdmin.php?action=<?= $_SESSION['role'] == 0 ? 'userAccount' : 'account'?>ModifyPost&id=<?= $datas['id']; ?>" method="post" enctype='multipart/form-data'>
         <div class="flex-md justify-between">
             <div>
                 <p>Mon image de profil :</p>
-                <img src="./App/Public/Admin/images/<?= $datas['picture']; ?>" alt="Image de profil de <?= $datas['pseudo']; ?>">
+                <img src="./App/Public/<?= $_SESSION['role'] > 0 ? 'Admin' : 'Users';?>/images/<?= $datas['picture']; ?>" alt="Image de profil de <?= $datas['pseudo']; ?>">
             </div>
             <div>
                 <p id="displayImg" class="display-none">Nouvelle image de profil :</p>

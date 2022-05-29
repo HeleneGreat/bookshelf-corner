@@ -21,22 +21,8 @@ class BookController extends Controller
         $data = $new->allBooks();
         $datas = $data->fetchAll();
         if(isset($_GET['status'])){
-            if($_GET['from'] == "add"){
-                $userMessage = new SubmitMessage ("success", "Le livre a bien été ajouté !");
-                $datas["feedback"] = $userMessage->formatedMessage();
-            }
-            elseif($_GET['from'] == "modify"){
-                $userMessage = new SubmitMessage ("success", "Le livre a bien été modifié !");
-                $datas["feedback"] = $userMessage->formatedMessage();
-            }
-            elseif($_GET['from'] == "delete"){
-                $userMessage = new SubmitMessage ("success", "Le livre a bien été supprimé !");
-                $datas["feedback"] = $userMessage->formatedMessage();
-            }
-            elseif($_GET['from'] == "duplicate"){
-                $userMessage = new SubmitMessage ("error", "Ce livre existe déjà !");
-                $datas["feedback"] = $userMessage->formatedMessage();
-            }
+            $statusMessage = new SubmitMessage("","");
+            $datas['feedback'] = $statusMessage->livresMessage();
         }
         return $this->validAccess("books-all", $datas);
     }
@@ -169,8 +155,8 @@ class BookController extends Controller
         $data = $new->allBooks();
         $datas = $data->fetchAll();
         if(isset($_GET['status'])){
-            $userMessage = new SubmitMessage ("success", "Le slider a été mis à jour !");
-            $datas["feedback"] = $userMessage->formatedMessage();
+            $userMessage = new SubmitMessage ("", "");
+            $datas["feedback"] = $userMessage->livresMessage();
         }
         return $this->validAccess("books-slider", $datas);
     }
@@ -183,7 +169,7 @@ class BookController extends Controller
         // Second, the books selected in the slider form are set to 1
         $books = new \Projet\Models\BookModel();
         $oneBook = $books->sliderOn($data);
-        header('Location: indexAdmin.php?action=livres-slider&status=success');
+        header('Location: indexAdmin.php?action=livres-slider&status=success&from=slider');
     }
     
 }

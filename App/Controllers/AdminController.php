@@ -153,30 +153,8 @@ class AdminController extends Controller
         $admin = $user->infoAdmin($id);
         $datas = $admin->fetch();
         if(isset($_GET['status'])){
-            if($_GET['status'] == "error"){
-                if($_GET['from'] == "modifyMail"){
-                    $userMessage = new SubmitMessage ("error", "Un compte est déjà associé à ce mail !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
-                if($_GET['from'] == "modifyPseudo"){
-                    $userMessage = new SubmitMessage ("error", "Ce pseudo est déjà utilisé !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
-                if($_GET['from'] == "modifyMailPseudo"){
-                    $userMessage = new SubmitMessage ("error", "Ce mail et ce pseudo sont déjà utilisés !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
-                if($_GET['from'] == "modifyPsw"){
-                    $userMessage = new SubmitMessage ("error", "Mot de passe incorrect !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
-            }
-            if($_GET['status'] == "success"){
-                if($_GET['from'] == "modify"){
-                    $userMessage = new SubmitMessage ("success", "Vos informations ont bien été modifiées !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
-            }
+            $statusMessage = new SubmitMessage("","");
+            $datas['feedback'] = $statusMessage->modifyAccountMessage();
         }
         return $this->validAccess("account", $datas);
     }
@@ -184,10 +162,17 @@ class AdminController extends Controller
     function accountModify()
     {
         $id = $_SESSION['id'];
-        $user = new \Projet\Models\AdminModel();
-        $admin = $user->infoAdmin($id);
-        $infoAdmin = $admin->fetch();
-        $this->validAccess("account-modify", $infoAdmin);
+        if($_SESSION['role'] > 0){
+            $new = new \Projet\Models\AdminModel();
+            $admin = $new->infoAdmin($id);
+            $infoAdmin = $admin->fetch();
+            $this->validAccess("account-modify", $infoAdmin);
+        }else{
+            $new = new \Projet\Models\UserModel();
+            $user = $new->infoUser($id);
+            $infoUser = $user->fetch();
+            $this->viewUser("account-modify", $infoUser);
+        }
     }
 
     function accountModifyPost($id, $Post, $Files)
@@ -225,6 +210,8 @@ class AdminController extends Controller
                     $adminMail = $this->infoAdmin($id)['mail'];
                     $redirection = "pbMail";
                 }
+            }else{
+                $adminMail = $this->infoAdmin($id)['mail'];
             }
         }else{
             $adminMail = $this->infoAdmin($id)['mail'];
@@ -281,11 +268,9 @@ class AdminController extends Controller
     {
         $datas = [];
         if(isset($_GET['status'])){
-            if($_GET['status'] == "error"){
-                if($_GET['from'] == "no-access"){
-                    $userMessage = new SubmitMessage ("error", "Accès non autorisé !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
+            if($_GET['from'] == "no-access"){
+                $userMessage = new SubmitMessage ("error", "Accès non autorisé !");
+                $datas["feedback"] = $userMessage->formatedMessage();
             }
         }
         return $this->viewAdmin("error", $datas);
