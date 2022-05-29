@@ -50,7 +50,7 @@ class AdminController extends Controller
             }
         }
         else{
-            $userMessage = new SubmitMessage ("error", "Tous les champs doivent être remplis !");
+            $userMessage = new SubmitMessage("error", "Tous les champs doivent être remplis !");
             $data["feedback"] = $userMessage->formatedMessage();
             return $this->viewFront("error", $data);
         }
@@ -62,12 +62,12 @@ class AdminController extends Controller
         if(isset($_GET['status'])){
             if($_GET['status'] == "success"){
                 if($_GET['from'] == "create"){
-                    $userMessage = new SubmitMessage ("success", "Le compte administrateur a bien été créé !");
+                    $userMessage = new SubmitMessage("success", "Le compte administrateur a bien été créé !");
                     $datas["feedback"] = $userMessage->formatedMessage();
                 }
             }elseif($_GET['status'] == "error"){
                 if($_GET['from'] == "mailconnexion"){
-                    $userMessage = new SubmitMessage ("error", "Aucun compte n'est associé à cette adresse mail !");
+                    $userMessage = new SubmitMessage("error", "Aucun compte n'est associé à cette adresse mail !");
                     $datas["feedback"] = $userMessage->formatedMessage();
                 }
             }
@@ -269,7 +269,7 @@ class AdminController extends Controller
         $datas = [];
         if(isset($_GET['status'])){
             if($_GET['from'] == "no-access"){
-                $userMessage = new SubmitMessage ("error", "Accès non autorisé !");
+                $userMessage = new SubmitMessage("error", "Accès non autorisé !");
                 $datas["feedback"] = $userMessage->formatedMessage();
             }
         }

@@ -26,7 +26,7 @@ class FrontController extends Controller
         if(isset($_GET['status'])){
             if($_GET['status'] == "error"){
                 if($_GET['from'] == "no-user-account"){
-                    $userMessage = new SubmitMessage ("error", "Vous devez être connecté pour accéder à cet espace !");
+                    $userMessage = new SubmitMessage("error", "Vous devez être connecté pour accéder à cet espace !");
                     $datas["feedback"] = $userMessage->formatedMessage();
                 }
             }   
@@ -77,7 +77,7 @@ class FrontController extends Controller
             if(isset($_GET['status'])){
                 if($_GET['status'] == "success"){
                     if($_GET['from'] == "addComment"){
-                        $userMessage = new SubmitMessage ("success", "Votre commentaire a bien été publié !");
+                        $userMessage = new SubmitMessage("success", "Votre commentaire a bien été publié !");
                         $datas["feedback"] = $userMessage->formatedMessage();
                     }
                 }

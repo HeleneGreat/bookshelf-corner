@@ -13,9 +13,9 @@ class MsgController extends Controller
         $msg = $messages->contactPost($data);
         
         if($msg != NULL){
-            $userMessage = new SubmitMessage ("success", 'Votre message a bien été envoyé !');
+            $userMessage = new SubmitMessage("success", 'Votre message a bien été envoyé !');
         } else {
-            $userMessage = new SubmitMessage ("error", "Votre message n'a pas pu être envoyé. Veuillez réessayer.");
+            $userMessage = new SubmitMessage("error", "Votre message n'a pas pu être envoyé. Veuillez réessayer.");
         }
         $data["feedback"] = $userMessage->formatedMessage();
         return $this->viewFront("contact", $data);
@@ -31,7 +31,7 @@ class MsgController extends Controller
         $datas['currentPage'] = $pagination['currentPage'];
         if(isset($_GET['status'])){
             if($_GET['status'] == "success"){
-                $userMessage = new SubmitMessage ("success", "Le message a bien été supprimé !");
+                $userMessage = new SubmitMessage("success", "Le message a bien été supprimé !");
                 $data["feedback"] = $userMessage->formatedMessage();
         }}
         return $this->validAccess("messages", $datas);

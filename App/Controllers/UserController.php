@@ -54,7 +54,7 @@ class UserController extends Controller
             }
         }
         else{
-            $userMessage = new SubmitMessage ("error", "Les champs suivis d'une astérisque sont obligatoires ! !");
+            $userMessage = new SubmitMessage("error", "Les champs suivis d'une astérisque sont obligatoires ! !");
             $data["feedback"] = $userMessage->formatedMessage();
             return $this->viewFront("user-create", $data);
         }
@@ -66,7 +66,7 @@ class UserController extends Controller
         if(isset($_GET['status'])){
             if($_GET['status'] == "success"){
                 if($_GET['from'] == "create"){
-                    $userMessage = new SubmitMessage ("success", "Votre compte utilisateur a bien été créé !");
+                    $userMessage = new SubmitMessage("success", "Votre compte utilisateur a bien été créé !");
                     $datas["feedback"] = $userMessage->formatedMessage();
                 }
             }

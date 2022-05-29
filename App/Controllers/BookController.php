@@ -155,7 +155,7 @@ class BookController extends Controller
         $data = $new->allBooks();
         $datas = $data->fetchAll();
         if(isset($_GET['status'])){
-            $userMessage = new SubmitMessage ("", "");
+            $userMessage = new SubmitMessage("", "");
             $datas["feedback"] = $userMessage->livresMessage();
         }
         return $this->validAccess("books-slider", $datas);
