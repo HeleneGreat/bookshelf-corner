@@ -19,7 +19,7 @@ include_once('./App/Views/admin/layouts/header.php') ;
                     <p class="italic text-center">
                     <?= substr($datas['lastBook']['title'], 0, 30); 
                         if(strlen($datas['lastBook']['title']) > 30){echo "[...]";}
-                        ?></p>
+                    ?></p>
                 </a>
             </div>
         </article>
@@ -42,11 +42,11 @@ include_once('./App/Views/admin/layouts/header.php') ;
                 <a title="Voir ce commentaire sur le blog" href="index.php?action=un-livre&id=<?=$datas['lastComment']['bookId'];?>#comment<?= $datas['lastComment']['commentId'];?>">
                     <p>Le <?=$datas['lastComment']['created_at']; ?></p>
                     <div class="flex justify-between align-items-center">
-                        <p><img class="avatar" src="./App/Public/Users/images/<?=$datas['lastComment']['userPicture']; ?>" alt="Image du profil de <?=$datas['lastComment']['pseudo']; ?>"></p>
+                        <p><img class="avatar" src="./App/Public/<?= isset($datas['lastComment']['userPseudo'])? 'Users/images/' . $datas['lastComment']['userPicture'] : 'Admin/images/' . $datas['lastComment']['adminPicture'];?>" alt="Image du profil de <?= isset($datas['lastComment']['userPseudo']) ? $datas['lastComment']['userPseudo'] : $datas['lastComment']['adminPseudo']; ?>"></p>
                         <p><img class="cover" src="./App/Public/Books/images/<?=$datas['lastComment']['bookPicture']; ?>" alt="Couverture du livre <?=$datas['lastComment']['bookTitle']; ?>"></p>
                     </div>
                     <div class="flex justify-between">
-                        <p><?=$datas['lastComment']['pseudo']; ?></p>
+                        <p><?= isset($datas['lastComment']['userPseudo']) ? $datas['lastComment']['userPseudo'] : $datas['lastComment']['adminPseudo']; ?></p>
                         <p><?=$datas['lastComment']['bookTitle']; ?></p>
                     </div>
                 </a>
@@ -68,59 +68,27 @@ include_once('./App/Views/admin/layouts/header.php') ;
     </div>
         
         <!-- USER DASHBOARD -->
-        <?php }else{ ?>
-            <div id="all-comments">
-            <p class="stats">Nombre total de <span class="bold">commentaires</span> publiés : <span class="bold"><?= $datas['nbComments']; ?></span></p>
-            <?php foreach($datas['allComments'] as $comment){ ?>
-                <article class="flex-md">
-                    <div class="user-info">
-                        <p><img src="./App/Public/Books/images/<?= $comment['bookCover']; ?>" alt="Couverture du livre <?= $comment['bookTitle']; ?>"></p>
-                        <p class="date"><?= $comment['created_at']; ?></p>
-                        <div class="flex-md actions justify-center">
-                            <a title="Voir ce commentaire sur le site" href="index.php?action=un-livre&id=<?=$comment['bookId'];?>#comment<?= $comment['commentId'];?>"><i class="fa-solid fa-eye"></i></a>
-                            <a title="Modifier ce commentaire" href="indexAdmin.php?action=commentModify&id=<?= $comment['commentId']; ?>"><i class="fa-solid fa-pencil"></i></a>
-                            <a href="indexAdmin.php?action=commentDelete&id=<?= $comment['commentId']; ?>" title="Supprimer ce commentaire" id="btn-delete-<?= $comment['commentId']; ?>" class="btn-delete-this"><i class="fa-regular fa-trash-can"></i></a>
+        <?php }else{?>
+        <div id="stats">
+            <article id="comments-stat" class="center">
+                <h2>Mes commentaires</h2>
+                <div class="stats" title="Nombre total de commentaires sur le blog"><?= $datas['nbComments']; ?></div>
+                <div class="last">
+                    <p class="text-center">Dernier commentaire</p>
+                    <a title="Voir ce commentaire sur le blog" href="index.php?action=un-livre&id=<?=$datas['lastComment']['bookId'];?>#comment<?= $datas['lastComment']['commentId'];?>">
+                        <p>Le <?=$datas['lastComment']['created_at']; ?></p>
+                        <div class="flex justify-between align-items-center">
+                            <p><img class="avatar" src="./App/Public/Users/images/<?=$datas['lastComment']['userPicture']; ?>" alt="Image du profil de <?=$datas['lastComment']['pseudo']; ?>"></p>
+                            <p><img class="cover" src="./App/Public/Books/images/<?=$datas['lastComment']['bookPicture']; ?>" alt="Couverture du livre <?=$datas['lastComment']['bookTitle']; ?>"></p>
                         </div>
-                    </div>
-                    <div class="comment">
-                        <p class="title bold"><?= $comment['commentTitle']; ?></p>
-                        <p class="content"><?= $comment['commentContent']; ?></p>
-                    </div>
-                </article>
-
-                <!-- DELETE CONFIRMATION MODAL FOR COMMENTS SUPPRESSION -->
-                <div id="myModal<?= $comment['commentId']; ?>" class="modal display-none">
-                    <div class="modal-content text-center">
-                        <span id="closing-<?= $comment['commentId']; ?>" class="closing close bold">X</span>
-                        <p><i class="fa-solid fa-trash-can"></i></p>
-                        <p class="bold">Demande de confirmation</p>
-                        <p>Êtes-vous sûr de vouloir supprimer ce commentaire ?</p>
-                        <div class="flex justify-center">
-                            <a id="cancel-<?= $comment['commentId']; ?>" class="cancel btn center" title="Retour">Annuler</a>
-                            <a href="indexAdmin.php?action=commentDelete&id=<?= $comment['commentId'];?>" title="Supprimer ce commentaire" class="btn center">Supprimer</a>
+                        <div class="flex justify-between">
+                            <p><?=$datas['lastComment']['pseudo']; ?></p>
+                            <p><?=$datas['lastComment']['bookTitle']; ?></p>
                         </div>
-                    </div>
+                    </a>
                 </div>
-            <?php }; ?>
-                <nav>
-                    <ul id="pagination" class="flex justify-center">
-                        <!-- PREVIOUS PAGE -->
-                        <li class="<?= ($datas['currentPage'] == 1) ? "display-none" : "" ?>">
-                            <a class="controller previous" title="Page précédente" href="indexAdmin.php?action=userDashboard&page=<?= $datas['currentPage'] - 1 ?>"><</a>
-                        </li>
-                        <!-- ALL PAGES NUMBER -->
-                        <?php for($page = 1; $page <= $datas['pages']; $page++): ?>
-                            <li class="<?= ($datas['currentPage'] == $page) ? "bold active" : "not-active" ?>">
-                                <a class="nb-page" href="indexAdmin.php?action=userDashboard&page=<?= $page ?>"><?= $page ?></a>
-                            </li>
-                        <?php endfor ?>
-                            <!-- NEXT PAGE -->
-                            <li class="<?= ($datas['currentPage'] == $datas['pages']) ? "display-none" : "" ?>">
-                            <a class="controller next" title="Page suivante" href="indexAdmin.php?action=userDashboard&page=<?= $datas['currentPage'] + 1 ?>">></a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            </article>
+    </div>
         <?php }; ?>
 
 </section>

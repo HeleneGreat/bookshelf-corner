@@ -5,8 +5,12 @@ include_once('./App/Views/admin/layouts/header-comments.php');
 
 <section id="dashboard" class="container-lg">
     <div id="all-comments">
-    <p class="stats">Nombre total de <span class="bold">commentaires</span> publiés : <span class="bold"><?= $datas['nbComments']; ?></span></p>
-    <?php foreach($datas['allComments'] as $comment){ ?>
+        <h1>Mes commentaires</h1>
+        <p class="stats">Nombre total de <span class="bold">commentaires</span> publiés : <span class="bold"><?= $datas['nbComments']; ?></span></p>
+        <?php if(empty($datas['allComments'])){ ?>
+            <p>Vous n'avez pas encore publié de commentaire.</p>
+        <?php } ;?>
+        <?php foreach($datas['allComments'] as $comment){ ?>
         <article class="flex-md">
             <div class="user-info">
                 <p><img src="./App/Public/Books/images/<?= $comment['bookCover']; ?>" alt="Couverture du livre <?= $comment['bookTitle']; ?>"></p>
@@ -36,7 +40,7 @@ include_once('./App/Views/admin/layouts/header-comments.php');
                 </div>
             </div>
         </div>
-    <?php }; ?>
+        <?php }; ?>
         <nav>
             <ul id="pagination" class="flex justify-center">
                 <!-- PREVIOUS PAGE -->

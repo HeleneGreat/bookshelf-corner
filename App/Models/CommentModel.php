@@ -43,17 +43,18 @@ class CommentModel extends Manager
         return $req;
     }
 
-    // TODO is this function used ?
-    public function allComments()
+    // All comments without pagination
+    public function allComments($userId = null)
     {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
-            'SELECT comments.id AS commentId, books.id AS bookId, DATE_FORMAT(comments.created_at, "%d %M %Y à %kh%i") AS created_at, users.pseudo, users.picture AS userPicture, comments.title, comments.content, books.picture AS bookPicture, books.title AS bookTitle
+            "SELECT comments.id AS commentId, books.id AS bookId, DATE_FORMAT(comments.created_at, '%d %M %Y à %kh%i') AS created_at, users.pseudo AS userPseudo, users.picture AS userPicture, administrators.pseudo AS adminPseudo, administrators.picture AS adminPicture, comments.title, comments.content, books.picture AS bookPicture, books.title AS bookTitle
             FROM comments
             INNER JOIN books ON comments.book_id = books.id
             LEFT JOIN users ON comments.user_id = users.id
             LEFT JOIN administrators ON comments.admin_id = administrators.id
-            ORDER BY comments.id DESC');
+            {$userId}
+            ORDER BY comments.id DESC");
         $req->execute();
         return $req;
     }

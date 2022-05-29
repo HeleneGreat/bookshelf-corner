@@ -110,7 +110,7 @@ class CommentController extends Controller
             }
         }
         if($_SESSION['role'] == 0){
-            return $this->viewUser("dashboard", $datas);
+            return $this->viewUser("comments-mine", $datas);
         }else{
             return $this->validAccess("comments-mine", $datas);
         }

@@ -180,12 +180,12 @@ try
         /********************************************************/
         elseif($_GET['action'] == "comments")
         {
-            if($_SESSION['role'] > 0){
-                $commentController->allComments();
-            }else{
+            // if($_SESSION['role'] > 0){
+            //     $commentController->allComments();
+            // }else{
                 $commentController->accountComments();
 
-            }
+            // }
         }
 
         elseif($_GET['action'] == "comments-mine")

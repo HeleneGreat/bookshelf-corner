@@ -132,7 +132,7 @@ class AdminController extends Controller
             'nbUsers' => $nbUsers[0],
             'lastUser' => $lastUser
         ];
-        $this->validAccess("dashboard", $datas);
+        return $this->validAccess("dashboard", $datas);
     }    
 
     /*********************************************************/

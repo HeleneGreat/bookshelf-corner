@@ -6,8 +6,6 @@ use Projet\Forms\SubmitMessage;
 
 class UserController extends Controller
 {
-
-
     /*******************************************************/
     /******************* CONNECTION USER *******************/
     /*******************************************************/
@@ -29,8 +27,7 @@ class UserController extends Controller
             ':pseudo' => $pseudo,
             ':mail' => $mail,
             ':mdp' => $mdp,
-        ];        
-        
+        ];
         if(!empty($pseudo) && (!empty($mail) && (!empty($mdp))))
         {
             if(filter_var($mail, FILTER_VALIDATE_EMAIL)){
@@ -97,70 +94,24 @@ class UserController extends Controller
         }
     }
 
-    // TODO à revoir si je mets les comments du user dans le dashboard
+    /****************************************************/
+    /******************* USER ACCOUNT *******************/
+    /****************************************************/
     function userDashboard()
     {
-        $pagination = $this->pagination("comments");
-        $new = new \Projet\Models\CommentModel();
-        $allComment = $new->allAccountComments($_SESSION['id'], "user_id", $pagination);
-        $allComments = $allComment->fetchAll();
         $countComments = new \Projet\Models\UserModel();
         $nbrComment = $countComments->countUserComments($_SESSION['id']);
         $nbComments = $nbrComment->fetch();
+        $userId = "WHERE user_id = " . $_SESSION['id'];
+        $lastComments = new \Projet\Models\CommentModel();
+        $lastComment = $lastComments->allComments($userId);
+        $userLastComment = $lastComment->fetch();
         $datas = [
-            'allComments' => $allComments,
             'nbComments' => $nbComments['nbComments'],
-            'pages' => $pagination['pages'],
-            'currentPage' => $pagination['currentPage']
+            'lastComment' => $userLastComment
         ];
-        if(isset($_GET['status'])){
-            if($_GET['status'] == "success"){
-                if($_GET['from'] == "deleteComment"){
-                    $userMessage = new SubmitMessage ("success", "Votre commentaire a bien été supprimé !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
-            }
-            if($_GET['status'] == "success"){
-                if($_GET['from'] == "modifyComment"){
-                    $userMessage = new SubmitMessage ("success", "Votre commentaire a bien été mis à jour !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
-            }
-        }
         return $this->viewUser("dashboard", $datas);
     }
-
-    // function userDashboard()
-    // {
-    //     $pagination = $this->pagination("comments");
-    //     $new = new \Projet\Models\UserModel();
-    //     $allComment = $new->allUserComments($_SESSION['id'], $pagination);
-    //     $allComments = $allComment->fetchAll();
-    //     $countComments = new \Projet\Models\UserModel();
-    //     $nbrComment = $countComments->countUserComments($_SESSION['id']);
-    //     $nbComments = $nbrComment->fetch();
-    //     $datas = [
-    //         'allComments' => $allComments,
-    //         'nbComments' => $nbComments['nbComments'],
-    //         'pages' => $pagination['pages'],
-    //         'currentPage' => $pagination['currentPage']
-    //     ];
-    //     if(isset($_GET['status'])){
-    //         if($_GET['status'] == "success"){
-    //             if($_GET['from'] == "deleteComment"){
-    //                 $userMessage = new SubmitMessage ("success", "Votre commentaire a bien été supprimé !");
-    //                 $datas["feedback"] = $userMessage->formatedMessage();
-    //             }
-    //         }
-    //         if($_GET['status'] == "success"){
-    //             if($_GET['from'] == "modifyComment"){
-    //                 $userMessage = new SubmitMessage ("success", "Votre commentaire a bien été mis à jour !");
-    //                 $datas["feedback"] = $userMessage->formatedMessage();
-    //             }
-    //         }
-    //     }
-    //     return $this->viewUser("dashboard", $datas);
-    // }
 
     function userAccount()
     {
