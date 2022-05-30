@@ -81,11 +81,10 @@ class CommentController extends Controller
     /********* USER OR ADMIN ACCOUNT *********/
     /*****************************************/
     // All the comments added from that user or admin account
-    function accountComments()
-    {
-        if($_SESSION['role'] == 0){
+    function accountComments() {
+        if($_SESSION['role'] == 0) {
             $table = "user_id";
-        }else{
+        } else{
             $table = "admin_id";
         }
         $pagination = $this->pagination("comments");
@@ -104,10 +103,9 @@ class CommentController extends Controller
         if(isset($_GET['status'])){
             $statusMessage = new SubmitMessage("","");
             $datas['feedback'] = $statusMessage->commentsMessage();
-        }
-        if($_SESSION['role'] == 0){
+        } if($_SESSION['role'] == 0) {
             return $this->viewUser("comments-mine", $datas);
-        }else{
+        } else{
             return $this->validAccess("comments-mine", $datas);
         }
     }

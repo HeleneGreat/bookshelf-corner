@@ -458,6 +458,10 @@ main{
     display: none;
 }
 
+#myCarousel{
+    margin-bottom: 20px;
+}
+
 #myCarousel a{
     margin: auto;
 }
@@ -491,6 +495,53 @@ main{
 #cat-grid .grille p{
     color: var(--main);
     font-weight: bold;
+}
+
+/* ************************** */
+/* ----- REFONTE !!!!! TODO ---- */
+/* ************************** */
+#home-banner{
+    width: 100%;
+    height: 200px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+#home-banner img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 0 78%;
+}
+
+#home-banner .banner-link{
+    position: absolute;
+    right: 10px;
+    top: 30px;
+    width: 217px;
+    text-align: center;
+}
+
+#home-banner .banner-link h3{
+    text-align: right;
+    color: white;
+    font-family: 'uppereastsideregular', 'quicksand', 'Times New Roman', Times, serif;
+    font-size: 3.6rem;
+    letter-spacing: 1rem;
+    margin-bottom: 20px;
+}
+
+#home-about .story{
+    margin-bottom: 20px;
+}
+
+#home-about img{
+    width: 120px;
+}
+
+#home-about h3{
+    color: var(--main);
+    margin-bottom: 10px;
 }
 
 /* **************************************** */
@@ -1028,7 +1079,27 @@ input[type="radio"]:checked::before {
         display: block;
     }
 
+    /* *********************************** */
+    /* --------------- HOME -------------- */
+    /* *********************************** */
+    #home-banner{
+        height: 400px; 
+    }
+    
+    #home-banner .banner-link{
+        right: 120px;
+        top: 100px;
+        width: 270px;
+    }
+    
+    #home-banner .banner-link h3{
+        font-size: 5.6rem;
+    }
 
+    #home-about .story{
+        width: 30%;
+    }
+    
     /* ************************** */
     /* ----- CATEGORIES LIST ---- */
     /* ************************** */

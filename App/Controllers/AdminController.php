@@ -16,8 +16,7 @@ class AdminController extends Controller
         return $this->viewAdmin("connexion/createAdmin");
     }
 
-    function createAdminPost ($Post, $Files)
-    {
+    function createAdminPost ($Post, $Files){
         $createAdmin = new \Projet\Models\AdminModel;
         $pseudo = htmlspecialchars($Post['adminPseudo']);
         $mail = htmlspecialchars($Post['adminMail']);
@@ -48,8 +47,7 @@ class AdminController extends Controller
                 ];
                 $this->updatePicture($data, 'administrators');
             }
-        }
-        else{
+        } else {
             $userMessage = new SubmitMessage("error", "Tous les champs doivent être remplis !");
             $data["feedback"] = $userMessage->formatedMessage();
             return $this->viewFront("error", $data);
@@ -104,8 +102,7 @@ class AdminController extends Controller
     /*********************************************************/
     /*********************** DASHBOARD ***********************/
     /*********************************************************/
-    function dashboard()
-    {
+    function dashboard() {
         $countBooks = new \Projet\Models\BookModel();
         $nbBooks = $countBooks->countBooks();
         $lastBooks = $countBooks->allBooks();
@@ -130,8 +127,7 @@ class AdminController extends Controller
             'nbComments' => $nbComments[0],
             'lastComment' => $lastComment,
             'nbUsers' => $nbUsers[0],
-            'lastUser' => $lastUser
-        ];
+            'lastUser' => $lastUser];
         return $this->validAccess("dashboard", $datas);
     }    
 

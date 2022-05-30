@@ -26,7 +26,7 @@
 
 </section>
 
-<section class="container">
+<section class="container display-none">
     <h2 class="text-center">Nos catégories de lecture</h2>
     <div id="cat-grid">
         <?php foreach($genres as $genre){ ;?>
@@ -38,6 +38,35 @@
         </a>
         <div class="grille-empty display-none md"><p></p></div>
         <?php } ;?>
+    </div>
+</section>
+
+<div id="home-banner">
+    <img src="./App/Public/Front/images/livre-devant-bibliotheque.png" alt="">
+    <div class="banner-link">
+        <h3>Voir tous nos articles</h3>
+        <a href="index.php?action=livres" class="btn">Accéder</a>
+    </div>
+</div>
+
+<section id="home-about" class="container">
+    <h2 class="text-center">Une histoire de...</h2>
+    <div class="flex-md justify-between">
+        <div class="story text-center">
+            <img src="./App/Public/Front/images/voyages.png" alt="Un globe terrestre">
+            <h3>voyages</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nam adipisci blanditiis optio sapiente ducimus.</p>
+        </div>
+        <div class="story text-center">
+            <img src="./App/Public/Front/images/rencontres.png" alt="Un chapeau d'aventurier">
+            <h3>rencontres</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor doloribus amet rem modi voluptates hic vel natus reiciendis vero veritatis.</p>
+        </div>
+        <div class="story text-center">
+            <img src="./App/Public/Front/images/reves.png" alt="La lune et les étoiles">
+            <h3>rêves</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum rem voluptate ad.</p>
+        </div>
     </div>
 </section>
 

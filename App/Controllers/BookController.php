@@ -51,8 +51,7 @@ class BookController extends Controller
             ':newCatchphrase' => htmlspecialchars($Post['newCatchphrase']),
             ':newContent' => htmlspecialchars($Post['newContent']),
             ':newNotation' => htmlspecialchars($Post['newNotation']),
-            ":adminId" => $admin
-        ];
+            ":adminId" => $admin];
         $new->addSingleBook($data);
         // Get book ID
         $book = new \Projet\Models\BookModel();
@@ -67,8 +66,7 @@ class BookController extends Controller
         }
         $data = [
             ":id" => $idBook['id'],
-            ":picture" => $fileName
-        ];
+            ":picture" => $fileName];
         $this->updatePicture($data, 'books');
     }
 
@@ -103,8 +101,7 @@ class BookController extends Controller
         }
     }
 
-    function modifyLivrePost($id, $Post, $Files)
-    {
+    function modifyLivrePost($id, $Post, $Files){
         $new = new \Projet\Models\BookModel();
         $purpose = "book";
         $folder = "Books";
@@ -135,7 +132,7 @@ class BookController extends Controller
             ':picture' => $fileName,
             ':newNotation' => htmlspecialchars($Post['newNotation'])
         ];
-        $datas = $new->modifySingleBook($data);
+        $new->modifySingleBook($data);
         header('Location: indexAdmin.php?action=livres&status=success&from=modify');
     }
 

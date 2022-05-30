@@ -24,11 +24,9 @@ class FrontController extends Controller
     {
         $datas = [];
         if(isset($_GET['status'])){
-            if($_GET['status'] == "error"){
-                if($_GET['from'] == "no-user-account"){
-                    $userMessage = new SubmitMessage("error", "Vous devez être connecté pour accéder à cet espace !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
+            if($_GET['from'] == "no-user-account"){
+                $userMessage = new SubmitMessage("error", "Vous devez être connecté pour accéder à cet espace !");
+                $datas["feedback"] = $userMessage->formatedMessage();
             }   
         }
         return $this->viewFront("error", $datas);

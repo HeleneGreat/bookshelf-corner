@@ -461,10 +461,10 @@ z-index: 9999999;
     background-color: white;
     width: 120px;
     height: 120px;
+    object-fit: cover;
 }
 
 #dashboard #stats article#comments-stat a p{
-    /* margin-top: 10px; */
     font-size: 1.3rem;
     text-align: center;
 }

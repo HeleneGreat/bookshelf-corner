@@ -34,8 +34,7 @@ class SubmitMessage
 
     public function modifyAccountMessage()
     {
-        if ($_GET['status'] == "error")
-        {
+        if ($_GET['status'] == "error") {
             if ($_GET['from'] == "modifyMail")
             {
                 $userMessage = new SubmitMessage("error", "Un compte est déjà associé à ce mail !");
@@ -53,10 +52,8 @@ class SubmitMessage
                 $userMessage = new SubmitMessage("error", "Mot de passe incorrect !");
             }
         }
-        if ($_GET['status'] == "success")
-        {
-            if ($_GET['from'] == "modify")
-            {
+        if ($_GET['status'] == "success") {
+            if ($_GET['from'] == "modify") {
                 $userMessage = new SubmitMessage("success", "Vos informations ont bien été modifiées !");
             }
         }
