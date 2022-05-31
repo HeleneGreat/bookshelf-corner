@@ -10,9 +10,12 @@ class Controller
         $newBlog = new \Projet\Models\BlogModel();
         $blogs = $newBlog->blogInfo(1);
         $blog = $blogs->fetch();
-        $newGenre = new \Projet\Models\GenreModel()    ;
+        $newGenre = new \Projet\Models\GenreModel();
         $allGenres = $newGenre->allGenres();
         $genres = $allGenres->fetchAll();
+        $newBook = new \Projet\Models\BookModel();
+        $lastThreeBooks = $newBook->lastBooks(3);
+        $lastBooks = $lastThreeBooks->fetchAll();
         include('./App/Views/front/' . $viewName . '.php');
     }
 

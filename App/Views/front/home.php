@@ -2,9 +2,6 @@
 <?php include_once('layouts/header.php');?>
 
 
-
-
-
 <section class="container">
     <h1>Bienvenue sur le blog des héros voyageurs !</h1>
 </section>
@@ -55,17 +52,17 @@
         <div class="story text-center">
             <img src="./App/Public/Front/images/voyages.png" alt="Un globe terrestre">
             <h3>voyages</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam nam adipisci blanditiis optio sapiente ducimus.</p>
+            <p>L'exploration d'un nouvel univers se cache peut-être à la page suivante. Que cette page soit faite de papier ou de pixels, n'attendons plus pour la tourner !</p>
         </div>
         <div class="story text-center">
             <img src="./App/Public/Front/images/rencontres.png" alt="Un chapeau d'aventurier">
             <h3>rencontres</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor doloribus amet rem modi voluptates hic vel natus reiciendis vero veritatis.</p>
+            <p>Avec des personnages tous plus originaux les uns que les autres, la littérature n'a pas fini de nous surprendre</p>
         </div>
         <div class="story text-center">
             <img src="./App/Public/Front/images/reves.png" alt="La lune et les étoiles">
             <h3>rêves</h3>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum rem voluptate ad.</p>
+            <p>Quand l'imaginaire n'a plus de limite, le réel s'élargit et nos rêves les plus fous sont envisageables. Les frontières sont repoussées et tout devient alors possible...</p>
         </div>
     </div>
 </section>

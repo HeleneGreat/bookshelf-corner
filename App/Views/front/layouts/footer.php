@@ -1,9 +1,34 @@
 </main>
 
 <footer id="foot">
-
-    <section class="container">
-        <button><a href="indexAdmin.php">Espace admin</a></button>
+    <section class="container flex justify-between">
+        <div class="foot-list">
+            <h3>Créer un compte</h3>
+            <p class="account">Pour profiter pleinement de nos lectures et participer à la vie du blog, créez un compte</p>
+            <a href="index.php?action=connexionUser" class="btn btn-secondary">Se connecter</a>
+        </div>
+        <div class="foot-list">
+            <h3>Catégories</h3>
+            <ul class="category">
+            <?php foreach($genres as $genre){ ;?>
+                <li>
+                    <a href="index.php?action=livres&category=<?= $genre['id'] ;?>"><?= $genre['category'] ;?></a>
+                </li>
+            <?php } ;?>
+            </ul>
+        </div>
+        <div class="foot-list">
+            <h3>Nos dernières lectures</h3>
+            <?php foreach($lastBooks as $lastBook){ ;?>
+            <a href="index.php?action=un-livre&id=<?= $lastBook['id'] ;?>">
+                <div class="last-books">
+                    <img src="./App/Public/Books/images/<?= $lastBook['picture'] ;?>" alt="Couverture du livre <?= $lastBook['title'] ;?>">
+                    <p class="title"><?= $lastBook['title'] ;?></p>
+                    <p class="author"><?= $lastBook['author'] ;?></p>
+                </div>
+            </a>
+            <?php } ;?>
+        </div>
     </section>
 </footer>
 

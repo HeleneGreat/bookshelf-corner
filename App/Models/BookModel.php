@@ -92,7 +92,17 @@ class BookModel extends Manager
         $req->execute(array($id));
         return $req;
     }
-    
+
+    public function lastBooks($number){
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare(
+            "SELECT id, title, author, picture
+            FROM books 
+            ORDER BY id DESC
+            LIMIT {$number}");
+        $req->execute();
+        return $req;
+    }
 
     /**************************/
     /********* SLIDER *********/
