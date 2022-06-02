@@ -32,6 +32,29 @@ class SubmitMessage
         ];
     }
 
+    // create account + connexion messages
+    public function accountMessage()
+    {
+        if($_GET['status'] == "success"){
+            if($_GET['from'] == "createUser"){
+                $userMessage = new SubmitMessage("success", "Votre compte utilisateur a bien été créé !");
+            }
+            if($_GET['from'] == "createAdmin"){
+                $userMessage = new SubmitMessage("success", "Le compte administrateur a bien été créé !");
+            }
+        }
+        if($_GET['status'] == "error"){
+            if($_GET['from'] == "connexionMail"){
+                $userMessage = new SubmitMessage("error", "Aucun compte n'est associé à cette adresse mail !");
+            }
+            if($_GET['from'] == "connexionPsw"){
+                $userMessage = new SubmitMessage("error", "Le mot de passe est erroné !");
+            }
+        }
+        $datas = $userMessage->formatedMessage();
+        return $datas;
+    }
+
     public function modifyAccountMessage()
     {
         if ($_GET['status'] == "error") {

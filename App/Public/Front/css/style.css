@@ -27,14 +27,8 @@ MEDIA QUERIES
 /* TODO */
 /************** VARIABLES TEMPORAIRES ************/
 
-
-.bg-all {
-    /* background-color: rgba(230, 230, 230); */
-    padding: 20px;
-}
-
 /* utilisé sur les book cards + se connecter */
-button,
+/* button, */
 #all-books a.btn-book {
     background-color: #3786ED;
     color: white;
@@ -44,13 +38,13 @@ button,
     padding: 8px 10px;
 }
 
-button:hover,
+/* button:hover, */
 #all-books a.btn-book:hover {
     cursor: pointer;
     box-shadow: 0 0 9px rgb(184, 184, 184);
 }
 
-button:active,
+/* button:active, */
 #all-books a.btn-book:active {
     box-shadow: inset 3px 3px 3px #0041c2,
         inset -3px -3px 3px rgb(88, 155, 231);

@@ -49,7 +49,7 @@ class UserController extends Controller
                     ];
                     $this->updatePicture($data, 'users');
                 }else{
-                    header('Location: index.php?action=connexionUser&status=success&from=create');
+                    header('Location: index.php?action=connexionUser&status=success&from=createUser');
                 }
             }
         }
@@ -64,12 +64,8 @@ class UserController extends Controller
     {
         $datas=[];
         if(isset($_GET['status'])){
-            if($_GET['status'] == "success"){
-                if($_GET['from'] == "create"){
-                    $userMessage = new SubmitMessage("success", "Votre compte utilisateur a bien été créé !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
-            }
+            $statusMessage = new SubmitMessage("","");
+            $datas['feedback'] = $statusMessage->accountMessage();
         }
         return $this->viewFront("user-connexion", $datas);
     }
@@ -79,18 +75,22 @@ class UserController extends Controller
         $user = new \Projet\Models\UserModel();
         $connexUser = $user->infoConnexion($mail);
         $result = $connexUser->fetch();
-        $isPasswordCorrect = password_verify($mdp, $result['mdp']);
-        if ($isPasswordCorrect){
-            $_SESSION['id'] = $result['id'];
-            $_SESSION['mail'] = $result['mail'];
-            $_SESSION['mdp'] = $result['mdp'];
-            $_SESSION['pseudo'] = $result['pseudo'];
-            $_SESSION['picture'] = $result['picture'];
-            $_SESSION['role'] = $result['role'];            
-            header('Location: indexAdmin.php?action=userDashboard');
-        }
-        else{
-            echo "Identifiants erronés !";
+        if(!empty($result)){
+            $isPasswordCorrect = password_verify($mdp, $result['mdp']);
+            if ($isPasswordCorrect){
+                $_SESSION['id'] = $result['id'];
+                $_SESSION['mail'] = $result['mail'];
+                $_SESSION['mdp'] = $result['mdp'];
+                $_SESSION['pseudo'] = $result['pseudo'];
+                $_SESSION['picture'] = $result['picture'];
+                $_SESSION['role'] = $result['role'];            
+                header('Location: indexAdmin.php?action=userDashboard');
+            }
+            else{
+                header('Location: index.php?action=connexionUser&status=error&from=connexionPsw');
+            }
+        }else{
+            header('Location: index.php?action=connexionUser&status=error&from=connexionMail');
         }
     }
 

@@ -2,7 +2,7 @@
 <?php include ('layouts/header.php');?>
 
 
-<section id="all-books" class="container bg-all">
+<section id="all-books" class="container">
     <!-- Books per category -->
 <?php if(isset($_GET['category']) && $_GET['category'] > 0) { ?>
     <div id="cat" class="flex justify-center align-items-center">

@@ -95,8 +95,8 @@ class Controller
         }       
         if($table === 'users'){
             $new = new \Projet\Models\UserModel(); 
-            $datas = $new->updatePicture($data, $table);
-            header('Location: indexAdmin.php?action=connexionUser&status=success&from=create');
+            $new->updatePicture($data, $table);
+            header('Location: index.php?action=connexionUser&status=success&from=createUser');
         }       
     }
 
@@ -156,7 +156,7 @@ class Controller
             $totalItems = $totalItems['COUNT(id)'];
         }elseif($table === "comments" && $_SESSION['role'] == 0){
             $new = new \Projet\Models\UserModel();
-            $perPage = 6;
+            $perPage = 10;
             $totalItem = $new->countUserComments($_SESSION['id']);
             $totalItems = $totalItem->fetch();
             $totalItems = $totalItems['nbComments'];

@@ -85,3 +85,9 @@
         <a href="#bandeau" title="Retour en haut de la page"><i class="fa-solid fa-circle-chevron-up"></i></a>
     </div>
 
+    
+<!-- Div for error management -->
+<?php if(isset($datas['feedback'])) {;?>
+    <div id="feedback" class="center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
+<?php }; ?>
+

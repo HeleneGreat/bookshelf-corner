@@ -58,17 +58,8 @@ class AdminController extends Controller
     {
         $datas=[];
         if(isset($_GET['status'])){
-            if($_GET['status'] == "success"){
-                if($_GET['from'] == "create"){
-                    $userMessage = new SubmitMessage("success", "Le compte administrateur a bien été créé !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
-            }elseif($_GET['status'] == "error"){
-                if($_GET['from'] == "mailconnexion"){
-                    $userMessage = new SubmitMessage("error", "Aucun compte n'est associé à cette adresse mail !");
-                    $datas["feedback"] = $userMessage->formatedMessage();
-                }
-            }
+            $statusMessage = new SubmitMessage("","");
+            $datas['feedback'] = $statusMessage->accountMessage();
         }
         return $this->viewAdmin("connexion/connexionAdmin", $datas);
     }
@@ -79,7 +70,6 @@ class AdminController extends Controller
         $user = new \Projet\Models\AdminModel();
         $connexAdmin = $user->infoConnexion($mail);
         $result = $connexAdmin->fetch();
-        // var_dump($result);die;
         if(!empty($result)){
             $isPasswordCorrect = password_verify($mdp, $result['mdp']);
             if ($isPasswordCorrect){
@@ -92,10 +82,10 @@ class AdminController extends Controller
                 header('Location: indexAdmin.php?action=dashboard');
             }
             else{
-                echo "Identifiants erronés !";
+                header('Location: indexAdmin.php?action=connexionAdmin&status=error&from=connexionPsw');
             }
         }else{
-            header('Location: indexAdmin.php?action=connexionAdmin&status=error&from=mailconnexion');
+            header('Location: indexAdmin.php?action=connexionAdmin&status=error&from=connexionMail');
         }
     }
 

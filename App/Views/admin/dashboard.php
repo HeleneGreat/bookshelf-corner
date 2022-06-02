@@ -73,6 +73,9 @@ include_once('./App/Views/admin/layouts/header.php') ;
             <article id="comments-stat" class="center">
                 <h2>Mes commentaires</h2>
                 <div class="stats" title="Nombre total de commentaires sur le blog"><?= $datas['nbComments']; ?></div>
+                <?php if(empty($datas['allComments'])){ ?>
+                    <p>Vous n'avez pas encore publié de commentaire.</p>
+                <?php }else{ ;?>
                 <div class="last">
                     <p class="text-center">Dernier commentaire</p>
                     <a title="Voir ce commentaire sur le blog" href="index.php?action=un-livre&id=<?=$datas['lastComment']['bookId'];?>#comment<?= $datas['lastComment']['commentId'];?>">
@@ -87,6 +90,7 @@ include_once('./App/Views/admin/layouts/header.php') ;
                         </div>
                     </a>
                 </div>
+                <?php } ;?>
             </article>
     </div>
         <?php }; ?>

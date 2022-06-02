@@ -41,6 +41,7 @@ include_once('./App/Views/admin/layouts/header-comments.php');
             </div>
         </div>
         <?php }; ?>
+        <?php  if(!empty($datas['allComments'])){?>
         <nav>
             <ul id="pagination" class="flex justify-center">
                 <!-- PREVIOUS PAGE -->
@@ -59,6 +60,7 @@ include_once('./App/Views/admin/layouts/header-comments.php');
                 </li>
             </ul>
         </nav>
+        <?php }; ?>
     </div>
 
 </section>

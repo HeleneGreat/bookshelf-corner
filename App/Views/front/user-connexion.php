@@ -15,7 +15,7 @@
 
     <div class="unregistered">
         <p>Vous n'avez pas de compte ?</p>
-        <p><a class="btn center" href="indexAdmin.php?action=createUser">Créer un compte</a></p>
+        <p><a class="btn center" href="index.php?action=createUser">Créer un compte</a></p>
     </div>
 </section>
 
