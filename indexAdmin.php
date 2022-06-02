@@ -113,8 +113,9 @@ try
 
         elseif ($_GET['action'] == "livresdelete")
         {
-            $id = $_GET['id'];
-            $bookController->deleteLivre($id);
+            $idBook = $_GET['id'];
+            $commentController->deleteBookComments($idBook);
+            $bookController->deleteLivre($idBook);
         }
 
         /****************************/
@@ -275,8 +276,8 @@ try
 
         elseif ($_GET['action'] == "commentDelete")
         {
-            $id = $_GET['id'];
-            $commentController->deleteComment($id);
+            $idComment = $_GET['id'];
+            $commentController->deleteComment($idComment);
         }
 
         elseif($_GET['action'] == "userAccount")

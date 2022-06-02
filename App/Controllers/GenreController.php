@@ -22,7 +22,7 @@ class GenreController extends Controller
         $datas = $data->fetchAll();
         if(isset($_GET['status'])){
             $statusMessage = new SubmitMessage("","");
-            $datas['feedback'] = $statusMessage->modifyAccountMessage();
+            $datas['feedback'] = $statusMessage->genresMessage();
         }
         return $this->validAccess("books-genres", $datas);
     }
@@ -93,10 +93,14 @@ class GenreController extends Controller
         header('Location: indexAdmin.php?action=livres-genres&status=success&from=modify');
     }
 
-    function deleteGenre($id)
+    function deleteGenre($idGenre)
     {
-        $new = new \Projet\Models\GenreModel();
-        $data = $new->deleteGenre($id);
+        $infoGenre = $this->infoGenre($idGenre);
+        if($infoGenre['picture'] != "no-icon.png"){
+            unlink("./App/Public/Books/images/" . $infoGenre['picture']);
+        }
+        $deletedGenre = new \Projet\Models\GenreModel();
+        $deletedGenre->deleteGenre($idGenre);
         header('Location: indexAdmin.php?action=livres-genres&status=success&from=delete');
     }
 

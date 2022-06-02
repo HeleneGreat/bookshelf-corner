@@ -15,6 +15,7 @@ include_once('./App/Views/admin/layouts/header.php');?>
             <p class="bold">Demande de confirmation</p>
             <p>Êtes-vous sûr de vouloir supprimer ce livre :</p>
             <p><span class="italic"><?= $datas['title']; ?></span> ?</p>
+            <p><b>Attention</b> : tous les commentaires associés à ce livre seront également supprimés.</p>
             <div class="flex justify-center">
                 <a id="cancel" class="btn center" title="Retour">Annuler</a>
                 <a href="indexAdmin.php?action=livresdelete&id=<?= $datas['id'];?>" title="Supprimer ce livre" class="btn center">Supprimer</a>

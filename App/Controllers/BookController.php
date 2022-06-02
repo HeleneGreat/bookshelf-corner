@@ -136,10 +136,14 @@ class BookController extends Controller
         header('Location: indexAdmin.php?action=livres&status=success&from=modify');
     }
 
-    function deleteLivre($id)
+    function deleteLivre($idBook)
     {
-        $new = new \Projet\Models\BookModel();
-        $data = $new->deleteBook($id);
+        $infoBook = $this->infoLivre($idBook);
+        if($infoBook['picture'] != "no-cover.png"){
+            unlink("./App/Public/Books/images/" . $infoBook['picture']);
+        }
+        $deletedBook = new \Projet\Models\BookModel();
+        $deletedBook->deleteBook($idBook);
         header('Location: indexAdmin.php?action=livres&status=success&from=delete');
     }
     

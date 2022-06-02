@@ -139,6 +139,13 @@ class CommentController extends Controller
         }
     }
 
+    // When a book is deleted, all comments related to it are also deleted
+    function deleteBookComments($idBook)
+    {
+        $comments = new \Projet\Models\CommentModel();
+        $comments->deleteBookComments($idBook);
+    }
+
     // Save in DB the comment modify form
     function commentModifyPost($id, $Post)
     {

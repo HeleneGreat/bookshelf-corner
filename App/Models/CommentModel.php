@@ -108,6 +108,14 @@ class CommentModel extends Manager
         $req->execute(array($id));
         return $req;
     }
+    
+    public function deleteBookComments($idBook)
+    {
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare('DELETE FROM comments WHERE book_id = ?');
+        $req->execute(array($idBook));
+        return $req;
+    }
 
     // All comments written by that User or Admin
     public function allAccountComments($accountId, $table, $pagination)
