@@ -10,12 +10,12 @@
         <p><input type="email" name="userMail" id="mail" placeholder="Votre adresse e-mail" value=""></p>
         <p><input type="password" name="userMdp" id="mdp" placeholder="Votre mot de passe" value=""></p>
 
-        <button class="btn" type="submit">Se connecter</button>
+        <button class="btn btn-main" type="submit">Se connecter</button>
     </form>
 
     <div class="unregistered">
         <p>Vous n'avez pas de compte ?</p>
-        <p><a class="btn center" href="index.php?action=createUser">Créer un compte</a></p>
+        <p><a class="btn btn-main center" href="index.php?action=createUser">Créer un compte</a></p>
     </div>
 </section>
 

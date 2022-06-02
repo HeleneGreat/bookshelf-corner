@@ -47,11 +47,11 @@
                 <h2><?= $blog['name']; ?></h2>
                 <div>
                 <?php if(empty($_SESSION)){ ?>
-                    <button><a href="index.php?action=connexionUser">Se Connecter</a></button>
+                    <a class="btn btn-secondary" href="index.php?action=connexionUser">Se Connecter</a>
                 <?php }elseif($_SESSION['role'] > 0){ ?>
-                    <button><a href="indexAdmin.php?action=dashboard">Espace admin</a></button>
+                    <a class="btn btn-secondary" href="indexAdmin.php?action=dashboard">Espace admin</a>
                 <?php }elseif($_SESSION['role'] === 0){ ?>
-                    <button><a href="indexAdmin.php?action=userDashboard">Mon compte</a></button>
+                    <a class="btn btn-secondary" href="indexAdmin.php?action=userDashboard">Mon compte</a>
                 <?php }; ?>
                 </div>
             </div>

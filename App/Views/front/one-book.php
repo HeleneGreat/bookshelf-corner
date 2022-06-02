@@ -80,7 +80,7 @@ include ('layouts/header.php');
         <input type="text" maxlength="40" name="title">
         <label for="content">Votre commentaire</label>
         <textarea name="content"></textarea>
-        <button type="submit" class="btn center">Publier</button>
+        <button type="submit" class=" btn-main center">Publier</button>
     </form>
     <?php }else{ ?>
         <p class="text-center">Vous devez être connecté pour poster un commentaire</p>

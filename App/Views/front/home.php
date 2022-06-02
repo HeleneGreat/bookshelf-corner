@@ -42,7 +42,7 @@
     <img src="./App/Public/Front/images/livre-devant-bibliotheque.png" alt="">
     <div class="banner-link">
         <h3>Voir tous nos articles</h3>
-        <a href="index.php?action=livres" class="btn">Accéder</a>
+        <a href="index.php?action=livres" class="btn btn-main">Accéder</a>
     </div>
 </div>
 

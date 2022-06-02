@@ -27,10 +27,9 @@ MEDIA QUERIES
 /* TODO */
 /************** VARIABLES TEMPORAIRES ************/
 
-/* utilisé sur les book cards + se connecter */
-/* button, */
+/* utilisé sur les book cards */
 #all-books a.btn-book {
-    background-color: #3786ED;
+    background-color: var(--secondary);
     color: white;
     border: none;
     border-radius: 30px;
@@ -38,15 +37,15 @@ MEDIA QUERIES
     padding: 8px 10px;
 }
 
-/* button:hover, */
+button:hover,
 #all-books a.btn-book:hover {
     cursor: pointer;
     box-shadow: 0 0 9px rgb(184, 184, 184);
 }
 
-/* button:active, */
+button:active,
 #all-books a.btn-book:active {
-    box-shadow: inset 3px 3px 3px #0041c2,
+    box-shadow: inset 3px 3px 3px var(--secondary),
         inset -3px -3px 3px rgb(88, 155, 231);
 }
 
@@ -214,7 +213,6 @@ ul {
 }
 
 .btn {
-    background-color: var(--main);
     border: none;
     color: white;
     border-radius: 30px;
@@ -225,45 +223,49 @@ ul {
     cursor: pointer;
 }
 
+.btn-main{
+    background-color: var(--main);
+}
+
 .btn-secondary{
     background-color: var(--secondary);
 }
 
-.btn-small {
-    background-color: var(--main);
-    border: none;
-    color: white;
-    padding: 8px 10px;
-    margin: 20px 0;
-    cursor: pointer;
-    font-size: 2rem;
-}
-
-.btn:hover,
-.btn-small:hover {
-    box-shadow: inset 0 0 8px rgb(92, 91, 91);
+.btn:hover{
+    /* box-shadow: inset 0 0 8px rgb(92, 91, 91); */
     color: white !important;
 }
 
-.lg {
+.btn-main:active{
+    box-shadow: inset 5px 5px 8px #8a372e,
+        inset -5px -5px 8px #ff8770;
+}
+
+#all-books a.btn-book:active,
+.btn-secondary:active{
+    box-shadow: inset 5px 5px 8px #204e89,
+            inset -5px -5px 8px #4ebeff;
+}
+
+.lg{
     display: none;
 }
 
-.success {
+.success{
     background-color: rgb(9, 184, 85);
 }
 
-.error {
+.error{
     background-color: var(--main);
 }
 
 .success,
-.error {
+.error{
     border-radius: 10px;
 }
 
 .success p,
-.error p {
+.error p{
     color: white;
     padding: 15px 30px;
     margin-top: 15px;
@@ -271,7 +273,7 @@ ul {
 }
 
 .success i,
-.error i {
+.error i{
     color: white;
     margin-right: 15px;
 }
@@ -1087,15 +1089,8 @@ input[type="radio"]:checked::before {
 
 #error p{
     margin-top: 60px;
-    border-radius: 30px;
-    padding: 10px 30px;
-    background-color: var(--main);
-    width: fit-content;
 }
 
-#error p, #error a{
-    color: white;
-}
 
 /* *********************************************** */
 /* ---------------- USER CONNEXION --------------- */
