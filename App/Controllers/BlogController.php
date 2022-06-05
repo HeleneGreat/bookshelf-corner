@@ -43,7 +43,7 @@ class BlogController extends Controller
     
     function blogModifyPost($id, $Post, $Files)
     {
-        $user = new \Projet\Models\AdminModel();
+        $new = new \Projet\Models\BlogModel();
         $purpose = "logo";
         $folder = "Admin";
         $blog = "blog";
@@ -64,7 +64,7 @@ class BlogController extends Controller
             ':picture' => $fileName,
             ':newBlog' => $blogName
         ];
-        $blogs = $user->blogModifyPost($data);
+        $new->blogModifyPost($data);
         header('Location: indexAdmin.php?action=blogParameters');
     }
 }

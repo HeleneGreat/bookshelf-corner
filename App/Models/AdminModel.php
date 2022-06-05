@@ -48,19 +48,6 @@ class AdminModel extends Manager
         $req = $bdd->prepare('UPDATE administrators SET pseudo = :newPseudo, mail = :newMail, mdp = :newAdminPsw, picture = :picture WHERE id = :id');
         $req->execute($data);
         return $req;
-    }
-
-    /*********************************************************/
-    /******************** BLOG PARAMETERS ********************/
-    /*********************************************************/
-    public function blogModifyPost($data)
-    {
-        $bdd = $this->dbConnect();
-        $req = $bdd->prepare('UPDATE website SET logo = :picture, name = :newBlog WHERE id = 1');
-        $req->execute($data);
-        return $req;
-    }
-
-    
+    }    
 
 }

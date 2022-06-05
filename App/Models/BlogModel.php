@@ -13,4 +13,12 @@ class BlogModel extends Manager
         return $req;
     }
 
+    public function blogModifyPost($data)
+    {
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare('UPDATE website SET logo = :picture, name = :newBlog WHERE id = 1');
+        $req->execute($data);
+        return $req;
+    }
+
 }

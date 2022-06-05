@@ -231,9 +231,13 @@ ul {
     background-color: var(--secondary);
 }
 
+a.btn-book:hover,
 .btn:hover{
-    /* box-shadow: inset 0 0 8px rgb(92, 91, 91); */
-    color: white !important;
+    box-shadow: inset 0px 1px 2px rgba(0,0,0,0.2), 
+    inset 0px 2px 4px rgba(0,0,0,0.2), 
+    inset 0px 4px 8px rgba(0,0,0,0.2), 
+    inset 0px 8px 16px rgba(0,0,0,0.2);
+    color: white;
 }
 
 .btn-main:active{
@@ -295,12 +299,11 @@ main{
 }
 
 #bandeau .logo {
-    width: 70px;
-    height: 70px;
-    padding: 7px;
+    display: none;
+    width: 90px;
+    height: 90px;
     object-fit: cover;
-    background-color: white;
-    border-radius: 100%;
+    border-radius: 40%;
 }
 
 #bandeau h2 {
@@ -313,6 +316,7 @@ main{
 
 #back-to-top {
     position: fixed;
+    z-index: 9999999999;
     right: 20px;
     bottom: 50px;
 }
@@ -446,7 +450,7 @@ main{
     margin-left: 15px;
 }
 
-#foot .foot-list a:hover{
+#foot .foot-list .category a:hover{
     border-bottom: 1px white solid;
 }
 
@@ -494,9 +498,39 @@ main{
 /* ****************************************** */
 
 
+/* **************************** */
+/* ---------- WELCOME --------- */
+/* **************************** */
+#home-landing{
+    margin-bottom: 50px;
+}
+
+#home-landing #welcome h1{
+    font-family: 'uppereastsideregular', 'quicksand', 'Times New Roman', Times, serif;
+    font-size: 7rem;
+    text-align: left;
+}
+
+#home-landing #welcome p{
+    padding-bottom: 20px;
+}
+
+#home-landing img{
+    margin-top: 20px;
+    width: 80%;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    height: auto;
+}
+
 /* ***************************** */
 /* ---------- CAROUSEL --------- */
 /* ***************************** */
+#myCarousel{
+    margin-bottom: 40px;
+}
 
 #carousel{
     width: 90%;
@@ -531,10 +565,6 @@ main{
     display: none;
 }
 
-#myCarousel{
-    margin-bottom: 20px;
-}
-
 #myCarousel a{
     margin: auto;
 }
@@ -545,33 +575,7 @@ main{
 }
 
 /* ************************** */
-/* ----- CATEGORIES LIST ---- */
-/* ************************** */
-#cat-grid{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
-
-#cat-grid .grille{
-    min-width: 150px;
-    margin: 10px auto;
-    text-align: center;
-    border-radius: 30px;
-    height: 180px;
-    justify-content: center;
-}
-#cat-grid .grille{
-    background-color: #fdfdbe;
-}
-
-#cat-grid .grille p{
-    color: var(--main);
-    font-weight: bold;
-}
-
-/* ************************** */
-/* ----- REFONTE !!!!! TODO ---- */
+/* ------- HOME BANNER ------ */
 /* ************************** */
 #home-banner{
     width: 100%;
@@ -1112,6 +1116,16 @@ input[type="radio"]:checked::before {
 
 
 /* ********************/
+/* ----- SMALL ----- */
+/* ********************/
+@media screen and (min-width:615px) {
+
+    #bandeau .logo{
+        display: inline;
+    }
+
+}
+/* ********************/
 /* ----- MEDIUM ----- */
 /* ********************/
 @media screen and (min-width:993px) {
@@ -1125,24 +1139,27 @@ input[type="radio"]:checked::before {
     .error {
         width: fit-content;
     }
-
-    #bandeau .logo {
-        width: 100px;
-        height: 100px;
-        padding: 10px;
-    }
-
+    
     .flex-md {
         display: flex;
         flex-wrap: wrap;
     }
-
+    
     .justify-between-md {
         justify-content: space-between;
     }
-
+    
     .md{
         display: block;
+    }
+
+    #bandeau .logo {
+        width: 150px;
+        height: 150px;
+    }
+
+    #bandeau nav{
+        width: 100%;
     }
 
     #foot .foot-list{
@@ -1164,6 +1181,22 @@ input[type="radio"]:checked::before {
     /* *********************************** */
     /* --------------- HOME -------------- */
     /* *********************************** */
+    #home-landing{
+        width: 993px;
+        margin-bottom: 50px;
+    }
+    
+    #home-landing #welcome{
+        width: 540px;
+    }
+    
+    #home-landing img{
+        margin-top: 40px;
+        float: right;
+        width: 440px;
+        height: auto;
+    }
+
     #home-banner{
         height: 400px; 
     }
@@ -1182,37 +1215,6 @@ input[type="radio"]:checked::before {
         width: 30%;
     }
     
-    /* ************************** */
-    /* ----- CATEGORIES LIST ---- */
-    /* ************************** */
-    #cat-grid{
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: repeat(5, 1fr);
-        grid-column-gap: 10px;
-        grid-row-gap: 10px;
-    }
-
-    #cat-grid .grille-empty,
-    #cat-grid .grille{
-        text-align: center;
-        border-radius: 30px;
-        width: 180px;
-        height: 180px;
-        justify-content: center;
-    }
-    #cat-grid .grille{
-        background-color: #fdfdbe;
-    }
-
-    #cat-grid .grille-empty{
-        background-color: var(--secondary);
-    }
-
-    #cat-grid .grille p{
-        color: var(--main);
-        font-weight: bold;
-    }
     /* ****************************************** */
     /* ---------------- ALL BOOKS --------------- */
     /* ****************************************** */
@@ -1253,7 +1255,6 @@ input[type="radio"]:checked::before {
         margin-right: 5px;
         margin-left: 5px;
     }
-
 
     #one-book #info-book .book-identity{
         height: 270px;
@@ -1377,6 +1378,20 @@ input[type="radio"]:checked::before {
     /* *****************/
     /* ----- NAV ----- */
     /* *****************/
+    
+    #nav-lg{
+        padding-bottom: 15px;
+        position: sticky;
+        position: -webkit-sticky;
+        top: 10px;
+        align-self: flex-start;
+    }
+
+    .head-lg{
+        width: 85%;
+        height: 156px;
+    }
+
     #nav-lg a {
         letter-spacing: 0.1rem;
     }
@@ -1384,10 +1399,6 @@ input[type="radio"]:checked::before {
     #open-menu:hover,
     #close-menu:hover {
         cursor: default;
-    }
-
-    .head-lg {
-        width: 85%;
     }
 
     .head-lg a {
@@ -1446,6 +1457,10 @@ input[type="radio"]:checked::before {
     #one-book #info-book .book-identity{
         margin-right: 20px;
         margin-left: 20px;
+    }
+
+    #home-landing{
+        height: 440px;
     }
 
     /* ***************************************** */

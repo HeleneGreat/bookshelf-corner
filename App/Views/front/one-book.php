@@ -83,7 +83,7 @@ include ('layouts/header.php');
         <button type="submit" class=" btn-main center">Publier</button>
     </form>
     <?php }else{ ?>
-        <p class="text-center">Vous devez être connecté pour poster un commentaire</p>
+        <p class="text-center">Vous devez être connecté.e pour poster un commentaire</p>
     <?php } ;?>
 </section>
 
