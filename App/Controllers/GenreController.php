@@ -7,7 +7,7 @@ use Projet\Forms\SubmitMessage;
 class GenreController extends Controller
 {
     
-    function infoGenre($id)
+    public function infoGenre($id)
     {
         $new = new \Projet\Models\GenreModel();
         $data = $new->infoGenre($id);
@@ -15,7 +15,7 @@ class GenreController extends Controller
         return $datas;
     }
 
-    function livresGenres()
+    public function livresGenres()
     {
         $new = new \Projet\Models\GenreModel();
         $data = $new->allGenres();
@@ -27,12 +27,12 @@ class GenreController extends Controller
         return $this->validAccess("books-genres", $datas);
     }
 
-    function noIcon()
+    public function noIcon()
     {
         return "no-icon.png";
     }
 
-    function allGenre()
+    public function allGenre()
     {
         $new = new \Projet\Models\GenreModel();
         $data = $new->allGenres();
@@ -40,12 +40,15 @@ class GenreController extends Controller
         return $this->validAccess("books-genres", $datas);
     }
 
-    function genreAddPost($Post, $Files)
+    public function genreAddPost($Post, $Files)
     {
         $new = new \Projet\Models\GenreModel();
-        $data = [':newType' => htmlspecialchars($Post['newType'])];
+        $genreName = $this->checkForDuplicate("genres", htmlspecialchars($Post['newType']));
+        if($genreName == "nameOk"){
+            $data = [':newType' => htmlspecialchars($Post['newType'])];
+        }
         $new->genreAddPost($data);
-        // Get book ID
+        // Get genre ID
         $genre = new \Projet\Models\GenreModel();
         $infoGenre = $genre->getId("genres", "category", $data[':newType']);
         $idGenre = $infoGenre->fetch();
@@ -63,7 +66,7 @@ class GenreController extends Controller
         $this->updatePicture($data, 'genres');
     }
 
-    function genreModifyPost($id, $Post, $Files)
+    public function genreModifyPost($id, $Post, $Files)
     {
         $new = new \Projet\Models\GenreModel(); 
         $purpose = "genre";
@@ -93,7 +96,7 @@ class GenreController extends Controller
         header('Location: indexAdmin.php?action=livres-genres&status=success&from=modify');
     }
 
-    function deleteGenre($idGenre)
+    public function deleteGenre($idGenre)
     {
         $infoGenre = $this->infoGenre($idGenre);
         if($infoGenre['picture'] != "no-icon.png"){

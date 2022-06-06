@@ -50,6 +50,15 @@ class SubmitMessage
             if($_GET['from'] == "connexionPsw"){
                 $userMessage = new SubmitMessage("error", "Le mot de passe est erroné !");
             }
+            if($_GET['from'] == "createAccountMail"){
+                $userMessage = new SubmitMessage("error", "Un compte est déjà associé à ce mail !");
+            }
+            if($_GET['from'] == "createAccountPseudo"){
+                $userMessage = new SubmitMessage("error", "Ce pseudo est déjà utilisé !");
+            }
+            if($_GET['from'] == "createAccountMailPseudo"){
+                $userMessage = new SubmitMessage("error", "Ce mail et ce pseudo sont déjà utilisés !");
+            }
         }
         $datas = $userMessage->formatedMessage();
         return $datas;

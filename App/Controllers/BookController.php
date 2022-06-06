@@ -7,7 +7,7 @@ use Projet\Forms\SubmitMessage;
 class BookController extends Controller
 {
 
-    function infoLivre($id)
+    public function infoLivre($id)
     {
         $new = new \Projet\Models\BookModel();
         $data = $new->singleBook($id);
@@ -15,7 +15,7 @@ class BookController extends Controller
         return $datas;
     }
 
-    function livresAll()
+    public function livresAll()
     {
         $new = new \Projet\Models\BookModel();
         $data = $new->allBooks();
@@ -27,7 +27,7 @@ class BookController extends Controller
         return $this->validAccess("books-all", $datas);
     }
 
-    function addLivre()
+    public function addLivre()
     {
         $new = new \Projet\Models\GenreModel();
         $data = $new->categoriesList();
@@ -36,15 +36,14 @@ class BookController extends Controller
     }
 
     // Default image if no book cover is submited
-    function noCover()
+    public function noCover()
     {
         return "no-cover.png";
     }
 
-    function addLivrePost($Post, $Files, $admin){
+    public function addLivrePost($Post, $Files, $admin){
         $new = new \Projet\Models\BookModel();
         $data = [
-            ':newTitle' => htmlspecialchars($Post['newTitle']),
             ':newAuthor' => htmlspecialchars($Post['newAuthor']),
             ':newYear_publication' => htmlspecialchars($Post['newYear_publication']),
             ':newGenre' => htmlspecialchars($Post['newGenre']),
@@ -52,6 +51,10 @@ class BookController extends Controller
             ':newContent' => htmlspecialchars($Post['newContent']),
             ':newNotation' => htmlspecialchars($Post['newNotation']),
             ":adminId" => $admin];
+        $newName = $this->checkForDuplicate("books", htmlspecialchars($Post['newTitle']));
+        if($newName == "nameOk"){
+            $data[':newTitle'] = htmlspecialchars($Post['newTitle']);
+        }
         $new->addSingleBook($data);
         // Get book ID
         $book = new \Projet\Models\BookModel();
@@ -70,7 +73,7 @@ class BookController extends Controller
         $this->updatePicture($data, 'books');
     }
 
-    function viewLivre($id)
+    public function viewLivre($id)
     {
         $new = new \Projet\Models\BookModel();
         $data = $new->singleBook($id);
@@ -82,7 +85,7 @@ class BookController extends Controller
         }
     }
   
-    function modifyLivre($id)
+    public function modifyLivre($id)
     {
         $newFirst = new \Projet\Models\BookModel();
         $dataFirst = $newFirst->singleBook($id);
@@ -101,7 +104,7 @@ class BookController extends Controller
         }
     }
 
-    function modifyLivrePost($id, $Post, $Files){
+    public function modifyLivrePost($id, $Post, $Files){
         $new = new \Projet\Models\BookModel();
         $purpose = "book";
         $folder = "Books";
@@ -136,7 +139,7 @@ class BookController extends Controller
         header('Location: indexAdmin.php?action=livres&status=success&from=modify');
     }
 
-    function deleteLivre($idBook)
+    public function deleteLivre($idBook)
     {
         $infoBook = $this->infoLivre($idBook);
         if($infoBook['picture'] != "no-cover.png"){
@@ -150,7 +153,7 @@ class BookController extends Controller
     /**************************/
     /********* SLIDER *********/
     /**************************/
-    function livresSlider()
+    public function livresSlider()
     {
         $new = new \Projet\Models\BookModel();
         $data = $new->allBooks();
@@ -162,7 +165,7 @@ class BookController extends Controller
         return $this->validAccess("books-slider", $datas);
     }
 
-    function sliderSelection($data)
+    public function sliderSelection($data)
     {
         // First, all books in the DBB are set to slider = 0
         $allBooks = new \Projet\Models\BookModel();

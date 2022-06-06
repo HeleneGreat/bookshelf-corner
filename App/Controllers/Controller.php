@@ -5,7 +5,7 @@ namespace Projet\Controllers;
 class Controller
 {
 
-    function viewFront($viewName, $datas = null)
+    public function viewFront($viewName, $datas = null)
     {
         $newBlog = new \Projet\Models\BlogModel();
         $blogs = $newBlog->blogInfo(1);
@@ -19,7 +19,7 @@ class Controller
         include('./App/Views/front/' . $viewName . '.php');
     }
 
-    function viewUser($viewName, $datas = null)
+    protected function viewUser($viewName, $datas = null)
     {
         $new = new \Projet\Models\BlogModel();
         $blogs = $new->blogInfo(1);
@@ -31,7 +31,7 @@ class Controller
         }
     }
 
-    function viewAdmin($viewName, $datas = null)
+    protected function viewAdmin($viewName, $datas = null)
     {
         $new = new \Projet\Models\BlogModel();
         $blogs = $new->blogInfo(1);
@@ -50,7 +50,7 @@ class Controller
         }
     }
 
-    function verifyFiles($purpose, $folder, $id)
+    public function verifyFiles($purpose, $folder, $id)
     {
         if(isset($_FILES['picture'])){
             $tmpName = $_FILES['picture']['tmp_name'];
@@ -76,7 +76,7 @@ class Controller
     }
 
     // After row creation in BDD, update the BDD with the picture name
-    function updatePicture($data, $table)
+    public function updatePicture($data, $table)
     {
         if($table === 'administrators'){
             $new = new \Projet\Models\AdminModel();
@@ -100,7 +100,7 @@ class Controller
         }       
     }
 
-    function checkForDuplicate($table, $newdata){
+    public function checkForDuplicate($table, $newdata){
         if($table == "administrators" || $table == "users"){
             if($table == "administrators"){
                 $new = new \Projet\Models\AdminModel();
@@ -126,14 +126,16 @@ class Controller
         }
         $data = $new->checkForDuplicate($table, $column, $newdata);
         $result = $data->fetch();
-        if(empty($result) || $result = false || $result['id'] == $_SESSION['id']){
+        // var_dump($_SESSION);die;
+        if(empty($result) || $result == false || (!empty($_SESSION)) && ($result['id'] == $_SESSION['id'])){
+            // var_dump($result);die;
             return "nameOk";
         }elseif($table == "books" || $table == "genres"){
             header('Location: indexAdmin.php?action=' . $redirection . '&status=error&from=duplicate');
         }
     }
 
-    function pagination($table)
+    public function pagination($table)
     {
         if(isset($_GET['page']) && !empty($_GET['page'])){
             $currentPage = (int) strip_tags($_GET['page']);
@@ -175,7 +177,7 @@ class Controller
         return $datas;
     }
 
-    function error404()
+    public function error404()
     {
         if(!empty($_SESSION) && $_SESSION['role'] === 0){
             return $this->viewUser("error404");

@@ -6,37 +6,53 @@ use Projet\Forms\SubmitMessage;
 
 class UserController extends Controller
 {
-    /*******************************************************/
-    /******************* CONNECTION USER *******************/
-    /*******************************************************/
-
-    function createUser()
+    /********************************************************/
+    /************** CREATION / CONNECTION USER **************/
+    /********************************************************/
+    public function createUser()
     {
-        return $this->viewFront("user-create");
+        if(isset($_GET['status'])){
+            $statusMessage = new SubmitMessage("","");
+            $datas['feedback'] = $statusMessage->accountMessage();
+        }
+        return $this->viewFront("user-create", $datas);
     }
 
-    function createUserPost ($Post, $Files)
+    public function createUserPost ($Post, $Files)
     {
+        $redirection = "";
         $createUser = new \Projet\Models\UserModel;
-        $pseudo = htmlspecialchars($Post['userPseudo']);
-        $mail = htmlspecialchars($Post['userMail']);
+        $pseudo = $this->checkForDuplicate("users", htmlspecialchars($Post['userPseudo']));
+        if($pseudo == "nameOk"){
+            $data[':pseudo'] = htmlspecialchars($Post['userPseudo']);
+        }else{
+            $redirection .= "pbPseudo";
+        }
+        $mail = $this->checkForDuplicate("users",htmlspecialchars($Post['userMail']));
+        if($mail == "nameOk"){
+            $data[':mail'] = htmlspecialchars($Post['userMail']);
+        }else{
+            $redirection .= "pbMail";
+        }
+        if($redirection == "pbMail"){
+            header('Location: index.php?action=createUser&status=error&from=createAccountMail');
+        }elseif ($redirection == "pbPseudo"){
+            header('Location: index.php?action=createUser&status=error&from=createAccountPseudo');
+        }elseif ($redirection == "pbPseudopbMail"){
+            header('Location: index.php?action=createUser&status=error&from=createAccountMailPseudo');
+        }
         $pass = htmlspecialchars($Post['userMdp']);
         $mdp = password_hash($pass, PASSWORD_DEFAULT);
-        $picture = $Files['picture']['name'];
-        $data = [
-            ':pseudo' => $pseudo,
-            ':mail' => $mail,
-            ':mdp' => $mdp,
-        ];
+        $data[':mdp'] = $mdp;
         if(!empty($pseudo) && (!empty($mail) && (!empty($mdp))))
         {
-            if(filter_var($mail, FILTER_VALIDATE_EMAIL)){
+            if(filter_var($data[':mail'], FILTER_VALIDATE_EMAIL)){
                 // create user in BDD
                 $createUser->createUser($data);
                 if($Files['picture']['name'] != ""){
                     // Get his ID
                     $new = new \Projet\Models\UserModel;
-                    $user= $new->getId("users", "mail", $mail);                
+                    $user= $new->getId("users", "mail", $data[':mail']);                
                     $idUser = $user->fetch();
                     // Second: save his picture if there is one
                     $purpose = "user";
@@ -60,7 +76,7 @@ class UserController extends Controller
         }
     }
 
-    function connexionUser()
+    public function connexionUser()
     {
         $datas=[];
         if(isset($_GET['status'])){
@@ -70,7 +86,7 @@ class UserController extends Controller
         return $this->viewFront("user-connexion", $datas);
     }
 
-    function connexionUserPost($mail, $mdp)
+    public function connexionUserPost($mail, $mdp)
     {
         $user = new \Projet\Models\UserModel();
         $connexUser = $user->infoConnexion($mail);
@@ -97,7 +113,7 @@ class UserController extends Controller
     /****************************************************/
     /******************* USER ACCOUNT *******************/
     /****************************************************/
-    function userDashboard()
+    public function userDashboard()
     {
         $countComments = new \Projet\Models\UserModel();
         $nbrComment = $countComments->countUserComments($_SESSION['id']);
@@ -113,19 +129,19 @@ class UserController extends Controller
         return $this->viewUser("dashboard", $datas);
     }
 
-    function infoUser($id)
+    public function infoUser($userId)
     {
         $new = new \Projet\Models\UserModel();
-        $user = $new->infoUser($id);
+        $user = $new->infoUser($userId);
         $infoUser = $user->fetch();
         return $infoUser;
     }
 
-    function userAccount()
+    public function userAccount()
     {
-        $id = $_SESSION['id'];
+        $userId = $_SESSION['id'];
         $user = new \Projet\Models\UserModel();
-        $users = $user->infoUser($id);
+        $users = $user->infoUser($userId);
         $datas = $users->fetch();
         if(isset($_GET['status'])){
             $statusMessage = new SubmitMessage("","");
@@ -135,19 +151,19 @@ class UserController extends Controller
     }
 
     // Modify User account
-    function userAccountModifyPost($id, $Post, $Files)
+    public function userAccountModifyPost($userId, $Post, $Files)
     {
         $user = new \Projet\Models\UserModel();
         $purpose = "user";
         $folder = "Users";
         $redirection = null;
         // Picture update
-        ($Files['picture']['name'] !== "") ? $fileName = $this->verifyFiles($purpose, $folder, $id) : $fileName = $this->infoUser($id)['picture'] ;
+        ($Files['picture']['name'] !== "") ? $fileName = $this->verifyFiles($purpose, $folder, $userId) : $fileName = $this->infoUser($userId)['picture'] ;
         // Psw update
         if(!empty($Post['newPsw']) || $Post['newPsw'] != ""){
             // Check if actual psw is correct
             $actualUserPsw = htmlspecialchars($Post['actualPsw']);
-            $getInfo = $this->infoUser($id);    
+            $getInfo = $this->infoUser($userId);    
             $isPasswordCorrect = password_verify($actualUserPsw, $getInfo['mdp']);
             if ($isPasswordCorrect == true){
                 $newPsw = $Post['newPsw'];
@@ -158,7 +174,7 @@ class UserController extends Controller
                 return;
             }
         }else{
-            $newMdp = $this->infoUser($id)['mdp'];
+            $newMdp = $this->infoUser($userId)['mdp'];
         }
         // unique email
         if(!empty($Post['newMail']) || $Post['newMail'] != ""){
@@ -167,14 +183,14 @@ class UserController extends Controller
                 if($newMail == "nameOk"){
                     $userMail = htmlspecialchars($Post['newMail']);
                 }else{
-                    $userMail = $this->infoUser($id)['mail'];
+                    $userMail = $this->infoUser($userId)['mail'];
                     $redirection = "pbMail";
                 }
             }else{
-                $userMail = $this->infoUser($id)['mail'];
+                $userMail = $this->infoUser($userId)['mail'];
             }
         }else{
-            $userMail = $this->infoUser($id)['mail'];
+            $userMail = $this->infoUser($userId)['mail'];
         }
         // unique pseudo
         if(!empty($Post['newPseudo']) || $Post['newPseudo'] != ""){
@@ -183,14 +199,14 @@ class UserController extends Controller
                 if($newPseudo == "nameOk"){
                     $userPseudo = htmlspecialchars($Post['newPseudo']);
                 }else{
-                    $userPseudo = $this->infoUser($id)['pseudo'];
+                    $userPseudo = $this->infoUser($userId)['pseudo'];
                     $redirection .= "pbPseudo";
                 }
             }else{
                 $userPseudo = $_SESSION['pseudo'];
             }
         }else{
-            $userPseudo = $this->infoUser($id)['pseudo'];
+            $userPseudo = $this->infoUser($userId)['pseudo'];
         }
         // Update the $_SESSION information with this update
         if($redirection == null || !str_contains($redirection != null, "pbPseudo")){
@@ -203,7 +219,7 @@ class UserController extends Controller
         $_SESSION['mdp'] = $newMdp;
         // Update the DBB 
         $data = [
-            ':id' => $id,
+            ':id' => $userId,
             ':picture' => $fileName,
             ':newPseudo' => $userPseudo,
             ':newMail' => $userMail,

@@ -7,19 +7,43 @@ use Projet\Forms\SubmitMessage;
 class AdminController extends Controller
 {
 
-
     /********************************************************/
     /******************* CONNECTION ADMIN *******************/
     /********************************************************/
-    function addAdmin()
+    public function addAdmin()
     {
-        return $this->viewAdmin("connexion/createAdmin");
+        if(isset($_GET['status'])){
+            $statusMessage = new SubmitMessage("","");
+            $datas['feedback'] = $statusMessage->accountMessage();
+            return $this->viewAdmin("connexion/createAdmin", $datas);
+        }else{
+            return $this->viewAdmin("connexion/createAdmin");
+        }
     }
 
-    function createAdminPost ($Post, $Files){
+    public function createAdminPost ($Post, $Files){
+        $redirection = "";
         $createAdmin = new \Projet\Models\AdminModel;
-        $pseudo = htmlspecialchars($Post['adminPseudo']);
-        $mail = htmlspecialchars($Post['adminMail']);
+        $pseudo = $this->checkForDuplicate("administrators", htmlspecialchars($Post['adminPseudo']));
+        if($pseudo == "nameOk"){
+            $data[':pseudo'] = htmlspecialchars($Post['adminPseudo']);
+        }else{
+            $redirection .= "pbPseudo";
+        }
+        $mail = $this->checkForDuplicate("administrators", htmlspecialchars($Post['adminMail']));
+        if($mail == "nameOk"){
+            $data[':mail'] = htmlspecialchars($Post['adminMail']);
+        }else{
+            $redirection .= "pbMail";
+        }
+        if($redirection == "pbMail"){
+            header('Location: indexAdmin.php?action=createAccount&status=error&from=createAccountMail');
+        }elseif ($redirection == "pbPseudo"){
+            header('Location: indexAdmin.php?action=createAccount&status=error&from=createAccountPseudo');
+        }elseif ($redirection == "pbPseudopbMail"){
+            header('Location: indexAdmin.php?action=createAccount&status=error&from=createAccountMailPseudo');
+        }
+
         $pass = htmlspecialchars($Post['adminMdp']);
         $mdp = password_hash($pass, PASSWORD_DEFAULT);
         $picture = $Files['picture']['name'];
@@ -54,7 +78,7 @@ class AdminController extends Controller
         }
     }
 
-    function connexionAdmin()
+    public function connexionAdmin()
     {
         $datas=[];
         if(isset($_GET['status'])){
@@ -64,7 +88,7 @@ class AdminController extends Controller
         return $this->viewAdmin("connexion/connexionAdmin", $datas);
     }
 
-    function connexionAdminPost($mail, $mdp)
+    public function connexionAdminPost($mail, $mdp)
     {
         // get password
         $user = new \Projet\Models\AdminModel();
@@ -92,7 +116,7 @@ class AdminController extends Controller
     /*********************************************************/
     /*********************** DASHBOARD ***********************/
     /*********************************************************/
-    function dashboard() {
+    public function dashboard() {
         $countBooks = new \Projet\Models\BookModel();
         $nbBooks = $countBooks->countBooks();
         $lastBooks = $countBooks->allBooks();
@@ -124,19 +148,19 @@ class AdminController extends Controller
     /*********************************************************/
     /********************* ADMIN ACCOUNT *********************/
     /*********************************************************/
-    function infoAdmin($id)
+    public function infoAdmin($adminId)
     {
         $user = new \Projet\Models\AdminModel();
-        $admin = $user->infoAdmin($id);
+        $admin = $user->infoAdmin($adminId);
         $infoAdmin = $admin->fetch();
         return $infoAdmin;
     }
 
-    function account()
+    public function account()
     {
-        $id = $_SESSION['id'];
+        $adminId = $_SESSION['id'];
         $user = new \Projet\Models\AdminModel();
-        $admin = $user->infoAdmin($id);
+        $admin = $user->infoAdmin($adminId);
         $datas = $admin->fetch();
         if(isset($_GET['status'])){
             $statusMessage = new SubmitMessage("","");
@@ -145,35 +169,35 @@ class AdminController extends Controller
         return $this->validAccess("account", $datas);
     }
 
-    function accountModify()
+    public function accountModify()
     {
-        $id = $_SESSION['id'];
+        $adminId = $_SESSION['id'];
         if($_SESSION['role'] > 0){
             $new = new \Projet\Models\AdminModel();
-            $admin = $new->infoAdmin($id);
+            $admin = $new->infoAdmin($adminId);
             $infoAdmin = $admin->fetch();
             $this->validAccess("account-modify", $infoAdmin);
         }else{
             $new = new \Projet\Models\UserModel();
-            $user = $new->infoUser($id);
+            $user = $new->infoUser($adminId);
             $infoUser = $user->fetch();
             $this->viewUser("account-modify", $infoUser);
         }
     }
 
-    function accountModifyPost($id, $Post, $Files)
+    public function accountModifyPost($adminId, $Post, $Files)
     {
         $admin = new \Projet\Models\AdminModel();
         $purpose = "admin";
         $folder = "Admin";
         $redirection = null;
         // Picture update
-        ($Files['picture']['name'] !== "") ? $fileName = $this->verifyFiles($purpose, $folder, $id) : $fileName = $this->infoAdmin($id)['picture'] ;
+        ($Files['picture']['name'] !== "") ? $fileName = $this->verifyFiles($purpose, $folder, $adminId) : $fileName = $this->infoAdmin($adminId)['picture'] ;
         // Psw update
         if(!empty($Post['newPsw']) || $Post['newPsw'] != ""){
             // Check if actual psw is correct
             $actualAdminPsw = htmlspecialchars($Post['actualPsw']);
-            $getInfo = $this->infoAdmin($id);    
+            $getInfo = $this->infoAdmin($adminId);    
             $isPasswordCorrect = password_verify($actualAdminPsw, $getInfo['mdp']);
             if ($isPasswordCorrect == true){
                 $newPsw = $Post['newPsw'];
@@ -184,7 +208,7 @@ class AdminController extends Controller
                 return;
             }
         }else{
-            $newMdp = $this->infoAdmin($id)['mdp'];
+            $newMdp = $this->infoAdmin($adminId)['mdp'];
         }
         // unique email
         if(!empty($Post['newMail']) || $Post['newMail'] != ""){
@@ -193,14 +217,14 @@ class AdminController extends Controller
                 if($newMail == "nameOk"){
                     $adminMail = htmlspecialchars($Post['newMail']);
                 }else{
-                    $adminMail = $this->infoAdmin($id)['mail'];
+                    $adminMail = $this->infoAdmin($adminId)['mail'];
                     $redirection = "pbMail";
                 }
             }else{
-                $adminMail = $this->infoAdmin($id)['mail'];
+                $adminMail = $this->infoAdmin($adminId)['mail'];
             }
         }else{
-            $adminMail = $this->infoAdmin($id)['mail'];
+            $adminMail = $this->infoAdmin($adminId)['mail'];
         }
         // unique pseudo
         if(!empty($Post['newPseudo']) || $Post['newPseudo'] != ""){
@@ -209,14 +233,14 @@ class AdminController extends Controller
                 if($newPseudo == "nameOk"){
                     $adminPseudo = htmlspecialchars($Post['newPseudo']);
                 }else{
-                    $adminPseudo = $this->infoAdmin($id)['pseudo'];
+                    $adminPseudo = $this->infoAdmin($adminId)['pseudo'];
                     $redirection .= "pbPseudo";
                 }
             }else{
                 $adminPseudo = $_SESSION['pseudo'];
             }
         }else{
-            $adminPseudo = $this->infoAdmin($id)['pseudo'];
+            $adminPseudo = $this->infoAdmin($adminId)['pseudo'];
         }
         // Update the $_SESSION information with this update
         if($redirection == null || !str_contains($redirection != null, "pbPseudo")){
@@ -229,7 +253,7 @@ class AdminController extends Controller
         $_SESSION['mdp'] = $newMdp;
         // Update the DBB 
         $data = [
-            ':id' => $id,
+            ':id' => $adminId,
             ':picture' => $fileName,
             ':newPseudo' => $adminPseudo,
             ':newMail' => $adminMail,
@@ -250,7 +274,7 @@ class AdminController extends Controller
     /**********************************************************/
     /******************** ERROR MANAGEMENT ********************/
     /**********************************************************/
-    function error()
+    public function error()
     {
         $datas = [];
         if(isset($_GET['status'])){

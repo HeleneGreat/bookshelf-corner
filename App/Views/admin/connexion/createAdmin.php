@@ -1,6 +1,11 @@
 <?php $currentPageTitle = "Créer un nouvel administrateur";
  include_once('./App/Views/admin/layouts/head.php'); ?>
 
+<!-- Div for error management -->
+<?php if(isset($datas['feedback'])) {;?>
+    <div id="feedback" class="center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
+<?php }; ?>
+
 <section id="new-admin" class="container text-center">
 
     <h2>Créer un nouvel administrateur</h2>

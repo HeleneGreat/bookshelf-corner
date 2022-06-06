@@ -7,3 +7,6 @@
 <div align=center>
   <img src="./App/Public/Front/images/bookshelf.png">
   </div>
+
+
+S'il y a "Post" en fin de nom de fonction, c'est qu'elle traite les informations d'un formulaire

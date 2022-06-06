@@ -6,7 +6,7 @@ use Projet\Forms\SubmitMessage;
 
 class FrontController extends Controller
 {
-    function home()
+    public function home()
     {
         $new = new \Projet\Models\BookModel();
         $data = $new->allBooks();
@@ -14,14 +14,14 @@ class FrontController extends Controller
         return $this->viewFront("home", $datas);
     }
 
-    function allBooks($idGenre)
+    public function allBooks($genreId)
     {
         $pagination = $this->pagination("books");
         $newBook = new \Projet\Models\BookModel();
-        $book = $newBook->allBooksPagination($pagination, $idGenre);
+        $book = $newBook->allBooksPagination($pagination, $genreId);
         $datas['book'] = $book->fetchAll();
         $newGenre = new \Projet\Models\GenreModel();
-        $genre = $newGenre->infoGenre($idGenre);
+        $genre = $newGenre->infoGenre($genreId);
         $datas['genre'] = $genre->fetch();
         if(!empty($datas['genre']) || !empty($datas['book'])){
             $datas['pages'] = $pagination['pages'];
@@ -33,14 +33,14 @@ class FrontController extends Controller
         }
     }
 
-    function oneBook($id)
+    public function oneBook($bookId)
     {
         $newFirst = new \Projet\Models\BookModel();
-        $dataFirst = $newFirst->singleBook($id);
+        $dataFirst = $newFirst->singleBook($bookId);
         $datasFirst = $dataFirst->fetch();
         if($datasFirst != false){
             $newSecond = new \Projet\Models\CommentModel();
-            $dataSecond = $newSecond->allBookComments($id);
+            $dataSecond = $newSecond->allBookComments($bookId);
             $datasSecond = $dataSecond->fetchAll();
             $datas = [
                 "book" => $datasFirst,
@@ -60,7 +60,7 @@ class FrontController extends Controller
         }
     }
     
-    function about()
+    public function about()
     {
         $new = new \Projet\Models\AdminModel;
         $admins = $new->allAdmins();
@@ -68,17 +68,17 @@ class FrontController extends Controller
         return $this->viewFront("about", $allAdmins);
     }
     
-    function contact()
+    public function contact()
     {
         return $this->viewFront("contact");
     }
     
-    function legals()
+    public function legals()
     {
         return $this->viewFront("legals");
     }
 
-    function error()
+    public function error()
     {
         $datas = [];
         if(isset($_GET['status'])){
@@ -90,13 +90,13 @@ class FrontController extends Controller
         return $this->viewFront("error", $datas);
     }
     
-    function error404()
+    public function error404()
     {
         return $this->viewFront("error404");
     }
 
     // In case javascript is disabled, the mobile menu opens in a new page :
-    function menuNoJs()
+    public function menuNoJs()
     {
         return $this->viewFront("menu-backup");
     }

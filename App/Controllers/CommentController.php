@@ -9,8 +9,8 @@ class CommentController extends Controller
     /*************************************/
     /*************** FRONT ***************/
     /*************************************/
-    // Form a add a new comment under a book review
-    function commentPost($idBook, $Post)
+    // Form to add a new comment under a book review
+    public function commentPost($idBook, $Post)
     {
         $comment = new \Projet\Models\CommentModel();
         $data = [
@@ -37,7 +37,7 @@ class CommentController extends Controller
     /*************** ADMIN ***************/
     /*************************************/
     // List all comments in the admin account
-    function allComments()
+    public function allComments()
     {
         $pagination = $this->pagination("comments");
         $comments = new \Projet\Models\CommentModel();
@@ -54,10 +54,10 @@ class CommentController extends Controller
     }
 
     // For the admin to read this comment
-    function viewComment($id)
+    public function viewComment($commentId)
     {
         $comments = new \Projet\Models\CommentModel();
-        $comm = $comments->singleComment($id);
+        $comm = $comments->singleComment($commentId);
         $data = $comm->fetch();
         if($data != false)
         {
@@ -70,10 +70,10 @@ class CommentController extends Controller
     }
 
     // For the admin to delete this user comment
-    function deleteUserComment($id)
+    public function deleteUserComment($userId)
     {
         $comments = new \Projet\Models\CommentModel();
-        $comments->deleteComment($id);
+        $comments->deleteComment($userId);
         header('Location: indexAdmin.php?action=comments&status=success&from=admindelete');
     }
     
@@ -81,7 +81,7 @@ class CommentController extends Controller
     /********* USER OR ADMIN ACCOUNT *********/
     /*****************************************/
     // All the comments added from that user or admin account
-    function accountComments() {
+    public function accountComments() {
         if($_SESSION['role'] == 0) {
             $table = "user_id";
         } else{
@@ -111,18 +111,18 @@ class CommentController extends Controller
     }
 
     // For the User or Admin to delete one of his comments
-    function deleteComment($id)
+    public function deleteComment($commentId)
     {
         $comments = new \Projet\Models\CommentModel();
-        $comments->deleteComment($id);
+        $comments->deleteComment($commentId);
         header('Location: indexAdmin.php?action=comments-mine&status=success&from=deleteComment');
     }
 
     // For the User or Admin to modify one of his comments
-    function commentModify($id)
+    public function commentModify($commentId)
     {
         $comments = new \Projet\Models\CommentModel();
-        $comm = $comments->singleComment($id);
+        $comm = $comments->singleComment($commentId);
         $data = $comm->fetch();
         if($data != false){
             if($_SESSION['role'] == 0)
@@ -140,18 +140,18 @@ class CommentController extends Controller
     }
 
     // When a book is deleted, all comments related to it are also deleted
-    function deleteBookComments($idBook)
+    public function deleteBookComments($idBook)
     {
         $comments = new \Projet\Models\CommentModel();
         $comments->deleteBookComments($idBook);
     }
 
     // Save in DB the comment modify form
-    function commentModifyPost($id, $Post)
+    public function commentModifyPost($commentId, $Post)
     {
         $comments = new \Projet\Models\CommentModel();
         $data = [
-            ':id' => $id,
+            ':id' => $commentId,
             ':title' => htmlspecialchars($Post['title']),
             ':content' => htmlspecialchars($Post['content'])
         ];

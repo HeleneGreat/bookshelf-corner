@@ -27,7 +27,7 @@
     || $currentPageTitle == "Tous les commentaires"
     || str_contains($currentPageTitle, "Message de ")
     || $currentPageTitle == "Tous les messages"
-    || $_GET["action"] == 'livresview'
+    || (isset($_GET["action"]) && $_GET["action"] == 'livresview')
     ){ ?>
     <script src="App/Public/Admin/js/confirmation-modal.js"></script>
 <?php } ;?>

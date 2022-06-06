@@ -7,7 +7,11 @@ use Projet\Forms\SubmitMessage;
 class MsgController extends Controller
 {
 
-    function contactPost($data)
+    /*************************************/
+    /*************** FRONT ***************/
+    /*************************************/
+    // Contact form
+    public function contactPost($data)
     {
         $messages = new \Projet\Models\MsgModel();
         $msg = $messages->contactPost($data);
@@ -21,7 +25,10 @@ class MsgController extends Controller
         return $this->viewFront("contact", $data);
     }
 
-    function allMessages()
+    /************************************/
+    /*************** BACK ***************/
+    /************************************/
+    public function allMessages()
     {
         $pagination = $this->pagination("messages");
         $messages = new \Projet\Models\MsgModel();
@@ -37,10 +44,10 @@ class MsgController extends Controller
         return $this->validAccess("messages", $datas);
     }
 
-    function viewMessage($id)
+    public function viewMessage($messageId)
     {
         $messages = new \Projet\Models\MsgModel();
-        $oneMsg = $messages->singleMessage($id);
+        $oneMsg = $messages->singleMessage($messageId);
         $data = $oneMsg->fetch();
         if($data != false){
             return $this->validAccess("message-view", $data);
@@ -49,10 +56,10 @@ class MsgController extends Controller
         }
     }
 
-    function deleteMessage($id)
+    public function deleteMessage($messageId)
     {
         $messages = new \Projet\Models\MsgModel();
-        $messages->deleteMessage($id);
+        $messages->deleteMessage($messageId);
         header('Location: indexAdmin.php?action=messages&status=success');
     }
     
