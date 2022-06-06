@@ -22,6 +22,14 @@ class UserModel extends Manager
         return $result;
     }
 
+    public function infoUser($userId)
+    {
+        $bdd = $this->dbConnect();
+        $infoUser = $bdd->prepare('SELECT id, pseudo, mail, mdp, picture, role FROM users WHERE id = ?');
+        $infoUser->execute(array($userId));
+        return $infoUser;
+    }
+
     // Number of comments written by that user
     public function countUserComments($userId)
     {
@@ -49,6 +57,14 @@ class UserModel extends Manager
         return $req;
     }
 
+    public function modifyUserAccountPost($data)
+    {
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare('UPDATE users SET pseudo = :newPseudo, mail = :newMail, mdp = :newUserPsw, picture = :picture WHERE id = :id');
+        $req->execute($data);
+        return $req;
+    }
+
     /*******************************************************/
     /******************* USER CONNECTION *******************/
     /*******************************************************/
@@ -68,19 +84,5 @@ class UserModel extends Manager
         return $infoUser;
     }
 
-    public function infoUser($id)
-    {
-        $bdd = $this->dbConnect();
-        $infoUser = $bdd->prepare('SELECT id, pseudo, mail, mdp, picture, role FROM users WHERE id = ?');
-        $infoUser->execute(array($id));
-        return $infoUser;
-    }
 
-    public function modifyUserAccountPost($data)
-    {
-        $bdd = $this->dbConnect();
-        $req = $bdd->prepare('UPDATE users SET pseudo = :newPseudo, mail = :newMail, mdp = :newUserPsw, picture = :picture WHERE id = :id');
-        $req->execute($data);
-        return $req;
-    }
 }

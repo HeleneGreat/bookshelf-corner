@@ -11,6 +11,22 @@ class AdminModel extends Manager
         $req->execute();
         return $req;
     }
+
+    public function infoAdmin($id)
+    {
+        $bdd = $this->dbConnect();
+        $infoAdmin = $bdd->prepare('SELECT id, pseudo, mail, mdp, picture, role FROM administrators WHERE id = ?');
+        $infoAdmin->execute(array($id));
+        return $infoAdmin;
+    }
+
+    public function modifyAccountPost($data)
+    {
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare('UPDATE administrators SET pseudo = :newPseudo, mail = :newMail, mdp = :newAdminPsw, picture = :picture WHERE id = :id');
+        $req->execute($data);
+        return $req;
+    }    
     
     /********************************************************/
     /******************* ADMIN CONNECTION *******************/
@@ -30,24 +46,5 @@ class AdminModel extends Manager
         $infoAdmin->execute(array($mail));
         return $infoAdmin;
     }
-
-    public function infoAdmin($id)
-    {
-        $bdd = $this->dbConnect();
-        $infoAdmin = $bdd->prepare('SELECT id, pseudo, mail, mdp, picture, role FROM administrators WHERE id = ?');
-        $infoAdmin->execute(array($id));
-        return $infoAdmin;
-    }
-
-    /*********************************************************/
-    /********************* ADMIN ACCOUNT *********************/
-    /*********************************************************/
-    public function modifyAccountPost($data)
-    {
-        $bdd = $this->dbConnect();
-        $req = $bdd->prepare('UPDATE administrators SET pseudo = :newPseudo, mail = :newMail, mdp = :newAdminPsw, picture = :picture WHERE id = :id');
-        $req->execute($data);
-        return $req;
-    }    
 
 }

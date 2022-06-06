@@ -36,7 +36,6 @@
 
 <script src="./App/Public/Front/js/navigation.js"></script>
 <?php if ($currentPageTitle == "Bienvenue au coin des héros voyageurs"){ ?>
-    <!-- <script src="./App/Public/Front/js/slider.js"></script> -->
     <script src="./App/Public/Front/js/carousel.js"></script>
 <?php } ?>
 

@@ -22,10 +22,10 @@ class GenreModel extends Manager
         return $req;
     }
     
-    public function infoGenre($id){
+    public function infoGenre($genreId){
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('SELECT id, category, picture FROM genres WHERE id = ?');
-        $req->execute(array($id));
+        $req->execute(array($genreId));
         return $req;
     }
 
@@ -43,10 +43,10 @@ class GenreModel extends Manager
         return $req;
     }
 
-    public function deleteGenre($id){
+    public function deleteGenre($genreId){
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('DELETE FROM genres WHERE id = ?');
-        $req->execute(array($id));
+        $req->execute(array($genreId));
         return $req;
     }
 

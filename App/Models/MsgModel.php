@@ -5,6 +5,10 @@ namespace Projet\Models;
 class MsgModel extends Manager
 {
 
+    /*********************************/
+    /************* FRONT *************/
+    /*********************************/
+    // Contact form on the blog
     public function contactPost($data)
     {
         $bdd = $this->dbConnect();
@@ -15,6 +19,9 @@ class MsgModel extends Manager
         return $req;
     }
 
+    /**********************************/
+    /************** BACK **************/
+    /**********************************/
     public function countMessages()
     {
         $bdd = $this->dbConnect();
@@ -49,33 +56,22 @@ class MsgModel extends Manager
         return $req;
     }
 
-    public function singleMessage($id)
+    public function singleMessage($idMessage)
     {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'SELECT id, gender, familyname, firstname, DATE_FORMAT(send_at, "%d/%m/%Y à %kh%i") AS send_at, email, object, message
             FROM messages
             WHERE id = ?');
-        $req->execute(array($id));
+        $req->execute(array($idMessage));
         return $req;
     }
 
-    // TODO : function non utilisée à supprimer ?
-    public function sendMessagePost($data)
-    {
-        $bdd = $this->dbConnect();
-        $req = $bdd->prepare(
-            'INSERT INTO messages(gender, familyname, firstname, email, object, message)
-            VALUES (:gender, :familyname, :firstname, :email, :object, :message');
-        $req->execute(array($data));
-        return $req;
-    }
-
-    public function deleteMessage($id)
+    public function deleteMessage($idMessage)
     {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('DELETE FROM messages WHERE id = ?');
-        $req->execute(array($id));
+        $req->execute(array($idMessage));
         return $req;
     }
     

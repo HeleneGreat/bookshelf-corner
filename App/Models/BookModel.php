@@ -5,6 +5,23 @@ namespace Projet\Models;
 class BookModel extends Manager
 {
 
+    /*********************************/
+    /************* FRONT *************/
+    /*********************************/
+    public function lastBooks($number){
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare(
+            "SELECT id, title, author, picture
+            FROM books 
+            ORDER BY id DESC
+            LIMIT {$number}");
+        $req->execute();
+        return $req;
+    }
+
+    /********************************/
+    /************* BACK *************/
+    /********************************/
     public function countBooks()
     {
         $bdd = $this->dbConnect();
@@ -93,21 +110,10 @@ class BookModel extends Manager
         return $req;
     }
 
-    public function lastBooks($number){
-        $bdd = $this->dbConnect();
-        $req = $bdd->prepare(
-            "SELECT id, title, author, picture
-            FROM books 
-            ORDER BY id DESC
-            LIMIT {$number}");
-        $req->execute();
-        return $req;
-    }
-
-    /**************************/
-    /********* SLIDER *********/
-    /**************************/
-// All slider colomns are set to 0
+    /**********************************/
+    /************* SLIDER *************/
+    /**********************************/
+    // All slider colomns are set to 0
     public function sliderOff()
     {
         $bdd = $this->dbConnect();
@@ -116,7 +122,7 @@ class BookModel extends Manager
         return $req;
     }
 
-// The ones selected in the form are set to 1
+    // The ones selected in the form are set to 1
     public function sliderOn($data)
     {
         $bdd = $this->dbConnect();

@@ -1,4 +1,4 @@
-// This function add a "back to my previous page" button in the 404 error page
+// This js add a "back to my previous page" button in the 404 error page
 
 let historyBtn = document.getElementById("history-btn");
 
