@@ -389,6 +389,15 @@ z-index: 9999999;
 /* ************************************************* */
 /* ---------------- CONNECTION ADMIN --------------- */
 /* ************************************************* */
+#new-admin p{
+    margin-top: 20px;
+}
+
+#new-admin label,
+#new-admin label a{
+    font-size: 1rem;
+}
+
 #new-admin,
 #admin-connexion{
     margin-top: 30px;
@@ -1492,6 +1501,11 @@ img.old-picture{
 
     #dashboard #all-comments .btn{
         padding: 10px 20px;
+    }
+    
+    #new-admin{
+        min-width: 600px;
+        max-width: 600px;
     }
     
 

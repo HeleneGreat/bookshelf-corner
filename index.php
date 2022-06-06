@@ -71,6 +71,11 @@ try
             $commentController->commentPost($idBook, $_POST);
         }
 
+        elseif($_GET['action'] == 'mentions-legales')
+        {
+            $controllerFront->legals();
+        }
+
         elseif($_GET['action'] == 'menu')
         {
             $controllerFront->menuNoJs();

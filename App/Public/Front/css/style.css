@@ -488,6 +488,17 @@ main{
     padding-top: 10px;
 }
 
+#foot .legals,
+#foot .legals a{
+    color: white;
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+#foot .legals a:hover{
+    text-decoration: underline;
+}
+
 /* ****************************************** */
 /* ------------------- HOME ----------------- */
 /* ****************************************** */
@@ -1071,6 +1082,8 @@ input[type="radio"]:checked::before {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #107a24;
+    border: none;
 }
 
 #send-btn img {
@@ -1090,6 +1103,17 @@ input[type="radio"]:checked::before {
     margin-top: 60px;
 }
 
+
+/* ***************************************** */
+/* ------------ MENTIONS LEGALES ----------- */
+/* ***************************************** */
+#legals .main:hover{
+    text-decoration: underline;
+}
+
+#legals p{
+    margin-bottom: 10px;
+}
 
 /* *********************************************** */
 /* ---------------- USER CONNEXION --------------- */
@@ -1169,6 +1193,10 @@ input[type="radio"]:checked::before {
     #foot .foot-list:nth-of-type(3){
         width: 40%;
     }
+
+    #foot .legals{
+        margin-top: 40px;
+    }
     /* *********************************** */
     /* --------------- HOME -------------- */
     /* *********************************** */
@@ -1226,6 +1254,10 @@ input[type="radio"]:checked::before {
 
     #contact-form #contact-right {
         width: 60%;
+    }
+
+    #contact a:hover{
+        text-decoration: underline;
     }
 
     /* ****************************************** */
@@ -1315,7 +1347,7 @@ input[type="radio"]:checked::before {
 /* *******************/
 @media screen and (min-width:1201px) {
 
-    p, span{
+    p, span, label{
         font-size: 2rem;
     }
 
@@ -1487,6 +1519,12 @@ input[type="radio"]:checked::before {
         margin: 0 auto;
     }
 
+    #contact a{
+        font-size: 2rem;
+    }
 
+    .main{
+        font-size: 2rem;
+    }
 
 }

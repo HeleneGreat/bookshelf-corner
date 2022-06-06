@@ -30,6 +30,7 @@
             <?php } ;?>
         </div>
     </section>
+    <p class="legals">HeleneGreat © 2022 - <a href="index.php?action=mentions-legales">Mentions légales</a> - <a href="indexAdmin.php">Espace administrateur</a></p>
 </footer>
 
 

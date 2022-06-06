@@ -73,6 +73,11 @@ class FrontController extends Controller
         return $this->viewFront("contact");
     }
     
+    function legals()
+    {
+        return $this->viewFront("legals");
+    }
+
     function error()
     {
         $datas = [];

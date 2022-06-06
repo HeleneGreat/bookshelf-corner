@@ -2,7 +2,7 @@
  include_once('layouts/header.php'); 
 ?>
 
-<section class="container bg-contact">
+<section id="contact" class="container">
     <h1>Nous contacter</h1>
 
     <form action="index.php?action=contactPost" method="post" id="contact-form" class="text-center"> 
@@ -34,7 +34,7 @@
                 <textarea name="message" placeholder="Votre message..." required></textarea>
             </div>
         </div>
-        <p class="rgpd"><input type="checkbox" name="rgpd" required><label for="rgpd">En cochant cette case, vous acceptez que les données transmises soient conservées. Aucun traitement commercial n'en sera fait, et elles ne seront pas transmises à des tiers.</label></p>
+        <p class="rgpd"><input type="checkbox" name="rgpd" required><label for="rgpd">En cochant cette case, vous acceptez que les données transmises soient conservées. Aucun traitement commercial n'en sera fait, et elles ne seront pas transmises à des tiers. <a class="main" title="Consulter les mentions légales" href="index.php?action=mentions-legales">Plus d'information</a>.</label></p>
 
         <button type="submit" class="btn btn-main center lg">Envoyer</button>
 
