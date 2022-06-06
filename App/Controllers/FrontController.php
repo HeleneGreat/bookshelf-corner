@@ -6,32 +6,6 @@ use Projet\Forms\SubmitMessage;
 
 class FrontController extends Controller
 {
-
-    function contact()
-    {
-        return $this->viewFront("contact");
-    }
-
-    function about()
-    {
-        $new = new \Projet\Models\AdminModel;
-        $admins = $new->allAdmins();
-        $allAdmins = $admins->fetchAll();
-        return $this->viewFront("about", $allAdmins);
-    }
-
-    function error()
-    {
-        $datas = [];
-        if(isset($_GET['status'])){
-            if($_GET['from'] == "no-user-account"){
-                $userMessage = new SubmitMessage("error", "Vous devez être connecté pour accéder à cet espace !");
-                $datas["feedback"] = $userMessage->formatedMessage();
-            }   
-        }
-        return $this->viewFront("error", $datas);
-    }
- 
     function home()
     {
         $new = new \Projet\Models\BookModel();
@@ -85,10 +59,41 @@ class FrontController extends Controller
             return $this->viewFront("error404");
         }
     }
-
+    
+    function about()
+    {
+        $new = new \Projet\Models\AdminModel;
+        $admins = $new->allAdmins();
+        $allAdmins = $admins->fetchAll();
+        return $this->viewFront("about", $allAdmins);
+    }
+    
+    function contact()
+    {
+        return $this->viewFront("contact");
+    }
+    
+    function error()
+    {
+        $datas = [];
+        if(isset($_GET['status'])){
+            if($_GET['from'] == "no-user-account"){
+                $userMessage = new SubmitMessage("error", "Vous devez être connecté pour accéder à cet espace !");
+                $datas["feedback"] = $userMessage->formatedMessage();
+            }   
+        }
+        return $this->viewFront("error", $datas);
+    }
+    
     function error404()
     {
         return $this->viewFront("error404");
+    }
+
+    // In case javascript is disabled, the mobile menu opens in a new page :
+    function menuNoJs()
+    {
+        return $this->viewFront("menu-backup");
     }
 
 

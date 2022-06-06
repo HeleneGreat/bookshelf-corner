@@ -292,6 +292,8 @@ main{
 /* ---------------- HEADER --------------- */
 /* *************************************** */
 #bandeau {
+    position: sticky;
+    top: 0;
     background-color: var(--main);
     padding: 10px 0;
     margin-bottom: 50px;
@@ -304,6 +306,7 @@ main{
     height: 90px;
     object-fit: cover;
     border-radius: 40%;
+    margin-right: 20px;
 }
 
 #bandeau h2 {
@@ -335,41 +338,14 @@ main{
 #open-menu,
 #close-menu {
     cursor: pointer;
-    position: relative;
-    width: 75px;
-    height: 75px;
-}
-
-#open-menu,
-#close-menu {
     position: absolute;
-    top: 15px;
+    top: 50px;
     right: 25px;
 }
 
 #open-menu:hover,
 #close-menu:hover {
     cursor: pointer;
-}
-
-.title {
-    margin-right: 25%;
-}
-
-#nav-xs {
-    position: fixed;
-    top: 0;
-    left: 0;
-    visibility: hidden;
-    width: 100%;
-    opacity: 0;
-    text-align: center;
-    transition: all 0.3s ease-in-out;
-}
-
-#nav-xs ul {
-    justify-content: space-around;
-    height: 100%;
 }
 
 #nav-xs li,
@@ -379,14 +355,33 @@ main{
     color: white;
 }
 
-/* menu mobile qui s'affiche par-dessus l'écran */
-#nav-xs.overlay {
-    visibility: visible;
-    opacity: 1;
-    width: 100%;
-    height: 100vh;
-    background-color: var(--main);
-    z-index: 99999999;
+.menu-toggle i{
+    color: white;
+}
+
+.hide-menu{
+    display: none;
+}
+.show-menu{
+    display: block;
+    height: 80vh;
+}
+
+.show-menu ul{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.show-menu ul .submenu ul li{
+    text-align: center;
+    height: 22px;
+}
+
+.show-menu ul .submenu ul li a{
+    font-size: 1.7rem;
 }
 
 #bandeau li .active{
@@ -1124,6 +1119,11 @@ input[type="radio"]:checked::before {
         display: inline;
     }
 
+    .flex-xs{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
 }
 /* ********************/
 /* ----- MEDIUM ----- */
@@ -1151,15 +1151,6 @@ input[type="radio"]:checked::before {
     
     .md{
         display: block;
-    }
-
-    #bandeau .logo {
-        width: 150px;
-        height: 150px;
-    }
-
-    #bandeau nav{
-        width: 100%;
     }
 
     #foot .foot-list{
@@ -1366,14 +1357,28 @@ input[type="radio"]:checked::before {
     /* ********************************/
     /* ----------- HEADER ----------- */
     /* ********************************/
+    #bandeau{
+        position: static;
+    }
+    
     #bandeau h2 {
         margin-bottom: 20px;
+    }
+    
+    #bandeau .logo {
+        width: 150px;
+        height: 150px;
+    }
+    
+    #bandeau nav{
+        width: 100%;
     }
     
     #back-to-top {
         right: 50px;
         bottom: 70px;;
     }
+    
 
     /* *****************/
     /* ----- NAV ----- */
@@ -1381,10 +1386,7 @@ input[type="radio"]:checked::before {
     
     #nav-lg{
         padding-bottom: 15px;
-        position: sticky;
-        position: -webkit-sticky;
-        top: 10px;
-        align-self: flex-start;
+        display: block;
     }
 
     .head-lg{

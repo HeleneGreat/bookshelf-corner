@@ -1,64 +1,29 @@
-// CODE POUR  SEULE IMAGE :
+// Menu burger in small screens
 
-// let menuBurger = document.getElementById('menu-burger');
-
-// let overlay = document.getElementById('nav-xs');
-
-
-
-// menuBurger.addEventListener('click', function(){
-
-//     this.classList.toggle("close");
-//     overlay.classList.toggle("overlay");
-
-// });
-
-
-/* AVEC CONDITION DE TAILLE D'ECRAN
-const bigScreen = window.matchMedia('(max-width: 1200px)');
-
-
-if(bigScreen.matches){
 
 let openMenu = document.getElementById('open-menu');
 
-let overlay = document.getElementById('nav-xs');
+let overlay = document.getElementById('nav-lg');
 
 let closeMenu = document.getElementById('close-menu');
 
-openMenu.addEventListener('click', function(){
 
-    overlay.classList.toggle("overlay");
+
+openMenu.addEventListener('click', function(event){
+
+    overlay.classList.remove("hide-menu");
+    overlay.classList.add("show-menu");
+    event.preventDefault();
+    openMenu.classList.toggle('display-none');
     
 });
 
 
-closeMenu.addEventListener('click', function(){
-
-    this.classList.toggle("close");
-    overlay.classList.toggle("overlay");
+closeMenu.addEventListener('click', function(event){
     
-});
-}
-
-*/
-
-let openMenu = document.getElementById('open-menu');
-
-let overlay = document.getElementById('nav-xs');
-
-let closeMenu = document.getElementById('close-menu');
-
-openMenu.addEventListener('click', function(){
-
-    overlay.classList.toggle("overlay");
-    
-});
-
-
-closeMenu.addEventListener('click', function(){
-
-    // this.classList.toggle("close");
-    overlay.classList.toggle("overlay");
+    overlay.classList.remove("show-menu");
+    overlay.classList.add("hide-menu");
+    event.preventDefault();
+    openMenu.classList.toggle('display-none');
     
 });
