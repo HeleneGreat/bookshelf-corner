@@ -73,7 +73,7 @@ include_once('./App/Views/admin/layouts/header.php') ;
             <article id="comments-stat" class="center">
                 <h2>Mes commentaires</h2>
                 <div class="stats" title="Nombre total de commentaires sur le blog"><?= $datas['nbComments']; ?></div>
-                <?php if(empty($datas['allComments'])){ ?>
+                <?php if(empty($datas['lastComment'])){ ?>
                     <p>Vous n'avez pas encore publié de commentaire.</p>
                 <?php }else{ ;?>
                 <div class="last">

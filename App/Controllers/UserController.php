@@ -11,6 +11,7 @@ class UserController extends Controller
     /********************************************************/
     public function createUser()
     {
+        $datas=[];
         if(isset($_GET['status'])){
             $statusMessage = new SubmitMessage("","");
             $datas['feedback'] = $statusMessage->accountMessage();

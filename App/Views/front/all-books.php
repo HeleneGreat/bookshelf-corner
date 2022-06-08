@@ -22,10 +22,10 @@
     <?php 
     foreach($datas['book'] as $book){ ?>
         <article class="book-card center flex col justify-between">
-            <h3 class="text-center"><?= 
+            <h2 class="text-center"><?= 
             substr($book['title'], 0, 30); 
             if(strlen($book['title']) > 30){echo "[...]";}
-            ?></h3>
+            ?></h2>
             <p class="text-center date"><?= $book['date'] ?></p>
             <p class="text-center">
                 <a href="index.php?action=un-livre&id=<?= $book['id'] ?>">

@@ -6,19 +6,37 @@ HEADER
     * NAV BOOK CATEGORIES
 FOOTER
 HOME
+    * WELCOME
     * CAROUSEL
-ALL BOOKS
+    * HOME BANNER
+ALL BOOKS + ABOUT
     * PAGINATION
 ONE BOOK
+GENERAL FORMS
 COMMENTS
     * COMMENTS FORM
-    * COMMENTS BOOK
+    * ALL COMMENTS
 CONTACT
 PAGE 404
+MENTIONS LEGALES
 USER CONNEXION
+
+
 MEDIA QUERIES
-- min-width: 993px
-- min-width: 1201px
+-> XS SMALL = min-width:615px
+-> MD MEDIUM = min-width: 993px
+    * FOOTER
+    * HOME
+    * ALL BOOKS + CONTACT
+    * ONE BOOK
+        - BOOK COMMENTS
+    * ABOUT
+-> LG LARGE = min-width: 1201px
+    * HEADER
+        - NAV
+        - NAV BOOK CATEGORIES
+    * COMMENTS
+        - COMMENTS FORM
 
 
 
@@ -53,11 +71,9 @@ button:active,
 /* ----- RESET ----- */
 /* *******************/
 :root {
-    /* --main: #ec4e3d; */
-    --jaune: #eed64f;
-    --main: #ee5f4f;
-    --background: #dde1e7;
-    --secondary: #3786ED ;
+    --dark: rgb(44, 41, 41);
+    --main: rgb(238, 95, 79);
+    --secondary: rgb(55, 134, 237) ;
 }
 
 /* default font-size reduced to 10px to make rem calculs easier*/
@@ -136,7 +152,7 @@ ul {
 * {
     padding: 0;
     margin: 0;
-    color: rgb(44, 41, 41);
+    color: var(--dark);
     font-size: 2.5rem;
     font-family: 'quicksand', 'Times New Roman', Times, serif;
 }
@@ -503,7 +519,6 @@ main{
 /* ------------------- HOME ----------------- */
 /* ****************************************** */
 
-
 /* **************************** */
 /* ---------- WELCOME --------- */
 /* **************************** */
@@ -648,8 +663,13 @@ main{
     height: 300px;
 }
 
+#all-books h2{
+    font-size: 2.5rem;
+    color: var(--dark);
+}
+
 #abouts h3,
-#all-books h3{
+#all-books h2{
     margin-top: auto;
     margin-bottom: auto;
 }
@@ -764,9 +784,9 @@ main{
     object-fit: cover;
 }
 
-/* ********************************************* */
-/* ----------------- PAGINATION ---------------- */
-/* ********************************************* */
+/* *********************************** */
+/* ------------ PAGINATION ----------- */
+/* *********************************** */
 #pagination{
     width: fit-content;
     min-width: 25%;
@@ -808,12 +828,18 @@ main{
     color: var(--main);
 }
 
-/* ****************************************** */
+/* ***************************************** */
 /* ---------------- ONE BOOK --------------- */
-/* ****************************************** */
+/* ***************************************** */
 .content,
 .catchphrase {
     white-space: pre-line;
+}
+
+#one-book h2{
+    color: var(--dark);
+    font-size: 2rem;
+    font-weight: normal;
 }
 
 #one-book .date{
@@ -865,9 +891,9 @@ svg g path{
     white-space: pre-line;
 }
 
-/* ************************************* */
-/* ---------------- FORM --------------- */
-/* ************************************* */
+/* ************************************ */
+/* ----------- GENERAL FORMS ---------- */
+/* ************************************ */
 input,
 textarea {
     padding: 8px 8px;
@@ -919,9 +945,9 @@ textarea:focus {
     margin-top: 20px;
 }
 
-/* ************************** */
-/* ------ COMMENTS BOOK ----- */
-/* ************************** */
+/* ************************* */
+/* ------ ALL COMMENTS ----- */
+/* ************************* */
 #all-comments article {
     width: 100%;
     margin-bottom: 30px;
@@ -955,6 +981,10 @@ textarea:focus {
     background-color: #e4e4e4;
 }
 
+#all-comments .comment .title {
+    font-size: 2.2rem;
+}
+
 #all-comments .user-info .pseudo,
 #all-comments .comment .title {
     color: var(--main);
@@ -966,10 +996,13 @@ textarea:focus {
     color: var(--secondary);
 }
 
-
 /* **************************************** */
 /* ---------------- CONTACT --------------- */
 /* **************************************** */
+#contact fieldset{
+    border: none;
+}
+
 #contact-left,
 #contact-right {
     width: 100%;
@@ -979,6 +1012,7 @@ textarea:focus {
 #contact-form textarea,
 #contact-form input[type='text'],
 #contact-form input[type='email'] {
+    box-sizing:content-box;
     padding: 10px;
     background-color: #dde1e7;
     border: none;
@@ -1128,15 +1162,15 @@ input[type="radio"]:checked::before {
 }
 
 
-
 /* ********************************************** */
 /* ---------------- MEDIA QUERIES --------------- */
 /* ********************************************** */
 
-
-/* ********************/
-/* ----- SMALL ----- */
-/* ********************/
+/* ***********************************/
+/* ***********************************/
+/* ------------- SMALL ------------- */
+/* ***********************************/
+/* ***********************************/
 @media screen and (min-width:615px) {
 
     #bandeau .logo{
@@ -1149,9 +1183,12 @@ input[type="radio"]:checked::before {
     }
 
 }
-/* ********************/
-/* ----- MEDIUM ----- */
-/* ********************/
+
+/* ************************************/
+/* ************************************/
+/* ------------- MEDIUM ------------- */
+/* ************************************/
+/* ************************************/
 @media screen and (min-width:993px) {
 
     .container {
@@ -1177,6 +1214,9 @@ input[type="radio"]:checked::before {
         display: block;
     }
 
+    /* *********************************** */
+    /* -------------- FOOTER ------------- */
+    /* *********************************** */
     #foot .foot-list{
         margin-bottom: 0;
     }
@@ -1197,6 +1237,7 @@ input[type="radio"]:checked::before {
     #foot .legals{
         margin-top: 40px;
     }
+
     /* *********************************** */
     /* --------------- HOME -------------- */
     /* *********************************** */
@@ -1235,7 +1276,7 @@ input[type="radio"]:checked::before {
     }
     
     /* ****************************************** */
-    /* ---------------- ALL BOOKS --------------- */
+    /* ----------- ALL BOOKS + CONTACT ---------- */
     /* ****************************************** */
     #about .admin-card,
     #all-books .book-card {
@@ -1260,9 +1301,9 @@ input[type="radio"]:checked::before {
         text-decoration: underline;
     }
 
-    /* ****************************************** */
+    /* ***************************************** */
     /* ---------------- ONE BOOK --------------- */
-    /* ****************************************** */
+    /* ***************************************** */
     #one-book #info-book .cover{
         width: 300px;
         height: 430px;
@@ -1287,7 +1328,7 @@ input[type="radio"]:checked::before {
     }
 
     /* ************************** */
-    /* ------ COMMENTS BOOK ----- */
+    /* ------ BOOK COMMENTS ----- */
     /* ************************** */
     #all-comments .user-info,
     #all-comments .comment {
@@ -1310,9 +1351,9 @@ input[type="radio"]:checked::before {
         width: 80%;
     }
 
-    /* ************************** */
-    /* ---------- ABOUT --------- */
-    /* ************************** */
+    /* ************************************** */
+    /* ---------------- ABOUT --------------- */
+    /* ************************************** */
     #about .quote{
         position: relative;
     }
@@ -1337,14 +1378,15 @@ input[type="radio"]:checked::before {
         bottom: -40px;
     }
 
-
 }
 
 
 
-/* *******************/
-/* ----- LARGE ----- */
-/* *******************/
+/* *************************/
+/* *************************/
+/* -------- LARGE -------- */
+/* *************************/
+/* *************************/
 @media screen and (min-width:1201px) {
 
     p, span, label{

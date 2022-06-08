@@ -23,7 +23,7 @@
             <?php  foreach($datas as $data) { 
                 if($data['slider'] == 1){ ?>
                 <a href="index.php?action=un-livre&id=<?= $data['id'] ;?>" title="<?= $data['title']; ?>">
-                    <img src="./App/Public/Books/images/<?= $data['picture']; ?>" />
+                    <img src="./App/Public/Books/images/<?= $data['picture']; ?>" alt="Couverture du livre<?= $data['title']; ?>"/>
                 </a>
             <?php }}; ?>
 

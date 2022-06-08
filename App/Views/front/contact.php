@@ -9,18 +9,20 @@
 
         <div class="flex justify-between">
             <div id="contact-left">
+                <fieldset>
+                    <legend class="display-none">Genre</legend>
                 <p class="flex"><input type="radio" name="gender" id="female" value="female" checked="checked">
                 <label for="female">Madame</label></p>  
                 <p class="flex"><input type="radio" name="gender" id="male" value="male">
                 <label for="male">Monsieur</label></p>    
                 <p class="flex"><input type="radio" name="gender" id="other" value="other">
                 <label for="other">Autre</label></p>
+</fieldset>
+                <p><label class="display-none" for="familyname">Nom</label><input type="text" name="familyname" id="familyname" placeholder="Votre nom" required></p>
+                <p><label class="display-none" for="firstname">Prénom</label><input type="text" name="firstname" id="firstname" placeholder="Votre prénom" required></p>
+                <p><label class="display-none" for="email">Adresse email</label><input type="email" name="email" id="email" placeholder="Votre email" required></p>
 
-                <p><input type="text" name="familyname" id="familyname" placeholder="Votre nom" required></p>
-                <p><input type="text" name="firstname" id="firstname" placeholder="Votre prénom" required></p>
-                <p><input type="email" name="email" id="email" placeholder="Votre email" required></p>
-
-               
+                    <p><label class="display-none" for="object">Objet de votre message</label></p>
                     <p><select id="object" name="object" required>
                         <option value="" class="placeholder" selected disabled hidden>Objet de votre message :</option>
                         <option value="Proposer un conseil lecture">Proposer un conseil lecture</option>
@@ -31,10 +33,11 @@
             </div>
 
             <div id="contact-right">
-                <textarea name="message" placeholder="Votre message..." required></textarea>
+                <label class="display-none" for="message">Message</label>
+                <textarea name="message" id="message" placeholder="Votre message..." required></textarea>
             </div>
         </div>
-        <p class="rgpd"><input type="checkbox" name="rgpd" required><label for="rgpd">En cochant cette case, vous acceptez que les données transmises soient conservées. Aucun traitement commercial n'en sera fait, et elles ne seront pas transmises à des tiers. <a class="main" title="Consulter les mentions légales" href="index.php?action=mentions-legales">Plus d'information</a>.</label></p>
+        <p class="rgpd"><input type="checkbox" id="rgpd" name="rgpd" required><label for="rgpd">En cochant cette case, vous acceptez que les données transmises soient conservées. Aucun traitement commercial n'en sera fait, et elles ne seront pas transmises à des tiers. <a class="main" title="Consulter les mentions légales" href="index.php?action=mentions-legales">Plus d'information</a>.</label></p>
 
         <button type="submit" class="btn btn-main center lg">Envoyer</button>
 
