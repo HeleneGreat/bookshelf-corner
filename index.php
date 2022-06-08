@@ -2,7 +2,6 @@
 
 session_start();
 
-// autoload.php generated with composer
 require_once __DIR__ . '/vendor/autoload.php';
 
 require_once('./App/form/SubmitMessage.php');
@@ -22,36 +21,42 @@ try
     
     if (isset($_GET['action']))
     {
-        
+ 
         if($_GET['action'] == 'livres')
         {
             if(isset($_GET['category']))
             {
-                $idGenre = $_GET['category'];
-                $controllerFront->allBooks($idGenre);
+                $genreId = $_GET['category'];
+                $controllerFront->allBooks($genreId);
             }
             else
             {
                 $controllerFront->allBooks(0);
             }
         }
-        
+
         elseif($_GET['action'] == 'un-livre')
         {
-            $id = $_GET['id'];
-            $controllerFront->oneBook($id);
+            $bookId = $_GET['id'];
+            $controllerFront->oneBook($bookId);
         }
-        
+
+        elseif($_GET['action'] == 'commentPost')
+        {
+            $bookId = $_GET['id'];
+            $commentController->commentPost($bookId, $_POST);
+        }
+
         elseif($_GET['action'] == 'about')
         {
             $controllerFront->about();
         }
-        
+
         elseif($_GET['action'] == 'contact')
         {
             $controllerFront->contact();
         }
-        
+
         elseif($_GET['action'] == 'contactPost')
         {
             $data = [
@@ -63,12 +68,6 @@ try
                 ':message' => htmlspecialchars($_POST['message'])
             ];
             $messageController->contactPost($data);
-        }
-
-        elseif($_GET['action'] == 'commentPost')
-        {
-            $idBook = $_GET['id'];
-            $commentController->commentPost($idBook, $_POST);
         }
 
         elseif($_GET['action'] == 'mentions-legales')
@@ -108,6 +107,10 @@ try
             $userController->connexionUserPost($mail, $mdp);
         }
 
+
+        /********************************************************/
+        /******************* ERROR MANAGEMENT *******************/
+        /********************************************************/
         elseif($_GET['action'] == 'error')
         {
             $controllerFront->error();
@@ -129,18 +132,16 @@ try
         $controllerFront->home();
     }
 
-
-
 }
 
 catch (Exception $e)
 {
-    // return $this->viewFront("error");
+    // TODO return $this->viewFront("error");
     echo $e->getMessage();
 }
 
 catch (Error $e)
 {
-    // return $this->viewFront('error');
+    // TODO return $this->viewFront('error');
     echo $e->getMessage();
 }

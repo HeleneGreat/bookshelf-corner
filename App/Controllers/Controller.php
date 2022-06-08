@@ -47,6 +47,8 @@ class Controller
             }else{
                 header('Location: indexAdmin.php?action=error&status=error&from=no-access');
             }
+        }else{
+            header('Location: indexAdmin.php?action=error&status=error&from=no-access');
         }
     }
 
@@ -126,9 +128,7 @@ class Controller
         }
         $data = $new->checkForDuplicate($table, $column, $newdata);
         $result = $data->fetch();
-        // var_dump($_SESSION);die;
         if(empty($result) || $result == false || (!empty($_SESSION)) && ($result['id'] == $_SESSION['id'])){
-            // var_dump($result);die;
             return "nameOk";
         }elseif($table == "books" || $table == "genres"){
             header('Location: indexAdmin.php?action=' . $redirection . '&status=error&from=duplicate');

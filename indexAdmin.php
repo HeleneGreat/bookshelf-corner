@@ -1,8 +1,5 @@
 <?php
 
-// TODO : à supprimer ?
-use Projet\Controllers\AdminController;
-
 session_start();
 
 require_once __DIR__ . '/vendor/autoload.php';
@@ -31,9 +28,11 @@ try
     if(isset($_GET['action']))
     {
 
-        /********************************************************/
-        /******************* CONNECTION ADMIN *******************/
-        /********************************************************/
+        /*******************************************************/
+        /*******************************************************/
+        /******************** ADMIN ACCOUNT ********************/
+        /*******************************************************/
+        /*******************************************************/
         if($_GET['action'] == 'createAccount')
         {
             $adminController->addAdmin();
@@ -62,17 +61,17 @@ try
             $adminController->connexionAdmin();
         }
 
-        /*********************************************************/
-        /*********************** DASHBOARD ***********************/
-        /*********************************************************/
+        /***************************************************/
+        /******************** DASHBOARD ********************/
+        /***************************************************/
         elseif($_GET['action'] == 'dashboard')
         {
             $adminController->dashboard();
         }
 
-        /*********************************************************/
-        /********************** PAGE LIVRES **********************/
-        /*********************************************************/
+        /****************************************************/
+        /********************** LIVRES **********************/
+        /****************************************************/
 
         /****************************/
         /******** TAB LIVRES ********/
@@ -84,8 +83,12 @@ try
 
         elseif ($_GET['action'] == "livresview")
         {
-            $id = $_GET['id'];
-            $bookController->viewLivre($id);
+            $bookId = $_GET['id'];
+            if($bookId != null){
+                $bookController->viewLivre($bookId);
+            }else{
+                header('Location: indexAdmin.php?action=livres');
+            }
         }
         
         elseif ($_GET['action'] == "livresadd")
@@ -95,27 +98,35 @@ try
 
         elseif ($_GET['action'] == "livresaddPost")
         {
-            $admin = strval($_SESSION['id']);
-            $newBook = $bookController->addLivrePost($_POST, $_FILES, $admin);
+            $adminId = strval($_SESSION['id']);
+            $newBook = $bookController->addLivrePost($_POST, $_FILES, $adminId);
         }
 
         elseif ($_GET['action'] == "livresmodify")
         {
-            $id = $_GET['id'];
-            $bookController->modifyLivre($id);
+            $bookId = $_GET['id'];
+            if($bookId != null){
+                $bookController->modifyLivre($bookId);
+            }else{
+                header('Location: indexAdmin.php?action=livres');
+            }
         }
 
         elseif ($_GET['action'] == "livresmodifyPost")
         {
-            $id = $_GET['id'];            
-            $bookController->modifyLivrePost($id, $_POST, $_FILES);
+            $bookId = $_GET['id'];            
+            $bookController->modifyLivrePost($bookId, $_POST, $_FILES);
         }  
 
         elseif ($_GET['action'] == "livresdelete")
         {
-            $idBook = $_GET['id'];
-            $commentController->deleteBookComments($idBook);
-            $bookController->deleteLivre($idBook);
+            $bookId = $_GET['id'];
+            if($bookId != null){
+                $commentController->deleteBookComments($bookId);
+                $bookController->deleteLivre($bookId);
+            }else{
+                header('Location: indexAdmin.php?action=livres');
+            }
         }
 
         /****************************/
@@ -133,14 +144,14 @@ try
 
         elseif ($_GET['action'] == "genreModifyPost")
         {
-            $id = $_GET['id'];
-            $genreController->genreModifyPost($id, $_POST, $_FILES);
+            $genreId = $_GET['id'];
+            $genreController->genreModifyPost($genreId, $_POST, $_FILES);
         }  
 
         elseif ($_GET['action'] == "genreDelete")
         {
-            $id = $_GET['id'];
-            $genreController->deleteGenre($id);
+            $genreId = $_GET['id'];
+            $genreController->deleteGenre($genreId);
         }
 
         /****************************/
@@ -166,14 +177,22 @@ try
 
         elseif($_GET['action'] == "messagesView")
         {
-            $id = $_GET['id'];
-            $messageController->viewMessage($id);
+            $messageId = $_GET['id'];
+            if($messageId != null){
+                $messageController->viewMessage($messageId);
+            }else{
+                header('Location: indexAdmin.php?action=messages');
+            }
         }   
 
         elseif ($_GET['action'] == "messagesDelete")
         {
-            $id = $_GET['id'];
-            $messageController->deleteMessage($id);
+            $messageId = $_GET['id'];
+            if($messageId != null){
+                $messageController->deleteMessage($messageId);
+            }else{
+                header('Location: indexAdmin.php?action=messages');
+            }
         }
 
         /********************************************************/
@@ -181,35 +200,58 @@ try
         /********************************************************/
         elseif($_GET['action'] == "comments")
         {
-            // if($_SESSION['role'] > 0){
-            //     $commentController->allComments();
-            // }else{
-                $commentController->accountComments();
-
-            // }
+            if($_SESSION['role'] > 0)
+            {
+                $commentController->allComments();
+            }else{
+                header('Location: indexAdmin.php?action=error&status=error&from=no-access');
+            }
         }
 
         elseif($_GET['action'] == "comments-mine")
         {
-            $commentController->accountComments();
+            if($_SESSION['role'] >= 0)
+            {
+                $commentController->accountComments();
+            }else{
+                header('Location: indexAdmin.php?action=error&status=error&from=no-access');
+            }
         }
 
         elseif($_GET['action'] == "commentsView")
         {
-            $id = $_GET['id'];
-            $commentController->viewComment($id);
+            $commentId = $_GET['id'];
+            if($commentId != null){
+                $commentController->viewComment($commentId);
+            }else{
+                header('Location: indexAdmin.php?action=comments');
+            }
         }
 
         elseif ($_GET['action'] == "commentModify")
         {
-            $id = $_GET['id'];
-            $commentController->commentModify($id);
+            $commentId = $_GET['id'];
+            if($commentId != null){
+                $commentController->commentModify($commentId);
+            }else{
+                header('Location: indexAdmin.php?action=comments');
+            }
+        }
+
+        elseif ($_GET['action'] == "commentModifyPost")
+        {
+            $commentId = $_GET['id'];
+            $commentController->commentModifyPost($commentId, $_POST);
         }
 
         elseif ($_GET['action'] == "commentsDelete")
         {
-            $id = $_GET['id'];
-            $commentController->deleteUserComment($id);
+            $commentId = $_GET['id'];
+            if($commentId != null){
+                $commentController->deleteUserComment($commentId);
+            }else{
+                header('Location: indexAdmin.php?action=comments');
+            }
         }
 
         /*********************************************************/
@@ -236,20 +278,20 @@ try
         /*********************************************************/
         elseif($_GET['action'] == "blogParameters")
         {
-            $id = "1";
-            $blogController->blogParameters($id);
+            $blogId = "1";
+            $blogController->blogParameters($blogId);
         }
 
         elseif($_GET['action'] == "blogModify")
         {
-            $id = "1";
-            $blogController->blogModify($id);
+            $blogId = "1";
+            $blogController->blogModify($blogId);
         }
 
         elseif($_GET['action'] == "blogModifyPost")
         {
-            $id = "1";            
-            $blogController->blogModifyPost($id, $_POST, $_FILES);
+            $blogId = "1";            
+            $blogController->blogModifyPost($blogId, $_POST, $_FILES);
         }
         
         /********************************************************/
@@ -262,10 +304,19 @@ try
             $userController->userDashboard();
         }
 
-        elseif ($_GET['action'] == "commentModifyPost")
+        elseif ($_GET['action'] == "commentDelete")
         {
-            $id = $_GET['id'];
-            $commentController->commentModifyPost($id, $_POST);
+            $commentId = $_GET['id'];
+            if($commentId != null){
+                $commentController->deleteComment($commentId);
+            }else{
+                header('Location: indexAdmin.php?action=comments-mine');
+            }
+        }
+
+        elseif($_GET['action'] == "userAccount")
+        {
+            $userController->userAccount();
         }
 
         elseif($_GET['action'] == "userAccountModifyPost")
@@ -274,23 +325,17 @@ try
             $userController->userAccountModifyPost($id, $_POST, $_FILES);
         }
 
-        elseif ($_GET['action'] == "commentDelete")
-        {
-            $idComment = $_GET['id'];
-            $commentController->deleteComment($idComment);
-        }
-
-        elseif($_GET['action'] == "userAccount")
-        {
-            $userController->userAccount();
-        }
-
         elseif ($_GET['action'] == "userDisconnect")
         {
             session_destroy();
             $userController->connexionUser();
         }
 
+        /********************************************************/
+        /********************************************************/
+        /******************* ERROR MANAGEMENT *******************/
+        /********************************************************/
+        /********************************************************/
         elseif($_GET['action'] == "error")
         {
             $adminController->error();

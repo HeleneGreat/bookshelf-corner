@@ -26,7 +26,7 @@
             <li><a href="index.php" title="<?= $blog['name']; ?>"><i class="fas fa-arrow-left"></i> Retourner au blog</a></li>
             <li><a href="indexAdmin.php?action=<?= $_SESSION['role'] === 0 ? "userDashboard" : "dashboard";?>" title="Tableau de bord"><i class="fas fa-chart-line"></i> Tableau de bord</a></li>
             <?php if($_SESSION['role'] == 0){ ?>
-                <li><a href="indexAdmin.php?action=comments" title="Voir tous mes commentaires"><i class="fas fa-comment"></i> Commentaires</a></li>
+                <li><a href="indexAdmin.php?action=comments-mine" title="Voir tous mes commentaires"><i class="fas fa-comment"></i> Commentaires</a></li>
             <?php } ?>
         </ul>
         <?php if($_SESSION['role'] > 0){ ?>
