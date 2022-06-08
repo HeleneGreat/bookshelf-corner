@@ -5,11 +5,11 @@ namespace Projet\Models;
 class BlogModel extends Manager
 {
 
-    public function blogInfo($id)
+    public function blogInfo($blogId)
     {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('SELECT logo, name FROM website WHERE id = ?');
-        $req->execute(array($id));
+        $req->execute(array($blogId));
         return $req;
     }
 

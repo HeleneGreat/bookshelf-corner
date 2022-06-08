@@ -269,8 +269,8 @@ try
 
         elseif($_GET['action'] == "accountModifyPost")
         {
-            $id = $_GET['id'];
-            $adminController->accountModifyPost($id, $_POST, $_FILES);
+            $adminId = $_GET['id'];
+            $adminController->accountModifyPost($adminId, $_POST, $_FILES);
         }
         
         /*********************************************************/
@@ -321,8 +321,8 @@ try
 
         elseif($_GET['action'] == "userAccountModifyPost")
         {
-            $id = $_GET['id'];
-            $userController->userAccountModifyPost($id, $_POST, $_FILES);
+            $uderId = $_GET['id'];
+            $userController->userAccountModifyPost($uderId, $_POST, $_FILES);
         }
 
         elseif ($_GET['action'] == "userDisconnect")

@@ -59,14 +59,14 @@ class AdminController extends Controller
                 // Get his ID
                 $user = new \Projet\Models\AdminModel;
                 $admin = $user->getId("administrators", "mail", $mail);
-                $idAdmin = $admin->fetch();
+                $adminId = $admin->fetch();
                 // Second: save his picture
                 $purpose = "admin";
                 $folder = "Admin";
-                $fileName = $this->verifyFiles($purpose, $folder, $idAdmin['id']);
+                $fileName = $this->verifyFiles($purpose, $folder, $adminId['id']);
                 // Third: update BDD with new picture name
                 $data = [
-                    "id" => $idAdmin['id'],
+                    "id" => $adminId['id'],
                     "picture" => $fileName
                 ];
                 $this->updatePicture($data, 'administrators');

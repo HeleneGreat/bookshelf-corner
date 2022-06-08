@@ -7,10 +7,10 @@ use Projet\Forms\SubmitMessage;
 class BookController extends Controller
 {
 
-    public function infoLivre($id)
+    public function infoLivre($bookId)
     {
         $new = new \Projet\Models\BookModel();
-        $data = $new->singleBook($id);
+        $data = $new->singleBook($bookId);
         $datas = $data->fetch();
         return $datas;
     }
@@ -59,20 +59,20 @@ class BookController extends Controller
         // Get book ID
         $book = new \Projet\Models\BookModel();
         $infoBook = $book->getId("books", "title", $data[':newTitle']);
-        $idBook = $infoBook->fetch();
+        $bookId = $infoBook->fetch();
         $purpose = "book";
         $folder = "Books";
-        $Files['picture']['name'] !== "" ? $fileName = $this->verifyFiles($purpose, $folder, $idBook['id']) : $fileName = $this->noCover();
+        $Files['picture']['name'] !== "" ? $fileName = $this->verifyFiles($purpose, $folder, $bookId['id']) : $fileName = $this->noCover();
         $data = [
-            ":id" => $idBook['id'],
+            ":id" => $bookId['id'],
             ":picture" => $fileName];
         $this->updatePicture($data, 'books');
     }
 
-    public function viewLivre($id)
+    public function viewLivre($bookId)
     {
         $new = new \Projet\Models\BookModel();
-        $data = $new->singleBook($id);
+        $data = $new->singleBook($bookId);
         $datas = $data->fetch();
         if($datas != false){
             return $this->validAccess("book-view", $datas);
@@ -81,10 +81,10 @@ class BookController extends Controller
         }
     }
   
-    public function modifyLivre($id)
+    public function modifyLivre($bookId)
     {
         $newFirst = new \Projet\Models\BookModel();
-        $dataFirst = $newFirst->singleBook($id);
+        $dataFirst = $newFirst->singleBook($bookId);
         $datasFirst = $dataFirst->fetch();
         if($datasFirst != false){
             $newSecond = new \Projet\Models\GenreModel();
@@ -100,14 +100,14 @@ class BookController extends Controller
         }
     }
 
-    public function modifyLivrePost($id, $Post, $Files){
+    public function modifyLivrePost($bookId, $Post, $Files){
         $new = new \Projet\Models\BookModel();
         $purpose = "book";
         $folder = "Books";
         if(!empty($Files) && $Files['picture']['name'] !== ""){
-            $fileName = $this->verifyFiles($purpose, $folder, $id);
+            $fileName = $this->verifyFiles($purpose, $folder, $bookId);
         } else{
-            $fileName = $this->infoLivre($id)['picture'];
+            $fileName = $this->infoLivre($bookId)['picture'];
         }
          // unique book name
         if(!empty($Post['newTitle'])){
@@ -118,10 +118,10 @@ class BookController extends Controller
                 }
             }
         } else{
-           $bookName = $this->infoLivre($id)['title'];
+           $bookName = $this->infoLivre($bookId)['title'];
         }
         $data = [
-            ':id' => $id,
+            ':id' => $bookId,
             ':newTitle' => $bookName,
             ':newAuthor' => htmlspecialchars($Post['newAuthor']),
             ':newYear_publication' => htmlspecialchars($Post['newYear_publication']),
@@ -135,14 +135,14 @@ class BookController extends Controller
         header('Location: indexAdmin.php?action=livres&status=success&from=modify');
     }
 
-    public function deleteLivre($idBook)
+    public function deleteLivre($bookId)
     {
-        $infoBook = $this->infoLivre($idBook);
+        $infoBook = $this->infoLivre($bookId);
         if($infoBook['picture'] != "no-cover.png"){
             unlink("./App/Public/Books/images/" . $infoBook['picture']);
         }
         $deletedBook = new \Projet\Models\BookModel();
-        $deletedBook->deleteBook($idBook);
+        $deletedBook->deleteBook($bookId);
         header('Location: indexAdmin.php?action=livres&status=success&from=delete');
     }
     

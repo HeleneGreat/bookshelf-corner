@@ -43,10 +43,10 @@ class BookModel extends Manager
         return $req;
     }
 
-    public function allBooksPagination($pagination, $idGenre)
+    public function allBooksPagination($pagination, $genreId)
     {
-        if($idGenre > 0){
-            $category = "WHERE genres.id = " . $idGenre;
+        if($genreId > 0){
+            $category = "WHERE genres.id = " . $genreId;
         }else{
             $category = "";
         }
@@ -66,7 +66,7 @@ class BookModel extends Manager
         return $req;
     }
 
-    public function singleBook($id)
+    public function singleBook($bookId)
     {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
@@ -77,7 +77,7 @@ class BookModel extends Manager
             INNER JOIN administrators
             ON books.id_admin = administrators.id
             WHERE books.id = ?');
-        $req->execute(array($id));
+        $req->execute(array($bookId));
         return $req;
     }
 
@@ -102,11 +102,11 @@ class BookModel extends Manager
         return $req;
     }
 
-    public function deleteBook($id)
+    public function deleteBook($bookId)
     {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('DELETE FROM books WHERE id = ?');
-        $req->execute(array($id));
+        $req->execute(array($bookId));
         return $req;
     }
 

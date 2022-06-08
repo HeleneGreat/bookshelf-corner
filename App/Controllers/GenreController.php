@@ -7,10 +7,10 @@ use Projet\Forms\SubmitMessage;
 class GenreController extends Controller
 {
     
-    public function infoGenre($id)
+    public function infoGenre($genreId)
     {
         $new = new \Projet\Models\GenreModel();
-        $data = $new->infoGenre($id);
+        $data = $new->infoGenre($genreId);
         $datas = $data->fetch();
         return $datas;
     }
@@ -51,26 +51,26 @@ class GenreController extends Controller
         // Get genre ID
         $genre = new \Projet\Models\GenreModel();
         $infoGenre = $genre->getId("genres", "category", $data[':newType']);
-        $idGenre = $infoGenre->fetch();
+        $genreId = $infoGenre->fetch();
         $purpose = "genre";
         $folder = "Books";
-        $Files['picture']['name'] !== "" ? $fileName = $this->verifyFiles($purpose, $folder, $idGenre['id']) : $fileName = $this->noIcon();
+        $Files['picture']['name'] !== "" ? $fileName = $this->verifyFiles($purpose, $folder, $genreId['id']) : $fileName = $this->noIcon();
         $data = [
-            ":id" => $idGenre['id'],
+            ":id" => $genreId['id'],
             ":picture" => $fileName
         ];
         $this->updatePicture($data, 'genres');
     }
 
-    public function genreModifyPost($id, $Post, $Files)
+    public function genreModifyPost($genreId, $Post, $Files)
     {
         $new = new \Projet\Models\GenreModel(); 
         $purpose = "genre";
         $folder = "Books";
         if(!empty($Files) && $Files['picture']['name'] !== ""){
-            $fileName = $this->verifyFiles($purpose, $folder, $id);
+            $fileName = $this->verifyFiles($purpose, $folder, $genreId);
         } else{
-            $fileName = $this->infoGenre($id)['picture'];
+            $fileName = $this->infoGenre($genreId)['picture'];
         }
         // unique genre name
         if(!empty($Post['newType'])){
@@ -81,25 +81,25 @@ class GenreController extends Controller
                 }
             }
         } else{
-            $genreName = $this->infoGenre($id)['category'];
+            $genreName = $this->infoGenre($genreId)['category'];
         }
         $data = [
-            ':id' => $id,
+            ':id' => $genreId,
             ':newType' => $genreName,
             ':picture' => $fileName
         ];
-        $datas = $new->genreModifyPost($data);
+        $new->genreModifyPost($data);
         header('Location: indexAdmin.php?action=livres-genres&status=success&from=modify');
     }
 
-    public function deleteGenre($idGenre)
+    public function deleteGenre($genreId)
     {
-        $infoGenre = $this->infoGenre($idGenre);
+        $infoGenre = $this->infoGenre($genreId);
         if($infoGenre['picture'] != "no-icon.png"){
             unlink("./App/Public/Books/images/" . $infoGenre['picture']);
         }
         $deletedGenre = new \Projet\Models\GenreModel();
-        $deletedGenre->deleteGenre($idGenre);
+        $deletedGenre->deleteGenre($genreId);
         header('Location: indexAdmin.php?action=livres-genres&status=success&from=delete');
     }
 }

@@ -56,22 +56,22 @@ class MsgModel extends Manager
         return $req;
     }
 
-    public function singleMessage($idMessage)
+    public function singleMessage($messageId)
     {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
             'SELECT id, gender, familyname, firstname, DATE_FORMAT(send_at, "%d/%m/%Y à %kh%i") AS send_at, email, object, message
             FROM messages
             WHERE id = ?');
-        $req->execute(array($idMessage));
+        $req->execute(array($messageId));
         return $req;
     }
 
-    public function deleteMessage($idMessage)
+    public function deleteMessage($messageId)
     {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('DELETE FROM messages WHERE id = ?');
-        $req->execute(array($idMessage));
+        $req->execute(array($messageId));
         return $req;
     }
     

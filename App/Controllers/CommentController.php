@@ -10,12 +10,12 @@ class CommentController extends Controller
     /*************** FRONT ***************/
     /*************************************/
     // Form to add a new comment under a book review
-    public function commentPost($idBook, $Post)
+    public function commentPost($bookId, $Post)
     {
         $comment = new \Projet\Models\CommentModel();
         $data = [
             ':user_id' => $_SESSION['id'],
-            ':book_id' => $idBook,
+            ':book_id' => $bookId,
             ':title' => htmlspecialchars(($Post['title'])),
             ':content' => htmlspecialchars(($Post['content']))
         ];
@@ -136,10 +136,10 @@ class CommentController extends Controller
     }
 
     // When a book is deleted, all comments related to it are also deleted
-    public function deleteBookComments($idBook)
+    public function deleteBookComments($bookId)
     {
         $comments = new \Projet\Models\CommentModel();
-        $comments->deleteBookComments($idBook);
+        $comments->deleteBookComments($bookId);
     }
 
     // Save in DB the comment modify form

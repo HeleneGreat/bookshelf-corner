@@ -12,11 +12,11 @@ class AdminModel extends Manager
         return $req;
     }
 
-    public function infoAdmin($id)
+    public function infoAdmin($adminId)
     {
         $bdd = $this->dbConnect();
         $infoAdmin = $bdd->prepare('SELECT id, pseudo, mail, mdp, picture, role FROM administrators WHERE id = ?');
-        $infoAdmin->execute(array($id));
+        $infoAdmin->execute(array($adminId));
         return $infoAdmin;
     }
 

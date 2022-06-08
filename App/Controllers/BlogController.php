@@ -5,18 +5,18 @@ namespace Projet\Controllers;
 class BlogController extends Controller
 {
 
-    public function blogInfo($id)
+    public function blogInfo($blogId)
     {
         $user = new \Projet\Models\BlogModel();
-        $blogs = $user->blogInfo($id);
+        $blogs = $user->blogInfo($blogId);
         $blog = $blogs->fetch();
         return $blog;
     }
 
-    public function blogParameters($id)
+    public function blogParameters($blogId)
     {
         $user = new \Projet\Models\BlogModel();
-        $blogs = $user->blogInfo($id);
+        $blogs = $user->blogInfo($blogId);
         $blog = $blogs->fetch();
         $admin = new \Projet\Models\AdminModel();
         $thisAdmin = $admin->infoAdmin($_SESSION['id']);
@@ -27,10 +27,10 @@ class BlogController extends Controller
             else{ echo "Vous n'avez pas accès à cette page"; }       
     }
     
-    public function blogModify($id)
+    public function blogModify($blogId)
     {
         $user = new \Projet\Models\BlogModel();
-        $blogs = $user->blogInfo($id);
+        $blogs = $user->blogInfo($blogId);
         $blog = $blogs->fetch();  
         $admin = new \Projet\Models\AdminModel();
         $thisAdmin = $admin->infoAdmin($_SESSION['id']);
@@ -41,7 +41,7 @@ class BlogController extends Controller
             echo "Vous n'avez pas accès à cette page"; }
     }
     
-    public function blogModifyPost($id, $Post, $Files)
+    public function blogModifyPost($blogId, $Post, $Files)
     {
         $new = new \Projet\Models\BlogModel();
         $purpose = "logo";
@@ -51,14 +51,14 @@ class BlogController extends Controller
         if($Files['picture']['name'] !== ""){
             $fileName = $this->verifyFiles($purpose, $folder, $blog);
         } else{
-            $fileName = $this->blogInfo($id)['logo'];
+            $fileName = $this->blogInfo($blogId)['logo'];
         }
         // check is there is a new blog name
         if($Post['newBlog'] !== ""){
             $blogName = htmlspecialchars($Post['newBlog']);
         }
         else{
-            $blogName = $this->blogInfo($id)['name'];
+            $blogName = $this->blogInfo($blogId)['name'];
         }
         $data = [
             ':picture' => $fileName,

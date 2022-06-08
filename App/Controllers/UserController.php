@@ -54,14 +54,14 @@ class UserController extends Controller
                     // Get his ID
                     $new = new \Projet\Models\UserModel;
                     $user= $new->getId("users", "mail", $data[':mail']);                
-                    $idUser = $user->fetch();
+                    $userId = $user->fetch();
                     // Second: save his picture if there is one
                     $purpose = "user";
                     $folder = "Users";
-                    $fileName = $this->verifyFiles($purpose, $folder, $idUser['id']);
+                    $fileName = $this->verifyFiles($purpose, $folder, $userId['id']);
                     // Third: update BDD with new picture name
                     $data = [
-                        "id" => $idUser['id'],
+                        "id" => $userId['id'],
                         "picture" => $fileName
                     ];
                     $this->updatePicture($data, 'users');
