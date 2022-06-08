@@ -82,11 +82,7 @@ class CommentController extends Controller
     /*****************************************/
     // All the comments added from that user or admin account
     public function accountComments() {
-        if($_SESSION['role'] == 0) {
-            $table = "user_id";
-        } else{
-            $table = "admin_id";
-        }
+        $_SESSION['role'] == 0 ? $table = "user_id" : $table = "admin_id";
         $pagination = $this->pagination("comments");
         $new = new \Projet\Models\CommentModel();
         $allComment = $new->allAccountComments($_SESSION['id'], $table, $pagination);
@@ -158,6 +154,4 @@ class CommentController extends Controller
         $comments->commentModifyPost($data);
         header('Location: indexAdmin.php?action=comments-mine&status=success&from=modifyComment');
     }
-
-    
 }

@@ -54,11 +54,7 @@ class GenreController extends Controller
         $idGenre = $infoGenre->fetch();
         $purpose = "genre";
         $folder = "Books";
-        if($Files['picture']['name'] !== ""){
-            $fileName = $this->verifyFiles($purpose, $folder, $idGenre['id']);
-        } else{
-            $fileName = $this->noIcon();
-        }
+        $Files['picture']['name'] !== "" ? $fileName = $this->verifyFiles($purpose, $folder, $idGenre['id']) : $fileName = $this->noIcon();
         $data = [
             ":id" => $idGenre['id'],
             ":picture" => $fileName
@@ -106,5 +102,4 @@ class GenreController extends Controller
         $deletedGenre->deleteGenre($idGenre);
         header('Location: indexAdmin.php?action=livres-genres&status=success&from=delete');
     }
-
 }

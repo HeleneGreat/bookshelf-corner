@@ -62,11 +62,7 @@ class BookController extends Controller
         $idBook = $infoBook->fetch();
         $purpose = "book";
         $folder = "Books";
-        if($Files['picture']['name'] !== ""){
-            $fileName = $this->verifyFiles($purpose, $folder, $idBook['id']);
-        } else{
-            $fileName = $this->noCover();
-        }
+        $Files['picture']['name'] !== "" ? $fileName = $this->verifyFiles($purpose, $folder, $idBook['id']) : $fileName = $this->noCover();
         $data = [
             ":id" => $idBook['id'],
             ":picture" => $fileName];

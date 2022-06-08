@@ -35,30 +35,28 @@ class SubmitMessage
     // create account + connexion messages
     public function accountMessage()
     {
-        if($_GET['status'] == "success"){
-            if($_GET['from'] == "createUser"){
-                $userMessage = new SubmitMessage("success", "Votre compte utilisateur a bien été créé !");
-            }
-            if($_GET['from'] == "createAdmin"){
-                $userMessage = new SubmitMessage("success", "Le compte administrateur a bien été créé !");
-            }
+        // Success
+        if($_GET['from'] == "createUser"){
+            $userMessage = new SubmitMessage("success", "Votre compte utilisateur a bien été créé !");
         }
-        if($_GET['status'] == "error"){
-            if($_GET['from'] == "connexionMail"){
-                $userMessage = new SubmitMessage("error", "Aucun compte n'est associé à cette adresse mail !");
-            }
-            if($_GET['from'] == "connexionPsw"){
-                $userMessage = new SubmitMessage("error", "Le mot de passe est erroné !");
-            }
-            if($_GET['from'] == "createAccountMail"){
-                $userMessage = new SubmitMessage("error", "Un compte est déjà associé à ce mail !");
-            }
-            if($_GET['from'] == "createAccountPseudo"){
-                $userMessage = new SubmitMessage("error", "Ce pseudo est déjà utilisé !");
-            }
-            if($_GET['from'] == "createAccountMailPseudo"){
-                $userMessage = new SubmitMessage("error", "Ce mail et ce pseudo sont déjà utilisés !");
-            }
+        if($_GET['from'] == "createAdmin"){
+            $userMessage = new SubmitMessage("success", "Le compte administrateur a bien été créé !");
+        }
+        // Error
+        if($_GET['from'] == "connexionMail"){
+            $userMessage = new SubmitMessage("error", "Aucun compte n'est associé à cette adresse mail !");
+        }
+        if($_GET['from'] == "connexionPsw"){
+            $userMessage = new SubmitMessage("error", "Le mot de passe est erroné !");
+        }
+        if($_GET['from'] == "createAccountMail"){
+            $userMessage = new SubmitMessage("error", "Un compte est déjà associé à ce mail !");
+        }
+        if($_GET['from'] == "createAccountPseudo"){
+            $userMessage = new SubmitMessage("error", "Ce pseudo est déjà utilisé !");
+        }
+        if($_GET['from'] == "createAccountMailPseudo"){
+            $userMessage = new SubmitMessage("error", "Ce mail et ce pseudo sont déjà utilisés !");
         }
         $datas = $userMessage->formatedMessage();
         return $datas;
@@ -66,28 +64,26 @@ class SubmitMessage
 
     public function modifyAccountMessage()
     {
-        if ($_GET['status'] == "error") {
-            if ($_GET['from'] == "modifyMail")
-            {
-                $userMessage = new SubmitMessage("error", "Un compte est déjà associé à ce mail !");
-            }
-            elseif ($_GET['from'] == "modifyPseudo")
-            {
-                $userMessage = new SubmitMessage("error", "Ce pseudo est déjà utilisé !");
-            }
-            elseif ($_GET['from'] == "modifyMailPseudo")
-            {
-                $userMessage = new SubmitMessage("error", "Ce mail et ce pseudo sont déjà utilisés !");
-            }
-            elseif ($_GET['from'] == "modifyPsw")
-            {
-                $userMessage = new SubmitMessage("error", "Mot de passe incorrect !");
-            }
+        // Error
+        if ($_GET['from'] == "modifyMail")
+        {
+            $userMessage = new SubmitMessage("error", "Un compte est déjà associé à ce mail !");
         }
-        if ($_GET['status'] == "success") {
-            if ($_GET['from'] == "modify") {
-                $userMessage = new SubmitMessage("success", "Vos informations ont bien été modifiées !");
-            }
+        elseif ($_GET['from'] == "modifyPseudo")
+        {
+            $userMessage = new SubmitMessage("error", "Ce pseudo est déjà utilisé !");
+        }
+        elseif ($_GET['from'] == "modifyMailPseudo")
+        {
+            $userMessage = new SubmitMessage("error", "Ce mail et ce pseudo sont déjà utilisés !");
+        }
+        elseif ($_GET['from'] == "modifyPsw")
+        {
+            $userMessage = new SubmitMessage("error", "Mot de passe incorrect !");
+        }
+        // Success
+        if ($_GET['from'] == "modify") {
+            $userMessage = new SubmitMessage("success", "Vos informations ont bien été modifiées !");
         }
         $datas = $userMessage->formatedMessage();
         return $datas;

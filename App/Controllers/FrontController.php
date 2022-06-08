@@ -46,13 +46,9 @@ class FrontController extends Controller
                 "book" => $datasFirst,
                 "comments" => $datasSecond            
             ];
-            if(isset($_GET['status'])){
-                if($_GET['status'] == "success"){
-                    if($_GET['from'] == "addComment"){
-                        $userMessage = new SubmitMessage("success", "Votre commentaire a bien été publié !");
-                        $datas["feedback"] = $userMessage->formatedMessage();
-                    }
-                }
+            if(isset($_GET['status']) && $_GET['from'] == "addComment"){
+                $userMessage = new SubmitMessage("success", "Votre commentaire a bien été publié !");
+                $datas["feedback"] = $userMessage->formatedMessage();
             }
             return $this->viewFront("one-book", $datas);
         }else{
@@ -100,6 +96,4 @@ class FrontController extends Controller
     {
         return $this->viewFront("menu-backup");
     }
-
-
 }
