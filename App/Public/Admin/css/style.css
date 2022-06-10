@@ -160,6 +160,10 @@ ul{
     justify-content: center;
 }
 
+.justify-evenly{
+    justify-content: space-evenly;
+}
+
 .align-items-center{
     align-items: center;
 }
@@ -389,6 +393,20 @@ z-index: 9999999;
 /* ************************************************* */
 /* ---------------- CONNECTION ADMIN --------------- */
 /* ************************************************* */
+#admin-connexion{
+    margin-top: 35vh;
+    transform: translateY(-35%);
+}
+
+#admin-connexion fieldset,
+#new-admin fieldset{
+    border-color: var(--dashboard);
+    border-radius: 10px;
+    margin-top: 20px;
+    padding-bottom: 20px;
+}
+
+#admin-connexion p,
 #new-admin p{
     margin-top: 20px;
 }
@@ -398,15 +416,57 @@ z-index: 9999999;
     font-size: 1rem;
 }
 
-#new-admin,
-#admin-connexion{
-    margin-top: 30px;
+#new-admin{
+    max-width: 600px;
+    margin: 20px auto;
 }
 
-#admin-connexion form{
-    margin-bottom: 30px;
-    padding-bottom: 30px;
-    border-bottom: 1px solid var(--anthracite);
+#new-admin .confirmation{
+    text-align: justify;
+    padding-top: 15px;
+}
+
+#new-admin fieldset{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#admin-connexion label,
+#admin-connexion input,
+#new-admin label,
+#new-admin input{
+    font-size: 18px;
+}
+
+/* Checkbox */
+input[type="checkbox"]{
+    appearance: none;
+    background-color: white;
+    margin: 0;
+    font: inherit;
+    width: 22.5px;
+    height: 22.5px;
+    border: 0.15em solid var(--dashboard);
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+    margin-right: 10px;
+    border-radius: 5px;
+    display: inline-grid;
+}
+
+/* before = quand le bouton est coché */
+input[type="checkbox"]::before{
+    content: "";
+    width: 13.5px;
+    height: 13.5px;
+    transform: scale(0);
+    box-shadow: inset 1em 1em var(--dashboard);
+    border-radius: 2px;
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
 }
 
 /* *********************************************** */
@@ -1502,8 +1562,8 @@ img.old-picture{
     #dashboard #all-comments .btn{
         padding: 10px 20px;
     }
-    
-    #new-admin{
+
+    #admin-connexion{
         min-width: 600px;
         max-width: 600px;
     }

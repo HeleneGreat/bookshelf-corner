@@ -1,21 +1,20 @@
 <?php $currentPageTitle = "Créer un nouvel administrateur";
- include_once('./App/Views/admin/layouts/head.php'); ?>
+ include_once('./App/Views/admin/layouts/header.php'); ?>
 
-<!-- Div for error management -->
-<?php if(isset($datas['feedback'])) {;?>
-    <div id="feedback" class="center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
-<?php }; ?>
 
-<section id="new-admin" class="container text-center">
+<section id="new-admin" class="text-center center">
 
-    <h2>Créer un nouvel administrateur</h2>
+    <h1>Créer un nouvel administrateur</h1>
 
     <form action="indexAdmin.php?action=createAdminPost" method="post" enctype='multipart/form-data'>
-        <p><input type="text" pattern="^[a-zA-Z0-9]{5,}$" title="Votre pseudo doit contenir au moins 5 caractère et n'accepte pas les caractères spéciaux" name="adminPseudo" id="pseudo" placeholder="Votre pseudo"></p>
-        <p><input type="email" name="adminMail" id="mail" placeholder="Votre adresse e-mail" value=""></p>
-        <p><input type="password" pattern="^(?=.{7,})(?=.*[a-z])(?=.*[A-Z])(?=.*[!£@$%^&*()_+=\-`{}:~#';<>?/.,|\\]).*$" title="Votre mot de passe doit contenir au moins 7 caractères, une minuscule, une majuscule et un caractère spécial" name="adminMdp" id="adminMdp" placeholder="Votre mot de passe" value=""></p>
-        <p><input type="file" name="picture" id="inputImg" accept="image/*"></p>
-        <p class="rgpd"><input type="checkbox" name="rgpd" required><span class="required">*</span><label for="rgpd">En cochant cette case, vous acceptez que les données transmises soient conservées. Aucun traitement commercial n'en sera fait, et elles ne seront pas transmises à des tiers. <a class="dashboard" title="Consulter les mentions légales" href="index.php?action=mentions-legales">Plus d'information</a>.</label></p>
+        <fieldset>
+            <p><span class="required">*</span>  <input type="text" pattern="^[a-zA-Z0-9]{5,}$" title="Le pseudo doit contenir au moins 5 caractère et n'accepte pas les caractères spéciaux" name="adminPseudo" id="pseudo" placeholder="Pseudo" required></p>
+            <p><span class="required">*</span>  <input type="email" name="adminMail" id="mail" placeholder="Adresse e-mail" value="" required></p>
+            <p><span class="required">*</span>  <input type="password" pattern="^(?=.{7,})(?=.*[a-z])(?=.*[A-Z])(?=.*[!£@$%^&*()_+=\-`{}:~#';<>?/.,|\\]).*$" title="Le mot de passe doit contenir au moins 7 caractères, une minuscule, une majuscule et un caractère spécial" name="adminMdp" id="adminMdp" placeholder="Mot de passe" value="" required></p>
+            <p><span class="required">*</span>  <input type="file" name="picture" id="inputImg" accept="image/*" required></p>
+            <p class="confirmation"><span class="required">Êtes-vous sûr</span> de vouloir ajouter ce compte à la liste des administrateurs du site ? Il ou elle aura accès à l'ensemble de ses contenus (articles, commentaires, messages...). Ne donnez ce genre de droit qu'à des <span class="required">personnes de confiance</span>. Le nouvel administrateur est fortement encouragé à changer son mot de passe.</p>
+            <p><span class="required">*</span>  <label><input type="checkbox" name="confirmation" required> Oui</label></p>
+        </fieldset>
         <input type="submit">
     </form>
 </section>

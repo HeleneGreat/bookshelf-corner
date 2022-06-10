@@ -54,8 +54,8 @@ class BookModel extends Manager
         $req = $bdd->prepare(
             "SELECT genres.id, category, genres.picture AS catPicture, 
             books.id, title, books.picture AS bookPicture, DATE_FORMAT(created_at, '%d %M %Y') AS date 
-            FROM genres
-            INNER JOIN books 
+            FROM books
+            INNER JOIN genres 
             ON genres.id = books.id_genre
             {$category}
             ORDER BY books.id DESC
@@ -107,6 +107,17 @@ class BookModel extends Manager
         $bdd = $this->dbConnect();
         $req = $bdd->prepare('DELETE FROM books WHERE id = ?');
         $req->execute(array($bookId));
+        return $req;
+    }
+
+    public function updateBookBeforeDeleteGenre($genreId)
+    {
+        $bdd = $this->dbConnect();
+        $req = $bdd->prepare(
+            'UPDATE books 
+            SET id_genre = 21 
+            WHERE id_genre = ?');
+        $req->execute(array($genreId));
         return $req;
     }
 

@@ -12,12 +12,16 @@ class AdminController extends Controller
     /********************************************************/
     public function addAdmin()
     {
-        if(isset($_GET['status'])){
-            $statusMessage = new SubmitMessage("","");
-            $datas['feedback'] = $statusMessage->accountMessage();
-            return $this->viewAdmin("connexion/createAdmin", $datas);
-        }else{
+        if($_SESSION['role'] === 2){
+            if(isset($_GET['status'])){
+                $statusMessage = new SubmitMessage("","");
+                $datas['feedback'] = $statusMessage->accountMessage();
+                return $this->viewAdmin("connexion/createAdmin", $datas);
+            }else{
             return $this->viewAdmin("connexion/createAdmin");
+            } 
+        } else{
+            header('Location: indexAdmin.php?action=error&status=error&from=no-access'); 
         }
     }
 
@@ -43,22 +47,17 @@ class AdminController extends Controller
         }elseif ($redirection == "pbPseudopbMail"){
             header('Location: indexAdmin.php?action=createAccount&status=error&from=createAccountMailPseudo');
         }
-
         $pass = htmlspecialchars($Post['adminMdp']);
         $mdp = password_hash($pass, PASSWORD_DEFAULT);
         $picture = $Files['picture']['name'];
-        $data = [
-            ':pseudo' => $pseudo,
-            ':mail' => $mail,
-            ':mdp' => $mdp,
-        ];
-        if(!empty($pseudo) && (!empty($mail) && (!empty($mdp) && (!empty($picture))))){
-            if(filter_var($mail, FILTER_VALIDATE_EMAIL)){
+        $data[':mdp'] = $mdp;
+        if(!empty($pseudo) && (!empty($data[':mail']) && (!empty($mdp) && (!empty($picture))))){
+            if(filter_var($data[':mail'], FILTER_VALIDATE_EMAIL)){
                 // create admin in BDD
                 $createAdmin->createAdmin($data);
                 // Get his ID
                 $user = new \Projet\Models\AdminModel;
-                $admin = $user->getId("administrators", "mail", $mail);
+                $admin = $user->getId("administrators", "mail", $data[':mail']);
                 $adminId = $admin->fetch();
                 // Second: save his picture
                 $purpose = "admin";
@@ -213,7 +212,7 @@ class AdminController extends Controller
         // unique email
         if(!empty($Post['newMail']) || $Post['newMail'] != ""){
             if($Post['newMail'] != $_SESSION['mail']){
-                $newMail = $this->checkForDuplicate("administrators", htmlspecialchars($Post['newMail']));
+                $newMail = $this->checkForDuplicate("administrators", htmlspecialchars($Post['newMail']), "accountUpdate");
                 if($newMail == "nameOk"){
                     $adminMail = htmlspecialchars($Post['newMail']);
                 }else{
@@ -229,7 +228,7 @@ class AdminController extends Controller
         // unique pseudo
         if(!empty($Post['newPseudo']) || $Post['newPseudo'] != ""){
             if($Post['newPseudo'] != $_SESSION['pseudo']){
-                $newPseudo = $this->checkForDuplicate("administrators", htmlspecialchars($Post['newPseudo']));
+                $newPseudo = $this->checkForDuplicate("administrators", htmlspecialchars($Post['newPseudo']), "accountUpdate");
                 if($newPseudo == "nameOk"){
                     $adminPseudo = htmlspecialchars($Post['newPseudo']);
                 }else{
@@ -285,7 +284,5 @@ class AdminController extends Controller
         }
         return $this->viewAdmin("error", $datas);
     }
-
-   
 
 }

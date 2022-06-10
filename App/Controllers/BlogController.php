@@ -21,12 +21,12 @@ class BlogController extends Controller
         $admin = new \Projet\Models\AdminModel();
         $thisAdmin = $admin->infoAdmin($_SESSION['id']);
         $infoAdmin = $thisAdmin->fetch();
-            if($infoAdmin['role'] === 2){
-               return $this->viewAdmin("parameters", $blog); 
-            }
-            else{ echo "Vous n'avez pas accès à cette page"; }       
+        if($infoAdmin['role'] === 2){
+            return $this->viewAdmin("parameters", $blog); 
+        }
+        else{ echo "Vous n'avez pas accès à cette page"; }
     }
-    
+
     public function blogModify($blogId)
     {
         $user = new \Projet\Models\BlogModel();
@@ -40,7 +40,7 @@ class BlogController extends Controller
         }else{
             echo "Vous n'avez pas accès à cette page"; }
     }
-    
+
     public function blogModifyPost($blogId, $Post, $Files)
     {
         $new = new \Projet\Models\BlogModel();

@@ -12,7 +12,7 @@
 
     <div class="flex-md justify-center">
         <a href="indexAdmin.php?action=blogModify" class="btn center">Modifier les informations du blog</a>
-        <a href="" class="btn center">Ajouter un compte administrateur</a>
+        <a href="indexAdmin.php?action=createAccount" class="btn center">Ajouter un compte administrateur</a>
     </div>
 </section>
 

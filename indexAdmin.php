@@ -145,13 +145,21 @@ try
         elseif ($_GET['action'] == "genreModifyPost")
         {
             $genreId = $_GET['id'];
-            $genreController->genreModifyPost($genreId, $_POST, $_FILES);
+            if($genreId != 21){
+                $genreController->genreModifyPost($genreId, $_POST, $_FILES);
+            }else{
+                header('Location: indexAdmin.php?action=livres-genres');
+            }
         }  
 
         elseif ($_GET['action'] == "genreDelete")
         {
             $genreId = $_GET['id'];
-            $genreController->deleteGenre($genreId);
+            if($genreId != 21){
+                $genreController->deleteGenre($genreId);
+            }else{
+                header('Location: indexAdmin.php?action=livres-genres');
+            }
         }
 
         /****************************/
@@ -343,7 +351,7 @@ try
 
         else
         {
-            header('Location: indexAdmin.php?error=notFound');
+            $adminController->error404();
         }
     }
 
@@ -354,7 +362,15 @@ try
 
     else
     {
-        $adminController->connexionAdmin();
+        if(!empty($_SESSION)){
+            if($_SESSION['role'] > 0){
+                header('Location: indexAdmin.php?action=dashboard');
+            }else{
+                header('Location: indexAdmin.php?action=userDashboard');
+            }
+        }else{
+            header('Location: indexAdmin.php?action=connexionAdmin');
+        }
     }
 }
 

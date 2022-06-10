@@ -83,7 +83,7 @@ class Controller
         if($table === 'administrators'){
             $new = new \Projet\Models\AdminModel();
             $datas = $new->updatePicture($data, $table); 
-            header('Location: indexAdmin.php?action=connexionAdmin&status=success&from=create');
+            header('Location: indexAdmin.php?action=createAccount&status=success&from=createAdmin');
         }
         if($table === 'books'){
             $new = new \Projet\Models\BookModel(); 
@@ -102,8 +102,9 @@ class Controller
         }       
     }
 
-    public function checkForDuplicate($table, $newdata){
+    public function checkForDuplicate($table, $newdata, $accountStep = null){
         if($table == "administrators" || $table == "users"){
+            $check = $newdata;
             if($table == "administrators"){
                 $new = new \Projet\Models\AdminModel();
             }elseif($table == "users"){
@@ -117,22 +118,33 @@ class Controller
             }
         }elseif($table == "books"){
             $new = new \Projet\Models\BookModel();
-            $column = 'title';
+            $column = "title";
             $redirection = "livres";
+            $check = $newdata['newTitle'];
         }elseif($table == "genres"){
             $new = new \Projet\Models\BookModel();
             $column = 'category';
             $redirection = "livres-genres";
+            $check = $newdata['newGenre'];
         }else{
             echo "Un des arguments a été mal enregistré";
         }
-        $data = $new->checkForDuplicate($table, $column, $newdata);
+        $data = $new->checkForDuplicate($table, $column, $check);
         $result = $data->fetch();
-        if(empty($result) || $result == false || (!empty($_SESSION)) && ($result['id'] == $_SESSION['id'])){
+        if(empty($result) || $result == false){
             return "nameOk";
+        }elseif($table == "administrators" || $table == "users"){
+            if($accountStep == "accountUpdate" && !empty($_SESSION) && $result['ID'] == $_SESSION['id']){
+                return "nameOk";
+            }
         }elseif($table == "books" || $table == "genres"){
-            header('Location: indexAdmin.php?action=' . $redirection . '&status=error&from=duplicate');
+            if(($table == "books" && $result['ID'] == $newdata['genreId']) || ($table == "genres" && $result['id'] == $newdata['genreId'])){
+                    return "nameOk";
+            }else{
+                header('Location: indexAdmin.php?action=' . $redirection . '&status=error&from=duplicate');
+            }
         }
+
     }
 
     public function pagination($table)

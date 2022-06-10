@@ -43,7 +43,11 @@ class GenreController extends Controller
     public function genreAddPost($Post, $Files)
     {
         $new = new \Projet\Models\GenreModel();
-        $genreName = $this->checkForDuplicate("genres", htmlspecialchars($Post['newType']));
+        $newGenre = [
+            'genreId' => "0",
+            'newGenre' => htmlspecialchars($Post['newType'])
+        ];
+        $genreName = $this->checkForDuplicate("genres", $newGenre);
         if($genreName == "nameOk"){
             $data = [':newType' => htmlspecialchars($Post['newType'])];
         }
@@ -74,8 +78,12 @@ class GenreController extends Controller
         }
         // unique genre name
         if(!empty($Post['newType'])){
-             if($Post['newType'] != ""){
-                $newName = $this->checkForDuplicate("genres", htmlspecialchars($Post['newType']));
+            if($Post['newType'] != ""){
+                $dataGenre = [
+                    'genreId' => $genreId,
+                    'newGenre' => htmlspecialchars($Post['newType'])
+                ];
+                $newName = $this->checkForDuplicate("genres", $dataGenre);
                 if($newName == "nameOk"){
                     $genreName = htmlspecialchars($Post['newType']);
                 }
@@ -98,6 +106,8 @@ class GenreController extends Controller
         if($infoGenre['picture'] != "no-icon.png"){
             unlink("./App/Public/Books/images/" . $infoGenre['picture']);
         }
+        $replaceBooksGenre = new \Projet\Models\BookModel();
+        $replaceBooksGenre->updateBookBeforeDeleteGenre($genreId);
         $deletedGenre = new \Projet\Models\GenreModel();
         $deletedGenre->deleteGenre($genreId);
         header('Location: indexAdmin.php?action=livres-genres&status=success&from=delete');

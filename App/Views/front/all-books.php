@@ -19,7 +19,8 @@
 <?php } ;?>
 
     <div class="flex-md justify-between-md">
-    <?php 
+    <?php  
+    // var_dump($datas);die;
     foreach($datas['book'] as $book){ ?>
         <article class="book-card center flex col justify-between">
             <h2 class="text-center"><?= 

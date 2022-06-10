@@ -112,7 +112,11 @@ class BookController extends Controller
          // unique book name
         if(!empty($Post['newTitle'])){
             if($Post['newTitle'] != ""){
-                $newName = $this->checkForDuplicate("books", htmlspecialchars($Post['newTitle']));
+                $dataBook = [
+                    'bookId' => $bookId,
+                    'newTitle' => htmlspecialchars($Post['newTitle'])
+                ];
+                $newName = $this->checkForDuplicate("books", $dataBook, $bookId);
                 if($newName == "nameOk"){
                     $bookName = htmlspecialchars($Post['newTitle']);
                 }

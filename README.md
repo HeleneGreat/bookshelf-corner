@@ -10,3 +10,6 @@
 
 
 S'il y a "Post" en fin de nom de fonction, c'est qu'elle traite les informations d'un formulaire
+
+
+Ne pas modifier genres id = 21 ("Autres") car c'est la catégorie par défaut

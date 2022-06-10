@@ -41,7 +41,7 @@ class Manager
     {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
-            "SELECT id
+            "SELECT *
             FROM {$table}
             WHERE {$column} = '{$data}'"
         );

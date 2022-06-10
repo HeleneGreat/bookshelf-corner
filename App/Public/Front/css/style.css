@@ -1056,7 +1056,7 @@ input::placeholder {
     clear: left;
 }
 
-/* radio button */
+/* radio button + checkboxes */
 input[type="checkbox"],
 input[type="radio"] {
     appearance: none;
@@ -1074,7 +1074,6 @@ input[type="radio"] {
 input[type="checkbox"] {
     margin-right: 60px;
     border-radius: 5px;
-    /* float: left; */
     display: inline-grid;
 }
 
