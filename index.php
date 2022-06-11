@@ -136,12 +136,12 @@ try
 
 catch (Exception $e)
 {
-    return $this->viewFront("error");
+    header('Location: index.php?action=error');
     // echo $e->getMessage();
 }
 
 catch (Error $e)
 {
-    return $this->viewFront('error');
+    header('Location: index.php?action=error');
     // echo $e->getMessage();
 }

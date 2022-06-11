@@ -381,12 +381,12 @@ try
 
 catch (Exception $e)
 {
-    $this->viewAdmin("error");
+    header('Location: indexAdmin.php?action=error');
     // echo $e->getMessage();
 }
 
 catch (Error $e)
 {
-    return $this->validAccess('error');
+    header('Location: indexAdmin.php?action=error');
     // echo $e->getMessage();
 }

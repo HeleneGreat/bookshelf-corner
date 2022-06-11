@@ -147,7 +147,7 @@ class Controller
 
     }
 
-    public function pagination($table)
+    public function pagination($table, $allBlogComments = null)
     {
         if(isset($_GET['page']) && !empty($_GET['page'])){
             $currentPage = (int) strip_tags($_GET['page']);
@@ -163,15 +163,22 @@ class Controller
             $new = new \Projet\Models\MsgModel();
             $perPage = 15;
             $totalItems = $new->countItems($table);
-        }elseif($table === "comments" && $_SESSION['role'] > 0){
+        // }elseif($table === "comments" && $_SESSION['role'] > 0){
+        }elseif($table === "comments" && $allBlogComments != null){
             $new = new \Projet\Models\CommentModel();
             $perPage = 15;
             $totalItems = $new->countComments($table);
             $totalItems = $totalItems['COUNT(id)'];
-        }elseif($table === "comments" && $_SESSION['role'] == 0){
-            $new = new \Projet\Models\UserModel();
+        // }elseif($table === "comments" && $_SESSION['role'] == 0){
+        }elseif($table === "comments"){
+            if($_SESSION['role'] == 0){
+                $table = "user_id";
+            }elseif($_SESSION['role'] > 0){
+                $table = "admin_id";
+            }
+            $new = new \Projet\Models\CommentModel();
+            $totalItem = $new->countAccountComments($_SESSION['id'], $table);
             $perPage = 10;
-            $totalItem = $new->countUserComments($_SESSION['id']);
             $totalItems = $totalItem->fetch();
             $totalItems = $totalItems['nbComments'];
         }

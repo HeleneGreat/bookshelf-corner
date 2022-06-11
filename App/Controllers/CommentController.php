@@ -39,7 +39,7 @@ class CommentController extends Controller
     // List all comments in the admin account
     public function allComments()
     {
-        $pagination = $this->pagination("comments");
+        $pagination = $this->pagination("comments", "allBlogComments");
         $comments = new \Projet\Models\CommentModel();
         $comm = $comments->allCommentsPagination($pagination);
         $datas['comments'] = $comm->fetchAll();

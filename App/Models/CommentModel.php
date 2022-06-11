@@ -33,10 +33,10 @@ class CommentModel extends Manager
     }
 
     // Count all comments from that User or Admin
-    public function countAccountComments($accountId, $table)
+    public function countAccountComments($accountId, $role_id)
     {
         $bdd =$this->dbConnect();
-        $req = $bdd->prepare("SELECT COUNT(id) AS nbComments FROM comments WHERE {$table} = ?");
+        $req = $bdd->prepare("SELECT COUNT(id) AS nbComments FROM comments WHERE {$role_id} = ?");
         $req->execute(array($accountId));
         return $req;
     }
