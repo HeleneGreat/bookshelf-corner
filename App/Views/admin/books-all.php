@@ -13,7 +13,7 @@
         <article class="flex">
             <img src="./App/Public/Books/images/<?= $book['bookPicture']; ?>" alt="Couverture <?= $book['title']; ?>">
             <div class='info'>
-                <p class="list-title"><?= $book['title']; ?></p>
+                <h2 class="list-title"><?= $book['title']; ?></h2>
                 <p class="list-date"><?= $book['date']; ?></p>
             </div>
             <div class="flex book-link">

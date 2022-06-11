@@ -13,7 +13,7 @@
                 <p class="time"><?= $msg['send_at']; ?></p>
                 <p><?= $msg['firstname']; ?></p>
                 <p><?= $msg['familyname']; ?></p>
-                <p class="object"><?= $msg['object']; ?></p>
+                <h2 class="object"><?= $msg['object']; ?></h2>
             </div>
             <div class="flex message-link">
                 <a title="Lire ce message" href="indexAdmin.php?action=messagesView&id=<?=$msg['id']; ?>" class="stretched-link"><i class="fa-solid fa-eye"></i></a>
@@ -40,7 +40,7 @@
             <ul id="pagination" class="flex justify-center">
                 <!-- PREVIOUS PAGE -->
                 <li class="<?= ($datas['currentPage'] == 1) ? "display-none" : "" ?>">
-                    <a class="controller previous" title="Page précédente" href="indexAdmin.php?action=messages&page=<?= $datas['currentPage'] - 1 ?>"><</a>
+                    <a class="controller previous" title="Page précédente" href="indexAdmin.php?action=messages&page=<?= $datas['currentPage'] - 1 ?>">&lt;</a>
                 </li>
                 <!-- ALL PAGES NUMBER -->
                 <?php for($page = 1; $page <= $datas['pages']; $page++): ?>
@@ -50,7 +50,7 @@
                 <?php endfor ?>
                     <!-- NEXT PAGE -->
                     <li class="<?= ($datas['currentPage'] == $datas['pages']) ? "display-none" : "" ?>">
-                    <a class="controller next" title="Page suivante" href="indexAdmin.php?action=messages&page=<?= $datas['currentPage'] + 1 ?>">></a>
+                    <a class="controller next" title="Page suivante" href="indexAdmin.php?action=messages&page=<?= $datas['currentPage'] + 1 ?>">&gt;</a>
                 </li>
             </ul>
         </nav>

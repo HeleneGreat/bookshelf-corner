@@ -9,13 +9,15 @@ HOME
     * WELCOME
     * CAROUSEL
     * HOME BANNER
-ALL BOOKS + ABOUT
+CARDS
+GENERAL FORMS
+ALL BOOKS
     * PAGINATION
 ONE BOOK
-GENERAL FORMS
 COMMENTS
     * COMMENTS FORM
     * ALL COMMENTS
+ABOUT
 CONTACT
 PAGE 404
 MENTIONS LEGALES
@@ -27,10 +29,11 @@ MEDIA QUERIES
 -> MD MEDIUM = min-width: 993px
     * FOOTER
     * HOME
-    * ALL BOOKS + CONTACT
+    * ALL BOOK
     * ONE BOOK
         - BOOK COMMENTS
     * ABOUT
+    * CONTACT
 -> LG LARGE = min-width: 1201px
     * HEADER
         - NAV
@@ -38,34 +41,8 @@ MEDIA QUERIES
     * COMMENTS
         - COMMENTS FORM
 
-
-
-
 */
-/* TODO */
-/************** VARIABLES TEMPORAIRES ************/
 
-/* utilisé sur les book cards */
-#all-books a.btn-book {
-    background-color: var(--secondary);
-    color: white;
-    border: none;
-    border-radius: 30px;
-    font-size: 2rem;
-    padding: 8px 10px;
-}
-
-button:hover,
-#all-books a.btn-book:hover {
-    cursor: pointer;
-    box-shadow: 0 0 9px rgb(184, 184, 184);
-}
-
-button:active,
-#all-books a.btn-book:active {
-    box-shadow: inset 3px 3px 3px var(--secondary),
-        inset -3px -3px 3px rgb(88, 155, 231);
-}
 
 /* *******************/
 /* ----- RESET ----- */
@@ -254,6 +231,10 @@ a.btn-book:hover,
     inset 0px 4px 8px rgba(0,0,0,0.2), 
     inset 0px 8px 16px rgba(0,0,0,0.2);
     color: white;
+}
+
+button:hover{
+    cursor: pointer;
 }
 
 .btn-main:active{
@@ -643,7 +624,7 @@ main{
 }
 
 /* **************************************** */
-/* ----------- ALL BOOKS + ABOUT ---------- */
+/* ----------------- CARDS ---------------- */
 /* **************************************** */
 #about .admin-card,
 #all-books .book-card{
@@ -663,11 +644,6 @@ main{
     height: 300px;
 }
 
-#all-books h2{
-    font-size: 2.5rem;
-    color: var(--dark);
-}
-
 #abouts h3,
 #all-books h2{
     margin-top: auto;
@@ -677,6 +653,42 @@ main{
 #about .admin-card:hover,
 #all-books .book-card:hover{
     box-shadow: 0 0 9px #989898;
+}
+
+/* **************************************** */
+/* ------------- GENERAL FORMS ------------ */
+/* **************************************** */
+input,
+textarea {
+    padding: 8px 8px;
+    font-size: 18px;
+    margin-top: 8px;
+    margin-bottom: 22px;
+    border: 1px solid var(--main);
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    box-shadow: inset 0 0 0.25rem var(--main);
+}
+
+/* **************************************** */
+/* --------------- ALL BOOKS -------------- */
+/* **************************************** */
+/* utilisé sur les book cards */
+#all-books a.btn-book {
+    background-color: var(--secondary);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 2rem;
+    padding: 8px 10px;
+}
+
+#all-books h2{
+    font-size: 2.5rem;
+    color: var(--dark);
 }
 
 #all-books .book-card p {
@@ -719,62 +731,6 @@ main{
 
 #all-books .no-book-cat{
     margin: 80px 0;
-}
-
-#about .quote{
-    margin-top : 30px;
-    height: 300px; 
-    background-color: var(--main);
-    box-shadow: inset 14px 14px 28px #9d3f34,
-            inset -14px -14px 28px #9d3f34; 
-}
-
-#about .admin-card h3{
-    width: 100%;
-}
-
-#about .quote .text-box{
-    width: 100%;
-    height: 100%;
-    
-}
-
-#about .quote .text-box h3{
-    position: relative;
-    padding-bottom: 10px;
-}
-
-#about .quote .text-box h3,
-#about .quote .text-box p{
-    text-align: center;
-    color: white;
-    width: fit-content;
-}
-
-#about p{
-    margin-bottom: 20px;
-}
-
-#about > p{
-    text-align: justify;
-}
-
-#about .quote .text-box i.fa-quote-left{
-    position: absolute;
-    left: 30px;
-    top: -50px;
-    color: white;
-}
-#about .quote .text-box i.fa-quote-right{
-    position: absolute;
-    right: 30px;
-    bottom: -50px;
-    color: white;
-}
-
-#about img.float{
-    float: right;
-    height: 280px;
 }
 
 #about .admin-card img{
@@ -892,25 +848,6 @@ svg g path{
     white-space: pre-line;
 }
 
-/* ************************************ */
-/* ----------- GENERAL FORMS ---------- */
-/* ************************************ */
-input,
-textarea {
-    padding: 8px 8px;
-    font-size: 18px;
-    margin-top: 8px;
-    margin-bottom: 22px;
-    border: 1px solid var(--main);
-}
-
-input:focus,
-textarea:focus {
-    outline: none;
-    box-shadow: inset 0 0 0.25rem var(--main);
-}
-
-
 /* ***************************************** */
 /* ---------------- COMMENTS --------------- */
 /* ***************************************** */
@@ -995,6 +932,73 @@ textarea:focus {
 #all-comments .user-info .admin-comment,
 #all-comments .comment .admin-comment {
     color: var(--secondary);
+}
+
+/* **************************************** */
+/* ----------------- ABOUT ---------------- */
+/* **************************************** */
+#about .quote{
+    margin-top : 30px;
+    height: 300px; 
+    background-color: var(--main);
+    box-shadow: inset 14px 14px 28px #9d3f34,
+            inset -14px -14px 28px #9d3f34; 
+}
+
+#about .admin-card h3{
+    width: 100%;
+}
+
+#about .quote .text-box{
+    width: 100%;
+    height: 100%;
+    
+}
+
+#about .quote .text-box h3{
+    position: relative;
+    padding-bottom: 10px;
+}
+
+
+#about .quote .text-box h3,
+#about .quote .text-box p{
+    text-align: center;
+    color: white;
+    width: fit-content;
+}
+
+#about p{
+    margin-bottom: 20px;
+}
+
+#about > p{
+    text-align: justify;
+}
+
+#about .quote .text-box i.fa-quote-left{
+    position: absolute;
+    left: 30px;
+    top: -50px;
+    color: white;
+}
+#about .quote .text-box i.fa-quote-right{
+    position: absolute;
+    right: 30px;
+    bottom: -50px;
+    color: white;
+}
+
+#about img.float{
+    float: right;
+    height: 280px;
+}
+
+#about .admin-card img{
+    width: auto;
+    max-width: 90%;
+    height: 80%;
+    object-fit: cover;
 }
 
 /* **************************************** */
@@ -1276,29 +1280,11 @@ input[type="radio"]:checked::before {
     }
     
     /* ****************************************** */
-    /* ----------- ALL BOOKS + CONTACT ---------- */
+    /* ---------------- ALL BOOKS --------------- */
     /* ****************************************** */
     #about .admin-card,
     #all-books .book-card {
         width: 250px;
-    }
-
-    #contact-form textarea {
-        min-width: 96%;
-        max-width: 96%;
-        min-height: 440px;
-    }
-
-    #contact-form #contact-left {
-        width: 35%;
-    }
-
-    #contact-form #contact-right {
-        width: 60%;
-    }
-
-    #contact a:hover{
-        text-decoration: underline;
     }
 
     /* ***************************************** */
@@ -1306,7 +1292,6 @@ input[type="radio"]:checked::before {
     /* ***************************************** */
     #one-book #info-book .cover{
         width: 300px;
-        height: 430px;
     }
 
     #one-book #info-book .cover img {
@@ -1376,6 +1361,27 @@ input[type="radio"]:checked::before {
     #about .quote .text-box i.fa-quote-right{
         right: -75px;
         bottom: -40px;
+    }
+    
+    /* ****************************************** */
+    /* ----------------- CONTACT ---------------- */
+    /* ****************************************** */
+    #contact-form textarea {
+        min-width: 96%;
+        max-width: 96%;
+        min-height: 440px;
+    }
+
+    #contact-form #contact-left {
+        width: 35%;
+    }
+
+    #contact-form #contact-right {
+        width: 60%;
+    }
+
+    #contact a:hover{
+        text-decoration: underline;
     }
 
 }

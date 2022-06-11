@@ -22,7 +22,7 @@ include_once('./App/Views/admin/layouts/header-comments.php');
                 </div>
             </div>
             <div class="comment">
-                <p class="title bold"><?= $comment['commentTitle']; ?></p>
+                <h2 class="title bold"><?= $comment['commentTitle']; ?></h2>
                 <p class="content"><?= $comment['commentContent']; ?></p>
             </div>
         </article>
@@ -46,7 +46,7 @@ include_once('./App/Views/admin/layouts/header-comments.php');
             <ul id="pagination" class="flex justify-center">
                 <!-- PREVIOUS PAGE -->
                 <li class="<?= ($datas['currentPage'] == 1) ? "display-none" : "" ?>">
-                    <a class="controller previous" title="Page précédente" href="indexAdmin.php?action=comments-mine&page=<?= $datas['currentPage'] - 1 ?>"><</a>
+                    <a class="controller previous" title="Page précédente" href="indexAdmin.php?action=comments-mine&page=<?= $datas['currentPage'] - 1 ?>">&lt;</a>
                 </li>
                 <!-- ALL PAGES NUMBER -->
                 <?php for($page = 1; $page <= $datas['pages']; $page++): ?>
@@ -56,7 +56,7 @@ include_once('./App/Views/admin/layouts/header-comments.php');
                 <?php endfor ?>
                     <!-- NEXT PAGE -->
                     <li class="<?= ($datas['currentPage'] == $datas['pages']) ? "display-none" : "" ?>">
-                    <a class="controller next" title="Page suivante" href="indexAdmin.php?action=comments-mine&page=<?= $datas['currentPage'] + 1 ?>">></a>
+                    <a class="controller next" title="Page suivante" href="indexAdmin.php?action=comments-mine&page=<?= $datas['currentPage'] + 1 ?>">&gt;</a>
                 </li>
             </ul>
         </nav>

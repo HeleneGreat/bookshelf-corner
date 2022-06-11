@@ -136,12 +136,12 @@ try
 
 catch (Exception $e)
 {
-    // TODO return $this->viewFront("error");
-    echo $e->getMessage();
+    return $this->viewFront("error");
+    // echo $e->getMessage();
 }
 
 catch (Error $e)
 {
-    // TODO return $this->viewFront('error');
-    echo $e->getMessage();
+    return $this->viewFront('error');
+    // echo $e->getMessage();
 }

@@ -65,7 +65,7 @@ include ('layouts/header.php');
             </div>
         </div>
         <div id="article-book">
-            <p class="catchphrase"><?= $datas['book']['catchphrase']; ?></p>
+            <p class="catchphrase bold"><?= $datas['book']['catchphrase']; ?></p>
             <p class="content"><?= $datas['book']['content']; ?></p>
         </div>
    </article>

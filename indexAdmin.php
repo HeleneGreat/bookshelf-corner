@@ -344,6 +344,11 @@ try
         /******************* ERROR MANAGEMENT *******************/
         /********************************************************/
         /********************************************************/
+        elseif($_GET['action'] == 'menu')
+        {
+            $blogController->menuNoJs();
+        }
+
         elseif($_GET['action'] == "error")
         {
             $adminController->error();
@@ -376,14 +381,12 @@ try
 
 catch (Exception $e)
 {
-    // TODO : message d'erreur
-    // return $this->viewAdmin("error");
-    echo $e->getMessage();
+    $this->viewAdmin("error");
+    // echo $e->getMessage();
 }
 
 catch (Error $e)
 {
-    // TODO : add message d'erreur
-    // return $this->validAccess('error');
-    echo $e->getMessage();
+    return $this->validAccess('error');
+    // echo $e->getMessage();
 }

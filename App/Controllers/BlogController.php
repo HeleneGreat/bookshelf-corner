@@ -67,4 +67,10 @@ class BlogController extends Controller
         $new->blogModifyPost($data);
         header('Location: indexAdmin.php?action=blogParameters');
     }
+
+    // In case javascript is disabled, the mobile menu opens in a new page :
+    public function menuNoJs()
+    {
+        return $this->validAccess("menu-backup");
+    }
 }

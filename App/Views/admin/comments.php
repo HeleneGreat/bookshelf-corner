@@ -13,11 +13,11 @@
             <div class="comment-info flex justify-between align-items-center">
                 <p class="time"><?= $data['created_at']; ?></p>
                 <?= isset($data['userPseudo']) ? "<p>".$data['userPseudo'] : "<p class='admin'>".$data['adminPseudo']; ?></p>
-                <p class="object"><?= $data['title']; ?></p>
+                <h2 class="object"><?= $data['title']; ?></h2>
             </div>
             <div class="flex comment-link">
                 <a title="Lire ce commentaire" href="indexAdmin.php?action=commentsView&id=<?=$data['id']; ?>" class="stretched-link"><i class="fa-solid fa-eye"></i></a>
-                <button title="Supprimer ce commentaire" id="btn-delete-<?= $data['id']; ?>" class="btn-delete-this"><a><i class="fa-regular fa-trash-can lg"></i></a></button>
+                <a title="Supprimer ce commentaire" id="btn-delete-<?= $data['id']; ?>" class="btn-delete-this"><i class="fa-regular fa-trash-can lg"></i></a>
             </div>
         </article>
         
@@ -42,7 +42,7 @@
         <ul id="pagination" class="flex justify-center">
             <!-- PREVIOUS PAGE -->
             <li class="<?= ($datas['currentPage'] == 1) ? "display-none" : "" ?>">
-                <a class="controller previous" title="Page précédente" href="indexAdmin.php?action=comments&page=<?= $datas['currentPage'] - 1 ?>"><</a>
+                <a class="controller previous" title="Page précédente" href="indexAdmin.php?action=comments&page=<?= $datas['currentPage'] - 1 ?>">&lt;</a>
             </li>
             <!-- ALL PAGES NUMBER -->
             <?php for($page = 1; $page <= $datas['pages']; $page++): ?>
@@ -52,7 +52,7 @@
             <?php endfor ?>
                 <!-- NEXT PAGE -->
                 <li class="<?= ($datas['currentPage'] == $datas['pages']) ? "display-none" : "" ?>">
-                <a class="controller next" title="Page suivante" href="indexAdmin.php?action=comments&page=<?= $datas['currentPage'] + 1 ?>">></a>
+                <a class="controller next" title="Page suivante" href="indexAdmin.php?action=comments&page=<?= $datas['currentPage'] + 1 ?>">&gt;</a>
             </li>
         </ul>
     </nav>

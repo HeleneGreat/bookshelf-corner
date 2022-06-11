@@ -1,26 +1,14 @@
-<?php include_once('./App/Views/admin/layouts/head.php');
- ?>
+<?php $currentPageTitle = "Menu de navigation"; ?>
 
-<!-- Blur element when mobile nav is open -->
-<div id="blur" class="display-none"></div>
+<?php include_once('./App/Views/admin/layouts/head.php') ;?>
 
-
-<!-- HEADER -->
-<header>
-    <div id="bandeau-admin">
-        <div class="container">
-            <h2><?= $blog['name']; ?></h2>
-            <h3>Espace admin</h3>
-        </div>
-        <div id="open-menu" class="menu-toggle mobile"><a title="Menu" href="indexAdmin.php?action=menu"><i class="fas fa-bars"></i></a></div>
-    </div>
-</header>
 
 <div class="container flex justify-between">
-    <nav id="nav-admin">
+    <nav id="nav-admin" class="no-js">
         <div id="nav-profile">
             <img src="./App/Public/<?= $_SESSION['role'] > 0 ? "Admin" : "Users" ;?>/images/<?= $_SESSION['picture']; ?>" alt="Mon image de profil">
             <p><?= $_SESSION['pseudo'] ;?></p>
+            <a class="exit" href="indexAdmin.php" title="Revenir au tableau de bord"><i class="fa-solid fa-xmark"></i></a>
         </div>
         <ul>
             <li><a href="index.php" title="<?= $blog['name']; ?>"><i class="fas fa-arrow-left"></i> Retourner au blog</a></li>
@@ -46,19 +34,3 @@
             <li><a class="disconnect" href="indexAdmin.php?action=<?= $_SESSION['role'] === 0 ? "userDisconnect" : "disconnect";?>" title="Se déconnecter"><i class="fas fa-sign-out-alt"></i> Se déconnecter</a></li>
         </ul>
     </nav>
-
-    <main >
-
-    <!-- Button back to top of the page -->
-    <!-- not shown on book pages, where there already is a fixed bottom button -->
-    <?php if($_GET['action'] !== "livres" && $_GET['action'] !== "livresview"){;?>
-        <div id="back-to-top">
-            <a href="#bandeau-admin" title="Retour en haut de la page"><i class="fa-solid fa-circle-chevron-up"></i></a>
-        </div>
-    <?php } ;?>
-
-    
-    <!-- Div for error management -->
-    <?php if(isset($datas['feedback'])) {;?>
-        <div id="feedback" class="center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
-    <?php }; ?>

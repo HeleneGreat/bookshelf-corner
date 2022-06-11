@@ -14,7 +14,7 @@
         <article class="flex justify-between align-items-center">
             <div class="flex">
                 <img src="./App/Public/Books/images/<?= $book['bookPicture']; ?>" alt="Couverture <?= $book['title']; ?>">
-                <p class="list-title"><?= $book['title']; ?></p>
+                <h2 class="list-title"><?= $book['title']; ?></h2>
             </div>
             <div class="switch">
                 <input title="Ajouter ou enlever du slider" type="checkbox" name="slider<?= $book['id']; ?>" value="<?= $book['id']; ?>" <?php if($book['slider'] == "1"){ echo "checked";} ?>>

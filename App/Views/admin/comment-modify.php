@@ -3,7 +3,7 @@
 
 
 <section id="comment-modify" class="container-lg">
-    <div class="retour"><a href="indexAdmin.php?action=comments-mine"><i class="fas fa-arrow-circle-left"></i></a></div>
+    <div class="retour"><a title="Retour" href="indexAdmin.php?action=comments-mine"><i class="fas fa-arrow-circle-left"></i></a></div>
 
     <h1>Modifier mon commentaire</h1> 
 

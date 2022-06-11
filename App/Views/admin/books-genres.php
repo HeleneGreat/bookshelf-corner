@@ -15,7 +15,7 @@
                     <div class="cat-img text-center">
                         <img src="./App/Public/Books/images/<?= $data['picture']; ?>" alt="Genre : <?= $data['category']; ?>">
                     </div>
-                    <p class="list-title"><?= $data['category']; ?></p>
+                    <h2 class="list-title"><?= $data['category']; ?></h2>
                 </div>
                 <div class="flex cat-link">
                     <?php if($data['id'] != 21){ ?>
@@ -27,11 +27,11 @@
             <?php if($data['id'] != 21){ ?>
             <!-- FORM MODIFY GENRE -->
             <form id="modify<?= $data['id']; ?>" action="indexAdmin.php?action=genreModifyPost&id=<?= $data['id']; ?>" method="post" enctype="multipart/form-data" class="flex display-none">
-                <label for="picture" class="custom-file-upload-cat ajout">
+                <label class="custom-file-upload-cat ajout">
                     <img src="./App/Public/Admin/images/picture.png" alt="Ajouter une icône" title="Ajouter une icône">
                     <input type="file" name="picture" id="inputImg<?= $data['id']; ?>" accept="image/*">
                 </label>
-                <p><input type="text" name="newType" id="newType" value="<?= $data['category']; ?>"></p>
+                <p><input type="text" name="newType" id="newType<?= $data['id']; ?>" value="<?= $data['category']; ?>"></p>
                 <div class="cat-submit">
                     <p><input type="submit" value="Modifier"></p>
                 </div>
@@ -67,7 +67,7 @@
             </div>
             <div>
                 <p id="displayImg">Icône :</p>
-                <label for="picture" class="custom-file-upload-cat ajout center">
+                <label for="inputImg" class="custom-file-upload-cat ajout center">
                     <img src="./App/Public/Admin/images/picture.png" alt="Ajouter une icône" title="Ajouter une icône">
                     <input type="file" name="picture" id="inputImg" accept="image/*">
                 </label>

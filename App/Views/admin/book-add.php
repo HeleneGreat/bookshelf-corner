@@ -13,7 +13,7 @@
             <!-- Book information -->
                 <div>
                     <p><label for="newTitle">Titre du livre</label></p>
-                    <p><input type="text" name="newTitle" id="newTitle"></p>
+                    <p><input type="text" name="newTitle" id="newTitle" required></p>
                 </div>
                 <div>
                     <p><label for="newAuthor">Auteur</label></p>
@@ -40,7 +40,7 @@
                 <!-- input file -->
                 <div>
                     <p id="displayImg">Couverture du livre</p>
-                    <label for="picture" class="custom-file-upload ajout">
+                    <label for="inputImg" class="custom-file-upload ajout">
                         <img src="./App/Public/Admin/images/picture.png" alt="Ajouter une image" title="Ajouter une image">
                         <input type="file" name="picture" id="inputImg" accept="image/*">
                     </label>
@@ -52,12 +52,12 @@
             <div class="zones-text">
                 <div>
                     <p><label for="newCatchphrase">Accroche de l'article</label></p>
-                    <textarea class="catchphrase" name="newCatchphrase" id="newCatchphrase" maxlength="300"></textarea>
+                    <textarea class="catchphrase" name="newCatchphrase" id="newCatchphrase" maxlength="300" required></textarea>
                     <p id="count"><span id="counter">0</span> / 300</p>
                 </div>
                 <div>
                     <p><label for="newContent">Contenu de l'article</label></p>
-                    <textarea class="content" name="newContent" id="newContent"></textarea>
+                    <textarea class="content" name="newContent" id="newContent" required></textarea>
                 </div>
             </div>
         </div>
