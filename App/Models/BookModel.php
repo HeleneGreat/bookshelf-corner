@@ -31,13 +31,19 @@ class BookModel extends Manager
         return $result;
     }
 
-    public function allBooks()
+    public function allBooks($genreId = null)
     {
+        if($genreId == null){
+            $genre = '';
+        }else{
+            $genre = 'WHERE id_genre = ' . $genreId;
+        }
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
-            'SELECT id, title, author, picture, DATE_FORMAT(created_at, "%d %M %Y") AS date, slider 
-            FROM books 
-            ORDER BY id DESC'
+            "SELECT id, title, id_genre, author, picture AS bookPicture, DATE_FORMAT(created_at, '%d %M %Y') AS date, slider 
+            FROM books
+            {$genre}
+            ORDER BY id DESC"
         );
         $req->execute();
         return $req;

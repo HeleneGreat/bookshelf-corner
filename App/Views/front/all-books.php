@@ -19,9 +19,7 @@
 <?php } ;?>
 
     <div class="flex-md justify-between-md">
-    <?php  
-    // var_dump($datas);die;
-    foreach($datas['book'] as $book){ ?>
+    <?php foreach($datas['book'] as $book){ ?>
         <article class="book-card center flex col justify-between">
             <h2 class="text-center"><?= 
             substr($book['title'], 0, 30); 
@@ -40,6 +38,7 @@
 </section>
 
 <!-- Pagination -->
+<?php if(!isset($_GET['category']) || $_GET['category'] == 0) { ?>
 <nav>
     <ul id="pagination" class="center flex justify-center">
         <!-- PREVIOUS PAGE -->
@@ -58,7 +57,7 @@
         </li>
     </ul>
 </nav>
-
+<?php } ;?>
 
 
 

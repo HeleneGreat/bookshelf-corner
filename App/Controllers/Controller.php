@@ -120,7 +120,7 @@ class Controller
             $new = new \Projet\Models\BookModel();
             $column = "title";
             $redirection = "livres";
-            $check = $newdata['newTitle'];
+            $check = $newdata[':newTitle'];
         }elseif($table == "genres"){
             $new = new \Projet\Models\BookModel();
             $column = 'category';

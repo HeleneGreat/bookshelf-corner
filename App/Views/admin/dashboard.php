@@ -15,7 +15,7 @@ include_once('./App/Views/admin/layouts/header.php') ;
             <div class="last flex col">
                 <p class="text-center">Dernier livre ajouté au blog</p>
                 <a title="Voir ce livre sur le blog" href="index.php?action=un-livre&id=<?=$datas['lastBook']['id'];?>">
-                <p class="text-center"><img src="./App/Public/Books/images/<?=$datas['lastBook']['picture']; ?>" class="cover" alt="Couverture du livre <?=$datas['lastBook']['title']; ?>"></p>
+                <p class="text-center"><img src="./App/Public/Books/images/<?=$datas['lastBook']['bookPicture']; ?>" class="cover" alt="Couverture du livre <?=$datas['lastBook']['title']; ?>"></p>
                     <p class="italic text-center">
                     <?= substr($datas['lastBook']['title'], 0, 30); 
                         if(strlen($datas['lastBook']['title']) > 30){echo "[...]";}

@@ -18,7 +18,11 @@ class FrontController extends Controller
     {
         $pagination = $this->pagination("books");
         $newBook = new \Projet\Models\BookModel();
-        $book = $newBook->allBooksPagination($pagination, $genreId);
+        if($genreId == 0){
+            $book = $newBook->allBooksPagination($pagination, $genreId);
+        }else{
+            $book = $newBook->allBooks($genreId);
+        }
         $datas['book'] = $book->fetchAll();
         $newGenre = new \Projet\Models\GenreModel();
         $genre = $newGenre->infoGenre($genreId);

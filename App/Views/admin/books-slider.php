@@ -13,7 +13,7 @@
             ?> 
         <article class="flex justify-between align-items-center">
             <div class="flex">
-                <img src="./App/Public/Books/images/<?= $book['picture']; ?>" alt="Couverture <?= $book['title']; ?>">
+                <img src="./App/Public/Books/images/<?= $book['bookPicture']; ?>" alt="Couverture <?= $book['title']; ?>">
                 <p class="list-title"><?= $book['title']; ?></p>
             </div>
             <div class="switch">

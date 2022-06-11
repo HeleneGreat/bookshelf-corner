@@ -11,7 +11,7 @@
         if(isset($book['title'])){
         ?> 
         <article class="flex">
-            <img src="./App/Public/Books/images/<?= $book['picture']; ?>" alt="Couverture <?= $book['title']; ?>">
+            <img src="./App/Public/Books/images/<?= $book['bookPicture']; ?>" alt="Couverture <?= $book['title']; ?>">
             <div class='info'>
                 <p class="list-title"><?= $book['title']; ?></p>
                 <p class="list-date"><?= $book['date']; ?></p>

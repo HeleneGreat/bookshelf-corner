@@ -788,6 +788,7 @@ main{
 /* ------------ PAGINATION ----------- */
 /* *********************************** */
 #pagination{
+    margin-top: 40px;
     width: fit-content;
     min-width: 25%;
     background: var(--main);

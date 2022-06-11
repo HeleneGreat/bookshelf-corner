@@ -44,6 +44,7 @@ class BookController extends Controller
     public function addLivrePost($Post, $Files, $admin){
         $new = new \Projet\Models\BookModel();
         $data = [
+            ':newTitle' => htmlspecialchars($Post['newTitle']),
             ':newAuthor' => htmlspecialchars($Post['newAuthor']),
             ':newYear_publication' => htmlspecialchars($Post['newYear_publication']),
             ':newGenre' => htmlspecialchars($Post['newGenre']),
@@ -51,7 +52,7 @@ class BookController extends Controller
             ':newContent' => htmlspecialchars($Post['newContent']),
             ':newNotation' => htmlspecialchars($Post['newNotation']),
             ":adminId" => $admin];
-        $newName = $this->checkForDuplicate("books", htmlspecialchars($Post['newTitle']));
+        $newName = $this->checkForDuplicate("books", $data);
         if($newName == "nameOk"){
             $data[':newTitle'] = htmlspecialchars($Post['newTitle']);
         }
