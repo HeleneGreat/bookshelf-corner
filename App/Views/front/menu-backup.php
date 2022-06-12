@@ -16,7 +16,7 @@
                             <a class="btn btn-secondary" href="index.php?action=connexionUser">Se Connecter</a>
                         <?php }elseif($_SESSION['role'] > 0){ ?>
                             <a class="btn btn-secondary" href="indexAdmin.php?action=dashboard">Espace admin</a>
-                        <?php }elseif($_SESSION['role'] === 0){ ?>
+                        <?php }elseif($_SESSION['role'] == 0){ ?>
                             <a class="btn btn-secondary" href="indexAdmin.php?action=userDashboard">Mon compte</a>
                         <?php }; ?>
                     </div>
@@ -38,7 +38,7 @@
                         <li class="mobile"><a class="btn btn-secondary" href="indexAdmin.php?action=connexionUser">Se Connecter</a></li>
                     <?php }elseif($_SESSION['role'] > 0){ ?>
                         <li class="mobile"><a class="btn btn-secondary" href="indexAdmin.php?action=dashboard">Espace admin</a></li>
-                    <?php }elseif($_SESSION['role'] === 0){ ?>
+                    <?php }elseif($_SESSION['role'] == 0){ ?>
                         <li class="mobile"><a class="btn btn-secondary" href="indexAdmin.php?action=userDashboard">Mon compte</a></li>
                     <?php }; ?>
                     </ul>

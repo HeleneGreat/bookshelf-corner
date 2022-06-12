@@ -1,4 +1,5 @@
-<?php include_once('./App/Views/front/layouts/head.php') ;?>
+<?php include_once('./App/Views/front/layouts/head.php') ;
+?>
 
 <header id="bandeau">
     <div>
@@ -17,7 +18,7 @@
                             <a class="btn btn-secondary" title="Se connecter" href="index.php?action=connexionUser">Se Connecter</a>
                         <?php }elseif($_SESSION['role'] > 0){ ?>
                             <a class="btn btn-secondary" title="Espace administrateur" href="indexAdmin.php?action=dashboard">Espace admin</a>
-                        <?php }elseif($_SESSION['role'] === 0){ ?>
+                        <?php }elseif($_SESSION['role'] == 0){ ?>
                             <a class="btn btn-secondary" title="Mon compte" href="indexAdmin.php?action=userDashboard">Mon compte</a>
                         <?php }; ?>
                     </div>
@@ -36,10 +37,10 @@
                         <li><a title="A propos" href="index.php?action=about" <?php if(isset($_GET['action']) && $_GET['action'] == "about"){echo "class='active'";} ?>>A propos</a></li>
                         <li><a title="Nous contacter" href="index.php?action=contact" <?php if(isset($_GET['action']) && $_GET['action'] == "contact"){echo "class='active'";} ?>>Nous contacter</a></li>
                     <?php if(empty($_SESSION)){ ?>
-                        <li class="mobile"><a class="btn btn-secondary" title="Se connecter" href="indexAdmin.php?action=connexionUser">Se Connecter</a></li>
+                        <li class="mobile"><a class="btn btn-secondary" title="Se connecter" href="index.php?action=connexionUser">Se Connecter</a></li>
                     <?php }elseif($_SESSION['role'] > 0){ ?>
                         <li class="mobile"><a class="btn btn-secondary" title="Espace administrateur" href="indexAdmin.php?action=dashboard">Espace admin</a></li>
-                    <?php }elseif($_SESSION['role'] === 0){ ?>
+                    <?php }elseif($_SESSION['role'] == 0){ ?>
                         <li class="mobile"><a class="btn btn-secondary" title="Mon compte" href="indexAdmin.php?action=userDashboard">Mon compte</a></li>
                     <?php }; ?>
                     </ul>

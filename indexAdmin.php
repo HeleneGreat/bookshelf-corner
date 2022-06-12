@@ -57,6 +57,7 @@ try
 
         elseif ($_GET['action'] == "disconnect")
         {
+            session_unset();
             session_destroy();
             $adminController->connexionAdmin();
         }
@@ -335,6 +336,7 @@ try
 
         elseif ($_GET['action'] == "userDisconnect")
         {
+            session_unset();
             session_destroy();
             $userController->connexionUser();
         }

@@ -12,7 +12,7 @@ class AdminController extends Controller
     /********************************************************/
     public function addAdmin()
     {
-        if($_SESSION['role'] === 2){
+        if($_SESSION['role'] == 2){
             if(isset($_GET['status'])){
                 $statusMessage = new SubmitMessage("","");
                 $datas['feedback'] = $statusMessage->accountMessage();

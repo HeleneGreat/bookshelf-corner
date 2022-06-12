@@ -15,7 +15,7 @@ class Controller
         $genres = $allGenres->fetchAll();
         $newBook = new \Projet\Models\BookModel();
         $lastThreeBooks = $newBook->lastBooks(3);
-        $lastBooks = $lastThreeBooks->fetchAll();
+        $lastBooks  = $lastThreeBooks->fetchAll();
         include('./App/Views/front/' . $viewName . '.php');
     }
 
@@ -24,7 +24,7 @@ class Controller
         $new = new \Projet\Models\BlogModel();
         $blogs = $new->blogInfo(1);
         $blog = $blogs->fetch();
-        if (!empty($_SESSION) && $_SESSION['role'] === 0){
+        if (!empty($_SESSION) && $_SESSION['role'] == 0){
             include('./App/Views/admin/' . $viewName . '.php');
         }else{
             header('Location: index.php?action=error&status=error&from=no-user-account');
@@ -110,10 +110,10 @@ class Controller
             }elseif($table == "users"){
                 $new = new \Projet\Models\UserModel();
             }
-            if(str_contains($newdata, "@")){
+            if(strpos($newdata, "@")){
                 $column = "mail";
             }
-            if(!str_contains($newdata, "@")){
+            if(!strpos($newdata, "@")){
                 $column = "pseudo";
             }
         }elseif($table == "books"){
@@ -198,7 +198,7 @@ class Controller
 
     public function error404()
     {
-        if(!empty($_SESSION) && $_SESSION['role'] === 0){
+        if(!empty($_SESSION) && $_SESSION['role'] == 0){
             return $this->viewUser("error404");
         }else{
             return $this->viewAdmin("error404");

@@ -100,7 +100,7 @@ class UserController extends Controller
                 $_SESSION['mdp'] = $result['mdp'];
                 $_SESSION['pseudo'] = $result['pseudo'];
                 $_SESSION['picture'] = $result['picture'];
-                $_SESSION['role'] = $result['role'];            
+                $_SESSION['role'] = $result['role'];
                 header('Location: indexAdmin.php?action=userDashboard');
             }
             else{

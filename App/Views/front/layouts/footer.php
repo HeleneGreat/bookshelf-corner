@@ -11,7 +11,7 @@
                 <h3>Espace administrateur</h3>
                 <p class="account">Pour gérer l'ensemble du blog et publier de nouveaux contenus, rendez-vous sur votre tableau de bord.</p>
                 <a class="btn btn-secondary" title="Espace administrateur" href="indexAdmin.php?action=dashboard">Espace admin</a>
-            <?php }elseif($_SESSION['role'] === 0){ ?>
+            <?php }elseif($_SESSION['role'] == 0){ ?>
                 <h3>Mon compte</h3>
                 <p class="account">Rendez-vous sur votre tableau de bord pour gérer votre profil et vos commentaires.</p>
                 <a class="btn btn-secondary" title="Mon compte" href="indexAdmin.php?action=userDashboard">Mon compte</a>
