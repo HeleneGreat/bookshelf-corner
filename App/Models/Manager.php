@@ -8,7 +8,8 @@ class Manager
     protected static function dbConnect()
     {
         try{
-            $bdd = new \PDO('mysql:host=localhost;dbname=bookshelf_corner;charset=utf8', 'root', '');
+            // $bdd = new \PDO('mysql:host=localhost;dbname=bookshelf_corner;charset=utf8', 'root', '');
+            $bdd = new \PDO('mysql:host=mysql-helenegreat.alwaysdata.net;dbname=helenegreat_bookshelf_corner;charset=utf8', '250374', '12rgb44N300!');
             $bdd->query("SET lc_time_names = 'fr_FR'");
             return $bdd;
         }        
