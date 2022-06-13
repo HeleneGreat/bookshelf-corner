@@ -1,4 +1,5 @@
 <?php $currentPageTitle = $datas['book']['title'] . ", mon avis";
+$errorMngt = "ignore this page";
 include ('layouts/header.php');
 ?>
 

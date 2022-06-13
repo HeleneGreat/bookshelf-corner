@@ -210,10 +210,10 @@ class UserController extends Controller
             $userPseudo = $this->infoUser($userId)['pseudo'];
         }
         // Update the $_SESSION information with this update
-        if($redirection == null || !str_contains($redirection != null, "pbPseudo")){
+        if($redirection == null || !strpos($redirection != null, "pbPseudo")){
             $_SESSION['pseudo'] = $userPseudo;
         }
-        if($redirection == null || !str_contains($redirection, "pbMail")){
+        if($redirection == null || !strpos($redirection, "pbMail")){
             $_SESSION['mail'] = $userMail;
         }        
         $_SESSION['picture'] = $fileName;

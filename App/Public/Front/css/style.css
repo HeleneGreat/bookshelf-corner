@@ -1141,6 +1141,16 @@ input[type="radio"]:checked::before {
     margin-top: 60px;
 }
 
+/* ******************************************* */
+/* ---------------- PAGE ERROR --------------- */
+/* ******************************************* */
+#error-page a{
+    color: var(--main);
+}
+
+#error-page a:hover{
+    text-decoration: underline;
+}
 
 /* ***************************************** */
 /* ------------ MENTIONS LEGALES ----------- */

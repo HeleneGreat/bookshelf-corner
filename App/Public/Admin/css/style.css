@@ -1321,7 +1321,16 @@ img.old-picture{
     color: rgb(255, 255, 255);
 }
 
+/* ******************************************* */
+/* ---------------- PAGE ERROR --------------- */
+/* ******************************************* */
+#error-page a.error-contact{
+    color: var(--dashboard);
+}
 
+#error-page a.error-contact:hover{
+    text-decoration: underline;
+}
 
 /* ********************************************** */
 /* ---------------- MEDIA QUERIES --------------- */

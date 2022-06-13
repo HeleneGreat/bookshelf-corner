@@ -2,11 +2,11 @@
  include_once('layouts/header.php'); 
 ?>
 
-<section id="error" class="container">
+<section id="error-page" class="container">
 
     <h1>Oups, une erreur s'est produite.</h1>
     <p>Veuillez nous en excuser.</p>
-    <p>Vous pouvez nous la signaler grâce au formulaire de contact.</p>
+    <p>Vous pouvez nous la signaler grâce au <a class="error-contact" href="index.php?action=contact">formulaire de contact</a>.</p>
 
 </section>
 

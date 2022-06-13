@@ -242,10 +242,10 @@ class AdminController extends Controller
             $adminPseudo = $this->infoAdmin($adminId)['pseudo'];
         }
         // Update the $_SESSION information with this update
-        if($redirection == null || !str_contains($redirection != null, "pbPseudo")){
+        if($redirection == null || !strpos($redirection != null, "pbPseudo")){
             $_SESSION['pseudo'] = $adminPseudo;
         }
-        if($redirection == null || !str_contains($redirection, "pbMail")){
+        if($redirection == null || !strpos($redirection, "pbMail")){
             $_SESSION['mail'] = $adminMail;
         }        
         $_SESSION['picture'] = $fileName;

@@ -1,5 +1,6 @@
 <?php include_once('./App/Views/front/layouts/head.php') ;
 ?>
+<div id="top-page"></div>
 
 <header id="bandeau">
     <div>
@@ -57,12 +58,12 @@
 
     <!-- Button back to top of the page -->
     <div id="back-to-top">
-        <a href="#bandeau" title="Retour en haut de la page"><i class="fa-solid fa-circle-chevron-up"></i></a>
+        <a href="#top-page" title="Retour en haut de la page"><i class="fa-solid fa-circle-chevron-up"></i></a>
     </div>
 
     
 <!-- Div for error management -->
-<?php if(isset($datas['feedback'])) {;?>
+<?php if(isset($datas['feedback']) && $errorMngt != "ignore this page") {;?>
     <div id="feedback" class="center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
 <?php }; ?>
 
