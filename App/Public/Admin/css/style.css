@@ -1274,6 +1274,10 @@ img.old-picture{
     font-weight: bold;
 }
 
+#account #inputImg{
+    max-width: 90%;
+}
+
 #account input[type="submit"]{
     margin-top: 30px
 }
