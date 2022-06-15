@@ -32,6 +32,10 @@ class BookController extends Controller
         $new = new \Projet\Models\GenreModel();
         $data = $new->categoriesList();
         $datas = $data->fetchAll();
+        if(isset($_GET['status'])){
+            $userMessage = new SubmitMessage("", "");
+            $datas["feedback"] = $userMessage->livresMessage();
+        }
         return $this->validAccess("book-add", $datas);
     }
 
@@ -42,6 +46,10 @@ class BookController extends Controller
     }
 
     public function addLivrePost($Post, $Files, $admin){
+        if(isset($Files['picture']['size']) && $Files['picture']['size'] > 1000000){
+            header('Location: indexAdmin.php?action=livres&status=error&&from=img');
+            return;
+        }
         $new = new \Projet\Models\BookModel();
         $data = [
             ':newTitle' => htmlspecialchars($Post['newTitle']),
@@ -94,7 +102,7 @@ class BookController extends Controller
             $datas = [
                 "book" => $datasFirst,
                 "genres" => $datasSecond
-            ] ;
+                ] ;
             return $this->validAccess("book-modify", $datas);
         }else{
             return $this->error404();
@@ -103,6 +111,10 @@ class BookController extends Controller
 
     public function modifyLivrePost($bookId, $Post, $Files){
         $new = new \Projet\Models\BookModel();
+        if(isset($Files['picture']['size']) && $Files['picture']['size'] > 1000000){
+            header('Location: indexAdmin.php?action=livres&status=error&&from=img');
+            return;
+        }
         $purpose = "book";
         $folder = "Books";
         if(!empty($Files) && $Files['picture']['name'] !== ""){

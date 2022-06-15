@@ -45,19 +45,18 @@ class SubmitMessage
         // Error
         if($_GET['from'] == "connexionMail"){
             $userMessage = new SubmitMessage("error", "Aucun compte n'est associé à cette adresse mail !");
-        }
-        if($_GET['from'] == "connexionPsw"){
+        }elseif($_GET['from'] == "connexionPsw"){
             $userMessage = new SubmitMessage("error", "Le mot de passe est erroné !");
-        }
-        if($_GET['from'] == "createAccountMail"){
+        }elseif($_GET['from'] == "createAccountMail"){
             $userMessage = new SubmitMessage("error", "Un compte est déjà associé à ce mail !");
-        }
-        if($_GET['from'] == "createAccountPseudo"){
+        }elseif($_GET['from'] == "createAccountPseudo"){
             $userMessage = new SubmitMessage("error", "Ce pseudo est déjà utilisé !");
-        }
-        if($_GET['from'] == "createAccountMailPseudo"){
+        }elseif($_GET['from'] == "createAccountMailPseudo"){
             $userMessage = new SubmitMessage("error", "Ce mail et ce pseudo sont déjà utilisés !");
+        }elseif($_GET['from'] == "img"){
+            $userMessage = new SubmitMessage("error", "La taille limite autorisée pour les photos de profil est de 1 Mo");
         }
+
         $datas = $userMessage->formatedMessage();
         return $datas;
     }
@@ -80,9 +79,11 @@ class SubmitMessage
         elseif ($_GET['from'] == "modifyPsw")
         {
             $userMessage = new SubmitMessage("error", "Mot de passe incorrect !");
+        }elseif($_GET['from'] == "img"){
+            $userMessage = new SubmitMessage("error", "La taille limite autorisée pour les photos de profil est de 1 Mo");
         }
         // Success
-        if ($_GET['from'] == "modify") {
+        elseif($_GET['from'] == "modify") {
             $userMessage = new SubmitMessage("success", "Vos informations ont bien été modifiées !");
         }
         $datas = $userMessage->formatedMessage();
@@ -132,6 +133,9 @@ class SubmitMessage
         elseif ($_GET['from'] == "slider")
         {
             $userMessage = new SubmitMessage("success", "Le slider a été mis à jour !");
+        }
+        elseif($_GET['from'] == "img"){
+            $userMessage = new SubmitMessage("error", "La taille limite autorisée pour les photos de profil est de 1 Mo");
         }
         $datas = $userMessage->formatedMessage();
         return $datas;

@@ -11,7 +11,7 @@ include_once('./App/Views/admin/layouts/header.php');?>
             <div>
             <!-- Book information -->
                 <div>
-                    <p><label for="newTitle">Titre du livre</label></p>
+                    <p><label for="newTitle">Titre du livre <span class="required">*</span></label></p>
                     <p><input type="text" name="newTitle" id="newTitle" value="<?= $datas['book']['title']; ?>" required></p>
                 </div>
                 <div>
@@ -23,9 +23,8 @@ include_once('./App/Views/admin/layouts/header.php');?>
                     <p><input type="text" name="newYear_publication" id="newYear_publication" size="4" value="<?= $datas['book']['year_publication']; ?>"></p>
                 </div>
                 <div>
-                    <p><label for="newGenre">Genre</label></p>
+                    <p><label for="newGenre">Genre <span class="required">*</span></label></p>
                     <select id="newGenre" name="newGenre">
-                        <!-- <option value="<?= $datas['book']['category']; ?>" selected><?= $datas['book']['category']; ?></option> -->
                         <?php foreach ($datas['genres'] as $data) { ?>
                             <option value="<?= $data['category']; ?>"
                                 <?php if($datas['book']['category'] == $data['category'] ) { echo "selected" ;} ; ?>
@@ -56,12 +55,12 @@ include_once('./App/Views/admin/layouts/header.php');?>
             <!-- Text zones -->
             <div class="zones-text">                
                 <div>
-                    <p><label for="newCatchphrase">Accroche de l'article</label></p>
+                    <p><label for="newCatchphrase">Accroche de l'article <span class="required">*</span></label></p>
                     <textarea class="catchphrase" name="newCatchphrase" id="newCatchphrase" maxlength="300" required><?= $datas['book']['catchphrase']; ?></textarea>
                     <p id="count"><span id="counter">0</span> / 300</p>
                 </div>
                 <div>
-                    <p><label for="newContent">Contenu de l'article</label></p>
+                    <p><label for="newContent">Contenu de l'article <span class="required">*</span></label></p>
                     <textarea class="content" name="newContent" id="newContent" required><?= $datas['book']['content']; ?></textarea>
                 </div>
             </div>

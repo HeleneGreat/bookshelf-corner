@@ -65,8 +65,8 @@ class Controller
         $extension = strtolower(end($tabExtension));
         // Extensions accepted
         $extensions = ['jpg', 'png', 'jpeg', 'gif', 'webp'];
-        // Max size accepted in octet (2000000 octets = 2 Mo)
-        $maxSize = 2000000;
+        // Max size accepted in octet (1000000 octets = 1 Mo)
+        $maxSize = 1000000;
         if(in_array($extension, $extensions) && $size <= $maxSize && $error == 0){
             // Files are renamed like this example : "admin_22.png"
             $fileName = filter_var($purpose . "_" . $id . "." . $extension);
@@ -74,7 +74,7 @@ class Controller
             move_uploaded_file($tmpName, "./App/Public/$folder/images/" . $fileName);
             return $fileName;
         }
-        else { echo "Une erreur est survenue. Vous devez ajouter une image de profil. La taille du fichier est limitée à 2 Mo. "; }
+        else { echo "Une erreur est survenue. Vous devez ajouter une image de profil. La taille du fichier est limitée à 1 Mo. "; }
     }
 
     // After row creation in BDD, update the BDD with the picture name

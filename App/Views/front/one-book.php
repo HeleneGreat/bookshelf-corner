@@ -6,6 +6,12 @@ include ('layouts/header.php');
 <!-- One book presentation -->
 <section id="one-book" class="container">
     <h1><?= $datas['book']['title']; ?></h1>
+    <div class="bookCat">
+        <a href="index.php?action=livres&category=<?= $genre['id'] ;?>">
+            <img src="./App/Public/Books/images/<?= $datas['book']['catPicture']; ?>" alt="Catégorie : <?= $datas['book']['category']; ?>">
+            <p><?= $datas['book']['category']; ?></p>
+        </a>
+    </div>
     <article>
         <h2 class="italic date">Article publié le <?= $datas['book']['date']; ?> par <?= $datas['book']['pseudo'] ;?></h2>
         <div id="info-book" class="flex-md justify-center align-items-center">
@@ -98,7 +104,7 @@ include ('layouts/header.php');
 <section id="all-comments" class="container">
     <h2 class="text-center">Toutes vos réactions</h2>
     <?php if(empty($datas['comments'])){?>
-        <p class="text-center">Soyez le premier à commenter cet article !</p>
+        <p class="text-center">Soyez le.la premier.ère à commenter cet article !</p>
     <?php };?>
     <?php foreach ($datas['comments'] as $data){?>
         <article id="comment<?= $data['id']; ?>" class="flex-md">

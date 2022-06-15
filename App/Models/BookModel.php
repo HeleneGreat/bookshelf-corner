@@ -40,7 +40,7 @@ class BookModel extends Manager
         }
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
-            "SELECT id, title, id_genre, author, picture AS bookPicture, DATE_FORMAT(created_at, '%d %M %Y') AS date, slider 
+            "SELECT books.id, title, id_genre AS genreId, author, books.picture AS bookPicture, DATE_FORMAT(created_at, '%d %M %Y') AS date, slider
             FROM books
             {$genre}
             ORDER BY id DESC"
@@ -58,7 +58,7 @@ class BookModel extends Manager
         }
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
-            "SELECT genres.id, category, genres.picture AS catPicture, 
+            "SELECT genres.id AS genreId, category, genres.picture AS catPicture, 
             books.id, title, books.picture AS bookPicture, DATE_FORMAT(created_at, '%d %M %Y') AS date 
             FROM books
             INNER JOIN genres 
@@ -76,7 +76,7 @@ class BookModel extends Manager
     {
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
-            'SELECT books.id, title, DATE_FORMAT(created_at, "%d %M %Y") AS date, author, notation, catchphrase, content, books.picture, year_publication, category, administrators.pseudo
+            'SELECT books.id, title, DATE_FORMAT(created_at, "%d %M %Y") AS date, author, notation, catchphrase, content, books.picture AS picture, year_publication, category, genres.picture AS catPicture, administrators.pseudo
             FROM books 
             INNER JOIN genres 
             ON books.id_genre = genres.id 

@@ -22,6 +22,10 @@ class UserController extends Controller
     public function createUserPost ($Post, $Files)
     {
         $redirection = "";
+        if(isset($Files['picture']['size']) && $Files['picture']['size'] > 1000000){
+            header('Location: index.php?action=createUser&status=error&&from=img');
+            return;
+        }
         $createUser = new \Projet\Models\UserModel;
         $pseudo = $this->checkForDuplicate("users", htmlspecialchars($Post['userPseudo']));
         if($pseudo == "nameOk"){
@@ -158,6 +162,10 @@ class UserController extends Controller
         $purpose = "user";
         $folder = "Users";
         $redirection = null;
+        if(isset($Files['picture']['size']) && $Files['picture']['size'] > 1000000){
+            header('Location: indexAdmin.php?action=userAccount&status=error&&from=img');
+            return;
+        }
         // Picture update
         ($Files['picture']['name'] !== "") ? $fileName = $this->verifyFiles($purpose, $folder, $userId) : $fileName = $this->infoUser($userId)['picture'] ;
         // Psw update

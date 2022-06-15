@@ -12,7 +12,7 @@
             <div>
             <!-- Book information -->
                 <div>
-                    <p><label for="newTitle">Titre du livre</label></p>
+                    <p><label for="newTitle">Titre du livre <span class="required">*</span></label></p>
                     <p><input type="text" name="newTitle" id="newTitle" required></p>
                 </div>
                 <div>
@@ -24,7 +24,7 @@
                     <p><input type="text" name="newYear_publication" id="newYear_publication" size="4"></p>
                 </div>
                 <div>
-                    <p><label for="newGenre">Genre</label></p>
+                    <p><label for="newGenre">Genre <span class="required">*</span></label></p>
                     <select id="newGenre" name="newGenre" required>
                         <option value="" class="placeholder" selected disabled hidden></option>
                         <?php foreach($datas as $data){?>
@@ -51,12 +51,12 @@
             <!-- Text zones -->
             <div class="zones-text">
                 <div>
-                    <p><label for="newCatchphrase">Accroche de l'article</label></p>
+                    <p><label for="newCatchphrase">Accroche de l'article <span class="required">*</span></label></p>
                     <textarea class="catchphrase" name="newCatchphrase" id="newCatchphrase" maxlength="300" required></textarea>
                     <p id="count"><span id="counter">0</span> / 300</p>
                 </div>
                 <div>
-                    <p><label for="newContent">Contenu de l'article</label></p>
+                    <p><label for="newContent">Contenu de l'article <span class="required">*</span></label></p>
                     <textarea class="content" name="newContent" id="newContent" required></textarea>
                 </div>
             </div>

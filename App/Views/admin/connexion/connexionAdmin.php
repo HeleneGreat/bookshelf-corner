@@ -7,16 +7,21 @@
 <?php }; ?>
 
 <section id="admin-connexion" class="container text-center">
+    <a href="index.php" class="btn"><i class="fas fa-arrow-left"></i> Retourner au blog</a>
 
     <h1>Se connecter en tant qu'administrateur</h1>
 
     <form action="indexAdmin.php?action=connexionAdminPost" method="post">
         <fieldset>
+            <p class="label"><label>Adresse mail</label></p>
             <p><input type="email" name="adminMail" id="mail" placeholder="Votre adresse e-mail" value=""></p>
-            <p><input type="password" name="mdp" id="mdp" placeholder="Votre mot de passe" value=""></p>
+            <p class="label"><label>Mot de passe</label></p>
+            <p><input type="password" autocomplete="new-password" name="mdp" id="mdp" placeholder="Votre mot de passe" value=""></p>
+            
             <input type="submit" value="Se connecter">
         </fieldset>
     </form>
+
 
 </section>
 

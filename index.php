@@ -136,12 +136,12 @@ try
 
 catch (Exception $e)
 {
-    header('Location: index.php?action=error');
-    // echo $e->getMessage();
+    // header('Location: index.php?action=error');
+    echo $e->getMessage();
 }
 
 catch (Error $e)
 {
-    header('Location: index.php?action=error');
-    // echo $e->getMessage();
+    // header('Location: index.php?action=error');
+    echo $e->getMessage();
 }

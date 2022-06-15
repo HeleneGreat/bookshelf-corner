@@ -25,7 +25,16 @@
             substr($book['title'], 0, 30); 
             if(strlen($book['title']) > 30){echo "[...]";}
             ?></h2>
-            <p class="text-center date"><?= $book['date'] ?></p>
+            <p class="text-center date">
+                <a href="index.php?action=livres&category=<?= $book['genreId'] ;?>">
+                    <?php if(isset($_GET['category']) && $_GET['category'] > 0){ ;?>
+                        <img title="Catégorie <?= $datas['genre']['category']?>" src="./App/Public/Books/images/<?= $datas['catPicture']?>" alt="Catégorie">
+                    <?php }else{ ;?>
+                        <img title="Catégorie <?= $book['category']?>" src="./App/Public/Books/images/<?= $book['catPicture']?>" alt="Catégorie <?= $book['category'] ;?>">
+                    <?php } ;?>
+                </a>
+                <?= $book['date'] ?>
+            </p>
             <p class="text-center">
                 <a href="index.php?action=un-livre&id=<?= $book['id'] ?>">
                     <img src="./App/Public/Books/images/<?= $book['bookPicture']; ?>" alt="La couverture du roman <?= $book['title']; ?>">

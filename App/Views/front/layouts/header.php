@@ -63,7 +63,7 @@
 
     
 <!-- Div for error management -->
-<?php if(isset($datas['feedback']) && $errorMngt != "ignore this page") {;?>
+<?php if(isset($datas['feedback']) && !isset($errorMngt)) {;?>
     <div id="feedback" class="center <?= $datas['feedback']['code'] ?>"><p><i class="fa-solid fa-circle-<?= $datas['feedback']['code']  == "error" ? "xmark" : "check"; ?>"></i> <?= $datas['feedback']['message'] ?></p></div>
 <?php }; ?>
 

@@ -20,10 +20,14 @@ class FrontController extends Controller
         $newBook = new \Projet\Models\BookModel();
         if($genreId == 0){
             $book = $newBook->allBooksPagination($pagination, $genreId);
+            $datas['book'] = $book->fetchAll();
         }else{
             $book = $newBook->allBooks($genreId);
+            $datas['book'] = $book->fetchAll();
+            $newCat = new \Projet\Models\GenreModel();
+            $cat = $newCat->infoGenre($genreId);
+            $datas['catPicture'] = $cat->fetch()['picture'];
         }
-        $datas['book'] = $book->fetchAll();
         $newGenre = new \Projet\Models\GenreModel();
         $genre = $newGenre->infoGenre($genreId);
         $datas['genre'] = $genre->fetch();

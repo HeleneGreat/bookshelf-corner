@@ -439,11 +439,6 @@ ul{
     padding-bottom: 20px;
 }
 
-#admin-connexion p,
-#new-admin p{
-    margin-top: 20px;
-}
-
 #new-admin label,
 #new-admin label a{
     font-size: 1rem;
@@ -464,13 +459,42 @@ ul{
     padding-right: 20px;
 }
 
+
+#new-admin .pattern{
+    font-size: 1.1rem;
+    margin: 10px auto;
+    max-width: 400px;
+}
+
 #admin-connexion label,
 #admin-connexion input,
 #new-admin label,
 #new-admin input{
-    font-size: 18px;
+    font-size: 24px;
 }
 
+#new-admin label,
+#new-admin  .label,
+#admin-connexion  label,
+#admin-connexion  .label{
+    color: var(--dashboard);
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+#admin-connexion .btn{
+    background-color: var(--rouge);
+    border-radius: 30px;
+    width: 215px;
+    margin-bottom: 40px;
+}
+
+#admin-connexion .btn,
+#admin-connexion i{
+    color: rgb(255, 255, 255);
+}
+       
 /* Checkbox */
 input[type="checkbox"]{
     appearance: none;
@@ -964,7 +988,7 @@ input[type="checkbox"]:checked::before {
 input[type='submit'], 
 a.btn,
 button.btn{
-    margin-top: 20px;
+    margin-top: 40px;
     color: rgb(255, 255, 255);
     font-size: 1.3rem;
     background-color: var(--dashboard);

@@ -664,7 +664,8 @@ main{
 /* ------------- GENERAL FORMS ------------ */
 /* **************************************** */
 input,
-textarea {
+textarea,
+select, option {
     padding: 8px 8px;
     font-size: 18px;
     margin-top: 8px;
@@ -703,6 +704,11 @@ textarea:focus {
 
 #all-books .book-card p.date{
     font-size: 1.8rem;
+}
+
+#all-books .book-card p.date img{
+    width: 60px;
+    height: auto;
 }
 
 #all-books .book-card img{
@@ -851,6 +857,23 @@ svg g path{
 
 #one-book #article-book .content {
     white-space: pre-line;
+}
+
+#one-book .bookCat{
+    margin: 0 auto;
+    margin-top: -20px;
+    text-align: center;
+}
+
+#one-book .bookCat img{
+    width: 70px;
+    height: auto;
+}
+
+#one-book .bookCat p{
+    color: var(--main);
+    font-size: 1.8rem;
+    font-style: italic;
 }
 
 /* ***************************************** */
@@ -1011,6 +1034,7 @@ svg g path{
 /* **************************************** */
 #contact fieldset{
     border: none;
+    margin-bottom: 30px;
 }
 
 #contact-left,
@@ -1047,23 +1071,33 @@ input::placeholder {
     border: none;
 }
 
-#contact-form textarea,
-#contact-form p {
-    margin-top: 30px;
+#contact-form p{
+    margin-top: 15px;
 }
 
 #contact-form textarea {
+    margin-top: 8px;
     min-width: 90%;
     max-width: 90%;
     min-height: 300px;
+    display: block;
+}
+
+#contact .label{
+    text-align: left;
 }
 
 #contact-form .rgpd {
     text-align: justify;
+    margin-top: 30px;
 }
 
 #contact-form .rgpd label {
     clear: left;
+}
+
+#contact-form .left{
+    text-align: left;
 }
 
 /* radio button + checkboxes */
@@ -1082,7 +1116,7 @@ input[type="radio"] {
 }
 
 input[type="checkbox"] {
-    margin-right: 60px;
+    margin-right: 50px;
     border-radius: 5px;
     display: inline-grid;
 }
@@ -1180,6 +1214,24 @@ input[type="radio"]:checked::before {
     margin-top: 30px;
 }
 
+.label label{
+    color: var(--main);
+}
+
+.label{
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+#user-connexion .pattern{
+    font-size: 1.7rem;
+    margin: 10px auto;
+    max-width: 400px;
+}
+
+#user-connexion #inputImg{
+    max-width: 95%;
+}
 
 /* ********************************************** */
 /* ---------------- MEDIA QUERIES --------------- */
@@ -1327,6 +1379,16 @@ input[type="radio"]:checked::before {
         justify-content: center;
     }
 
+    #one-book{
+        position: relative;
+    }
+    
+    #one-book .bookCat{
+        position: absolute;
+        top: -15px;
+        left: 40px;
+    }
+
     /* ************************** */
     /* ------ BOOK COMMENTS ----- */
     /* ************************** */
@@ -1397,6 +1459,10 @@ input[type="radio"]:checked::before {
 
     #contact a:hover{
         text-decoration: underline;
+    }
+
+    #contact .rgpd{
+        margin-top: 60px;
     }
 
 }

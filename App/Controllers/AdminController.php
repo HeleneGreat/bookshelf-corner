@@ -27,6 +27,10 @@ class AdminController extends Controller
 
     public function createAdminPost ($Post, $Files){
         $redirection = "";
+        if(isset($Files['picture']['size']) && $Files['picture']['size'] > 1000000){
+            header('Location: indexAdmin.php?action=createAccount&status=error&&from=img');
+            return;
+        }
         $createAdmin = new \Projet\Models\AdminModel;
         $pseudo = $this->checkForDuplicate("administrators", htmlspecialchars($Post['adminPseudo']));
         if($pseudo == "nameOk"){
@@ -190,6 +194,10 @@ class AdminController extends Controller
         $purpose = "admin";
         $folder = "Admin";
         $redirection = null;
+        if(isset($Files['picture']['size']) && $Files['picture']['size'] > 1000000){
+            header('Location: indexAdmin.php?action=account&status=error&&from=img');
+            return;
+        }
         // Picture update
         ($Files['picture']['name'] !== "") ? $fileName = $this->verifyFiles($purpose, $folder, $adminId) : $fileName = $this->infoAdmin($adminId)['picture'] ;
         // Psw update
