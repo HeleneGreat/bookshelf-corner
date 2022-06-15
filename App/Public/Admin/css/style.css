@@ -71,6 +71,7 @@ a{
          url('../../Front/fonts/UpperEastSide-webfont.ttf') format('ttf');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -78,6 +79,7 @@ a{
     src: url('../fonts/Roboto-Regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -85,6 +87,7 @@ a{
     src: url('../fonts/Roboto-Italic-webfont.woff') format('woff');
     font-weight: normal;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -92,6 +95,7 @@ a{
     src: url('../fonts/Roboto-Bold-webfont.woff') format('woff');
     font-weight: bold;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -99,6 +103,7 @@ a{
     src: url('../fonts/Roboto-BoldItalic-webfont.woff') format('woff');
     font-weight: bold;
     font-style: italic;
+    font-display: swap;
 }
 
 *{

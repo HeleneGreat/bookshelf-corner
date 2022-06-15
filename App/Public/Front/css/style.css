@@ -49,7 +49,7 @@ MEDIA QUERIES
 /* *******************/
 :root {
     --dark: rgb(44, 41, 41);
-    --main: rgb(238, 95, 79);
+    --main: #ee5f4f;
     --secondary: rgb(55, 134, 237) ;
 }
 
@@ -92,6 +92,7 @@ ul {
     url('../fonts/UpperEastSide-webfont.ttf') format('ttf');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -100,6 +101,7 @@ ul {
     url('../fonts/quicksand-regular-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -108,6 +110,7 @@ ul {
          url('../fonts/quicksand-bold-webfont.woff') format('woff');
     font-weight: bold;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -116,6 +119,7 @@ ul {
          url('../fonts/quicksand-italic-webfont.woff') format('woff');
     font-weight: normal;
     font-style: italic;
+    font-display: swap;
 }
 
 @font-face {
@@ -124,6 +128,7 @@ ul {
          url('../fonts/quicksand-bolditalic-webfont.woff') format('woff');
     font-weight: bold;
     font-style: italic;
+    font-display: swap;
 }
 
 * {
