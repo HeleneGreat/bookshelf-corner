@@ -384,11 +384,13 @@ try
 catch (Exception $e)
 {
     header('Location: indexAdmin.php?action=error');
+    // In developpement, change the error page by this to see the error message :
     // echo $e->getMessage();
 }
 
 catch (Error $e)
 {
     header('Location: indexAdmin.php?action=error');
+    // In developpement, change the error page by this to see the error message :
     // echo $e->getMessage();
 }
