@@ -1,7 +1,9 @@
 </main>
 
+<!-- FOOTER -->
 <footer id="foot">
     <section class="container flex justify-between">
+        <!-- Account -->
         <div class="foot-list">
             <?php if(empty($_SESSION)){ ?>
                 <h3>Créer un compte</h3>
@@ -17,6 +19,7 @@
                 <a class="btn btn-secondary" title="Mon compte" href="indexAdmin.php?action=userDashboard">Mon compte</a>
             <?php }; ?>
         </div>
+        <!-- Book categories -->
         <div class="foot-list">
             <h3>Catégories</h3>
             <ul class="category">
@@ -27,6 +30,7 @@
             <?php } ;?>
             </ul>
         </div>
+        <!-- Three last books -->
         <div class="foot-list">
             <h3>Nos dernières lectures</h3>
             <?php foreach($lastBooks as $lastBook){ ;?>
@@ -40,10 +44,12 @@
             <?php } ;?>
         </div>
     </section>
+    <!-- Copyrights -->
     <p class="legals">HeleneGreat © 2022 - <a href="index.php?action=mentions-legales">Mentions légales</a> - <a href="indexAdmin.php?action=connexionAdmin">Espace administrateur</a></p>
 </footer>
 
 
+<!-- Custom scripts -->
 <script src="./App/Public/Front/js/navigation.js"></script>
 <?php if ($currentPageTitle == "Bienvenue au coin des héros voyageurs"){ ?>
     <script src="./App/Public/Front/js/carousel.js"></script>

@@ -6,6 +6,7 @@ include ('layouts/header.php');
 <!-- One book presentation -->
 <section id="one-book" class="container">
     <h1><?= $datas['book']['title']; ?></h1>
+    <!-- Book category -->
     <div class="bookCat">
         <a href="index.php?action=livres&category=<?= $genre['id'] ;?>">
             <img src="./App/Public/Books/images/<?= $datas['book']['catPicture']; ?>" alt="Catégorie : <?= $datas['book']['category']; ?>">
@@ -15,9 +16,11 @@ include ('layouts/header.php');
     <article>
         <h2 class="italic date">Article publié le <?= $datas['book']['date']; ?> par <?= $datas['book']['pseudo'] ;?></h2>
         <div id="info-book" class="flex-md justify-center align-items-center">
+            <!-- Couverture -->
             <div class="cover">
                 <img src="./App/Public/Books/images/<?= $datas['book']['picture']; ?>" alt="Couverture du livre <?= $datas['book']['title']; ?>">
             </div>
+            <!-- Information section about the book -->
             <div class="book-identity">
                 <ul>
                     <li>Autheur : <span class="bold italic"><?= $datas['book']['author']; ?></span></li>
@@ -25,6 +28,7 @@ include ('layouts/header.php');
                     <li>Genre : <span class="bold italic"><?= $datas['book']['category']; ?></span></li>
                     <li>Mon avis :
                         <span id="notation" class="bold"> <?= $datas['book']['notation'];?> / 5</span>
+                        <!-- Book pile drawing that represents the book's notation -->
                         <svg class="center" width="101" height="99" xmlns="http://www.w3.org/2000/svg">
                             <title/>
                             <g id="imagebot_2">
@@ -60,6 +64,7 @@ include ('layouts/header.php');
                             </g>
                             </g>
                         </svg>
+                        <!-- Appreciation comment based on notation -->
                         <span class="bold"><?php 
                             if($datas['book']['notation'] == 1){ echo "Passez votre chemin, vous avez mieux à faire.";}
                             elseif($datas['book']['notation'] == 2){ echo "Sans plus, ce livre ne m'a rien inspiré.";}
@@ -71,6 +76,7 @@ include ('layouts/header.php');
                 </ul>
             </div>
         </div>
+        <!-- Book review -->
         <div id="article-book">
             <p class="catchphrase bold"><?= $datas['book']['catchphrase']; ?></p>
             <p class="content"><?= $datas['book']['content']; ?></p>
@@ -89,6 +95,7 @@ include ('layouts/header.php');
         <textarea name="content"></textarea>
         <button type="submit" class="btn btn-main center">Publier</button>
     </form>
+    <!-- If the user is not connected -->
     <?php }else{ ?>
         <p class="text-center">Vous devez être connecté.e pour poster un commentaire</p>
     <?php } ;?>
@@ -103,11 +110,14 @@ include ('layouts/header.php');
 <!-- All comments about this book -->
 <section id="all-comments" class="container">
     <h2 class="text-center">Toutes vos réactions</h2>
+    <!-- If there is no comment -->
     <?php if(empty($datas['comments'])){?>
         <p class="text-center">Soyez le.la premier.ère à commenter cet article !</p>
     <?php };?>
+    <!-- Each comment -->
     <?php foreach ($datas['comments'] as $data){?>
         <article id="comment<?= $data['id']; ?>" class="flex-md">
+            <!-- User or admin information -->
             <div class="user-info">
                 <p><img <?php 
                 if(isset($data['userPicture'])){?>
@@ -121,6 +131,7 @@ include ('layouts/header.php');
                 <p class="<?php if(isset($data['adminPseudo'])){ echo "admin-comment ";}?>bold pseudo"><?= $data['userPseudo']; echo $data['adminPseudo'];?></p>
                 <p class="date">Publié le <?= $data['created_at']; ?></p>
             </div>
+            <!-- The comment -->
             <div class="comment">
                 <h3 class="<?php if(isset($data['adminPseudo'])){ echo "admin-comment ";}?>title bold"><?= $data['commentTitle']; ?></h3>
                 <p class="content"><?= $data['commentContent']; ?></p>

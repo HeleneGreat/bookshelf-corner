@@ -21,10 +21,12 @@
     <div class="flex-md justify-between-md">
     <?php foreach($datas['book'] as $book){ ?>
         <article class="book-card center flex col justify-between">
+            <!-- Book title (first 30 caracters) -->
             <h2 class="text-center"><?= 
             substr($book['title'], 0, 30); 
             if(strlen($book['title']) > 30){echo "[...]";}
             ?></h2>
+            <!-- Book category + date -->
             <p class="text-center date">
                 <a href="index.php?action=livres&category=<?= $book['genreId'] ;?>">
                     <?php if(isset($_GET['category']) && $_GET['category'] > 0){ ;?>
@@ -35,11 +37,13 @@
                 </a>
                 <?= $book['date'] ?>
             </p>
+            <!-- Book cover -->
             <p class="text-center">
                 <a href="index.php?action=un-livre&id=<?= $book['id'] ?>">
                     <img src="./App/Public/Books/images/<?= $book['bookPicture']; ?>" alt="La couverture du roman <?= $book['title']; ?>">
                 </a>
             </p>
+            <!-- Book link -->
             <a href="index.php?action=un-livre&id=<?= $book['id'] ?>" class="center btn-book">Lire l'article</a>
         </article>  
     <?php }; ?>

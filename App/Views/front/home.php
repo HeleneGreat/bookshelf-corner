@@ -1,9 +1,9 @@
 <?php $currentPageTitle = "Bienvenue au coin des héros voyageurs"; ?>
 <?php include_once('layouts/header.php');?>
 
-
+<!-- Welcome -->
 <section id="home-landing" class="container">
-    <img src="./App/Public/Front/images/home-banner.png" alt="">
+    <img src="./App/Public/Front/images/home-banner.png" alt="Bienvenue sur le blog des passionné.e.s de lecture">
     <div id="welcome">
         <h1><?= $blog['name']; ?></h1>
         <h2>Bienvenue sur le blog des héros voyageurs</h2>
@@ -13,6 +13,7 @@
     </div>
 </section>
 
+<!-- Carousel -->
 <section id="myCarousel" class="container lg">
     <h2 class="text-center">Les coups de cœur de la rédaction</h2>
     <div class="flex justify-between">
@@ -32,6 +33,7 @@
     </div>
 </section>
 
+<!-- Banner + link to all books -->
 <div id="home-banner">
     <img src="./App/Public/Front/images/livre-devant-bibliotheque.png" alt="">
     <div class="banner-link">
@@ -40,6 +42,7 @@
     </div>
 </div>
 
+<!-- What this blog is about -->
 <section id="home-about" class="container">
     <h2 class="text-center">Une histoire de...</h2>
     <div class="flex-md justify-between">

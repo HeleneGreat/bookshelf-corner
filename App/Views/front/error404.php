@@ -11,6 +11,7 @@
     </section>
 </main>
 
+<!-- Custom scripts -->
 <script src="./App/Public/Front/js/history.js"></script>
 
 </body>
