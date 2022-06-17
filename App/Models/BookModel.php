@@ -8,6 +8,7 @@ class BookModel extends Manager
     /*********************************/
     /************* FRONT *************/
     /*********************************/
+    // Get last books for the footer
     public function lastBooks($number){
         $bdd = $this->dbConnect();
         $req = $bdd->prepare(
@@ -22,6 +23,7 @@ class BookModel extends Manager
     /********************************/
     /************* BACK *************/
     /********************************/
+    // Count all books
     public function countBooks()
     {
         $bdd = $this->dbConnect();
@@ -31,6 +33,7 @@ class BookModel extends Manager
         return $result;
     }
 
+    // Get all books
     public function allBooks($genreId = null)
     {
         if($genreId == null){
@@ -49,6 +52,7 @@ class BookModel extends Manager
         return $req;
     }
 
+    // Get all books with a pagination
     public function allBooksPagination($pagination, $genreId)
     {
         if($genreId > 0){
@@ -72,6 +76,7 @@ class BookModel extends Manager
         return $req;
     }
 
+    // Get one book information
     public function singleBook($bookId)
     {
         $bdd = $this->dbConnect();
@@ -87,6 +92,7 @@ class BookModel extends Manager
         return $req;
     }
 
+    // Add this book to the database
     public function addSingleBook($data)
     {
         $bdd = $this->dbConnect();
@@ -97,6 +103,7 @@ class BookModel extends Manager
         return $req;
     }
 
+    // Modify this book
     public function modifySingleBook($data)
     {
         $bdd = $this->dbConnect();
@@ -108,6 +115,7 @@ class BookModel extends Manager
         return $req;
     }
 
+    // Delete this book
     public function deleteBook($bookId)
     {
         $bdd = $this->dbConnect();
@@ -116,6 +124,7 @@ class BookModel extends Manager
         return $req;
     }
 
+    // When a genre is delete, update all its associated books to the "Other" category
     public function updateBookBeforeDeleteGenre($genreId)
     {
         $bdd = $this->dbConnect();

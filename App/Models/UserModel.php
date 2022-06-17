@@ -5,6 +5,7 @@ namespace Projet\Models;
 class UserModel extends Manager
 {
 
+    // Get all users
     public function allUsers()
     {
         $bdd = $this->dbConnect();
@@ -13,6 +14,7 @@ class UserModel extends Manager
         return $req;
     }
 
+    // Count all users
     public function countUsers()
     {
         $bdd =$this->dbConnect();
@@ -22,6 +24,7 @@ class UserModel extends Manager
         return $result;
     }
 
+    // Information about this user
     public function infoUser($userId)
     {
         $bdd = $this->dbConnect();
@@ -57,6 +60,7 @@ class UserModel extends Manager
         return $req;
     }
 
+    // Modify this user account
     public function modifyUserAccountPost($data)
     {
         $bdd = $this->dbConnect();
@@ -68,6 +72,7 @@ class UserModel extends Manager
     /*******************************************************/
     /******************* USER CONNECTION *******************/
     /*******************************************************/
+    // Add this user
     public static function createUser ($data)
     {
         $bdd = self::dbConnect();
@@ -76,6 +81,7 @@ class UserModel extends Manager
         return $req;
     }
 
+    // Information about user with this email
     public function infoConnexion($mail)
     {
         $bdd = $this->dbConnect();

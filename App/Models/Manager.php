@@ -5,6 +5,7 @@ namespace Projet\Models;
 class Manager
 {
 
+    // Connexion to the database
     protected static function dbConnect()
     {
         try{
@@ -17,6 +18,7 @@ class Manager
         }
     }
 
+    // Add this picture to the admin or user account
     public function updatePicture($data, $table)
     {
         $bdd = $this->dbConnect();
@@ -25,6 +27,7 @@ class Manager
         return $req;
     }
 
+    // Get this user or admin ID
     public function getId($table, $column, $identifiant)
     {
         $bdd = $this->dbConnect();
@@ -37,6 +40,7 @@ class Manager
         return $req;
     }
 
+    // Check if the data is unique (pseudo, email, book title, category)
     public function checkForDuplicate($table, $column, $data)
     {
         $bdd = $this->dbConnect();
@@ -49,6 +53,7 @@ class Manager
         return $req;
     }
 
+    // Count the number of items in this table
     public function countItems($table)
     {
         $bdd = $this->dbConnect();

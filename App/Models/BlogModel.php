@@ -5,6 +5,7 @@ namespace Projet\Models;
 class BlogModel extends Manager
 {
 
+    // Get information about the blog
     public function blogInfo($blogId)
     {
         $bdd = $this->dbConnect();
@@ -13,6 +14,7 @@ class BlogModel extends Manager
         return $req;
     }
 
+    // Update blog name and logo
     public function blogModifyPost($data)
     {
         $bdd = $this->dbConnect();

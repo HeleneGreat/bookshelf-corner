@@ -4,6 +4,7 @@ namespace Projet\Models;
 
 class AdminModel extends Manager
 {
+    // Get all admins
     public function allAdmins()
     {
         $bdd = self::dbConnect();
@@ -12,6 +13,7 @@ class AdminModel extends Manager
         return $req;
     }
 
+    // Information about this admin
     public function infoAdmin($adminId)
     {
         $bdd = $this->dbConnect();
@@ -20,6 +22,7 @@ class AdminModel extends Manager
         return $infoAdmin;
     }
 
+    // Modify this admin account
     public function modifyAccountPost($data)
     {
         $bdd = $this->dbConnect();
@@ -31,6 +34,7 @@ class AdminModel extends Manager
     /********************************************************/
     /******************* ADMIN CONNECTION *******************/
     /********************************************************/
+    // Add this admin
     public static function createAdmin ($data)
     {
         $bdd = self::dbConnect();
@@ -39,6 +43,7 @@ class AdminModel extends Manager
         return $req;
     }
 
+    // Information about admin with this email
     public function infoConnexion($mail)
     {
         $bdd = $this->dbConnect();

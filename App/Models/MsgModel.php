@@ -22,6 +22,7 @@ class MsgModel extends Manager
     /**********************************/
     /************** BACK **************/
     /**********************************/
+    // Count all messages
     public function countMessages()
     {
         $bdd = $this->dbConnect();
@@ -31,6 +32,7 @@ class MsgModel extends Manager
         return $result;
     }
 
+    // Get all messages
     public function allMessages()
     {
         $bdd = $this->dbConnect();
@@ -42,6 +44,7 @@ class MsgModel extends Manager
         return $req;
     }
 
+    // Get all messages with pagination
     public function allMessagesPagination($pagination)
     {
         $bdd = $this->dbConnect();
@@ -56,6 +59,7 @@ class MsgModel extends Manager
         return $req;
     }
 
+    // Get this message
     public function singleMessage($messageId)
     {
         $bdd = $this->dbConnect();
@@ -67,6 +71,7 @@ class MsgModel extends Manager
         return $req;
     }
 
+    // Delete this message
     public function deleteMessage($messageId)
     {
         $bdd = $this->dbConnect();
