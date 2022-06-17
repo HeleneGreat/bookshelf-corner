@@ -5,6 +5,7 @@ namespace Projet\Controllers;
 class BlogController extends Controller
 {
 
+    // Get blog information
     public function blogInfo($blogId)
     {
         $user = new \Projet\Models\BlogModel();
@@ -13,6 +14,7 @@ class BlogController extends Controller
         return $blog;
     }
 
+    // Blog parameters page
     public function blogParameters($blogId)
     {
         $user = new \Projet\Models\BlogModel();
@@ -27,6 +29,7 @@ class BlogController extends Controller
         else{ echo "Vous n'avez pas accès à cette page"; }
     }
 
+    // Blog modify page
     public function blogModify($blogId)
     {
         $user = new \Projet\Models\BlogModel();
@@ -41,6 +44,7 @@ class BlogController extends Controller
             echo "Vous n'avez pas accès à cette page"; }
     }
 
+    // Blog modify form
     public function blogModifyPost($blogId, $Post, $Files)
     {
         $new = new \Projet\Models\BlogModel();

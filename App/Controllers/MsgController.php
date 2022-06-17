@@ -28,6 +28,7 @@ class MsgController extends Controller
     /************************************/
     /*************** BACK ***************/
     /************************************/
+    // All messages page
     public function allMessages()
     {
         $pagination = $this->pagination("messages");
@@ -44,6 +45,7 @@ class MsgController extends Controller
         return $this->validAccess("messages", $datas);
     }
 
+    // This message page
     public function viewMessage($messageId)
     {
         $messages = new \Projet\Models\MsgModel();
@@ -56,6 +58,7 @@ class MsgController extends Controller
         }
     }
 
+    // Delete this message
     public function deleteMessage($messageId)
     {
         $messages = new \Projet\Models\MsgModel();

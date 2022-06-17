@@ -6,6 +6,8 @@ use Projet\Forms\SubmitMessage;
 
 class FrontController extends Controller
 {
+
+    // "Accueil" page
     public function home()
     {
         $new = new \Projet\Models\BookModel();
@@ -14,6 +16,7 @@ class FrontController extends Controller
         return $this->viewFront("home", $datas);
     }
 
+    // All books page or this book category page
     public function allBooks($genreId)
     {
         $pagination = $this->pagination("books");
@@ -41,6 +44,7 @@ class FrontController extends Controller
         }
     }
 
+    // This book page and its comments
     public function oneBook($bookId)
     {
         $newFirst = new \Projet\Models\BookModel();
@@ -64,6 +68,7 @@ class FrontController extends Controller
         }
     }
     
+    // "A propos" page
     public function about()
     {
         $new = new \Projet\Models\AdminModel;
@@ -72,16 +77,19 @@ class FrontController extends Controller
         return $this->viewFront("about", $allAdmins);
     }
     
+    // "Nous contacter" page
     public function contact()
     {
         return $this->viewFront("contact");
     }
     
+    // "Mentions légales" page
     public function legals()
     {
         return $this->viewFront("legals");
     }
 
+    // Error page
     public function error()
     {
         $datas = [];
@@ -93,7 +101,8 @@ class FrontController extends Controller
         }
         return $this->viewFront("error", $datas);
     }
-    
+
+    // 404 error page
     public function error404()
     {
         return $this->viewFront("error404");

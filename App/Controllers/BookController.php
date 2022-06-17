@@ -7,6 +7,7 @@ use Projet\Forms\SubmitMessage;
 class BookController extends Controller
 {
 
+    // Get this book
     public function infoLivre($bookId)
     {
         $new = new \Projet\Models\BookModel();
@@ -15,6 +16,7 @@ class BookController extends Controller
         return $datas;
     }
 
+    // All books page
     public function livresAll()
     {
         $new = new \Projet\Models\BookModel();
@@ -27,6 +29,7 @@ class BookController extends Controller
         return $this->validAccess("books-all", $datas);
     }
 
+    // Add one book page
     public function addLivre()
     {
         $new = new \Projet\Models\GenreModel();
@@ -45,7 +48,9 @@ class BookController extends Controller
         return "no-cover.png";
     }
 
+    // Add one book form
     public function addLivrePost($Post, $Files, $admin){
+        // Verify picture size is < 1 Mo
         if(isset($Files['picture']['size']) && $Files['picture']['size'] > 1000000){
             header('Location: indexAdmin.php?action=livres&status=error&&from=img');
             return;
@@ -60,15 +65,18 @@ class BookController extends Controller
             ':newContent' => htmlspecialchars($Post['newContent']),
             ':newNotation' => htmlspecialchars($Post['newNotation']),
             ":adminId" => $admin];
+        // Verify book title is unique
         $newName = $this->checkForDuplicate("books", $data);
         if($newName == "nameOk"){
             $data[':newTitle'] = htmlspecialchars($Post['newTitle']);
         }
+        // Add book to DB
         $new->addSingleBook($data);
         // Get book ID
         $book = new \Projet\Models\BookModel();
         $infoBook = $book->getId("books", "title", $data[':newTitle']);
         $bookId = $infoBook->fetch();
+        // Add book cover
         $purpose = "book";
         $folder = "Books";
         $Files['picture']['name'] !== "" ? $fileName = $this->verifyFiles($purpose, $folder, $bookId['id']) : $fileName = $this->noCover();
@@ -78,6 +86,7 @@ class BookController extends Controller
         $this->updatePicture($data, 'books');
     }
 
+    // This book page
     public function viewLivre($bookId)
     {
         $new = new \Projet\Models\BookModel();
@@ -90,6 +99,7 @@ class BookController extends Controller
         }
     }
   
+    // Modify this book page
     public function modifyLivre($bookId)
     {
         $newFirst = new \Projet\Models\BookModel();
@@ -109,12 +119,15 @@ class BookController extends Controller
         }
     }
 
+    // Modify this book form
     public function modifyLivrePost($bookId, $Post, $Files){
-        $new = new \Projet\Models\BookModel();
+        // Verify picture size is < 1 Mo
         if(isset($Files['picture']['size']) && $Files['picture']['size'] > 1000000){
             header('Location: indexAdmin.php?action=livres&status=error&&from=img');
             return;
         }
+        // Add book cover
+        $new = new \Projet\Models\BookModel();
         $purpose = "book";
         $folder = "Books";
         if(!empty($Files) && $Files['picture']['name'] !== ""){
@@ -122,7 +135,7 @@ class BookController extends Controller
         } else{
             $fileName = $this->infoLivre($bookId)['picture'];
         }
-         // unique book name
+         // Verify book title is unique
         if(!empty($Post['newTitle'])){
             if($Post['newTitle'] != ""){
                 $dataBook = [
@@ -137,6 +150,7 @@ class BookController extends Controller
         } else{
            $bookName = $this->infoLivre($bookId)['title'];
         }
+        // Update book
         $data = [
             ':id' => $bookId,
             ':newTitle' => $bookName,
@@ -152,6 +166,7 @@ class BookController extends Controller
         header('Location: indexAdmin.php?action=livres&status=success&from=modify');
     }
 
+    // Delete this book
     public function deleteLivre($bookId)
     {
         $infoBook = $this->infoLivre($bookId);
@@ -166,6 +181,7 @@ class BookController extends Controller
     /**************************/
     /********* SLIDER *********/
     /**************************/
+    // Book slider page ("Coups de coeur")
     public function livresSlider()
     {
         $new = new \Projet\Models\BookModel();
@@ -178,6 +194,7 @@ class BookController extends Controller
         return $this->validAccess("books-slider", $datas);
     }
 
+    // Update list of books that are in the slider
     public function sliderSelection($data)
     {
         // First, all books in the DBB are set to slider = 0

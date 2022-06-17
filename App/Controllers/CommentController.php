@@ -36,7 +36,7 @@ class CommentController extends Controller
     /*************************************/
     /*************** ADMIN ***************/
     /*************************************/
-    // List all comments in the admin account
+    // All blog comments page
     public function allComments()
     {
         $pagination = $this->pagination("comments", "allBlogComments");
@@ -80,7 +80,7 @@ class CommentController extends Controller
     /*****************************************/
     /********* USER OR ADMIN ACCOUNT *********/
     /*****************************************/
-    // All the comments added from that user or admin account
+    // All of this user or this admin comments
     public function accountComments() {
         $_SESSION['role'] == 0 ? $table = "user_id" : $table = "admin_id";
         $pagination = $this->pagination("comments");

@@ -10,6 +10,7 @@ class AdminController extends Controller
     /********************************************************/
     /******************* CONNECTION ADMIN *******************/
     /********************************************************/
+    // Add an admin account page
     public function addAdmin()
     {
         if($_SESSION['role'] == 2){
@@ -25,12 +26,15 @@ class AdminController extends Controller
         }
     }
 
+    // Add an admin account form
     public function createAdminPost ($Post, $Files){
         $redirection = "";
+        // Verify picture size is < 1 Mo
         if(isset($Files['picture']['size']) && $Files['picture']['size'] > 1000000){
             header('Location: indexAdmin.php?action=createAccount&status=error&&from=img');
             return;
         }
+        // Verify if pseudo is unique
         $createAdmin = new \Projet\Models\AdminModel;
         $pseudo = $this->checkForDuplicate("administrators", htmlspecialchars($Post['adminPseudo']));
         if($pseudo == "nameOk"){
@@ -38,12 +42,14 @@ class AdminController extends Controller
         }else{
             $redirection .= "pbPseudo";
         }
+        // Verify if mail is unique
         $mail = $this->checkForDuplicate("administrators", htmlspecialchars($Post['adminMail']));
         if($mail == "nameOk"){
             $data[':mail'] = htmlspecialchars($Post['adminMail']);
         }else{
             $redirection .= "pbMail";
         }
+        // Redirection if the pseudo or mail are already taken
         if($redirection == "pbMail"){
             header('Location: indexAdmin.php?action=createAccount&status=error&from=createAccountMail');
         }elseif ($redirection == "pbPseudo"){
@@ -51,13 +57,14 @@ class AdminController extends Controller
         }elseif ($redirection == "pbPseudopbMail"){
             header('Location: indexAdmin.php?action=createAccount&status=error&from=createAccountMailPseudo');
         }
+        // Password hash
         $pass = htmlspecialchars($Post['adminMdp']);
         $mdp = password_hash($pass, PASSWORD_DEFAULT);
         $picture = $Files['picture']['name'];
         $data[':mdp'] = $mdp;
         if(!empty($pseudo) && (!empty($data[':mail']) && (!empty($mdp) && (!empty($picture))))){
             if(filter_var($data[':mail'], FILTER_VALIDATE_EMAIL)){
-                // create admin in BDD
+                // create admin in DB
                 $createAdmin->createAdmin($data);
                 // Get his ID
                 $user = new \Projet\Models\AdminModel;
@@ -67,7 +74,7 @@ class AdminController extends Controller
                 $purpose = "admin";
                 $folder = "Admin";
                 $fileName = $this->verifyFiles($purpose, $folder, $adminId['id']);
-                // Third: update BDD with new picture name
+                // Third: update DB with new picture name
                 $data = [
                     "id" => $adminId['id'],
                     "picture" => $fileName
@@ -77,10 +84,11 @@ class AdminController extends Controller
         } else {
             $userMessage = new SubmitMessage("error", "Tous les champs doivent être remplis !");
             $data["feedback"] = $userMessage->formatedMessage();
-            return $this->viewFront("error", $data);
+            return $this->validAccess("error", $data);
         }
     }
 
+    // Connexion to admin account page
     public function connexionAdmin()
     {
         $datas=[];
@@ -91,6 +99,7 @@ class AdminController extends Controller
         return $this->viewAdmin("connexion/connexionAdmin", $datas);
     }
 
+    // Connexion to admin account form
     public function connexionAdminPost($mail, $mdp)
     {
         // get password
@@ -98,6 +107,7 @@ class AdminController extends Controller
         $connexAdmin = $user->infoConnexion($mail);
         $result = $connexAdmin->fetch();
         if(!empty($result)){
+            // If password is correct => create a session
             $isPasswordCorrect = password_verify($mdp, $result['mdp']);
             if ($isPasswordCorrect){
                 $_SESSION['id'] = $result['id'];
@@ -119,19 +129,24 @@ class AdminController extends Controller
     /*********************************************************/
     /*********************** DASHBOARD ***********************/
     /*********************************************************/
+    // Admin dashboard stats page
     public function dashboard() {
+        // Books stats
         $countBooks = new \Projet\Models\BookModel();
         $nbBooks = $countBooks->countBooks();
         $lastBooks = $countBooks->allBooks();
         $lastBook = $lastBooks->fetch();
+        // Messages stats
         $countMails = new \Projet\Models\MsgModel();
         $nbMails = $countMails->countMessages();
         $lastMails = $countMails->allMessages();
         $lastMail = $lastMails->fetch();
+        // Comments stats
         $countComments = new \Projet\Models\CommentModel();
         $nbComments = $countComments->countComments();
         $lastComments = $countComments->allComments();
         $lastComment = $lastComments->fetch();
+        // Users stats
         $countUsers = new \Projet\Models\UserModel();
         $nbUsers = $countUsers->countUsers();
         $lastUsers = $countUsers->allUsers();
@@ -151,6 +166,7 @@ class AdminController extends Controller
     /*********************************************************/
     /********************* ADMIN ACCOUNT *********************/
     /*********************************************************/
+    // Information about this admin
     public function infoAdmin($adminId)
     {
         $user = new \Projet\Models\AdminModel();
@@ -159,6 +175,7 @@ class AdminController extends Controller
         return $infoAdmin;
     }
 
+    // Admin account page
     public function account()
     {
         $adminId = $_SESSION['id'];
@@ -172,14 +189,17 @@ class AdminController extends Controller
         return $this->validAccess("account", $datas);
     }
 
+    // Modify account page
     public function accountModify()
     {
         $adminId = $_SESSION['id'];
+        // Admin
         if($_SESSION['role'] > 0){
             $new = new \Projet\Models\AdminModel();
             $admin = $new->infoAdmin($adminId);
             $infoAdmin = $admin->fetch();
             $this->validAccess("account-modify", $infoAdmin);
+        // User
         }else{
             $new = new \Projet\Models\UserModel();
             $user = $new->infoUser($adminId);
@@ -188,12 +208,14 @@ class AdminController extends Controller
         }
     }
 
+    // Modify admin account form
     public function accountModifyPost($adminId, $Post, $Files)
     {
         $admin = new \Projet\Models\AdminModel();
         $purpose = "admin";
         $folder = "Admin";
         $redirection = null;
+        // Verify picture size is < 1 Mo
         if(isset($Files['picture']['size']) && $Files['picture']['size'] > 1000000){
             header('Location: indexAdmin.php?action=account&status=error&&from=img');
             return;
@@ -217,7 +239,7 @@ class AdminController extends Controller
         }else{
             $newMdp = $this->infoAdmin($adminId)['mdp'];
         }
-        // unique email
+        // Update email if unique
         if(!empty($Post['newMail']) || $Post['newMail'] != ""){
             if($Post['newMail'] != $_SESSION['mail']){
                 $newMail = $this->checkForDuplicate("administrators", htmlspecialchars($Post['newMail']), "accountUpdate");
@@ -233,7 +255,7 @@ class AdminController extends Controller
         }else{
             $adminMail = $this->infoAdmin($adminId)['mail'];
         }
-        // unique pseudo
+        // Update pseudo if unique
         if(!empty($Post['newPseudo']) || $Post['newPseudo'] != ""){
             if($Post['newPseudo'] != $_SESSION['pseudo']){
                 $newPseudo = $this->checkForDuplicate("administrators", htmlspecialchars($Post['newPseudo']), "accountUpdate");
@@ -258,7 +280,7 @@ class AdminController extends Controller
         }        
         $_SESSION['picture'] = $fileName;
         $_SESSION['mdp'] = $newMdp;
-        // Update the DBB 
+        // Update the DB 
         $data = [
             ':id' => $adminId,
             ':picture' => $fileName,
@@ -267,6 +289,7 @@ class AdminController extends Controller
             ':newAdminPsw' => $newMdp
         ];
         $admin->modifyAccountPost($data);
+        // Redirections
         if (!isset($redirection)){
             header('Location: indexAdmin.php?action=account&status=success&from=modify');
         }elseif ($redirection == "pbMail"){
@@ -281,6 +304,7 @@ class AdminController extends Controller
     /**********************************************************/
     /******************** ERROR MANAGEMENT ********************/
     /**********************************************************/
+    // Error page if trying to access admin page while not connected
     public function error()
     {
         $datas = [];

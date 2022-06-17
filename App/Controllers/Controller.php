@@ -5,6 +5,7 @@ namespace Projet\Controllers;
 class Controller
 {
 
+    // Return a front view
     public function viewFront($viewName, $datas = null)
     {
         $newBlog = new \Projet\Models\BlogModel();
@@ -19,6 +20,7 @@ class Controller
         include('./App/Views/front/' . $viewName . '.php');
     }
 
+    // Return a back view for the users
     protected function viewUser($viewName, $datas = null)
     {
         $new = new \Projet\Models\BlogModel();
@@ -31,6 +33,7 @@ class Controller
         }
     }
 
+    // Return a back view for the admins
     protected function viewAdmin($viewName, $datas = null)
     {
         $new = new \Projet\Models\BlogModel();
@@ -38,7 +41,8 @@ class Controller
         $blog = $blogs->fetch();      
         include('./App/Views/admin/' . $viewName . '.php');
     }
-
+    
+    // Make sure it is an admin that is connected before returning the back view
     protected function validAccess($path, $data = [])
     {
         if (!empty($_SESSION) && $_SESSION['role'] > 0){
@@ -52,6 +56,7 @@ class Controller
         }
     }
 
+    // Save the pictures uploaded and return its filename
     public function verifyFiles($purpose, $folder, $id)
     {
         if(isset($_FILES['picture'])){
@@ -77,7 +82,7 @@ class Controller
         else { echo "Une erreur est survenue. Vous devez ajouter une image de profil. La taille du fichier est limitée à 1 Mo. "; }
     }
 
-    // After row creation in BDD, update the BDD with the picture name
+    // After row creation in DB, update the DB with the picture name
     public function updatePicture($data, $table)
     {
         if($table === 'administrators'){
@@ -102,6 +107,7 @@ class Controller
         }       
     }
 
+    // Make sure the pseudos, emails, book titles and genre names are unique
     public function checkForDuplicate($table, $newdata, $accountStep = null){
         if($table == "administrators" || $table == "users"){
             $check = $newdata;
@@ -147,6 +153,7 @@ class Controller
 
     }
 
+    // Defines the number of items per page
     public function pagination($table, $allBlogComments = null)
     {
         if(isset($_GET['page']) && !empty($_GET['page'])){
@@ -163,7 +170,6 @@ class Controller
             $new = new \Projet\Models\MsgModel();
             $perPage = 15;
             $totalItems = $new->countItems($table);
-        // }elseif($table === "comments" && $_SESSION['role'] > 0){
         }elseif($table === "comments" && $allBlogComments != null){
             $new = new \Projet\Models\CommentModel();
             $perPage = 15;
@@ -196,6 +202,7 @@ class Controller
         return $datas;
     }
 
+    // 404 page according to session role
     public function error404()
     {
         if(!empty($_SESSION) && $_SESSION['role'] == 0){
