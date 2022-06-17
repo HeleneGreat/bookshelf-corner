@@ -80,6 +80,8 @@ Il existe deux types d'administrateurs, définit par leur ***rôle*** en base de
 
 Pour modifier le type d'un admin, il suffit de modifier la valeur de sa colonne "rôle" en la base de données. Si l'admin était connecté, il faudra se reconnecter pour réinitialiser les variables de session.
 
+Quand à eux, les utilisateurs enregistrés ont un rôle égal à 0.
+
 ---
 ## Installation
 Un diagramme UML de la base de donnée se trouve à la racine du projet (.png et .drawio), ainsi qu'un dump.sql

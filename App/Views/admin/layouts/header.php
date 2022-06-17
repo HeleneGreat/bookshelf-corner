@@ -10,7 +10,11 @@
     <div id="bandeau-admin">
         <div class="container">
             <h2><?= $blog['name']; ?></h2>
-            <h3>Espace admin</h3>
+            <?php if($_SESSION['role'] > 0){ ?>
+                <h3>Espace admin</h3>
+            <?php }else{ ;?>
+                <h3>Espace utilisateur</h3>
+            <?php } ;?>
         </div>
         <div id="open-menu" class="menu-toggle mobile"><a title="Menu" href="indexAdmin.php?action=menu"><i class="fas fa-bars"></i></a></div>
     </div>
