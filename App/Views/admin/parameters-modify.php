@@ -9,13 +9,15 @@
     <h1>Modifier les paramètres du site</h1> 
 
     <form action="indexAdmin.php?action=blogModifyPost" method="POST" enctype="multipart/form-data">
+        <!-- Name -->
         <p>Titre du blog : <input type="text" name="newBlog" value="<?= $datas['name'];?>"></p>
+        <!-- Actual logo -->
         <p>Logo actuel du blog : </p>
 
         <p class="flex justify-center"><img src="./App/Public/Admin/images/<?= $datas['logo'];?>" alt="Logo du site <?= $datas['name'];?>"></p>
         <input type="file" name="picture" id="inputImg" accept="image/*">
 
-
+        <!-- New logo preview -->
         <p id="displayImg" class="display-none">Nouveau logo :</p>
         <p class="flex justify-center"><img class="display-none" src="" id="preview" alt="Logo du site <?= $datas['name'];?>"></p>
        

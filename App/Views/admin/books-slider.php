@@ -12,10 +12,12 @@
             if(isset($book['title'])){
             ?> 
         <article class="flex justify-between align-items-center">
+            <!-- Book -->
             <div class="flex">
                 <img src="./App/Public/Books/images/<?= $book['bookPicture']; ?>" alt="Couverture <?= $book['title']; ?>">
                 <h2 class="list-title"><?= $book['title']; ?></h2>
             </div>
+            <!-- Switch button -->
             <div class="switch">
                 <input title="Ajouter ou enlever du slider" type="checkbox" name="slider<?= $book['id']; ?>" value="<?= $book['id']; ?>" <?php if($book['slider'] == "1"){ echo "checked";} ?>>
                 <span class="slide"></span>

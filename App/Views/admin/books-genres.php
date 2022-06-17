@@ -9,7 +9,7 @@
         if(isset($data['id'])){
         ?> 
         <article class="one-cat">
-            <!-- GENRE -->
+            <!-- Genre -->
             <div class="flex">
                 <div class="flex">
                     <div class="cat-img text-center">
@@ -25,12 +25,14 @@
                 </div>
             </div>
             <?php if($data['id'] != 21){ ?>
-            <!-- FORM MODIFY GENRE -->
+            <!-- Inline update form -->
             <form id="modify<?= $data['id']; ?>" action="indexAdmin.php?action=genreModifyPost&id=<?= $data['id']; ?>" method="post" enctype="multipart/form-data" class="flex display-none">
+                <!-- Picture -->
                 <label class="custom-file-upload-cat ajout">
                     <img src="./App/Public/Admin/images/picture.png" alt="Ajouter une icône" title="Ajouter une icône">
                     <input type="file" name="picture" id="inputImg<?= $data['id']; ?>" accept="image/*">
                 </label>
+                <!-- Name -->
                 <p><input type="text" name="newType" id="newType<?= $data['id']; ?>" value="<?= $data['category']; ?>"></p>
                 <div class="cat-submit">
                     <p><input type="submit" value="Modifier"></p>
@@ -57,14 +59,16 @@
         <?php } ?>
     <?php }} ?> 
 
-    <!-- FORM ADD A NEW GENRE -->
+    <!-- Creation form -->
     <article id="book-form" class="text-center">
         <h2>Ajouter une nouvelle catégorie</h2>
         <form action="indexAdmin.php?action=genreAddPost" method="post" enctype="multipart/form-data">
+            <!-- Name -->
             <div>
                 <p><label for="newType">Genre littéraire : <span class="required">*</span></label></p>
                 <p><input type="text" name="newType" id="newType" required></p>
             </div>
+            <!-- Picture -->
             <div>
                 <p id="displayImg">Icône :</p>
                 <label for="inputImg" class="custom-file-upload-cat ajout center">

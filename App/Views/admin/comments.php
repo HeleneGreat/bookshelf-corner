@@ -1,6 +1,6 @@
 <?php $currentPageTitle = "Tous les commentaires";
- include_once('./App/Views/admin/layouts/header.php');
- include_once('./App/Views/admin/layouts/header-comments.php');
+include_once('./App/Views/admin/layouts/header.php');
+include_once('./App/Views/admin/layouts/header-comments.php');
 ?>
 
 
@@ -11,11 +11,13 @@
         if(isset($data['id'])){
         ?>
         <article class="flex">
+            <!-- Comment informations -->
             <div class="comment-info flex justify-between align-items-center">
                 <p class="time"><?= $data['created_at']; ?></p>
                 <?= isset($data['userPseudo']) ? "<p>".$data['userPseudo'] : "<p class='admin'>".$data['adminPseudo']; ?></p>
                 <h2 class="object"><?= $data['title']; ?></h2>
             </div>
+            <!-- Action icons -->
             <div class="flex comment-link">
                 <a title="Lire ce commentaire" href="indexAdmin.php?action=commentsView&id=<?=$data['id']; ?>" class="stretched-link"><i class="fa-solid fa-eye"></i></a>
                 <a title="Supprimer ce commentaire" id="btn-delete-<?= $data['id']; ?>" class="btn-delete-this"><i class="fa-regular fa-trash-can lg"></i></a>
@@ -38,20 +40,22 @@
                 </div>
             </div>
         </div>
-    <?php } ; }?> 
+    <?php } ; }?>
+
+    <!-- Navigation -->
     <nav>
         <ul id="pagination" class="flex justify-center">
-            <!-- PREVIOUS PAGE -->
+            <!-- Previous page -->
             <li class="<?= ($datas['currentPage'] == 1) ? "display-none" : "" ?>">
                 <a class="controller previous" title="Page précédente" href="indexAdmin.php?action=comments&page=<?= $datas['currentPage'] - 1 ?>">&lt;</a>
             </li>
-            <!-- ALL PAGES NUMBER -->
+            <!-- All pages number -->
             <?php for($page = 1; $page <= $datas['pages']; $page++): ?>
                 <li class="<?= ($datas['currentPage'] == $page) ? "bold active" : "not-active" ?>">
                     <a class="nb-page" href="indexAdmin.php?action=comments&page=<?= $page ?>"><?= $page ?></a>
                 </li>
             <?php endfor ?>
-                <!-- NEXT PAGE -->
+                <!-- Next page -->
                 <li class="<?= ($datas['currentPage'] == $datas['pages']) ? "display-none" : "" ?>">
                 <a class="controller next" title="Page suivante" href="indexAdmin.php?action=comments&page=<?= $datas['currentPage'] + 1 ?>">&gt;</a>
             </li>

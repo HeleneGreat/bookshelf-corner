@@ -11,11 +11,14 @@
         if(isset($book['title'])){
         ?> 
         <article class="flex">
+            <!-- Picture -->
             <img src="./App/Public/Books/images/<?= $book['bookPicture']; ?>" alt="Couverture <?= $book['title']; ?>">
+            <!-- Title + date -->
             <div class='info'>
                 <h2 class="list-title"><?= $book['title']; ?></h2>
                 <p class="list-date"><?= $book['date']; ?></p>
             </div>
+            <!-- Action icons -->
             <div class="flex book-link">
                 <a title="Voir ce livre" href="indexAdmin.php?action=livresview&id=<?= $book['id']; ?>" class="stretched-link"><i class="fa-solid fa-eye"></i></a>
                 <a title="Modifier ce livre" href="indexAdmin.php?action=livresmodify&id=<?= $book['id']; ?>"><i class="fa-solid fa-pencil lg"></i></a>

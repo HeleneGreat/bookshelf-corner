@@ -21,10 +21,12 @@
             </div>
         </div>
     </div>
-    
+
+    <!-- The message -->
     <article>
         <h1 class="text-center">Message de <?= $datas['firstname']; ?></h1>
         <div class="msg-info flex justify-around">
+            <!-- Sender -->
             <div>
                 <p>Prénom : <span class="bold"><?= $datas['firstname']; ?></span></p>
                 <p>Nom : <span class="bold"><?= $datas['familyname']; ?></span></p>
@@ -35,6 +37,8 @@
                 <p>Mail : <span class="bold"><?= $datas['email']; ?></span></p>
             </div>
         </div>
+        
+        <!-- Content -->
         <div class="msg-content">
             <p>Objet du message : <span class="bold"><?= $datas['object']; ?></span></p>
             <p>Message :</p>

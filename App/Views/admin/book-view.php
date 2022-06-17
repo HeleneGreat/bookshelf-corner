@@ -23,14 +23,16 @@ include_once('./App/Views/admin/layouts/header.php');?>
         </div>
     </div>
 
-
+    <!-- Book cover + notation -->
     <div>
         <p><img id="book-cover" src="./App/Public/Books/images/<?= $datas['picture']; ?>" alt="<?= $datas['title']; ?>"></p>
         <p>Mon avis : <?= $datas['notation']; ?> / 5</p>
     </div>
 
+    <!-- Title -->
     <h1><?= $datas['title']; ?></h1>
     
+    <!-- Book information -->
     <div class="flex-md justify-around">
         <div>
             <p>Auteur : <span class="bold"><?= $datas['author']; ?></span></p>
@@ -41,6 +43,8 @@ include_once('./App/Views/admin/layouts/header.php');?>
             <p>Genre : <span class="bold"><?= $datas['category']; ?></span></p>
         </div>
     </div>
+
+    <!-- Book review -->
     <div>
         <p class="catchphrase"><?= $datas['catchphrase']; ?></p>
         <p class="content"><?= $datas['content']; ?></p>

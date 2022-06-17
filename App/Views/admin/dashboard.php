@@ -5,10 +5,10 @@ include_once('./App/Views/admin/layouts/header.php') ;
 <section id="dashboard" class="container-lg">
     <h1>Bienvenue sur votre tableau de bord, <span><?= $_SESSION['pseudo']; ?> !</span></h1>
 
-    <!-- ADMIN DASHBOARD -->
+    <!-- Admin dashboard -->
     <?php if($_SESSION['role'] > 0){ ?>
     <div id="stats" class="flex justify-between">
-        <!-- Books -->
+        <!-- Books stats -->
         <article id="book-stat">
             <h2>Livres</h2>
             <div class="stats" title="Nombre total de livres sur le blog"><?= $datas['nbBooks']; ?></div>
@@ -23,7 +23,7 @@ include_once('./App/Views/admin/layouts/header.php') ;
                 </a>
             </div>
         </article>
-        <!-- Users -->
+        <!-- Users stats -->
         <article id="user-stat">
             <h2>Lecteurs</h2>
             <div class="stats" title="Nombre total de comptes utilisateurs"><?= $datas['nbUsers']; ?></div>
@@ -33,7 +33,7 @@ include_once('./App/Views/admin/layouts/header.php') ;
                 <p class="italic text-center"><?=$datas['lastUser']['pseudo']; ?></p>
             </div>
         </article>
-        <!-- Comments -->
+        <!-- Comments stats -->
         <article id="comments-stat">
             <h2>Commentaires</h2>
             <div class="stats" title="Nombre total de commentaires sur le blog"><?= $datas['nbComments']; ?></div>
@@ -52,7 +52,7 @@ include_once('./App/Views/admin/layouts/header.php') ;
                 </a>
             </div>
         </article>
-        <!-- Messages -->
+        <!-- Messages stats -->
         <article id="message-stat">
             <h2>Messages</h2>
             <div class="stats" title="Nombre total de messages reçus"><?= $datas['nbMails']; ?></div>
@@ -67,7 +67,7 @@ include_once('./App/Views/admin/layouts/header.php') ;
         </article>
     </div>
         
-        <!-- USER DASHBOARD -->
+        <!-- User dashboard -->
         <?php }else{?>
         <div id="stats">
             <article id="comments-stat" class="center">

@@ -3,18 +3,20 @@
 
 <section id="all-messages" class="container-lg">
 
-    <h1>Liste des messages</h1>   
+    <h1>Liste des messages</h1>
     <?php 
     foreach($datas['messages'] as $msg){ 
         if(isset($msg['object'])){
         ?>
         <article class="flex">
+            <!-- Message informations -->
             <div class="message-info flex justify-between align-items-center">
                 <p class="time"><?= $msg['send_at']; ?></p>
                 <p><?= $msg['firstname']; ?></p>
                 <p><?= $msg['familyname']; ?></p>
                 <h2 class="object"><?= $msg['object']; ?></h2>
             </div>
+            <!-- Action icons -->
             <div class="flex message-link">
                 <a title="Lire ce message" href="indexAdmin.php?action=messagesView&id=<?=$msg['id']; ?>" class="stretched-link"><i class="fa-solid fa-eye"></i></a>
                 <a href="indexAdmin.php?action=messagesDelete&id=<?= $msg['id'];?>" title="Supprimer ce message" id="btn-delete-<?= $msg['id']; ?>" class="btn-delete-this"><i class="fa-regular fa-trash-can lg"></i></a>
@@ -36,19 +38,21 @@
             </div>
         </div>
         <?php } ; }?> 
+
+        <!-- Pagination -->
         <nav>
             <ul id="pagination" class="flex justify-center">
-                <!-- PREVIOUS PAGE -->
+                <!-- Previous page -->
                 <li class="<?= ($datas['currentPage'] == 1) ? "display-none" : "" ?>">
                     <a class="controller previous" title="Page précédente" href="indexAdmin.php?action=messages&page=<?= $datas['currentPage'] - 1 ?>">&lt;</a>
                 </li>
-                <!-- ALL PAGES NUMBER -->
+                <!-- All page NUMBER -->
                 <?php for($page = 1; $page <= $datas['pages']; $page++): ?>
                     <li class="<?= ($datas['currentPage'] == $page) ? "bold active" : "not-active" ?>">
                         <a class="nb-page" href="indexAdmin.php?action=messages&page=<?= $page ?>"><?= $page ?></a>
                     </li>
                 <?php endfor ?>
-                    <!-- NEXT PAGE -->
+                    <!-- Next page -->
                     <li class="<?= ($datas['currentPage'] == $datas['pages']) ? "display-none" : "" ?>">
                     <a class="controller next" title="Page suivante" href="indexAdmin.php?action=messages&page=<?= $datas['currentPage'] + 1 ?>">&gt;</a>
                 </li>

@@ -12,15 +12,18 @@ include_once('./App/Views/admin/layouts/header-comments.php');
         <?php } ;?>
         <?php foreach($datas['allComments'] as $comment){ ?>
         <article class="flex-md">
+            <!-- Comment info -->
             <div class="user-info">
                 <p><img src="./App/Public/Books/images/<?= $comment['bookCover']; ?>" alt="Couverture du livre <?= $comment['bookTitle']; ?>"></p>
                 <p class="date"><?= $comment['created_at']; ?></p>
+                <!-- Action icons -->
                 <div class="flex-md actions justify-center">
                     <a title="Voir ce commentaire sur le site" href="index.php?action=un-livre&id=<?=$comment['bookId'];?>#comment<?= $comment['commentId'];?>"><i class="fa-solid fa-eye"></i></a>
                     <a title="Modifier ce commentaire" href="indexAdmin.php?action=commentModify&id=<?= $comment['commentId']; ?>"><i class="fa-solid fa-pencil"></i></a>
                     <a href="indexAdmin.php?action=commentDelete&id=<?= $comment['commentId']; ?>" title="Supprimer ce commentaire" id="btn-delete-<?= $comment['commentId']; ?>" class="btn-delete-this"><i class="fa-regular fa-trash-can"></i></a>
                 </div>
             </div>
+            <!-- Comment content -->
             <div class="comment">
                 <h2 class="title bold"><?= $comment['commentTitle']; ?></h2>
                 <p class="content"><?= $comment['commentContent']; ?></p>
@@ -41,20 +44,22 @@ include_once('./App/Views/admin/layouts/header-comments.php');
             </div>
         </div>
         <?php }; ?>
+
+        <!-- Navigation -->
         <?php  if(!empty($datas['allComments'])){?>
         <nav>
             <ul id="pagination" class="flex justify-center">
-                <!-- PREVIOUS PAGE -->
+                <!-- Previous page -->
                 <li class="<?= ($datas['currentPage'] == 1) ? "display-none" : "" ?>">
                     <a class="controller previous" title="Page précédente" href="indexAdmin.php?action=comments-mine&page=<?= $datas['currentPage'] - 1 ?>">&lt;</a>
                 </li>
-                <!-- ALL PAGES NUMBER -->
+                <!-- All pages number -->
                 <?php for($page = 1; $page <= $datas['pages']; $page++): ?>
                     <li class="<?= ($datas['currentPage'] == $page) ? "bold active" : "not-active" ?>">
                         <a class="nb-page" href="indexAdmin.php?action=comments-mine&page=<?= $page ?>"><?= $page ?></a>
                     </li>
                 <?php endfor ?>
-                    <!-- NEXT PAGE -->
+                    <!-- Next page -->
                     <li class="<?= ($datas['currentPage'] == $datas['pages']) ? "display-none" : "" ?>">
                     <a class="controller next" title="Page suivante" href="indexAdmin.php?action=comments-mine&page=<?= $datas['currentPage'] + 1 ?>">&gt;</a>
                 </li>

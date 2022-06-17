@@ -30,6 +30,7 @@ $currentPageTitle = "Commentaire de " . $pseudo;
         <h1 class="text-center">Commentaire de 
             <?= isset($datas['userPseudo']) ? $datas['userPseudo'] : $datas['adminPseudo'];?>
         </h1>
+        <!-- Comment info -->
         <p>Livre commenté : <span class="bold dashboard"><?= $datas['bookTitle']; ?></span></p>
         <div class="msg-info flex-md justify-around">
             <?php if(isset($datas['userPseudo'])){?>
@@ -39,8 +40,9 @@ $currentPageTitle = "Commentaire de " . $pseudo;
             <?php }?>
             <p>Date du commentaire : <span class="bold"><?= $datas['created_at']; ?></span></p>
         </div>
+        <!-- Comment content -->
         <div class="msg-content">
-            <p>Objet du commentaire : <span class="bold"><?= $datas['commentTitle']; ?></span></p>
+            <p>Titre du commentaire : <span class="bold"><?= $datas['commentTitle']; ?></span></p>
             <p><?= $datas['commentContent']; ?></p>
         </div>
     </article>

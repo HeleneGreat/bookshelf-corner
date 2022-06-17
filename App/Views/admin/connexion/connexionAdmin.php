@@ -13,8 +13,10 @@
 
     <form action="indexAdmin.php?action=connexionAdminPost" method="post">
         <fieldset>
+            <!-- Email -->
             <p class="label"><label>Adresse mail</label></p>
             <p><input type="email" name="adminMail" id="mail" placeholder="Votre adresse e-mail" value=""></p>
+            <!-- Password -->
             <p class="label"><label>Mot de passe</label></p>
             <p><input type="password" autocomplete="new-password" name="mdp" id="mdp" placeholder="Votre mot de passe" value=""></p>
             
