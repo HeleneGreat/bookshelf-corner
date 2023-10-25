@@ -91,13 +91,6 @@ Pour installer le projet :
 - Installer composer puis taper la commande 'composer install' dans le répertoire du site
 - Vous pouvez créer un nouveau compte utilisateur ou utiliser les identifiants ci-dessous
 
-Accéder aux différents comptes :
-- [Utilisateur enregistré](https://helenegreat.alwaysdata.net/bookshelf_corner/index.php?action=connexionUser) : 
-  - Mail : user@user.com
-  - Mot de passe : kercode
-- [Super administrateur](https://helenegreat.alwaysdata.net/bookshelf_corner/indexAdmin.php?action=connexionAdmin) : 
-  - Mail : hgreat@admin.com
-  - Mot de passe : kercode
 
 
 ## Quelques pistes d'amélioration
